@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+ int main(){
+    int n;
+    cin >> n;
+    char userName[11];
+    char userNum[11];
+    char maxName[11];
+    char maxNum[11];
+    char minName[11];
+    char minNum[11];
+    int score;
+    int lowScore;
+    int highScore;
+    for (int i = 0;i < n;i++) {
+        cin >> userName;
+        cin >> userNum;
+        cin >> score;
+        if (i == 0) {
+            highScore = score;
+            lowScore = score;
+            strcpy(maxName,userName);
+            strcpy(maxNum,userNum);
+            strcpy(minName,userName);
+            strcpy(minNum,userNum);
+        } else {
+            if (score > highScore) {
+                highScore = score;
+                strcpy(maxName,userName);
+                strcpy(maxNum,userNum);
+            }
+            if (score < lowScore) {
+                lowScore = score;
+                strcpy(minName,userName);
+                strcpy(minNum,userNum);
+            }
+        }
+    }
+    cout << maxName << " " << maxNum << endl;
+    cout << minName << " " << minNum ;
+    return 0;
+ }

@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    int step;
+    int a[101];
+    cin >> n >> step;
+    for (int i = 0;i < n;i++) {
+        cin >> a[i];
+    }
+    int k = n - step - 1;
+    for (int j = n - step;j < n;j++) {
+        cout << a[j];
+        cout << " ";
+    }
+    bool flag = false;
+    for (int i = 0;i <= k;i++) {
+        if (!flag) {
+            flag = true;
+        } else {
+            cout << " ";
+        }
+        cout << a[i];
+    }
+    return 0;
+}

@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+int toNum(char a){
+    return a - '0';
+}
+
+int main(){
+    char a[101];
+    cin >> a;
+    int sum = 0;
+    for (int i = 0; a[i] != '\0'; i++) {
+        sum = sum + toNum(a[i]);
+    }
+    string str[10] = {"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};
+    int bai = 0;
+    int shi = 0;
+    int ge = 0;
+    bai = sum / 100;
+    shi = (sum % 100) / 10;
+    ge = (sum % 100) % 10;
+    if (bai != 0){
+        if (shi != 0){
+            cout << str[bai] << " " << str[shi] << " " << str[ge]; 
+        } else{
+            cout << str[bai] << " " << "ling" << " " << str[ge];
+        } 
+    } else {
+        if (shi != 0){
+            cout << str[shi] << " " << str[ge]; 
+        } else{
+            cout << str[ge];
+        }   
+    }
+    return 0;
+}
