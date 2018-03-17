@@ -38,7 +38,15 @@ int main () {
 		int suma = a[0]*1000 + a[1]*100 + a[2]*10 + a[3]*1;
 		int sumb = b[0]*1000 + b[1]*100 + b[2]*10 + b[3]*1;
 		result = suma -sumb;
-		cout << a[0]<<a[1]<<a[2]<<a[3] << " - " << b[0]<<b[1]<<b[2]<<b[3] <<" = " <<result<<endl;
+		if (result / 1000 == 0) {
+			cout << a[0]<<a[1]<<a[2]<<a[3] << " - " << b[0]<<b[1]<<b[2]<<b[3] <<" = " <<"0"<<result<<endl;
+		} else if (result / 100 == 0) {
+			cout << a[0]<<a[1]<<a[2]<<a[3] << " - " << b[0]<<b[1]<<b[2]<<b[3] <<" = " <<"00"<<result<<endl;
+		} else if (result / 10 == 0) {
+			cout << a[0]<<a[1]<<a[2]<<a[3] << " - " << b[0]<<b[1]<<b[2]<<b[3] <<" = " <<"000"<<result<<endl;
+		} else {
+			cout << a[0]<<a[1]<<a[2]<<a[3] << " - " << b[0]<<b[1]<<b[2]<<b[3] <<" = " <<result<<endl;	
+		}
 		k = result;
 		for (int i = 0;i < 4;i++) {
 			a[i] = 0;

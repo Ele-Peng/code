@@ -16,6 +16,7 @@ int main() {
     }
     i = i + 1;
     while (i < a.length() && i < b.length()) {
+    	//0-9 A/B/C/D/E/F/G/H/I/J/K/L/M/N
         if (a[i] == b[i] && ((a[i] >= 'A' && a[i] <= 'N') || isdigit(a[i]))) {
             t[1] = a[i];
             break;
