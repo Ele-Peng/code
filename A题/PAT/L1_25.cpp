@@ -16,28 +16,27 @@ int main() {
 	cin >> b;
 	int lena = 0;
 	int suma;
-	if (a[0] == ' '){
-		cout << "?";
-	} else {
-		for (int i = 0;a[i] != '\0';i++) {
-			if ((a[i] - '0') < 0 || (a[i] - '0') > 9) {
-				cout << "?";
-				lena = 0;
-				break;
-			} else {
-				lena++;
-			}
-		}
-		suma = 0;
-		for (int i = 0;i < lena;i++) {
-			suma = pow(10,lena - i - 1) * (a[i] - '0') + suma;
-		}
-		if (lena != 0) {
-			cout << suma;	
+	for (int i = 0;a[i] != '\0';i++) {
+		if ((a[i] - '0') < 0 || (a[i] - '0') > 9) {
+			cout << "?";
+			lena = 0;
+			break;
+		} else {
+			lena++;
 		}
 	}
-	
-	
+	suma = 0;
+	for (int i = 0;i < lena;i++) {
+		suma = pow(10,lena - i - 1) * (a[i] - '0') + suma;
+	}
+	if (lena!= 0 &&(suma < 1 || suma > 1000)) {
+		cout <<"?";
+		lena = 0;
+	}
+	if (lena != 0) {
+		cout << suma;	
+	}
+	 
 	cout << " + ";
 	
 	
@@ -55,12 +54,16 @@ int main() {
 	for (int i = 0;i < lenb;i++) {
 		sumb = pow(10,lenb - i - 1) * (b[i] - '0') + sumb;
 	}
+	if (lenb!= 0 && ( sumb < 1 || sumb > 1000 )) {
+		cout <<"?";
+		lenb = 0;
+	}
 	if (lenb != 0) {
 		cout << sumb;	
 	}
 	
 	cout << " = ";
-	if (lena == 0 || lenb == 0) {
+	if (lena == 0 || lenb == 0 || sumb < 1 || sumb > 1000) {
 		cout << "?";
 	} else {
 		cout << suma + sumb;
