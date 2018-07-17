@@ -1,0 +1,40 @@
+<!--pages/byindex/home_page.wxml-->
+<!-- 引用组件的页面模版 -->
+<!-- heading 可以设置，为标题名称-->
+<import src="../../components/toast/toast.wxml" />
+<template is="toast" data="{{ ...$wux.toast }}" />
+<title heading="{{heading}}"></title>
+
+<view wx:if="{{logged_in}}">
+
+  <scroll-view scroll-y="true" style="height:1268rpx;" class="container">
+
+    <!-- searchRec 为搜索框里的推荐内容，搜索框的背景颜色默认为白色，若需要改变则可以传递参数值 borderCol同理 -->
+    <searchBar searchRec="最新梭织面料" backgroundCol="#E4E4E4" borderCol="white">
+    </searchBar>
+
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <themeArea></themeArea>
+
+    <imgGrid></imgGrid>
+
+    <tagGrid tagClass="{{tagClass}}">
+    </tagGrid>
+
+
+
+  </scroll-view>
+</view>
+<view wx:else style="display: flex; align-items: center; flex-direction: column">
+  <image src="../../assets/images/logo-large.png" style="margin-top: 100px;width: 100%;height: 300px" mode="aspectFit" />
+  <view style="margin-top: 20px; color: #666">正在登录，请稍候</view>
+</view>
+<view wx:if="{{ isIpxpro }}" style='height: 400rpx;background: #FCFCFC;'>
+</view>

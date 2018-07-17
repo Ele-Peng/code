@@ -1,0 +1,246 @@
+<import src="../../components/picker/picker.wxml"/>
+<template is="picker" data="{{ ...$wux.picker.measure }}"/>
+<template is="picker" data="{{ ...$wux.picker.material }}"/>
+<template is="picker" data="{{ ...$wux.picker.color }}"/>
+<template is="picker" data="{{ ...$wux.picker.unit }}"/>
+<template is="picker" data="{{ ...$wux.picker.elastic }}"/>
+
+<!--publish.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+
+<import src="../../components/toast/toast.wxml"/>
+<template is="toast" data="{{ ...$wux.toast }}"/>
+
+<import src="../../components/loading/loading.wxml"/>
+<template is="loading" data="{{ ...$wux.loading }}"/>
+
+<view class="page" style="display:flex; flex-direction:column; height:100%">
+  <form report-submit="true" bindsubmit="onSubmit">
+  <view style="flex: 1 0 auto">
+    <view class="page__bd" style="padding-bottom: 20px">
+      <view class="weui-cells" style="margin-top: 15px">
+        <view class="weui-cell weui-cell_input" bindtap="onTapMaterial">
+          <view class="weui-cell__hd">
+           <view class="weui-label">材质匹配</view>
+          </view>
+          <view class="weui-cell__bd">
+            <text wx:if="{{ selected_material_matching_name.length > 0 }}" class="weui-input">{{selected_material_matching_name}}</text>
+            <text wx:else class="weui-input weui-input_hint">请选择匹配程度</text>
+          </view>
+          <view class="weui-cell__ft_in-access" />
+        </view>
+
+        <view class="weui-cell weui-cell_input" bindtap="onTapColorMatching">
+          <view class="weui-cell__hd">
+           <view class="weui-label">颜色匹配</view>
+          </view>
+          <view class="weui-cell__bd">
+            <text wx:if="{{ selected_color_matching_name.length > 0 }}" class="weui-input">{{selected_color_matching_name}}</text>
+            <text wx:else class="weui-input weui-input_hint">请选择匹配程度</text>
+          </view>
+          <view class="weui-cell__ft_in-access" />
+        </view>
+
+        <!-- <view class="weui-cell weui-cell_input" bindtap="onTapUnit">
+          <view class="weui-cell__hd">
+            <view class="weui-label">计价单位</view>
+          </view>
+          <view class="weui-cell__bd">
+            <text wx:if="{{ selected_unit_name.length > 0 }}" class="weui-input">{{selected_unit_name}}</text>
+            <text wx:else class="weui-input weui-input_hint">请选择计价单位</text>
+          </view>
+          <view class="weui-cell__ft_in-access" />
+        </view> -->
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">大货单价</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input type="digit" value="{{price}}" id="input-price" class="weui-input" placeholder="请输入大货单价"  name="price"/>
+          </view>
+          <view class="weui-cell__ft_in-access" bindtap="onTapUnit">
+            <view class='foot-unit-selector'>
+            <text wx:if="{{ selected_unit_name.length > 0 }}" class="weui-input">元/{{selected_unit_name}}</text>
+            <text wx:else class="weui-input weui-input_hint">单位</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">样布单价</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input type="digit" value="{{sample_price}}" id="input-sample" class="weui-input" placeholder="请输入样布单价" name="sample_price"/>
+          </view>
+          <view class="weui-cell__ft" class="foot-unit">
+            <span>元/米</span>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">门幅大小</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input type="digit" value="{{width}}" id="input-width" class="weui-input" placeholder="请输入门幅(选填)" name="width"/>
+          </view>
+          <view class="weui-cell__ft" class="foot-unit">
+            厘米
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">起订数量</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input type="digit" value="{{threshold}}" id="input-threshold" class="weui-input" placeholder="请输入起订数量" name="threshold"/>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input" bindtap="onTapElastic">
+          <view class="weui-cell__hd">
+            <view class="weui-label">面料弹力</view>
+          </view>
+          <view class="weui-cell__bd">
+            <text wx:if="{{ elastic_vb.length > 0 }}" class="weui-input">{{elastic_vb}}</text>
+            <text wx:else class="weui-input weui-input_hint">请选择面料弹力</text>
+          </view>
+          <view class="weui-cell__ft_in-access" />
+        </view>
+
+        <view class="weui-cell weui-cell_input" bindtap="onTapMeasure" 
+          wx:if="{{selected_unit=='y' || selected_unit=='m'}}">
+          <view class="weui-cell__hd">
+            <view class="weui-label">是否足秤</view>
+          </view>
+          <view class="weui-cell__bd">
+            <text wx:if="{{ measure_vb.length > 0 }}" class="weui-input">{{measure_vb}}</text>
+            <text wx:else class="weui-input weui-input_hint">请选择足秤成数</text>
+          </view>
+          <view class="weui-cell__ft_in-access" />
+        </view>
+
+        <view class="weui-cell weui-cell_input" wx:if="{{selected_unit=='k'}}">
+          <view class="weui-cell__hd">
+            <view class="weui-label">克重</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input type="digit" name="kezhong" value="{{kezhong}}" id="input-kezhong" class="weui-input" placeholder="请输入克重"/>
+          </view>
+          <view class="weui-cell__ft" class="foot-unit">
+            <span>克</span>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input" wx:if="{{selected_unit=='k'}}">
+          <view class="weui-cell__hd">
+            <view class="weui-label">空差</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input type="digit" name="kongcha" value="{{kongcha}}" id="input-kongcha" class="weui-input" placeholder="请输入空差"/>
+          </view>
+          <view class="weui-cell__ft" class="foot-unit">
+            <span>千克</span>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input" wx:if="{{selected_unit=='k'}}">
+          <view class="weui-cell__hd">
+            <view class="weui-label">纸管</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input type="digit" name="zhiguan" value="{{zhiguan}}" id="input-zhiguan" class="weui-input" placeholder="请输入纸管"/>
+          </view>
+          <view class="weui-cell__ft" class="foot-unit">
+            <span>千克</span>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input" bindtap="onTapDuration">
+          <view class="weui-cell__hd">
+            <view class="weui-label">货期</view>
+          </view>
+          <view class="weui-cell__bd">
+            <text wx:if="{{ duration_vb.length > 0 }}" class="weui-input">{{duration_vb}}</text>
+            <text wx:else class="weui-input weui-input_hint">请选择货期天数</text>
+          </view>
+          <view class="weui-cell__ft_in-access" />
+        </view>
+
+        <view wx:if="{{extra_needs.length > 0}}" class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">需求单价</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input type="digit" name="extra_price" value="{{extra_price}}" class="weui-input" id="input-extra_price" placeholder="请输入需求单价"/>
+          </view>
+          <view class="weui-cell__ft" class="foot-unit">
+          <text wx:if="{{ selected_unit_name.length > 0 }}" class="weui-input">元/{{selected_unit_name}}</text>
+          </view>
+        </view>
+
+        <view wx:if="{{extra_needs.length > 0}}" class="weui-panel weui-panel_access" style="margin-top: 0">
+          <view class="weui-panel__hd">额外需求：{{extra_needs}}</view>
+        </view>
+      </view>
+
+      <view class="weui-cells">
+        <textarea hidden="{{hide_text_area}}" style="padding:10px 15px; height: 70px" name="remark" placeholder="布料备注信息，可选。"/>
+        <textarea hidden="{{!hide_text_area}}" style="padding:10px 15px; height: 70px"/>
+      </view>
+
+      <view class="weui-cells">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <p class="weui-uploader__title">样品图片上传</p>
+                <view class="weui-uploader__info">{{selected_images.length}}/8</view>
+              </view>
+              <view class="weui-uploader__bd" style="display: flex; flex-wrap: wrap; justify-content:space-between">
+                <view wx:for="{{selected_images}}" wx:key="{{index}}" class="weui-uploader__files">
+                  <text wx:if="{{item.uploading}}" class='image-upload-percent'>{{item.progress}}%</text>
+                  <image style="width: {{image_block_size}}; height: {{image_block_size}}" data-index="{{index}}" bindlongtap="onLongTapImage" class="weui-uploader__img" src="{{item.path}}"/>
+                </view>
+                <view style="width: {{image_block_size}}; height: {{image_block_size}}" wx:if="{{selected_images.length < 8}}" class="weui-uploader__input-box" bindtap="selectImage">
+                </view>
+                <view wx:for="{{empty_images}}" class="weui-uploader__files" wx:key="">
+                  <image style="width: {{image_block_size}}; height: {{image_block_size}}" class="weui-uploader__img" src=""/>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <p class="weui-uploader__title">店铺门脸照片上传</p>
+              </view>
+              <view class="weui-uploader__bd" style="display: flex; flex-wrap: wrap; justify-content:space-between">
+                <view class="weui-uploader__files" wx:if="{{shop_image.path}}">
+                  <text wx:if="{{shop_image.uploading}}" class='image-upload-percent'>{{shop_image.progress}}%</text>
+                  <image style="width: {{image_block_size}}; height: {{image_block_size}}" data-index="{{index}}" bindlongtap="onLongTapImage" class="weui-uploader__img" src="{{shop_image.path}}"/>
+                </view>
+                <view style="width: {{image_block_size}}; height: {{image_block_size}}" wx:else class="weui-uploader__input-box" bindtap="selectShopImage">
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <button formType="submit" class="weui-btn" type="primary" style="flex: 0 0 auto; width: 100%; margin-top: 0">
+    提交找布结果
+  </button>
+  </form>
+</view>

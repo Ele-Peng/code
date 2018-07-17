@@ -1,0 +1,19 @@
+<!--pages/order/pay.wxml-->
+<import src="../../components/toast/toast.wxml"/>
+<template is="toast" data="{{ ...$wux.toast }}"/>
+
+<title heading="{{heading}}" lastUrl="{{lastUrl}}"></title>
+<view style="height:1226rpx;position: fixed; display: flex; flex-direction: column;background: #FFF;width: 750rpx;">
+  <view style="flex-grow: 1; padding: 20px">
+    <view>请汇款人民币￥{{money}}至以下账号:</view>
+    <view>户名: 李斌</view>
+    <view>账号: 6222081205003760643</view>
+    <view>开户银行: 中国工商银行湖州市织里支行</view>
+    <view>汇款备注: 订单号{{order_id}}</view>
+  </view>
+  <form bindsubmit="onReportPaid" report-submit="true" style='height: 98rpx;'>
+    <button class="weui-btn" type="primary" formType="submit" class="message_send" style='background: #FF9906;margin-top: -10rpx;'>
+              支付完成
+    </button>
+  </form>
+</view>

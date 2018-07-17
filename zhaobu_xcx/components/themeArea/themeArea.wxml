@@ -1,0 +1,14 @@
+<view class="themeArea">
+  <view class="theme-1" bindtap='onClickClothPreview'>
+    <image src="../../assets/images/icon-theme-1.png"></image>
+    <text>面料阅览</text>
+  </view>
+  <view class="theme-2" bindtap='onClickKSRG'>
+    <image src="../../assets/images/icon-theme-2.png"></image>
+    <text>快速认购</text>
+  </view>
+  <view class="theme-3">
+    <image src="../../assets/images/icon-theme-3.png"></image>
+    <text>我的设计单</text>
+  </view>
+</view>

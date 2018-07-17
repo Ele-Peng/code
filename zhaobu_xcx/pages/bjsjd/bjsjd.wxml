@@ -1,0 +1,69 @@
+<!--pages/bjsjd/bjsjd.wxm 编辑设计单-->
+<view class="container">
+  <view class="designName">
+    <text class="listName">设计单名字</text>
+  </view>
+  <view class="horizon"></view>
+  <view class="designName">
+    <!-- 通过查看某一设计单详情下的编辑入口进入的编辑设计界面，placeholder中应是对应的设计单名称-->
+    <input wx:if="{{idx != -1}}" class="companyName" placeholder='{{name}}' bindinput="bindKeyInput"></input>
+    <!-- 点新建进入的编辑设计单界面，加工厂为初始值 -->
+    <input wx:if="{{idx == -1}}" class="companyName_new" placeholder='输入设计单名' bindinput="bindKeyInput"></input>
+  </view>
+  <view class="horizon"></view>
+  <view class="addArea">
+    <image src="../../assets/images/icon-designAdd.png" bindtap="chose_cloth"></image>
+    <image wx:if="{{!is_edit}}" src="../../assets/images/icon-designMinus.png" bindtap="remove_cloth"></image>
+    <image wx:if="{{is_edit}}" src="../../assets/images/icon-editMinus.png" bindtap="remove_cloth_2"></image>
+  </view>
+  <view class="horizon"></view>
+  <view class="designName">
+    <text class="listName">包含面料</text>
+  </view>
+  <scroll-view scroll-y="true" class="goodsArea">
+    <view wx:for="{{add_list}}" wx:for-item="item2" wx:for-index="idx" wx:key="unique">
+      <view class="goodArea">
+        <image class="clothImg" src="{{item2.src}}" data-cloth_id="{{item2.id}}" data-is_pay="{{item2.is_psy}}" bindtap="show_item"></image>
+        <view class="textArea">
+          <view>ID:{{item2.id}}+{{item2.name}}</view>
+          <view>　　　</view>
+          <view>　　　</view>
+          <view>挂样货位: {{item2.guayang_huowei}}</view>
+          <view>色卡货位: {{item2.seka_huowei}}</view>
+        </view>
+        <view wx:if="{{!is_edit}}" class="numArea">
+          <view class="priceArea">¥{{item2.price}}元/{{item2.unit}}</view>
+          <image wx:if="{{item2.is_pay}}" class="logoImg" src="../../assets/images/icon-logo-in.png"></image>
+          <image wx:if="{{!item2.is_pay}}" class="logoImg" src="../../assets/images/icon-logo.png" />
+        </view>
+        <view wx:if="{{is_edit}}" class="numArea">
+          <image class="closeImg" src="../../assets/images/icon-editClose.png" data-idx="{{idx}}" bindtap="remove_cloth_3" />
+          <view class="priceArea_2">¥{{item2.price}}元/{{item2.unit}}</view>
+          <image wx:if="{{item2.is_pay}}" class="logoImg_2" src="../../assets/images/icon-logo-in.png"></image>
+          <image wx:if="{{!item2.is_pay}}" class="logoImg_2" src="../../assets/images/icon-logo.png" />
+        </view>
+      </view>
+      <view class="fgx_2"></view>
+    </view>
+  </scroll-view>
+  <!-- 点击删除设计单按钮时出现 确认删除将同步所有设计单中 -->
+  <view wx:if="{{is_remove}}" class="closeArea">
+    <view class="deleteText">是否删除此设计单</view>
+    <view class="buttonArea">
+      <button bindtap="remove_sjd_no">否</button>
+      <button bindtap="remove_sjd_yes">是</button>
+    </view>
+  </view>
+  <!-- 点击关闭按钮时出现 -->
+  <view wx:if="{{is_remove_2}}" class="closeArea">
+    <view class="deleteText">是否删除此款面料</view>
+    <view class="buttonArea">
+      <button bindtap="remove_cloth_no">否</button>
+      <button bindtap="remove_cloth_yes">是</button>
+    </view>
+  </view>
+  <view class="submitArea">
+    <view class="submitAreaLeft" bindtap="remove_sjd">删除设计单</view>
+    <view class="submitAreaRight" bindtap="save_sjd">保存</view>
+  </view>
+</view>

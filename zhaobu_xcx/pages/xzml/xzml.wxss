@@ -1,0 +1,127 @@
+/* pages/xzml/xzml.wxss */
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+.searchArea{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom:0;
+  width:750rpx;
+  height:100rpx;
+  background-color: white;
+  top:0;
+}
+
+.searchArea image{
+  width:40rpx;
+  height:40rpx;
+  padding-top:25rpx;
+  padding-left:25rpx;
+}
+
+.fgx_1{
+  margin-left:20rpx;
+  margin-top:20rpx;
+  width:710rpx;
+  border-bottom: 1rpx solid #ECBA5E;
+}
+
+.swiper{
+  width:750rpx;
+  margin-top:100rpx;
+  margin-bottom: 120rpx;
+}
+
+.rightArea{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right:20rpx;
+  top:100rpx;
+  font-family: Noto Sans CJK;
+  font-size: 25rpx;
+  font-weight: normal;
+  color: black;
+}
+
+.rightArea view{
+  margin-top:-1rpx;
+}
+
+.tagArea{
+  display: flex;
+  flex-direction: row;
+  margin-top:-1rpx;
+}
+
+.tagName{
+  width:60rpx;
+  height:60rpx;
+  padding-left:20rpx;
+  line-height: 60rpx;
+  font-family: Noto Sans CJK;
+  font-size: 36rpx;
+  font-weight: normal;
+  color: #BFBFBF;
+  background-color: #F5F4F4;
+}
+
+.fgx_2{
+  margin-top: -1rpx;
+  width:690rpx;
+  border-bottom: 60rpx solid #F5F4F4;
+}
+
+.bottomArea{
+  position: fixed;
+  bottom:0;
+  width:750rpx;
+  height:120rpx;
+  font-family: Noto Sans CJK;
+  font-size: 36rpx;
+  font-weight: normal;
+  line-height: 110rpx;
+  color: white;
+  background-color: #ECBA5E;
+  text-align: center;
+}
+
+.listArea{
+  display: flex;
+  flex-direction: column;
+}
+
+.boxArea{
+  margin-left: 20rpx;
+  height:110rpx;
+  display: flex;
+  flex-direction: row;
+  width:670rpx;
+  border-bottom: 1rpx solid #ECBA5E;
+  font-family: Noto Sans CJK;
+  font-size: 24rpx;
+  font-weight: normal;
+  color: black;
+}
+
+.clothImg{
+  width:60rpx;
+  height:60rpx;
+  margin-top: 25rpx;
+}
+
+.id{
+  width:520rpx;
+  line-height: 105rpx;
+  margin-left:20rpx;
+}
+
+.checkSquare{
+  width:40rpx;
+  height:40rpx;
+  border: 1rpx solid;
+  margin-top: 30rpx;
+}

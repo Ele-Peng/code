@@ -1,0 +1,57 @@
+<!--pages/order/agent.wxml-->
+
+<import src="../../components/dialog/dialog.wxml" />
+<template is="dialog" data="{{ ...$wux.dialog }}" />
+
+<import src="../../components/toast/toast.wxml" />
+<template is="toast" data="{{ ...$wux.toast }}" />
+
+<import src="../../components/loading/loading.wxml" />
+<template is="loading" data="{{ ...$wux.loading }}" />
+
+<view class="page" style="height: 100%;">
+  <view style="height: 100%; overflow: auto">
+    <view class="page__bd" style="padding-bottom: 66px">
+
+      <view class="weui-cells">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <p class="weui-uploader__title">{{upload_title_dict[order_status]}}</p>
+                <view class="weui-uploader__info">{{selected_images.length}}/1</view>
+              </view>
+              <view class="weui-uploader__bd" style="display: flex; flex-wrap: wrap; justify-content:space-between">
+                <view wx:for="{{selected_images}}" wx:key="{{index}}" class="weui-uploader__files">
+                  <text wx:if="{{item.uploading}}" class='image-upload-percent'>{{item.progress}}%</text>
+                  <image style="width: {{image_block_size}}; height: {{image_block_size}}" data-index="{{index}}" bindlongtap="onLongTapImage" class="weui-uploader__mg" src="{{item.path}}" />
+                </view>
+                <view style="width: {{image_block_size}}; height: {{image_block_size}}" wx:if="{{selected_images.length < 1}}" class="weui-uploader__input-box" bindtap="selectImage">
+                </view>
+                <view wx:for="{{empty_images}}" class="weui-uploader__files" wx:key="">
+                  <image style="width: {{image_block_size}}; height: {{image_block_size}}" class="weui-uploader__img" src="" />
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells">
+        <view class="weui-cell">
+          <view class="weui-cell__hd">
+            <view class="weui-label">请填写备注</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input id="desc-input" class="weui-input" bindinput="onInput" placeholder="可填进货、发货等信息" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view bindtap="submit_event">
+    <button class="weui-btn" type="primary" style="position: absolute; top: {{screen_height - 46}}px; width: 100%; margin-top: 0">
+      确认修改
+    </button>
+  </view>
+</view>

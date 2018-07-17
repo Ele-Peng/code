@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "title": "/components/title/title",
+    "searchBar": "/components/searchBar/searchBar"
+  }
+}

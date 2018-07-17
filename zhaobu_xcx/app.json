@@ -1,0 +1,99 @@
+{
+  "pages": [
+    "pages/byindex/home_page",
+    "pages/search/search",
+    "pages/ksrg/ksrg",
+    "pages/subscribe/subscribe",
+    "pages/twxx/twxx",
+    "pages/clothPreview/clothPreview",
+    "pages/gwc_2/gwc_2",
+    "pages/address/update",
+    "pages/byindex/auth",
+    "pages/byindex/index",
+    "pages/index/index",
+    "pages/welcome/binding",
+    "pages/order/pay",
+    "pages/order/update",
+    "pages/rater/index",
+    "pages/toast/index",
+    "pages/dialog/index",
+    "pages/loading/index",
+    "pages/backdrop/index",
+    "pages/picker/index",
+    "pages/toptips/index",
+    "pages/qrcode/index",
+    "pages/gallery/index",
+    "pages/xnumber/index",
+    "pages/countdown/index",
+    "pages/countup/index",
+    "pages/actionsheet/index",
+    "pages/prompt/index",
+    "pages/barcode/index",
+    "pages/refresher/index",
+    "pages/seats/index",
+    "pages/notification/index",
+    "pages/calendar/index",
+    "pages/button/index",
+    "pages/about/index",
+    "pages/needs/publish",
+    "pages/needs/needs_list",
+    "pages/agent/apply",
+    "pages/address/address_list",
+    "pages/address/create",
+    "pages/needs/detail",
+    "pages/needs/agent_needs",
+    "pages/result/submit",
+    "pages/result/detail",
+    "pages/order/neworder",
+    "pages/order/order_list",
+    "pages/order/order_detail",
+    "pages/order/agent_order_list",
+    "pages/needs/logistics",
+    "pages/needs/general_needs_list",
+    "pages/order/general_order_list",
+    "pages/order/order_colors",
+    "pages/shelf/goods",
+    "pages/settings/settings",
+    "pages/team/my_team",
+    "pages/team/qrcode",
+    "pages/team/team_members",
+    "pages/team/create",
+    "pages/team/info",
+    "pages/dfkdd/dfkdd"
+  ],
+  "window": {
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#9E9E9E",
+    "selectedColor": "#FF9906",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/byindex/home_page",
+        "text": "首页",
+        "iconPath": "assets/images/icon-home.png",
+        "selectedIconPath": "assets/images/icon-home-selected.png"
+      },
+      {
+        "pagePath": "pages/gwc_2/gwc_2",
+        "text": "购物车",
+        "iconPath": "assets/images/icon-trolley.png",
+        "selectedIconPath": "assets/images/icon-trolley-selected.png"
+      },
+      {
+        "pagePath": "pages/needs/publish",
+        "text": "发布需求",
+        "iconPath": "assets/images/icon-order.png",
+        "selectedIconPath": "assets/images/icon-order-selected.png"
+      },
+      {
+        "pagePath": "pages/byindex/index",
+        "text": "我的",
+        "iconPath": "assets/images/icon-myself.png",
+        "selectedIconPath": "assets/images/icon-myself-selected.png"
+      }
+    ]
+  },
+  "debug": true
+}

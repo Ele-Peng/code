@@ -1,0 +1,59 @@
+.container{
+  display: flex;
+  flex-direction: column;
+}
+.toolsArea{
+  margin-left: 60rpx;
+  margin-top: 40rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.imgArea{
+  width:150rpx;
+}
+.imgArea image{
+  width:100rpx;
+  height:100rpx;
+}
+.textArea {
+  width:540rpx;
+  height:140rpx;
+  border-bottom: 2rpx solid #EEEEEC;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+}
+.textArea text{
+  color: #C4C4C4;
+  font-family: Noto Sans CJK;
+}
+.font{
+  width:500rpx;
+  font-size: 35rpx;
+  line-height: 100rpx;
+}
+.more{
+  margin-right: 20rpx;
+  color: #C4C4C4;
+  font-family: Noto Sans CJK;
+  font-size:60rpx;
+}
+.Model{
+  color: #ECBA5E;
+  font-family: Microsoft Yahei;
+  font-size: 35rpx;
+  margin-left:60rpx;
+  margin-top:20rpx;
+  margin-bottom: 20rpx;
+}
+.horizon{
+  margin-top: -2rpx;
+  border: 16rpx solid #EEEEEC;
+}
+.Tab{
+  height:380rpx;
+}
+
+
+

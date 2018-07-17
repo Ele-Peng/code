@@ -1,0 +1,21 @@
+<view class="tagGrid">
+  <view class="tagTitle">
+    <text>精选当季热门推荐</text>
+  </view>
+  <view class="tagChoseArea">
+      <!-- 每三个为一组，每一组中颜色按 #FC5656  #FF9906 #19A4FF 排列 -->
+      <block wx:for="{{tagClass}}" wx:for-index>
+      <view class="tagArea">
+        <view wx:if="{{index % 3 == 0}}" class="tagSymbol" style="background-color:#FC5656;" >
+        </view>
+        <view wx:elif="{{index % 3 == 1}}" class="tagSymbol" style="background-color:#FF9906;" >
+        </view>
+        <view wx:else="{{index % 3 == 2}}" class="tagSymbol" style="background-color:#19A4FF;" >
+        </view>
+        <view class="tagSymbolTitle">
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+      </block>
+  </view>
+</view>

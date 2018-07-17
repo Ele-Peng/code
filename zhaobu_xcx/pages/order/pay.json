@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "支付信息",
+  "usingComponents": {
+    "title": "../../components/title/title"
+  }
+}

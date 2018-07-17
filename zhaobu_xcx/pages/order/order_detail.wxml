@@ -1,0 +1,189 @@
+<import src="../../components/loading/loading.wxml" />
+<template is="loading" data="{{ ...$wux.loading }}" />
+
+<title heading="{{heading}}" lastUrl="{{lastUrl}}">
+</title>
+<view class="page" style="display:flex; flex-direction:column; height:100%">
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar" style="background-color:#fff;position:fixed;margin-top:128rpx;">
+        <block wx:for-items="{{ tabs }}" wx:key="{{ index }}">
+          <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : '' }}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{ item }}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{ sliderLeft }}px; transform: translateX({{ sliderOffset }}px); -webkit-transform: translateX({{ sliderOffset }}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <scroll-view scroll-y style="{{user_type == 'user' && detail.status == 'u' ? 'height: 1010rpx;position: fixed;' : 'height: 1100rpx;position: fixed;'}}" class="weui-tab__content" hidden="{{ activeIndex != 0 }}">
+          <block wx:if="{{detail.id}}">
+            <view class="weui-cells" style="margin-top: 0">
+
+
+              <view wx:if="{{show_username}}" class="needsDetailArea" style='border: 1rpx solid #F5F5F5;'>
+                <view class="needsName">发布用户</view>
+                <view class="needsValue">{{detail.user}}</view>
+              </view>
+
+              <view class="needsDetailArea" style='border: 1rpx solid #F5F5F5;'>
+                <view class="needsName">订单状态</view>
+                <view class="needsValue">{{ detail.display_status }}</view>
+              </view>
+
+              <view class="needsDetailArea" style='border: 1rpx solid #F5F5F5;'>
+                <view class="needsName">采购类型</view>
+                <view wx:if="{{ detail.is_sample }}" class="needsValue">样布</view>
+                <view wx:else class="needsValue">大货</view>
+              </view>
+
+              <view class="needsDetailArea" style='border: 1rpx solid #F5F5F5;'>
+                <view class="needsName">采购数量</view>
+                <view class="needsValue">{{ detail.amount }}{{ detail.unit }}</view>
+              </view>
+
+              <view class="needsDetailArea" style='border: 1rpx solid #F5F5F5;'>
+                <view class="needsName">产品单价</view>
+                <view wx:if="{{ detail.is_sample }}" class="needsValue">{{ detail.sample_price }}元/{{ detail.unit }}</view>
+                <view wx:else class="needsValue">{{ detail.cloth_price }}元/{{ detail.unit }}</view>
+              </view>
+
+              <view wx:if="{{ detail.extra.length > 0 }}" class="needsDetailArea" style='border: 1rpx solid #F5F5F5;'>
+                <view class="needsName">额外需求</view>
+                <view class="needsValue">{{ detail.extra }}</view>
+              </view>
+
+              <view wx:if="{{ detail.extra.length > 0 }}" class="needsDetailArea" style='border: 1rpx solid #F5F5F5;'>
+                <view class="needsName">需求单价</view>
+                <view class="needsValue">{{ detail.extra_price }}元/{{ detail.unit }}</view>
+              </view>
+
+              <view class="needsDetailArea" style='border: 1rpx solid #F5F5F5;'>
+                <view class="needsName">订单总价</view>
+                <view class="needsValue">{{ detail.price }}元</view>
+              </view>
+
+              <view wx:if="{{ detail.user_product }}" class="needsDetailArea" style='border: 1rpx solid #F5F5F5;'>
+                <view class="needsName">客户款号</view>
+                <view class="needsValue">{{ detail.user_product }}</view>
+              </view>
+
+              <view wx:if="{{ detail.user_product }}" class="needsDetailArea" style='border: 1rpx solid #F5F5F5;'>
+                <view class="needsName">订单时间</view>
+                <view class="needsValue">{{ detail.display_time }}</view>
+              </view>
+
+              <view class="address">
+                <view class="addressText">收货地址</view>
+                <view style='display:flex;flex-direction:column;'>
+                  <view class="addressValue" style='padding-top: 41rpx;'>{{detail.address.name}} {{detail.address.phone}}</view>
+                  <view class="addressValue">{{detail.address.prov_vb}}{{detail.address.city_vb}}{{detail.address.county_vb}}{{detail.address.detail}}</view>
+                </view>
+              </view>
+
+
+              <view class="orderCount">
+                <view class='orderText'>订购数量</view>
+                <view class='orderCountList'>
+                  <view class='left'>
+                    <view>色号</view>
+                    <view wx:key="{{detail.colors}}" style='margin-top:25rpx; height:68rpx;'>{{item.code}}</view>
+                  </view>
+                  <view class='center'>
+                    <view>单价</view>
+                    <view wx:key="{{detail.colors}}" style='margin-top:25rpx;height:68rpx;'>{{detail.sample_price}}/{{detail.sample_unit}}</view>
+                  </view>
+                  <view class='right'>
+                    <view>数量</view>
+                    <view wx:key="{{detail.colors}}" style='margin-top:25rpx;height:68rpx;'>{{item.amount}}{{item.unit}}</view>
+                  </view>
+                </view>
+              </view>
+
+
+            </view>
+
+
+            <view class="weui-cells__title">布料详情</view>
+            <view class="weui-cells" style="margin-top: 0" bindtap="onClickCloth">
+              <view class="weui-cell">
+                <image class="weui-uploader__img" src="{{detail.thumb}}" />
+                <view class="weui-cell__bd">
+                  <view style="border-right: 0; margin-left: 20px;font-size:28rpx;" class="weui-select weui-select_in-select-after">查看布料详情</view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </scroll-view>
+
+        <!-- 采购进度 -->
+        <view class="weui-tab__content" hidden="{{ activeIndex != 1 }}">
+          <view wx:for="{{ history }}" wx:for-item="item" wx:for-index="idx" wx:key="unique">
+            <!--最新的进度历史-->
+            <view wx:if="{{idx == 0}}" class="progress">
+              <view class="progress__time">
+                <view class="progress__day">
+                  {{item.display_date}}
+                </view>
+                <view class="progress__minutes">
+                  {{item.display_hour}}
+                </view>
+              </view>
+
+              <view class="progress__green_line">
+              </view>
+              <image class="progress__tapLess" src="../../assets/images/icon-done2.png"></image>
+              <view class="progress__detail">
+                <view class="progress__status">
+                  {{item.display_status}}
+                </view>
+                <view class="progress__discription" wx:if="{{item.remark.length>0}}">
+                  {{item.remark}}
+                </view>
+                <view class="progress_image" wx:if="{{item.image.thumb.length>0}}">
+                  <image class="weui-uploader__img" src="{{item.image.thumb}}" data-url="{{item.image.url}}" data-thumb="{{item.image.thumb}}" bindtap='onClickHistoryImage' />
+                </view>
+              </view>
+            </view>
+            <!--剩余的进度历史-->
+            <view wx:if="{{idx != 0}}" class="progress">
+              <view class="progress__time">
+                <view class="progress__day">
+                  {{item.display_date}}
+                </view>
+                <view class="progress__minutes">
+                  {{item.display_hour}}
+                </view>
+              </view>
+              <view class="progress__line">
+              </view>
+              <image class="progress__tapLess" src="../../assets/images/icon-tapLess2.png"></image>
+              <view class="progress__detail">
+                <view class="progress__status">
+                  {{item.display_status}}
+                </view>
+                <view class="progress__discription">
+                  {{item.remark}}
+                </view>
+                <view class="progress_image" wx:if="{{item.image.thumb.length>0}}">
+                  <image class="weui-uploader__img" src="{{item.image.thumb}}" data-url="{{item.image.url}}" data-thumb="{{item.image.thumb}}" bindtap='onClickHistoryImage' />
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{user_type == 'user' && detail.status == 'u'}}" hidden="{{ activeIndex != 0 }}" bindtap="pay_event">
+        <button class="weui-btn" type="primary" style="position: fixed;margin-top: 1012rpx;width: 100%;background: #FF9906;">
+        <!-- top: {{screen_height - 46}}px; -->
+          前往支付
+        </button>
+      </view>
+      <view wx:if="{{user_type == 'agent' && (detail.status == 'n' || detail.status == 'c' || detail.status == 'p')}}" hidden="{{ activeIndex != 1 }}" bindtap="edit_event">
+        <button class="weui-btn" type="primary" style="position: absolute; top: {{screen_height - 46}}px; width: 100%; margin-top: 0">
+          {{ update_btn_text[detail.status] }}
+        </button>
+      </view>
+    </view>
+  </view>
+
+</view>

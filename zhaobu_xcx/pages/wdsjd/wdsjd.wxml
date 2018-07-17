@@ -1,0 +1,90 @@
+<!--pages/wdsjd/wdsjd.wxml 我的设计单-->
+<view class="container">
+  <view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">所有面料</view>
+    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">已查布源</view>
+  </view>
+  <view style="height:20rpx;"></view>
+  <view class="horizon"></view>
+  <view style="height:10rpx;"></view>
+  <swiper class="swiper" current="{{currentTab}}" bindchange="swiperTab">
+    <!-- 所有面料 -->
+    <swiper-item>
+      <view class="colorInfoClass " scroll-x="true" style="width: 100%">
+        <view>
+          <view wx:if="{{is_chose_all}}" class="checked" bindtap="chose_all">所有清单</view>
+          <view wx:if="{{!is_chose_all}}" class="noneChecked" bindtap="chose_all">所有清单</view>
+        </view>
+        <view wx:if="{{show_list.length != 0}}" wx:for="{{show_list}}" wx:for-item="item" wx:for-index="idx" wx:key="unique">
+          <view wx:if="{{item.is_chose}}" class="checked" data-idx="{{idx}}" bindtap="chose_sjd">{{item.name}}</view>
+          <view wx:if="{{!item.is_chose}}" class="noneChecked" data-idx="{{idx}}" bindtap="chose_sjd">{{item.name}}</view>
+        </view>
+        <view wx:if="{{list.length > 9}}" bindtap="show_all">
+          <view class="checked">更多
+            <image wx:if="{{moreTab == 0}}" src="../../assets/images/icon-morewdsjd.png" style="width:15rpx;height:10rpx;margin-left:3rpx;"></image>
+            <image wx:if="{{moreTab > 0}}" src="../../assets/images/icon-morewdsjd-bottom.png" style="width:15rpx;height:10rpx;margin-left:3rpx;"></image>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{show_list.length != 0}}">
+        <view style='height:10rpx;'></view>
+        <scroll-view scroll-y="true" class="goodsArea" style="height:894rpx;">
+          <view wx:for="{{show_cloth_list}}" wx:for-item="item2" wx:for-index="idx2" wx:key="unique">
+            <view class="goodArea" style="height:244rpx;">
+              <image class="clothImg" src="{{item2.src}}" data-cloth_id="{{item2.id}}" data-is_pay="{{item2.is_psy}}" bindtap="show_item"></image>
+              <view class="textArea">
+                <view>ID:{{item2.id}}+{{item2.name}}</view>
+                <view>　　　</view>
+                <view>　　　</view>
+                <view>挂样货位: {{item2.guayang_huowei}}</view>
+                <view>色卡货位: {{item2.seka_huowei}}</view>
+              </view>
+              <view class="numArea">
+                <view class="priceArea">¥{{item2.price}}元/{{item2.unit}}</view>
+                <image wx:if="{{item2.is_pay}}" class="logoImg" src="../../assets/images/icon-logo-in.png"></image>
+                <image wx:if="{{!item2.is_pay}}" class="logoImg" src="../../assets/images/icon-logo.png" />
+              </view>
+            </view>
+            <view class="fgx_2"></view>
+          </view>
+        </scroll-view>
+        <view class="submitArea">
+          <view class="submitAreaLeft" bindtap="manager_mianliao">管理面料</view>
+          <view class="submitAreaRight" bindtap="manager_sjd">管理设计单</view>
+        </view>
+      </view>
+      <view wx:if="{{show_list.length == 0}}">
+        <view class="motto">您还没有设计单</view>
+        <view style="background-color:white;">
+          <view class="boxArea">去浏览商品</view>
+        </view>
+        <view class="submitArea_2" bindtap="manager_sjd">
+          管理设计单
+        </view>
+      </view>
+    </swiper-item>
+    <!-- 已查布源 -->
+    <swiper-item>
+      <scroll-view scroll-y="true" class="goodsArea" style="height:1090rpx;">
+        <view wx:for="{{show_cloth_list}}" wx:for-item="item2" wx:for-index="idx2" wx:key="unique">
+          <view class="goodArea" style="height:244rpx;">
+            <image class="clothImg" src="{{item2.src}}" data-cloth_id="{{item2.id}}" data-is_pay="{{item2.is_psy}}" bindtap="show_item"></image>
+            <view class="textArea">
+              <view>ID:{{item2.id}}+{{item2.name}}</view>
+              <view>　　　</view>
+              <view>　　　</view>
+              <view>挂样货位: {{item2.guayang_huowei}}</view>
+              <view>色卡货位: {{item2.seka_huowei}}</view>
+            </view>
+            <view class="numArea">
+              <view class="priceArea">¥{{item2.price}}元/{{item2.unit}}</view>
+              <image wx:if="{{item2.is_pay}}" class="logoImg" src="../../assets/images/icon-logo-in.png"></image>
+              <image wx:if="{{!item2.is_pay}}" class="logoImg" src="../../assets/images/icon-logo.png" />
+            </view>
+          </view>
+          <view class="fgx_2"></view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>

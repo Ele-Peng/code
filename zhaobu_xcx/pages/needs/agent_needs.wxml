@@ -1,0 +1,112 @@
+<import src="../../components/prompt/prompt.wxml"/>
+<import src="../../components/loading/loading.wxml"/>
+<template is="loading" data= "{{ ...$wux.loading }}" />
+
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar" style="background-color:#fff;">
+                <block wx:for-items="{{ tabs}}" wx:key="{{ index }}">
+                    <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : '' }}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{ item }}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{ sliderLeft }}px; transform: translateX({{ sliderOffset }}px); -webkit-transform: translateX({{ sliderOffset }}px);"></view>
+            </view>
+            <view class="weui-tab__panel">
+              <view class="weui-tab__content" hidden="{{ activeIndex != 0 }}">
+                <template wx:if="{{open_needs.length == 0}}" is="prompt" data="{{ ...$wux.prompt.msg1 }}"/>
+                <view wx:else>
+                  <view class="weui-panel weui-panel_access" wx:key="" wx:for="{{ open_needs }}" bindtap="onClickNeeds" data-id="{{item.id}}">
+                    <view class="weui-panel__hd panel-needs-list__hd">
+                      <view style="display: flex; align-items: center">
+                        <text>编号: {{ item.id }}</text>
+                        <view wx:if="{{item.alert==1}}" class="red_dot" style="margin-left: 2px"/>
+                      </view>
+                      <text>{{item.display_time}}</text>
+                    </view>
+                    <view class="weui-panel__bd">
+                      <view class="weui-media-box panel-needs-list__bd">
+                        <image class="weui-uploader__img" src="{{item.thumb}}"/>
+                        <view class="panel-needs-list__desc">
+                          <view class="panel-needs-list__desc_item">
+                            <text class="panel-needs-list__desc_title">市场：</text>
+                            <text>{{item.market}}</text>
+                          </view>
+                          <view class="panel-needs-list__desc_item">
+                            <text class="panel-needs-list__desc_title">状态：</text>
+                            <text>{{item.display_status}}</text>
+                          </view>
+                          <text class="panel-needs-list__desc_price">￥{{item.reward}}</text>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+
+                  <view class="loadmore" wx:if="{{ needs_page_more[activeIndex] }}" bindtap='loadMoreNeeds'><text>查看更多</text></view>
+                </view>
+              </view>
+              <view class="weui-tab__content" hidden="{{ activeIndex != 1 }}">
+                <template wx:if="{{closed_needs.length == 0}}" is="prompt" data="{{ ...$wux.prompt.msg1 }}"/>
+                <view wx:else>
+                  <view class="weui-panel weui-panel_access" wx:key="" wx:for="{{ closed_needs }}" bindtap="onClickNeeds" data-id="{{item.id}}">
+                    <view class="weui-panel__hd panel-needs-list__hd">
+                      <text>编号: {{item.id}}</text>
+                      <text>{{item.display_time}}</text>
+                    </view>
+                    <view class="weui-panel__bd">
+                      <view class="weui-media-box panel-needs-list__bd">
+                        <image class="weui-uploader__img" src="{{item.thumb}}"/>
+                        <view class="panel-needs-list__desc">
+                          <view class="panel-needs-list__desc_item">
+                            <text class="panel-needs-list__desc_title">市场：</text>
+                            <text>{{item.market}}</text>
+                          </view>
+                          <view class="panel-needs-list__desc_item">
+                            <text class="panel-needs-list__desc_title">状态：</text>
+                            <text>{{item.display_status}}</text>
+                          </view>
+                          <text class="panel-needs-list__desc_price">￥{{item.reward}}</text>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+
+                  <view class="loadmore" wx:if="{{ needs_page_more[activeIndex] }}" bindtap='loadMoreNeeds'><text>查看更多</text></view>
+                </view>
+              </view>
+              
+              <view class="weui-tab__content" hidden="{{ activeIndex != 2 }}">
+                <template wx:if="{{invalid_needs.length == 0}}" is="prompt" data="{{ ...$wux.prompt.msg1 }}"/>
+                <view wx:else>
+                  <view class="weui-panel weui-panel_access" wx:key="" wx:for="{{ invalid_needs }}" bindtap="onClickNeeds" data-id="{{item.id}}">
+                    <view class="weui-panel__hd panel-needs-list__hd">
+                      <text>编号: {{item.id}}</text>
+                      <text>{{item.display_time}}</text>
+                    </view>
+                    <view class="weui-panel__bd">
+                      <view class="weui-media-box panel-needs-list__bd">
+                        <image class="weui-uploader__img" src="{{item.thumb}}"/>
+                        <view class="panel-needs-list__desc">
+                          <view class="panel-needs-list__desc_item">
+                            <text class="panel-needs-list__desc_title">市场：</text>
+                            <text>{{item.market}}</text>
+                          </view>
+                          <view class="panel-needs-list__desc_item">
+                            <text class="panel-needs-list__desc_title">状态：</text>
+                            <text>{{item.display_status}}</text>
+                          </view>
+                          <text class="panel-needs-list__desc_price">￥{{item.reward}}</text>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+
+                  <view class="loadmore" wx:if="{{ needs_page_more[activeIndex] }}" bindtap='loadMoreNeeds'><text>查看更多</text></view>
+                </view>
+              </view>
+
+            </view>
+        </view>
+    </view>
+</view>

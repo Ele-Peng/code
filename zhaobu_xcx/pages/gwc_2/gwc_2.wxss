@@ -1,0 +1,634 @@
+/* pages/gwc_2/gwc_2.wxss */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: #eeeeec;
+}
+
+.topArea {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizon {
+  width: 100%;
+  border-bottom: 20rpx solid white;
+}
+
+.storeArea {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+.storeArea image {
+  margin-left: 20rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.storeArea view text {
+  margin-left: 10rpx;
+  font-family: Noto Sans CJK;
+  font-size: 32rpx;
+  font-weight: normal;
+}
+
+.storeArea view image {
+  margin-left: 10rpx;
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.fgx {
+  width: 100%;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.gwcArea {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.goodsArea {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  background-color: white;
+}
+
+.checkImg {
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 20rpx;
+  margin-top: 70rpx;
+}
+
+.clothImg {
+  width: 200rpx;
+  height: 200rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+
+.rgArea {
+  display: flex;
+  flex-direction: column;
+  width: 350rpx;
+}
+
+.rgArea view {
+  margin-left: 20rpx;
+  font-family: Noto Sans CJK;
+  font-size: 24rpx;
+  font-weight: normal;
+}
+
+.priceArea {
+  margin-left: 20rpx;
+  font-family: Noto Sans CJK;
+  font-size: 10rpx;
+  font-weight: normal;
+  color: #fc5656;
+}
+
+.editArea {
+  display: flex;
+  flex-direction: row;
+  width: 174rpx;
+  margin-left: -36rpx;
+}
+
+/* .left {
+  height: 36rpx;
+  width: 36rpx;
+  margin-top: 174rpx;
+  border: 1rpx solid #E9E9E9;
+  border-radius: 5rpx;
+}
+
+.left text {
+  color: #E9E9E9;
+  position: absolute;
+  margin-top: -6rpx;
+  margin-left: 10rpx;
+} */
+
+.center {
+  height: 36rpx;
+  margin-top: 174rpx;
+  border: 1rpx solid #e9e9e9;
+  border-radius: 5rpx;
+  width: 100rpx;
+  margin-left: -36rpx;
+  margin-right: 20rpx;
+}
+
+.center input {
+  position: relative;
+  color: #c4c4c4;
+  text-align: center;
+  margin-top: -4rpx;
+  font-size: 22rpx;
+}
+
+/* .right {
+  height: 36rpx;
+  width: 36rpx;
+  margin-top: 174rpx;
+  border: 1rpx solid #E9E9E9;
+  border-radius: 5rpx;
+}
+
+.right text {
+  color: #E9E9E9;
+  position: absolute;
+  margin-top: -6rpx;
+  margin-left: -28rpx;
+}*/
+
+/* .classArea view{
+  text-align: right;
+  margin-top:145rpx;
+  font-family: Noto Sans CJK;
+  font-size: 22rpx;
+  font-weight: normal;
+  color:#AA4747;
+} */
+
+.submitArea {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0;
+  width: 750rpx;
+  height: 120rpx;
+}
+
+.submitButtonLeft {
+  width: 466rpx;
+  height: 120rpx;
+  text-align: center;
+  background-color: #f9f9f9;
+  font-weight: light;
+  display: flex;
+  flex-direction: row;
+}
+
+.checkLeftImg {
+  margin-top: 30rpx;
+  margin-left: 20rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.submitButtonLeft text {
+  margin-left: 20rpx;
+  font-weight: light;
+  font-size: 36rpx;
+  font-family: Noto Sans CJK;
+  line-height: 110rpx;
+  display: flex;
+}
+
+.submitButtonRight {
+  width: 284rpx;
+  height: 120rpx;
+  text-align: center;
+  background-color: #ff9906;
+  font-weight: light;
+}
+
+.submitButtonRight text {
+  margin-left: 20rpx;
+  font-weight: light;
+  font-size: 36rpx;
+  font-family: Noto Sans CJK;
+  line-height: 110rpx;
+  color: white;
+}
+
+.sumArea {
+  width: 290rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.sumPriceArea {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+}
+
+.sumText {
+  font-weight: light;
+  font-size: 24rpx;
+  font-family: Noto Sans CJK;
+  color: black;
+  text-align: right;
+}
+
+.priceText {
+  font-weight: light;
+  font-size: 24rpx;
+  font-family: Noto Sans CJK;
+  color: #fc5656;
+}
+
+.expArea {
+  font-weight: light;
+  font-size: 24rpx;
+  font-family: Noto Sans CJK;
+  color: #d8d8d8;
+  text-align: right;
+}
+
+.editArea {
+  display: flex;
+  flex-direction: column;
+}
+
+.editArea image {
+  width: 40rpx;
+  height: 40rpx;
+  padding-left: 75rpx;
+  margin-right: 20rpx;
+}
+
+/*
+*/
+
+.goodsEditArea {
+  width: 850rpx;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-bottom: 1rpx solid white;
+}
+
+.checkEditImg {
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 20rpx;
+  margin-top: 70rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.clothEditImg {
+  width: 200rpx;
+  height: 200rpx;
+  margin-left: 20rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.rgEditArea {
+  display: flex;
+  flex-direction: column;
+  width: 260rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.addEditRgArea {
+  display: flex;
+  flex-direction: row;
+}
+
+.bgEditImg {
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 20rpx;
+  background-color: white;
+  border-color: red;
+}
+
+.leftEditRg {
+  font-family: Noto Sans CJK;
+  font-weight: lighter;
+  position: absolute;
+  margin-top: -50rpx;
+  margin-left: 37rpx;
+}
+
+.rightEditRg {
+  font-family: Noto Sans CJK;
+  font-weight: lighter;
+  position: absolute;
+  margin-top: -52rpx;
+  margin-left: 34rpx;
+}
+
+.colorEditArea {
+  margin-left: 20rpx;
+  margin-top: 5rpx;
+  font-family: Noto Sans CJK;
+  font-size: 22rpx;
+  font-weight: normal;
+}
+
+.guayangEditArea {
+  margin-left: 20rpx;
+  margin-top: 5rpx;
+  font-family: Noto Sans CJK;
+  font-size: 22rpx;
+  font-weight: normal;
+}
+
+.sekaEditArea {
+  margin-left: 20rpx;
+  margin-top: 5rpx;
+  font-family: Noto Sans CJK;
+  font-size: 22rpx;
+  font-weight: normal;
+}
+
+.priceEditArea {
+  margin-left: 20rpx;
+  margin-top: 5rpx;
+  font-family: Noto Sans CJK;
+  font-size: 22rpx;
+  font-weight: normal;
+  color: #aa4747;
+}
+
+.classEditArea {
+  display: flex;
+  flex-direction: row;
+}
+
+.classEditArea text {
+  font-family: Noto Sans CJK;
+  font-size: 26rpx;
+  font-weight: normal;
+}
+
+.moreEditImg {
+  width: 20rpx;
+  height: 10rpx;
+  margin-top: 18rpx;
+  margin-left: 15rpx;
+}
+
+.submitEditArea {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0;
+  height: 120rpx;
+  margin-top: 10rpx;
+  width: 750rpx;
+}
+
+.submitEditButtonLeft {
+  width: 466rpx;
+  height: 120rpx;
+  text-align: center;
+  background-color: #f9f9f9;
+  font-weight: light;
+  display: flex;
+  flex-direction: row;
+}
+
+.checkEditLeftImg {
+  margin-top: 30rpx;
+  margin-left: 20rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.submitEditButtonLeft text {
+  margin-left: 20rpx;
+  font-weight: light;
+  font-size: 36rpx;
+  font-family: Noto Sans CJK;
+  line-height: 110rpx;
+}
+
+.submitEditButtonRight {
+  width: 284rpx;
+  height: 120rpx;
+  text-align: center;
+  background-color: #ecba5e;
+  font-weight: light;
+}
+
+.submitEditButtonRight text {
+  margin-left: 20rpx;
+  font-weight: light;
+  font-size: 36rpx;
+  font-family: Noto Sans CJK;
+  line-height: 110rpx;
+  color: white;
+}
+
+.buttonEditArea {
+  display: flex;
+  flex-direction: column;
+}
+
+.normalEditCheck {
+  width: 100rpx;
+  height: 40rpx;
+  position: absolute;
+  margin-left: -10rpx;
+  font-weight: light;
+  font-size: 22rpx;
+  font-family: Noto Sans CJK;
+  color: white;
+  background-color: #ecba5e;
+  line-height: 40rpx;
+}
+
+.sampleEditCheck {
+  width: 100rpx;
+  height: 75rpx;
+  margin-left: -10rpx;
+  font-weight: light;
+  font-size: 22rpx;
+  font-family: Noto Sans CJK;
+  background-color: #b5b5b5;
+  color: white;
+  line-height: 115rpx;
+}
+
+.clothEditCheck {
+  display: flex;
+  flex-direction: column;
+  width: 100rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.logoEditArea {
+  position: absolute;
+  width: 25rpx;
+  height: 30rpx;
+  margin-top: 160rpx;
+  margin-left: 60rpx;
+}
+
+.centerEditNum {
+  width: 70rpx;
+  height: 50rpx;
+  text-align: center;
+  margin-left: 10rpx;
+  font-weight: light;
+  font-size: 22rpx;
+  font-family: Noto Sans CJK;
+  line-height: 50rpx;
+  border-color: red;
+}
+
+.ok {
+  font-size: 36rpx;
+  width: 100rpx;
+  font-family: Noto Sans CJK;
+  text-align: center;
+  height: 224rpx;
+  line-height: 242rpx;
+  margin-left: 20rpx;
+  background-color: #ecba5e;
+  margin-bottom: 1rpx solid white;
+  color: white;
+}
+
+.remove {
+  font-size: 36rpx;
+  width: 100rpx;
+  font-family: Noto Sans CJK;
+  text-align: center;
+  height: 224rpx;
+  line-height: 242rpx;
+  background-color: #fc5656;
+  margin-bottom: 1rpx solid white;
+  color: white;
+}
+
+.motto {
+  font-weight: normal;
+  font-size: 32rpx;
+  font-family: Noto Sans CJK;
+  color: #d6d7d6;
+  background-color: white;
+  padding-top: 300rpx;
+  padding-left: 270rpx;
+}
+
+.boxArea {
+  width: 338rpx;
+  height: 64rpx;
+  margin-top: 50rpx;
+  margin-left: 200rpx;
+  border: 1rpx solid #ecba5e;
+  font-weight: normal;
+  font-size: 32rpx;
+  font-family: Noto Sans CJK;
+  color: #ecba5e;
+  text-align: center;
+  line-height: 64rpx;
+  border-radius: 8rpx;
+  background-color: white;
+}
+
+.submitArea_2 {
+  position: fixed;
+  bottom: 0;
+  width: 750rpx;
+  height: 120rpx;
+  font-size: 36rpx;
+  font-family: Noto Sans CJK;
+  background-color: #ecba5e;
+  color: white;
+  text-align: center;
+  line-height: 110rpx;
+}
+
+.none-goods {
+  display: flex;
+  flex-direction: column;
+}
+
+.none-goods-img {
+  width: 366rpx;
+  height: 243rpx;
+  margin-left: 193rpx;
+  margin-top: 182rpx;
+}
+
+.go-buy {
+  display: flex;
+  flex-direction: row;
+  font-size: 28rpx;
+  color: white;
+}
+
+.go-buy image {
+  width: 600rpx;
+  height: 80rpx;
+  margin-left: 75rpx;
+  margin-top: 152rpx;
+}
+
+.go-buy text {
+  position: relative;
+  margin-left: -356rpx;
+  margin-top: 162rpx;
+}
+
+.modal {
+  position: fixed;
+  top: 0rpx;
+  left: 0rpx;
+  right: 0rpx;
+  bottom: 0rpx;
+  width: 100%;
+  height: 100%;
+  z-index: 110;
+}
+
+.modal-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 107;
+  background-color: rgba(0, 0, 0, 0.30);
+}
+
+.modal-layer {
+  position: absolute;
+  background: transparent;
+  /* top: 50%;     */
+  display: flex;
+  flex-direction: column;
+  z-index: 108;
+  box-shadow: 0 4rpx 14rpx rgba(0, 0, 0, 0.4);
+}
+
+.right-page {
+  margin-top: 
+}
+
+.modal-footer {
+  background: #fff;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-top: 1rpx solid #eee;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+
+.modal-close {
+  color: #fff;
+  font-size: 48rpx;
+  position: absolute;
+  right: 40rpx;
+  top: 0;
+  z-index: 98;
+}

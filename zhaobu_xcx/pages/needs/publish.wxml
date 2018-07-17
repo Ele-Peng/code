@@ -1,0 +1,161 @@
+<!--publish.wxml-->
+<import src="../../components/picker/picker.wxml"/>
+<template is="picker" data="{{ ...$wux.picker.demo }}"/>
+<template is="picker" data="{{ ...$wux.picker.market }}"/>
+<template is="picker" data="{{ ...$wux.picker.matching }}"/>
+<template is="picker" data="{{ ...$wux.picker.time }}"/>
+<template is="picker" data="{{ ...$wux.picker.addresses }}"/>
+
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+
+<import src="../../components/toast/toast.wxml"/>
+<template is="toast" data="{{ ...$wux.toast }}"/>
+
+<import src="../../components/loading/loading.wxml"/>
+<template is="loading" data="{{ ...$wux.loading }}"/>
+
+
+<title heading="{{heading}}" lastUrl="{{lastUrl}}"> 
+</title>
+<view style="height: 1206rpx;position: fixed;width: 750rpx;background:#FCFCFC;">
+  <form report-submit="true" bindsubmit="onSubmit">
+  <scroll-view scroll-y style="position: fixed;height: 1000rpx;; overflow: auto">
+    <view>
+      <view class="weui-cells" style="margin-top: 0px;borde-color:#FCFCFC;">
+
+        <view class="weui-cell weui-cell_input" style="height:88rpx;font-size: 28rpx;border: 1rpx solid #F5F5F5;" bindtap="onTapDemo">
+            <view class="weui-cell__hd">
+              <view class="weui-label">寄样类型</view>
+            </view>
+            <view class="weui-cell__bd">
+                <text wx:if="{{ selected_type_name.length > 0 }}" class="weui-input">{{selected_type_name}}</text>
+                <text wx:else class="weui-input weui-input_hint">请选择寄样类型</text>
+            </view>
+            <view class="weui-cell__ft_in-access" />
+        </view>
+        <view class="weui-cell weui-cell_input" style="height:88rpx;font-size: 28rpx;border: 1rpx solid #F5F5F5;" bindtap="onTapTime">
+            <view class="weui-cell__hd">
+              <view class="weui-label">允许时间</view>
+            </view>
+            <view class="weui-cell__bd">
+              <text wx:if="{{ selected_time_name.length > 0 }}" class="weui-input">{{selected_time_name}}</text>
+              <text wx:else class="weui-input weui-input_hint">请选择允许时间</text>
+            </view>
+            <view class="weui-cell__ft_in-access" />
+        </view>
+        <view class="weui-cell weui-cell_input" style="height:88rpx;font-size: 28rpx;border: 1rpx solid #F5F5F5;"  bindtap="onTapMarket">
+            <view class="weui-cell__hd">
+              <view class="weui-label">目标市场</view>
+            </view>
+            <view class="weui-cell__bd">
+              <text wx:if="{{ selected_market_name.length > 0 }}" class="weui-input">{{selected_market_name}}</text>
+              <text wx:else class="weui-input weui-input_hint">请选择目标市场</text>
+            </view>
+            <view class="weui-cell__ft_in-access" />
+        </view>
+        <view class="weui-cell weui-cell_input" style="height:88rpx;font-size: 28rpx;border: 1rpx solid #F5F5F5;"  bindtap="onTapMatching">
+            <view class="weui-cell__hd">
+              <view class="weui-label">匹配程度</view>
+            </view>
+            <view class="weui-cell__bd">
+              <text wx:if="{{ selected_matching_name.length > 0 }}" class="weui-input">{{selected_matching_name}}</text>
+              <text wx:else class="weui-input weui-input_hint">请选择匹配程度</text>
+            </view>
+            <view class="weui-cell__ft_in-access" />
+        </view>
+      </view>
+      <view class="weui-cells" style='margin-top: 0rpx;border-top:15rpx solid #FCFCFC;borde-color:#FCFCFC;'>
+        <view class="weui-cell" style="height:88rpx;font-size: 28rpx;" bindtap="toggleOptional">
+          <view class="weui-cell__hd">
+            <view class="weui-label">展开更多</view>
+          </view>
+          <view class="weui-cell__bd" />
+          <view wx:if="{{ show_optional }}" class="weui-cell__ft weui-cell__ft_in-access-up" />
+          <view wx:if="{{ !show_optional }}" class="weui-cell__ft weui-cell__ft_in-access-down" />
+        </view>
+        <view hidden="{{ !show_optional }}" style="height:88rpx;font-size: 28rpx;border: 1rpx solid #F5F5F5;" class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">需求描述</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input id="desc-input" name="desc" class="weui-input" placeholder="可填材质、属性等信息" />
+            </view>
+        </view>
+        <view hidden="{{ !show_optional }}" style="height:88rpx;font-size: 28rpx;border: 1rpx solid #F5F5F5;" class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">期望价格</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input id="price-input" name="price" class="weui-input" placeholder="您期望的价格" />
+            </view>
+        </view>
+
+        <view hidden="{{ !show_optional }}" style="height:88rpx;font-size: 28rpx;border: 1rpx solid #F5F5F5;" class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">工艺需求</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input id="extra-input" name="extra" class="weui-input" placeholder="额外工艺需求，如防水涂层" />
+            </view>
+        </view>
+      </view>
+
+      <view class="weui-cells" style='margin-top: 0rpx;border-top:15rpx solid #FCFCFC;borde-color:#FCFCFC;'>
+        <view class="weui-cell">
+            <view class="weui-cell__bd" style="font-size: 28rpx;" >
+                <view class="weui-uploader">
+                    <view class="weui-uploader__hd">
+                        <p class="weui-uploader__title">图片上传</p>
+                        <view class="weui-uploader__info">{{selected_images.length}}/8</view>
+                    </view>
+                    <view class="weui-uploader__bd" style="display: flex; flex-wrap: wrap; justify-content:space-between">
+                        <view wx:for="{{selected_images}}" wx:key="{{index}}" class="weui-uploader__files">
+                          <text wx:if="{{item.uploading}}" class='image-upload-percent'>{{item.progress}}%</text>
+                          <image style="width: {{image_block_size}}; height: {{image_block_size}}" data-index="{{index}}" bindlongtap="onLongTapImage" class="weui-uploader__img" src="{{item.path}}"/>
+                        </view>
+                        <view style="width: {{image_block_size}}; height: {{image_block_size}}" wx:if="{{selected_images.length < 8}}" class="weui-uploader__input-box" bindtap="selectImage">
+                        </view>
+                        <view wx:for="{{empty_images}}" class="weui-uploader__files" wx:key="">
+                          <image style="width: {{image_block_size}}; height: {{image_block_size}}" class="weui-uploader__img" src=""/>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+      </view>
+
+      <view class="weui-cells" style='margin-top: 0rpx;border-top:15rpx solid #FCFCFC;borde-color:#FCFCFC;'>
+        <view class="weui-cell"style="height: 110rpx;font-size:28rpx;" bindtap="onTapAddress">
+          <view class="weui-cell__hd" >
+            <view class="weui-label">收货地址</view>
+          </view>
+          <view class="weui-cell__bd" style="display:flex;flex-direction:column;width:100%;height:100%;justify-content:space-around;font-size: 28rpx;">
+            <text wx:if="{{addresses.length == 0}}">新增收货地址</text>
+            <text wx:if="{{addresses.length > 0 && selected_address < 0}}">请选择收货地址</text>
+            <text wx:if="{{addresses.length > 0 && selected_address >= 0}}">{{addresses[selected_address].name}} {{addresses[selected_address].phone}}</text>
+            <text wx:if="{{addresses.length > 0 && selected_address >= 0}}">{{addresses[selected_address].prov_vb}}{{addresses[selected_address].city_vb}}{{addresses[selected_address].county_vb}}{{addresses[selected_address].detail}}</text>
+            <!-- <text style="word-break:keep-all; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">浙江省湖州市织里镇有个小路1234324325号</text> -->
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells" style='margin-top: 0rpx;border-top:15rpx solid #FCFCFC;borde-color:#FCFCFC;'>
+        <view class="weui-cell weui-cell_input" style="font-size: 28rpx;height: 88rpx;">
+          <view class="weui-cell__hd">
+            <view class="weui-label">打赏金额</view>
+          </view>
+          <view class="weui-cell__bd" style="display:flex; align-items:center">
+            <text class="weui-input" style="padding-right: 20px">￥{{market_fee}}</text>
+            <image src="../../assets/images/icon-warning.png" style="width: 28rpx;height: 28rpx" bindtap="onClickHelpFee"/>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <button formType="submit" class="weui-btn" type="primary" style="position: fixed; top: 1120rpx; width: 600rpx; height:80rpx;line-height: 80rpx; background-color: #FF9906;font-size: 28rpx;margin-left: 75rpx;">
+    发布
+  </button>
+  </form>
+
+</view>

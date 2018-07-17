@@ -1,0 +1,10 @@
+<!--pages/fkxx/fkxx.wxml-->
+<view class="container">
+  <view class="moneyArea">
+    <text>姓名：{{name}}</text>
+  </view>
+  <view class="cardArea">
+    <text>卡号：{{card}}</text>
+  </view>
+  <view class="submitArea" bindtap="pay_event">付款请转账到此银行卡</view>
+</view>

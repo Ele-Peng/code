@@ -1,0 +1,99 @@
+/* detail.wxss */
+
+.weui-tab__content {
+	height: 100%;
+	padding-bottom: 0;
+}
+
+.input_container {
+  background: #fff;
+  border-top: 1rpx solid #999999;
+  width:100%;
+  margin-top:0;
+  position:fixed;
+  height:45px;
+  display:flex;
+}
+
+.message_input {
+  align-self: center;
+  border-bottom: 1rpx solid #cccccc;
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.voice_input {
+  line-height: 2;
+  color: #777;
+  align-self: center;
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.message_send {
+  align-self: center;
+  height: 30px;
+  padding-left: 5px;
+  padding-right: 5px;
+  line-height:1.8;
+  margin-left: 10px;
+  margin-right: 10px; 
+}
+
+.message_add {
+  align-self: center;
+  border-radius: 15px;
+  border: 1rpx solid #999;
+  height: 30px;
+  width: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.conversation_time {
+  width: 100%;
+  color: #bbb;
+  text-align: center;
+  font-size: 12px;
+  line-height: 2em;
+  display:block;
+}
+
+.mine {
+  background-color: #b0e46e;
+  border: 1rpx solid #b0e46e;
+  margin-right: 20px;
+}
+
+.theirs {
+  background-color: #fff;
+  border: 1rpx solid #fff;
+  margin-left: 20px;
+}
+
+.conversation_content {
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+
+.conversation_content text {
+  word-break: break-all;
+}
+
+.conversation_content_img {
+  width: 240px;
+  height: 240px;
+}
+
+.conversation_content_audio_ico {
+  width: 1.2em;
+  height: 1.2em;
+  margin-top: 0.2em;
+}
+
+.conversation_content_audio_time {
+  padding:5px;
+  margin-right:0.2em;
+  margin-top:0.2em;
+}

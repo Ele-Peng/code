@@ -1,0 +1,57 @@
+<import src="../../components/toast/toast.wxml" />
+<template is="toast" data="{{ ...$wux.toast }}" />
+
+<import src="../../components/loading/loading.wxml" />
+<template is="loading" data="{{ ...$wux.loading }}" />
+
+<template is="dialog" data="{{ ...$wux.dialog }}" />
+<import src="../../components/dialog/dialog.wxml" />
+
+<title heading="{{heading}}" lastUrl="{{lastUrl}}">
+</title>
+
+<view class="page" style="position:fixed;background-color:#FCFCFC;width:750rpx;">
+  <view style='margin-left: 50rpx;height:88rpx;line-height:108rpx;'>
+    <view style='font-size: 28rpx;color:#A5A29F'>
+      <text wx:if="{{team_info.name}}">{{team_info.name}}</text>
+      <text wx:else>我的团队</text>
+    </view>
+
+  </view>
+  <view class="page__bd" wx:if="{{!loading}}" style='margin-left: -25rpx;height:865rpx;'>
+    <view class="weui-cells" style='font-size: 28rpx;'>
+      <view wx:if="{{!team_info.name}}" class="weui-cell weui-cell_input" style="height: 66px">
+        <text>您尚未加入任何团队。</text>
+      </view>
+      <view wx:elif="{{team_info.name && team_info.pending}}" class="weui-cell weui-cell_input" style="height: 66px">
+        <text>您已申请加入{{team_info.name}}，正在等待管理员批准。</text>
+      </view>
+      <block wx:else>
+        <view class="weui-cell weui-cell_input" style="height: 66px" bindtap="onClickMembers">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">团队成员</view>
+          </view>
+          <view class="weui-cell__bd">
+          </view>
+          <view class="weui-cell__ft_in-access" />
+        </view>
+
+        <view class="weui-cell weui-cell_input" style="height: 66px" bindtap='onClickInvites'>
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">邀请加入</view>
+          </view>
+          <view class="weui-cell__bd">
+          </view>
+          <view class="weui-cell__ft_in-access" />
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <block wx:if="{{!loading}}" style="background:#FCFCFC;">
+    <button wx:if="{{!team_info.name}}" style="width:698rpx;margin-left:26rpx;background-color:#FF9906;"  class="weui-btn" type="primary" bindtap="createTeam">创建团队</button>
+    <button wx:elif="{{team_info.pending}}" class="weui-btn" type="warn" style="width:698rpx;margin-left:26rpx;background-color:#FF9906;" bindtap="quitTeam">取消申请</button>
+    <button wx:else class="weui-btn" type="warn" style="width:698rpx;margin-left:26rpx;background-color:#FF9906;" bindtap="quitTeam">退出团队</button>
+  </block>
+  <view style='background-color:#FCFCFC;height:25rpx;'></view>
+</view>

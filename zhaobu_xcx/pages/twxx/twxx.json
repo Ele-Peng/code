@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#EDBA5F",
+  "navigationBarTitleText": "面料详情",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "title": "../../components/title/title"
+  }
+}

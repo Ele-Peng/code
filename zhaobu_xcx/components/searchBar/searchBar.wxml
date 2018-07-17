@@ -1,0 +1,12 @@
+<view class="searchBar" >
+  <view class="searchBorder" style="background-color:{{ backgroundCol}};border-color:{{ borderCol }}">
+    <image class="searchImg" src="../../assets/images/icon-search.png" bindtap="show"></image>
+    <input wx:if="{{is_redirect == 0}}" class="searchText" type="text" placeholder='{{ searchRec }}' bindtap='search_index'/>
+    <input wx:else class="searchText" type="text" placeholder='{{ searchRec }}'/>
+    <!-- <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}"> -->
+    <image class="cameraImg" src="../../assets/images/icon-camera.png" bindtap="takePhoto" ></image>
+  <!-- </picker> -->
+    
+  </view>
+  <image class="qrcodeImg"src="../../assets/images/icon-QRCode.png" bindtap='onClickScan'></image>
+</view>

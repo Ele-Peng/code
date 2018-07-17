@@ -1,0 +1,5 @@
+<!--pages/byindex/auth.wxml-->
+<view style="display: flex; align-items: center; flex-direction: column">
+<view style="margin-top: 20px; margin-bottom: 20px; color: #666">我们需要您的授权才能继续。</view>
+<button type="primary" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">允许授权</button>
+</view>

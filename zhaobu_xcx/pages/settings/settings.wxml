@@ -1,0 +1,27 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">个人中心</view>
+  </view>
+	<view class="page__bd">
+    <view class="weui-cells">
+        <view class="weui-cell weui-cell_input" style="height: 66px"
+         bindtap="onClickTeam">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">我的团队</view>
+            </view>
+            <view class="weui-cell__bd">
+            </view>
+            <view class="weui-cell__ft_in-access" />
+        </view>
+
+        <view class="weui-cell weui-cell_input" style="height: 66px" bindtap='onClickAddress'>
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">地址管理</view>
+            </view>
+            <view class="weui-cell__bd">
+            </view>
+            <view class="weui-cell__ft_in-access" />
+        </view>
+    </view>
+  </view>
+</view>

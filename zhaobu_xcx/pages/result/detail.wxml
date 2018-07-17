@@ -1,0 +1,165 @@
+<!--publish.wxml-->
+<import src="../../components/dialog/dialog.wxml"/>
+<template is="dialog" data="{{ ...$wux.dialog }}"/>
+
+<import src="../../components/toast/toast.wxml"/>
+<template is="toast" data="{{ ...$wux.toast }}"/>
+
+<import src="../../components/loading/loading.wxml"/>
+<template is="loading" data="{{ ...$wux.loading }}"/>
+
+
+<title heading="{{heading}}" lastUrl="{{lastUrl}}"> 
+</title>
+<view class="page" style="display:flex; flex-direction:column; height:100%" wx:if="{{detail.id}}">
+  <view style="flex: 1 0 auto">
+    <view class="page  __bd" style="padding-bottom: 15px">
+      <view class="weui-cells" style="margin-top: 0px">
+
+        <view class="needsDetailArea">
+          <view class="needsName">提交时间</view>
+          <view class="needsValue">{{ detail.display_time }}</view>
+        </view>
+
+        <view wx:if="{{detail.provider}}" class="needsDetailArea">
+          <view class="needsName">供应商</view>
+          <view class="needsValue" style='margin-left: 25rpx;'>{{detail.provider}}</view>
+        </view>
+
+        <view wx:if="{{detail.card_id}}" class="needsDetailArea">
+          <view class="needsName">原色卡号</view>
+          <view class="needsValue">{{ detail.card_id }}</view>
+        </view>
+
+        <view class="needsDetailArea">
+          <view class="needsName">材质匹配</view>
+          <view class="needsValue">{{ detail.display_material_matching }}</view>
+        </view>
+
+        <view class="needsDetailArea">
+          <view class="needsName">颜色匹配</view>
+          <view class="needsValue">{{ detail.display_color_matching }}</view>
+        </view>
+
+        <view class="needsDetailArea">
+          <view class="needsName">大货单价</view>
+          <view class="needsValue">{{ detail.price }}元/{{ detail.display_unit }}</view>
+        </view>
+
+        <view class="needsDetailArea">
+          <view class="needsName">样布单价</view>
+          <view class="needsValue">{{ detail.sample_price }}元/米</view>
+        </view>
+
+        <view class="needsDetailArea">
+          <view class="needsName">面料弹力</view>
+          <view class="needsValue">{{detail.display_elastic}}</view>
+        </view>
+
+        <view class="needsDetailArea">
+          <view class="needsName">门幅大小</view>
+          <view wx:if="{{ detail.width > 0 }}" class="needsValue">{{ detail.width }}厘米</view>
+          <view wx:else class="needsValue">未知</view>
+        </view>
+
+        <view class="needsDetailArea">
+          <view class="needsName">起订数量</view>
+          <view class="needsValue">{{ detail.threshold }}</view>
+        </view>
+
+        <view class="needsDetailArea">
+          <view class="needsName">是否足秤</view>
+          <view wx:if="{{ detail.measure == 100 }}" class="needsValue">足秤</view>
+          <view wx:elif="{{ detail.measure == 0 }}" class="needsValue">未知</view>
+          <view wx:else class="needsValue">{{ detail.measure }}成</view>
+        </view>
+
+        <view wx:if="{{detail.unit == 'k' && detail.kezhong > 0}}" class="needsDetailArea">
+          <view class="needsName">克重</view>
+          <view class="needsValue">{{ detail.kezhong }}克</view>
+        </view>
+
+        <view wx:if="{{detail.unit == 'k' && detail.kongcha > 0}}" class="needsDetailArea">
+          <view class="needsName">空差</view>
+          <view class="needsValue">{{ detail.kongcha }}千克</view>
+        </view>
+
+        <view wx:if="{{detail.unit == 'k' && detail.zhiguan > 0}}" class="needsDetailArea">
+          <view class="needsName">纸管</view>
+          <view class="needsValue">{{ detail.zhiguan }}千克</view>
+        </view>
+
+        <view class="needsDetailArea">
+          <view class="needsName">货期</view>
+          <view wx:if="{{ detail.duration == 0 }}" class="needsValue" style='padding-left: 130rpx;'>现货</view>
+          <view wx:elif="{{ detail.duration < 0 }}" class="needsValue" style='padding-left: 130rpx;'>未知</view>
+          <view wx:else class="needsValue" style='padding-left: 130rpx;'>{{ detail.duration }}天</view>
+        </view>
+
+
+        <view wx:if="{{ extras.extra }}" class="needsDetailArea">
+          <view class="needsName">需求单价</view>
+          <view class="needsValue">{{ extras.price }}元/{{ detail.display_unit }}</view>
+        </view>
+
+        <view wx:if="{{ extras.extra.length > 0 }}" class="needsDetailArea">
+          <view class="needsName">额外需求：</view>
+          <view class="needsValue">{{extras.extra}}</view>
+        </view>
+
+      </view>
+
+
+      <view wx:if="{{ detail.remark.length > 0 }}" class="needsDetailArea">
+        <view class="needsName">备注信息</view>
+        <view class="needsValue">{{detail.remark}}</view>
+      </view>
+
+      <view class="weui-cells">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <view class="weui-uploader">
+                    <view class="weui-uploader__hd" style='font-size: 28rpx;'>
+                        <p class="weui-uploader__title" >候选布料图片</p>
+                    </view>
+                    <view class="weui-uploader__bd" style="display: flex; flex-wrap: wrap; justify-content:space-between">
+                        <view wx:for="{{detail.images}}" wx:key="{{index}}" class="weui-uploader__files">
+                          <image style="width: {{image_block_size}}; height: {{image_block_size}}" data-index="{{index}}" bindtap="onPreviewImage" class="weui-uploader__img" src="{{item.thumb}}"/>
+                        </view>
+                        <view wx:for="{{empty_images}}" class="weui-uploader__files" wx:key="">
+                          <image style="width: {{image_block_size}}; height: {{image_block_size}}" class="weui-uploader__img" src=""/>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+      </view>
+
+      <view class="weui-cells" wx:if="{{ detail.shop_img.thumb }}" style='font-size: 28rpx;'>
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <view class="weui-uploader">
+                    <view class="weui-uploader__hd">
+                        <p class="weui-uploader__title">店铺门脸图片</p>
+                    </view>
+                    <view class="weui-uploader__bd" style="display: flex; flex-wrap: wrap; justify-content:space-between">
+                        <view class="weui-uploader__files">
+                          <image style="width: {{image_block_size}}; height: {{image_block_size}}" bindtap="onPreviewShopImage" class="weui-uploader__img" src="{{ detail.shop_img.thumb }}"/>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style="flex: 0 0 auto; width: 100%; margin-top: 0px; display:flex;">
+    <button wx:if="{{user_type == 'user' }}" class="weui-btn" type="primary" bindtap="onPurchase" style="flex-grow: 1;background-color:#FF9906;">
+      我要采购
+    </button>
+    <button wx:if="{{user_type == 'agent' }}" class="weui-btn" type="primary" bindtap="onModify" style="margin-top: 0;flex-grow: 1;background-color:#FF9906;">
+      修改结果
+    </button>
+  </view>
+</view>

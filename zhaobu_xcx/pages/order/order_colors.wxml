@@ -1,0 +1,7 @@
+<!--pages/order/order_colors.wxml-->
+<import src="../../components/colorselector/colorselector.wxml"/>
+<template is="colorselector" data="{{ ...$wux.colorselector }}"/>
+
+<text>pages/order/order_colors.wxml</text>
+
+<button style="height: 30px; width: 100px" bindtap='bindtap'></button>

@@ -1,0 +1,56 @@
+<!--pages/bjsjd/bjsjd.wxm 编辑设计单-->
+<view class="container">
+    <view class="designName">
+        <text class="listName">设计单名字</text>
+    </view>
+    <view style="height:20rpx;"></view>
+    <view class="horizon"></view>
+    <view class="designName">
+        <text class="companyName">{{t_name}}</text>
+    </view>
+    <view style="height:10rpx;"></view>
+    <view class="fgx"></view>
+    <view style="height:15rpx;"></view>
+    <view class="horizon"></view>
+    <view class="addArea">
+        <image src="../../assets/images/icon-designAdd.png"></image>
+        <image src="../../assets/images/icon-editMinus.png"></image>
+    </view>
+    <view class="horizon"></view>
+    <view class="designName">
+        <text class="listName">包含面料</text>
+    </view>
+    <view class="goodsArea">
+        <view wx:for="{{t_list}}" wx:for-item="item2" wx:for-index="idx" wx:key="unique">
+            <view class="goodArea">
+                <image class="clothImg" src="../../assets/images/buliao.jpg"></image>
+                <view class="textArea">
+                    <view>ID:{{item2.id}}+{{item2.name}}</view>
+                    <view>类型: {{item2.type}}</view>
+                    <view>颜色: {{item2.color}}</view>
+                    <view>挂样货位: {{item2.guayang_huowei}}</view>
+                    <view>色卡货位: {{item2.seka_huowei}}</view>
+                </view>
+                <view class="numArea">
+                    <image class="closeImg" src="../../assets/images/icon-editClose.png" />
+                    <view class="priceArea">¥{{item2.price}}元/{{item2.unit}}</view>
+                    <image wx:if="{{item2.is_pay}}" class="logoImg" src="../../assets/images/icon-logo-in.png"></image>
+                    <image wx:if="{{!item2.is_pay}}" class="logoImg" src="../../assets/images/icon-logo.png" />
+                </view>
+            </view>
+            <view class="fgx_2"></view>
+        </view>
+    </view>
+    <!-- 点击关闭按钮时出现 -->
+    <view wx:if="{{is_remove}}" class="closeArea">
+        <view class="deleteText">是否删除此款面料</view>
+        <view class="buttonArea">
+            <button bindtap="remove_sjd_no">否</button>
+            <button bindtap="remove_sjd_yes">是</button>
+        </view>
+    </view>
+    <view class="submitArea">
+        <view class="submitAreaLeft" bindtap="remove_sjd">删除设计单</view>
+        <view class="submitAreaRight" bindtap="save_sjd">保存</view>
+    </view>
+</view>

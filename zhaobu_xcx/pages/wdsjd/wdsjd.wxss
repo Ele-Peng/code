@@ -1,0 +1,304 @@
+/* pages/wdsjd/wdsjd.wxss */
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+.swiper-tab {
+  width: 750rpx;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-family: Noto Sans CJK;
+  font-weight: light;
+  font-size: 32rpx;
+}
+
+.swiper-tab-item {
+  display: inline-block;
+  width: 280rpx;
+  margin-left:20rpx;
+  border-bottom: 8rpx solid white;
+}
+
+.active {
+  color: #eeb959;
+  border-bottom: 8rpx solid #ebba5e;
+}
+
+.swiper {
+  width: 750rpx;
+  height: 1085rpx;
+}
+
+.horizon{
+  width:100%;
+  border-bottom:12rpx solid #F5F4F4;
+}
+
+
+.colorInfoClass{
+  margin-top:10rpx;
+  margin-left:20rpx;
+}
+
+.colorInfoClass view {
+  float:left;
+  margin-right:10rpx;
+  margin-bottom:19rpx;
+}
+
+
+.motto{
+  font-weight: normal;
+  font-size:32rpx;
+  font-family: Noto Sans CJK;
+  color: #D6D7D6;
+  background-color: white;
+  padding-top:300rpx;
+  padding-left:260rpx;
+}
+
+.boxArea{
+  width:338rpx;
+  height: 64rpx;
+  margin-top:50rpx;
+  margin-left:200rpx;
+  border: 1rpx solid #ECBA5E;
+  font-weight: normal;
+  font-size:32rpx;
+  font-family: Noto Sans CJK;
+  color: white;
+  text-align: center;
+  line-height: 64rpx;
+  border-radius: 8rpx; 
+  background-color: #ECBA5E;
+}
+
+.submitArea_2{
+  position: fixed;
+  bottom:0;
+  width:750rpx;
+  height:120rpx;
+  font-size:36rpx;
+  font-family: Noto Sans CJK;
+  background-color: #ECBA5E;
+  color:white;
+  text-align: center;
+  line-height: 110rpx;
+}
+
+.checked{
+  border-radius: 15rpx;
+  width: 126rpx;
+  height: 40rpx;
+  font-family: Noto Sans CJK;
+  font-weight: bold;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  color: white;
+  background-color: #ECBA5E;
+  text-align: center;
+}
+
+.noneChecked{
+  border-radius: 15rpx;
+  width: 122rpx;
+  height: 38rpx;
+  font-family: Noto Sans CJK;
+  font-weight: bold;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  color: black;
+  background-color: white;
+  text-align: center;
+  border:2rpx solid #ECBA5E;
+}
+
+.goodsArea{
+  display: flex;
+  flex-direction: column;
+  background-color: #F5F4F4;
+  width:750rpx;
+}
+
+.goodArea{
+  display: flex;
+  flex-direction: row;
+  height:244rpx;
+}
+
+.clothImg{
+  padding-top:22rpx;
+  padding-left: 20rpx;
+  width:200rpx;
+  height:200rpx;
+}
+
+.textArea{
+  width:350rpx;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20rpx;
+  font-family: Noto Sans CJK;
+  font-size: 22rpx;
+  font-weight: normal;
+  padding-top: 12rpx;
+}
+
+.textArea view{
+  padding-top:8rpx;
+}
+
+.numArea{
+  display: flex;
+  flex-direction: column;
+  font-family: Noto Sans CJK;
+  font-size: 22rpx;
+  font-weight: normal;
+  text-align: right;
+  width:150rpx;
+  height:244rpx;
+  color:#AA4747;
+}
+
+.priceArea{
+  margin-top:20rpx;
+}
+
+.logoImg{
+  width:25rpx;
+  height:30rpx;
+  margin-top:135rpx;
+  margin-left:125rpx;
+}
+
+.fgx_2{
+  width:750rpx;
+  height: 1rpx;
+  border-bottom: 1rpx solid #F2E5CE;
+}
+
+.submitArea{
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0;
+  width: 750rpx;
+  height:120rpx;
+}
+
+.submitAreaLeft{
+  width:375rpx;
+  text-align: center;
+  font-family: Noto Sans CJK;
+  font-weight: normal;
+  background-color: #F9F9F9;
+  font-size: 38rpx;
+  color:#ECBA5E;
+  line-height: 120rpx;
+}
+
+.submitAreaRight{
+  width:375rpx;
+  text-align: center;
+  font-family: Noto Sans CJK;
+  font-weight: normal;
+  background-color: #ECBA5E;
+  font-size: 38rpx;
+  color: white;
+  line-height: 120rpx;
+}
+
+
+
+.row {
+  display: block;
+  margin: 0px;
+}
+
+.col {
+  display: flex;
+  font-family: -apple-system-font, "Helvetica Neue", sans-serif;
+  font-size: 17px;
+}
+
+.col>.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9,
+.col-10, .col-11, .col-12 {
+  overflow: hidden;
+}
+
+.col-1 {
+  width: 8.33333333333333%;
+}
+
+.col-2 {
+  width: 16.6666666666666%;
+}
+
+.col-3 {
+  width: 25%;
+}
+
+.col-4 {
+  width: 33.3333333333333%;
+}
+
+.col-5 {
+  width: 41.6666666666666%;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.col-7 {
+  width: 58.333333333333333%;
+}
+
+.col-8 {
+  width: 66.66666666666666%;
+}
+
+.col-9 {
+  width: 75%;
+}
+
+.col-10 {
+  width: 83.33333333333333%;
+}
+
+.col-11 {
+  width: 91.66666666666666%;
+}
+
+.col-12 {
+  width: 100%;
+}
+
+.listDetailArea {
+  width: 750rpx;
+  height: 950rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.detailArea {
+  width: 364rpx;
+  height: 490rpx;
+  border: 6rpx solid #f9f9f9;
+  font-family: Noto Sans CJK;
+  font-size: 28rpx;
+  font-weight: normal;
+}
+
+.detailArea image {
+  width: 364rpx;
+  height: 364rpx;
+}
+
+.clothName {
+  margin-left: 20rpx;
+  margin-top: 5rpx;
+  width:240rpx;
+}

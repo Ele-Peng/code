@@ -1,0 +1,234 @@
+/* pages/xcxindex/xcxindex.wxss */
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+.imgTrans image{
+  width:100%;
+  height:360rpx;
+}
+
+.searchArea {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  margin-top: 15rpx;
+  margin-left: 175rpx;
+  width: 400rpx;
+  height: 50rpx;
+  border: 1rpx solid #e7bb5a;
+  border-radius: 5px;
+  font-family: Noto Sans CJK;
+  font-size: 24rpx;
+  color: #c9c9c9;
+  font-weight: lighter;
+  line-height: 50rpx;
+  background-color: white;
+}
+
+.camera {
+  width: 50rpx;
+  height: 35rpx;
+  margin-top: 7.5rpx;
+  margin-left: 15rpx;
+}
+
+.input {
+  width: 290rpx;
+}
+
+.searchImg {
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: 10rpx;
+  margin-right: 15rpx;
+}
+
+.fgx{
+  width:100%;
+  border-bottom: 20rpx solid #F9F9F9;
+}
+
+.tabArea{
+  display: flex;
+  flex-direction: row;
+}
+
+.tabArea view{
+  display: flex;
+  flex-direction: column;
+  margin-left:126rpx;
+  margin-top:20rpx;
+  margin-bottom: 20rpx;
+  font-family: Noto Sans CJK;
+  font-size:22rpx;
+}
+
+.tabArea view image{
+  width:75rpx;
+  height:75rpx;
+}
+
+.tabArea view text{
+  margin-left:-5rpx;
+}
+
+.imgArea{
+  display: flex;
+  flex-direction: row;
+  margin-left: 20rpx;
+  margin-top:20rpx;
+}
+
+.imgArea view{
+  display: flex;
+  flex-direction: column;
+}
+
+.img_lt{
+  border: 5rpx solid white;
+  width:430rpx;
+  height:360rpx;
+}
+
+.img_lb{
+  border: 5rpx solid white;
+  width:430rpx;
+  height:105rpx;
+}
+
+.img_rt{
+  border: 5rpx solid white;
+  width:260rpx;
+  height:180rpx;
+}
+
+.img_rb{
+  border: 5rpx solid white;
+  width:260rpx;
+  height:285rpx;
+}
+
+.ltTag{
+  position: absolute;
+  width:180rpx;
+  height:40rpx;
+  line-height: 40rpx;
+  font-family: Noto Sans CJK;
+  font-size:22rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-top:-300rpx;
+  margin-left:150rpx;
+  opacity: 0.5;
+}
+
+.lbTag{
+  position: absolute;
+  width:180rpx;
+  height:40rpx;
+  line-height: 40rpx;
+  font-family: Noto Sans CJK;
+  font-size:22rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-top:-75rpx;
+  margin-left:150rpx;
+  opacity: 0.5;
+}
+
+.rtTag{
+  position: absolute;
+  width:180rpx;
+  height:40rpx;
+  line-height: 40rpx;
+  font-family: Noto Sans CJK;
+  font-size:22rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-top:-400rpx;
+  margin-left:500rpx;
+  opacity: 0.5;
+}
+
+.rbTag{
+  position: absolute;
+  width:180rpx;
+  height:40rpx;
+  line-height: 40rpx;
+  font-family: Noto Sans CJK;
+  font-size:22rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-top:-175rpx;
+  margin-left:500rpx;
+  opacity: 0.5;
+}
+
+.tjTextArea{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+}
+
+.leftLine{
+  margin-left:40rpx;
+  margin-right: 10rpx;
+  width:200rpx;
+  height:25rpx;
+  border-bottom: 1rpx solid #BEBEBE;
+}
+
+.rightLine{
+  margin-left:10rpx;
+  width:200rpx;
+  height:25rpx;
+  border-bottom: 1rpx solid #BEBEBE;
+}
+
+.tagArea{
+  height:320rpx;
+}
+
+.tagArea view{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+
+.tagArea view button{
+  width:220rpx;
+  height: 80rpx;
+  font-family: Noto Sans CJK;
+  font-size:24rpx;
+  color: white;
+  line-height: 80rpx;
+  margin-left:0rpx;
+}
+
+.tag_01{
+  background-color: #7D99A5;
+}
+
+.tag_02{
+  background-color: #EB9C5E;
+  
+}
+
+.tag_03{
+  background-color: #752F23;
+}
+
+.tag_04{
+  background-color: #F2DFC1;
+}
+
+.tag_05{
+  background-color: #5A7870;
+}
+
+.tag_06{
+  background-color: #5B5351;
+}
