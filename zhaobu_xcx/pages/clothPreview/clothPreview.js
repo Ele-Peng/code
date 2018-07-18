@@ -8,6 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    key_map: {},
+    width: 0,
+    height: 0,
     heading: "面料预览",
     search_text: '最新发布',
     isShow: false,
@@ -24,9 +27,8 @@ Page({
     is_latest: false,
     is_hotest: false,
     is_newest: false,
-    button_array: [], // 筛选按钮列表
-    chose_a: 0, // 当前选择的大类
-    chose_b: -1, // 当前选择的中类
+    chose_a: '开发时间', // 当前选择的大类
+    chose_b: '', // 当前选择的中类
     order_by: 'None', // 根据什么排序
     is_shows: {},
     is_checked: 1,
@@ -53,8 +55,8 @@ Page({
         '条纹': {},
         '格子': {},
         '净色特种': {},
-        '素色常规': {},
-        '其他': {}
+        '素色': {},
+        '其它': {}
       },
       '适用品类': {
         'T恤/打底衫': {},
@@ -63,18 +65,18 @@ Page({
         '衬衫': {},
         '裤子': {},
         '家居服': {},
-        '婴儿服饰(哈衣/爬服)': {},
+        '婴儿服装(哈衣/爬服)': {},
         '棉衣/羽绒服/户外服': {},
         '泳装': {},
         '校服': {},
-        '其他': {}
+        '其它': {}
       },
       '织法': {
         '梭织': {
           '平纹': {},
           '斜纹': {},
           '缎纹': {},
-          '其他': {},
+          '其它': {},
         },
         '针织': {
           '罗纹布': {},
@@ -91,9 +93,9 @@ Page({
           '针织斜纹': {},
           '汗布': {},
           '针织缎纹': {},
-          '起绒/起毛布': {},
+          '起绒/毛布': {},
           '网眼布': {},
-          '其他': {}
+          '其它': {}
         },
         '无纺布': {
           '皮革': {},
@@ -118,7 +120,7 @@ Page({
           '帆布': {},
           '缎纹/贡缎': {},
           '棉竹节': {},
-          '其他': {}
+          '其它': {}
         },
         '麻类': {
           '大麻': {},
@@ -127,16 +129,16 @@ Page({
           '亚麻': {},
           '苎麻': {},
           '麻混纺': {},
-          '其他': {}
+          '其它': {}
         },
         '化纤': {
           '粘胶': {},
-          '人棉': {},
+          '人造棉': {},
           '人造丝': {},
           '空气层': {},
           '氨纶': {},
           '腈纶': {},
-          '其他': {}
+          '其它': {}
         },
         '混纺': {
           '棉毛混纺': {},
@@ -148,7 +150,7 @@ Page({
           '锦棉': {},
           'N/C': {},
           'CVC': {},
-          '其他': {}
+          '其它': {}
         },
         '皮毛': {
           '毛毡': {},
@@ -161,7 +163,7 @@ Page({
           '羊绒': {},
           '法兰绒': {},
           '麦呢': {},
-          '其他': {}
+          '其它': {}
         },
         '新型纤维': {
           '天丝': {},
@@ -179,7 +181,7 @@ Page({
           '罗': {},
           '绸': {},
           '绫': {},
-          '其他': {}
+          '其它': {}
         }
       },
       '所在市场': {
@@ -188,7 +190,7 @@ Page({
         '盛泽': {},
         '石狮': {},
         '织里': {},
-        '其他': {}
+        '其它': {}
       },
       '货期': {
         '现货': {},
@@ -282,6 +284,15 @@ Page({
    */
   onReady: function () {
     var that = this;
+
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          width: res.windowWidth,
+          height: res.windowHeight
+        })
+      }
+    })
     wx.request({
       url: 'http://by.edenhe.com/api/record/samples/filter',
       header: {
@@ -291,9 +302,20 @@ Page({
       method: 'GET',
       success: function (res) {
         console.log(res.data);
+        var list = res.data.data
+        var key_map = {}
+        for (var i in list) {
+          for (var j in list[i].options) {
+            key_map[list[i].options[j].verbal] = {
+              key: list[i].options[j].value,
+              father_key: list[i].key 
+            }
+          }
+        }
+        console.log(key_map);
         that.setData({
-          button_array: res.data.data
-        })
+          key_map: key_map
+        });
       }
     })
   },
@@ -391,10 +413,37 @@ Page({
   // 点击大类
   chose_a_f: function (e) {
     var that = this;
-    console.log(e);
+    var chose_a = e.target.dataset.chose_idx;
+    var br = that.data.type_relation;
+    if (br[chose_a].is_chose && that.data.chose_a == chose_a) {
+      br[chose_a].is_chose = false;
+      for (var i in br[chose_a]) {
+        if (i != 'is_chose') {
+          br[chose_a][i].is_chose = false;
+          for (var j in br[chose_a][i]) {
+            if (j != 'is_chose') {
+              br[chose_a][i][j].is_chose = false;
+            }
+          }
+        }
+      }
+    } else if (that.data.chose_a == chose_a) {
+      br[chose_a].is_chose = true;
+      for (var i in br[chose_a]) {
+        if (i != 'is_chose') {
+          br[chose_a][i].is_chose = true;
+          for (var j in br[chose_a][i]) {
+            if (j != 'is_chose') {
+              br[chose_a][i][j].is_chose = true;
+            }
+          }
+        }
+      }
+    }
     that.setData({
-      chose_a: e.target.dataset.chose_idx,
-      chose_b: -1,
+      chose_a: chose_a,
+      chose_b: '',
+      type_relation: br
     });
   },
 
@@ -403,28 +452,69 @@ Page({
     var that = this;
     var chose_a = that.data.chose_a;
     var chose_b = e.target.dataset.chose_idx;
-    var br = that.data.button_array;
-    if (br[chose_a].options) {
-      if (br[chose_a].options[chose_b].is_chose) {
-        br[chose_a].options[chose_b].is_chose = false;
-        var ar = br[chose_a].options;
-        var flag = true;
-        for (var i in ar) {
-          if (ar[i].is_chose) {
-            flag = false;
-          }
+    var br = that.data.type_relation;
+    if (br[chose_a]) {
+      var flag = true;
+      for (var t in br[chose_a][chose_b]) {
+        if (t != 'is_chose') {
+          flag = false;
+          break;
         }
-        if (flag) {
-          br[chose_a].is_chose = false;
+      }
+      if (flag) {
+        if (br[chose_a][chose_b].is_chose) {
+          br[chose_a][chose_b].is_chose = false;
+          for (var i in br[chose_a][chose_b]) {
+            if (i != 'is_chose') {
+              br[chose_a][chose_b].is_chose = false;
+            }
+          }
+          var ar = br[chose_a];
+          var flag = true;
+          for (var i in ar) {
+            if (i != 'is_chose' && ar[i].is_chose) {
+              flag = false;
+            }
+          }
+          if (flag) {
+            br[chose_a].is_chose = false;
+          }
+        } else {
+          br[chose_a].is_chose = true;
+          br[chose_a][chose_b].is_chose = true;
         }
       } else {
-        br[chose_a].is_chose = true;
-        br[chose_a].options[chose_b].is_chose = true;
+        if (br[chose_a][chose_b].is_chose && that.data.chose_b == chose_b) {
+          br[chose_a][chose_b].is_chose = false;
+          for (var i in br[chose_a][chose_b]) {
+            if (i != 'is_chose') {
+              br[chose_a][chose_b][i].is_chose = false;
+            }
+          }
+          var ar = br[chose_a];
+          var flag = true;
+          for (var i in ar) {
+            if (i != 'is_chose' && ar[i].is_chose) {
+              flag = false;
+            }
+          }
+          if (flag) {
+            br[chose_a].is_chose = false;
+          }
+        } else if (that.data.chose_b == chose_b) {
+          br[chose_a].is_chose = true;
+          br[chose_a][chose_b].is_chose = true;
+          for (var i in br[chose_a][chose_b]) {
+            if (i != 'is_chose') {
+              br[chose_a][chose_b][i].is_chose = true;
+            }
+          }
+        }
       }
       that.setData({
         chose_a: chose_a,
         chose_b: chose_b,
-        button_array: br
+        type_relation: br
       });
     }
   },
@@ -432,28 +522,72 @@ Page({
   // 点击小类
   chose_c_f: function (e) {
     var that = this;
-    console.log(
-      '接口未定义，暂未找到有第三大类'
-    );
+    var chose_a = that.data.chose_a;
+    var chose_b = that.data.chose_b;
+    var chose_c = e.target.dataset.chose_idx;
+    var br = that.data.type_relation;
+
+    console.log(br[chose_a][chose_b][chose_c])
+
+    if (br[chose_a][chose_b][chose_c].is_chose) {
+      br[chose_a][chose_b][chose_c].is_chose = false;
+      
+      // 处理第二大类
+      var flag2 = true;
+
+      for (var i in br[chose_a][chose_b]) {
+        if (i != 'is_chose' && br[chose_a][chose_b][i].is_chose) {
+          flag2 = false;
+        }
+      }
+
+      if (flag2) {
+        br[chose_a][chose_b].is_chose = false;
+        // 处理第一大类
+        var ar = br[chose_a];
+        var flag = true;
+        for (var i in ar) {
+          if (i != 'is_chose' && ar[i].is_chose) {
+            flag = false;
+          }
+        }
+        if (flag) {
+          br[chose_a].is_chose = false;
+        }
+      }
+
+    } else {
+      br[chose_a].is_chose = true;
+      br[chose_a][chose_b].is_chose = true;
+      br[chose_a][chose_b][chose_c].is_chose = true;
+    }
+
+    that.setData({
+      chose_a: chose_a,
+      chose_b: chose_b,
+      chose_c: chose_c,
+      type_relation: br
+    });
   },
 
   trash_b: function (e) {
     console.log(e);
     var that = this;
     var chose_a = that.data.chose_a;
-    var chose_b = e.target.dataset.chose_idx;
-    var br = that.data.button_array;
+    var br = that.data.type_relation;
 
-    var ar = br[chose_a].options;
+    var ar = br[chose_a];
     var flag = true;
     for (var i in ar) {
-      ar[i].is_chose = false;
+      if (i != 'is_chose') {
+        ar[i].is_chose = false;
+      }
     }
     br[chose_a].is_chose = false;
     that.setData({
       chose_a: chose_a,
-      chose_b: chose_b,
-      button_array: br
+      chose_b: '',
+      type_relation: br
     });
   },
 
@@ -666,41 +800,55 @@ Page({
     }
   },
 
-  //取消事件 向外部page 发送事件通知
+
   _cancelModal: function () {
     console.log("点击确认了");
 
     var key = '';
     var that = this;
-    var br = that.data.button_array;
-
+    var br = that.data.type_relation;
+    var key_map = that.data.key_map;
+    
+    var result_map = {};
+    // 重写
     for (var i in br) {
-      var first_key = br[i].key + '=';
       if (br[i].is_chose) {
-        var flag = false;
-        for (var j in br[i].options) {
-          if (br[i].options[j].is_chose) {
-            if (flag) {
-              first_key = first_key + ',';
+        for (var j in br[i]) {
+          if (j != 'is_chose' && j != '其它'  && br[i][j].is_chose) {
+            if (key_map[j] && result_map[key_map[j].father_key]) {
+              console.log(key_map[j].father_key)
+              result_map[key_map[j].father_key] = result_map[key_map[j].father_key] + ',' + key_map[j].key;
+            } else if (key_map[j]) {
+              result_map[key_map[j].father_key] = '' + key_map[j].key;
             }
-            flag = true;
-            first_key = first_key + j;
+            for (var k in br[i][j]) {
+              if (k != 'is_chose' && k != '其它' && br[i][j][k].is_chose) {
+                if (key_map[k] && result_map[key_map[k].father_key]) {
+                  result_map[key_map[k].father_key] = result_map[key_map[k].father_key] + ',' + key_map[k].key;
+                  console.log(key_map[k].father_key)
+                } else if (key_map[k]) {
+                  result_map[key_map[k].father_key] = '' + key_map[k].key;
+                }
+              }
+            }
           }
-          /* 暂时用不到第三类
-          for (var k in br[i].options[j].options) {
-            br[i].options[j].options[k].is_chose = false;
-          }
-          */
         }
-        if (key != '') {
-          key = key + '&';
-        }
-        key = key + first_key;
       }
     }
 
-    console.log(key);
+    console.log(result_map);
 
+    var flag = false;
+    for (var i in result_map) {
+      if (flag) {
+        key = key + '&';
+      } else {
+        flag = true;
+      }
+      key = key + i + '=' + result_map[i];
+    }
+
+    console.log(key)
 
     that.setData({
       key: key,
@@ -717,27 +865,30 @@ Page({
     this.triggerEvent("cancelEvent");
   },
 
-  //确认事件
   _confirmModal: function () {
     console.log("点击重置了");
 
     var that = this;
-    var br = that.data.button_array;
+    var br = that.data.type_relation;
 
     for (var i in br) {
       br[i].is_chose = false;
-      for (var j in br[i].options) {
-        br[i].options[j].is_chose = false;
-        for (var k in br[i].options[j].options) {
-          br[i].options[j].options[k].is_chose = false;
+      for (var j in br[i]) {
+        if (j != 'is_chose') {
+          br[i][j].is_chose = false;
+          for (var k in br[i][j]) {
+            if (k != 'is_chose') {
+              br[i][j][k].is_chose = false;
+            }
+          }
         }
       }
     }
 
     that.setData({
-      chose_a: 0,
-      chose_b: -1,
-      button_array: br
+      chose_a: '开发时间',
+      chose_b: '',
+      type_relation: br
     });
 
     this.triggerEvent("confirmEvent");
@@ -749,5 +900,16 @@ Page({
   },
   _cancelEvent: function () {
     console.log("点击取消!");
-  }
+  },
+
+  touch_cancel: function(e) {
+    if (this.data.isShow) {
+      if (e.changedTouches[0].clientX <= this.data.width * 0.185) {
+        this.setData({
+          isShow: false
+        })
+      }
+    }
+  },
+
 })

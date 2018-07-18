@@ -8,7 +8,7 @@
 
 <title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
 
-<view class="container" style='position: fixed;height: 1334rpx;'>
+<view class="container" style='position: fixed;height: 1334rpx;' bindtouchend="touch_cancel">
   <searchBar></searchBar>
   <view class="classifyArea">
 
@@ -163,12 +163,12 @@
         <view class="first-class" style="color:#15181D;font-size:26rpx;">
           <text style="margin-left: 16rpx;">第一大类</text>
           <view class="first-class-detail" style="display: flex;flex-direction: row;flex-wrap:wrap;justify-content:left;background-color: white;width: 610rpx;">
-            <view wx:for="{{button_array}}" wx:for-item="item" wx:for-index="idx" wx:key="unique">
+            <view wx:for="{{type_relation}}" wx:for-item="item" wx:for-index="idx" wx:key="unique" bindtap='chose_a_f'>
 
               <!-- 查看状态 -->
-              <view wx:if="{{!item.is_chose && chose_a == idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}} " bindtap='chose_a_f'>
+              <view wx:if="{{!item.is_chose && chose_a == idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}}">
                 <view class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#15181D;font-size:22rpx;background:#EFEFEF;border-radius:4rpx;line-height: 54rpx;margin-top: 20rpx;" data-chose_idx="{{idx}}">
-                  <text data-chose_idx="{{idx}}">{{item.verbal}}</text>
+                  <text data-chose_idx="{{idx}}">{{idx}}</text>
                   <image src="../../assets/images/icon-checked-white.png" style="width:11rpx;height:8rpx;margin-left: 5rpx;" data-chose_idx="{{idx}}"></image>
                 </view>
                 <image src="../../assets/images/icon-up-triangle.png" style="position:relative;width:17rpx;height:10rpx;padding-top:10rpx;margin-left: 60rpx;" data-chose_idx="{{idx}}"></image>
@@ -176,9 +176,9 @@
               </view>
 
               <!-- 查看状态 -->
-              <view wx:if="{{item.is_chose == true && chose_a == idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}} " bindtap='chose_a_f'>
+              <view wx:if="{{item.is_chose == true && chose_a == idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}}">
                 <view class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#fff;font-size:22rpx;background:#FF9906;border-radius:4rpx;line-height: 54rpx;margin-top: 20rpx;" data-chose_idx="{{idx}}">
-                  <text data-chose_idx="{{idx}}">{{item.verbal}}</text>
+                  <text data-chose_idx="{{idx}}">{{idx}}</text>
                   <image src="../../assets/images/icon-checked-white.png" style="width:11rpx;height:8rpx;margin-left: 5rpx;" data-chose_idx="{{idx}}"></image>
                 </view>
                 <image src="../../assets/images/icon-up-triangle.png" style="position:relative;width:17rpx;height:10rpx;padding-top:10rpx;margin-left: 60rpx;" data-chose_idx="{{idx}}"></image>
@@ -186,47 +186,44 @@
 
               <!-- 选中状态 -->
               <view wx:if="{{item.is_chose && chose_a != idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}}">
-                <view class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#fff;font-size:22rpx;background:#FF9906;border-radius:4rpx;line-height: 54rpx;margin-top: 20rpx;" bindtap='chose_a_f' data-chose_idx="{{idx}}">
-                  <text data-chose_idx="{{idx}}">{{item.verbal}}</text>
+                <view class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#fff;font-size:22rpx;background:#FF9906;border-radius:4rpx;line-height: 54rpx;margin-top: 20rpx;" data-chose_idx="{{idx}}">
+                  <text data-chose_idx="{{idx}}">{{idx}}</text>
                   <image src="../../assets/images/icon-checked-white.png" style="width:11rpx;height:8rpx;margin-left: 5rpx;" data-chose_idx="{{idx}}"></image>
                 </view>
               </view>
 
               <!-- 未选中状态 -->
-              <view wx:if="{{!item.is_chose && chose_a != idx}}" class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#15181D;font-size:22rpx;background:#EFEFEF;border-radius:4rpx;line-height: 54rpx;margin-top:20rpx;margin-left: 16rpx;" bindtap='chose_a_f'
-                data-chose_idx="{{idx}}">
-                <text data-chose_idx="{{idx}}">{{item.verbal}}</text>
+              <view wx:if="{{!item.is_chose && chose_a != idx}}" class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#15181D;font-size:22rpx;background:#EFEFEF;border-radius:4rpx;line-height: 54rpx;margin-top:20rpx;margin-left: 16rpx;" data-chose_idx="{{idx}}">
+                <text data-chose_idx="{{idx}}">{{idx}}</text>
               </view>
             </view>
           </view>
         </view>
+
         <view style="height: 20rpx;width:610rpx;border-bottom: 1rpx solid #E4E4E4;"></view>
 
         <view class="second-class" style="color:#15181D;margin-top: 20rpx;font-size:26rpx;">
           <view>
-            <text style="margin-left: 16rpx;padding-right: 430rpx;">{{button_array[chose_a].verbal}}</text>
+            <text style="margin-left: 16rpx;padding-right: 430rpx;">{{chose_a}}</text>
             <image src="../../assets/images/icon-trash.png" style="width:32rpx;height: 29rpx;" bindtap='trash_b'></image>
           </view>
           <view class="first-class-detail" style="display: flex;flex-direction: row;flex-wrap:wrap;justify-content:left;background-color: white;width: 610rpx;">
-            <view wx:for="{{button_array[chose_a].options}}" wx:for-item="item" wx:for-index="idx" wx:key="unique" data-chose_idx="{{idx}}" bindtap='chose_b_f'>
-
-              <view wx:if="{{!item.is_chose && chose_b != idx}}" class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#15181D;font-size:22rpx;background:#EFEFEF;border-radius:4rpx;line-height: 54rpx;margin-top:20rpx;margin-left:18rpx;" data-chose_idx="{{idx}}">
-                <text data-chose_idx="{{idx}}">{{item.verbal}}</text>
-              </view>
+            <view wx:for="{{type_relation[chose_a]}}" wx:for-item="item" wx:for-index="idx" wx:key="unique" data-chose_idx="{{idx}}" bindtap='chose_b_f' wx:if='{{idx != "is_chose"}}'>
 
               <!-- 查看状态 -->
-              <view wx:if="{{item.is_chose == false && chose_b == idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}}">
+              <view wx:if="{{!item.is_chose && chose_b == idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}}">
                 <view class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#15181D;font-size:22rpx;background:#EFEFEF;border-radius:4rpx;line-height: 54rpx;margin-top: 20rpx;" data-chose_idx="{{idx}}">
-                  <text data-chose_idx="{{idx}}">{{item.verbal}}</text>
+                  <text data-chose_idx="{{idx}}">{{idx}}</text>
                   <image src="../../assets/images/icon-checked-white.png" style="width:11rpx;height:8rpx;margin-left: 5rpx;" data-chose_idx="{{idx}}"></image>
                 </view>
                 <image src="../../assets/images/icon-up-triangle.png" style="position:relative;width:17rpx;height:10rpx;padding-top:10rpx;margin-left: 60rpx;" data-chose_idx="{{idx}}"></image>
+                <view class='clear-fix'></view>
               </view>
 
               <!-- 查看状态 -->
-              <view wx:if="{{item.is_chose == true && chose_b == idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}}">
+              <view wx:if="{{item.is_chose == true && chose_b == idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}} ">
                 <view class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#fff;font-size:22rpx;background:#FF9906;border-radius:4rpx;line-height: 54rpx;margin-top: 20rpx;" data-chose_idx="{{idx}}">
-                  <text data-chose_idx="{{idx}}">{{item.verbal}}</text>
+                  <text data-chose_idx="{{idx}}">{{idx}}</text>
                   <image src="../../assets/images/icon-checked-white.png" style="width:11rpx;height:8rpx;margin-left: 5rpx;" data-chose_idx="{{idx}}"></image>
                 </view>
                 <image src="../../assets/images/icon-up-triangle.png" style="position:relative;width:17rpx;height:10rpx;padding-top:10rpx;margin-left: 60rpx;" data-chose_idx="{{idx}}"></image>
@@ -235,9 +232,14 @@
               <!-- 选中状态 -->
               <view wx:if="{{item.is_chose && chose_b != idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}}">
                 <view class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#fff;font-size:22rpx;background:#FF9906;border-radius:4rpx;line-height: 54rpx;margin-top: 20rpx;" data-chose_idx="{{idx}}">
-                  <text data-chose_idx="{{idx}}">{{item.verbal}}</text>
+                  <text data-chose_idx="{{idx}}">{{idx}}</text>
                   <image src="../../assets/images/icon-checked-white.png" style="width:11rpx;height:8rpx;margin-left: 5rpx;" data-chose_idx="{{idx}}"></image>
                 </view>
+              </view>
+
+              <!-- 未选中状态 -->
+              <view wx:if="{{!item.is_chose && chose_b != idx}}" class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#15181D;font-size:22rpx;background:#EFEFEF;border-radius:4rpx;line-height: 54rpx;margin-top:20rpx;margin-left: 16rpx;" data-chose_idx="{{idx}}">
+                <text data-chose_idx="{{idx}}">{{idx}}</text>
               </view>
             </view>
           </view>
@@ -245,17 +247,44 @@
 
         <view style="height: 20rpx;width:610rpx;border-bottom: 1rpx solid #E4E4E4;"></view>
 
-        <!-- <view class="second-class" style="color:#15181D;margin-top: 20rpx;font-size:26rpx;">
-          <text style="margin-left: 16rpx;">第三大类</text>
+        <view wx:if="{{chose_b != '' && type_relation[chose_a][chose_b].length != 0}}" class="second-class" style="color:#15181D;margin-top: 20rpx;font-size:26rpx;">
+          <text style="margin-left: 16rpx;">{{chose_b}}</text>
           <view class="first-class-detail" style="display: flex;flex-direction: row;flex-wrap:wrap;justify-content:left;background-color: white;width: 610rpx;">
 
-            <view wx:for="{{button_array[chose_a].options[chose_b].options}}" wx:for-item="item" wx:for-index="idx" wx:key="unique">
-              <view class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#15181D;font-size:22rpx;background:#EFEFEF;border-radius:4rpx;line-height: 54rpx;margin-top:20rpx;margin-left:18rpx;">
-                <text>棉类</text>
+            <view wx:for="{{type_relation[chose_a][chose_b]}}" wx:for-item="item" wx:for-index="idx" wx:key="unique" data-chose_idx="{{idx}}" bindtap='chose_c_f' wx:if='{{idx != "is_chose"}}'>
+
+              <view wx:if="{{!item.is_chose && chose_b != idx}}" class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#15181D;font-size:22rpx;background:#EFEFEF;border-radius:4rpx;line-height: 54rpx;margin-top:20rpx;margin-left:18rpx;" data-chose_idx="{{idx}}">
+                <text data-chose_idx="{{idx}}">{{idx}}</text>
+              </view>
+
+              <!-- 查看状态 -->
+              <view wx:if="{{item.is_chose == false && chose_b == idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}}">
+                <view class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#15181D;font-size:22rpx;background:#EFEFEF;border-radius:4rpx;line-height: 54rpx;margin-top: 20rpx;" data-chose_idx="{{idx}}">
+                  <text data-chose_idx="{{idx}}">{{idx}}</text>
+                  <image src="../../assets/images/icon-checked-white.png" style="width:11rpx;height:8rpx;margin-left: 5rpx;" data-chose_idx="{{idx}}"></image>
+                </view>
+                <image src="../../assets/images/icon-up-triangle.png" style="position:relative;width:17rpx;height:10rpx;padding-top:10rpx;margin-left: 60rpx;" data-chose_idx="{{idx}}"></image>
+              </view>
+
+              <!-- 查看状态 -->
+              <view wx:if="{{item.is_chose == true && chose_b == idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}}">
+                <view class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#fff;font-size:22rpx;background:#FF9906;border-radius:4rpx;line-height: 54rpx;margin-top: 20rpx;" data-chose_idx="{{idx}}">
+                  <text data-chose_idx="{{idx}}">{{idx}}</text>
+                  <image src="../../assets/images/icon-checked-white.png" style="width:11rpx;height:8rpx;margin-left: 5rpx;" data-chose_idx="{{idx}}"></image>
+                </view>
+                <image src="../../assets/images/icon-up-triangle.png" style="position:relative;width:17rpx;height:10rpx;padding-top:10rpx;margin-left: 60rpx;" data-chose_idx="{{idx}}"></image>
+              </view>
+
+              <!-- 选中状态 -->
+              <view wx:if="{{item.is_chose && chose_b != idx}}" style='display:flex;flex-direction:column;margin-left:18rpx;' data-chose_idx="{{idx}}">
+                <view class="class-border" style="width:130rpx;height:54rpx;text-align:center;color:#fff;font-size:22rpx;background:#FF9906;border-radius:4rpx;line-height: 54rpx;margin-top: 20rpx;" data-chose_idx="{{idx}}">
+                  <text data-chose_idx="{{idx}}">{{idx}}</text>
+                  <image src="../../assets/images/icon-checked-white.png" style="width:11rpx;height:8rpx;margin-left: 5rpx;" data-chose_idx="{{idx}}"></image>
+                </view>
               </view>
             </view>
           </view>
-        </view> -->
+        </view>
       </scroll-view>
       <view class="modal-footer" style='position:fixed;margin-top: 1236rpx;width: 610rpx;height: 98rpx;display:flex;flex-direction: row;'>
         <view catchtap='_confirmModal' style='display: flex;flex-direction: row;'>
