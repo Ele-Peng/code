@@ -4,9 +4,33 @@
     <input wx:if="{{is_redirect == 0}}" class="searchText" type="text" placeholder='{{ searchRec }}' bindtap='search_index'/>
     <input wx:else class="searchText" type="text" placeholder='{{ searchRec }}'/>
     <!-- <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}"> -->
-    <image class="cameraImg" src="../../assets/images/icon-camera.png" bindtap="takePhoto" ></image>
+    <view style='width: 62rpx;padding-left: 30rpx;'>
+      <image class="cameraImg" src="../../assets/images/icon-camera.png" bindtap="takePhoto" ></image>
+    </view>
   <!-- </picker> -->
     
   </view>
   <image class="qrcodeImg"src="../../assets/images/icon-QRCode.png" bindtap='onClickScan'></image>
+</view>
+
+
+<view animation="{{animationData}}" hidden="{{!isShow}}" class='modal'>
+
+  <view data-type="mask" catchtap='hideModal' class='modal-mask'></view>
+
+  <view class="modal-layer" style='width: 540rpx;height: 340rpx;margin-left:105rpx;margin-top: {{ 338/1334*screen_height }}px;background: #FFF;border-radius: 8rpx;'>
+    <label style='text-align: center;margin-top: 44rpx;'>请输入色卡id</label>
+    <input value='{{t_amount}}' placeholder='{{cloth_id}}' bindinput="bindKeyInput" style='border-radius: 8rpx; border: 1rpx solid #F5F5F5;margin-top: 52rpx;width: 348rpx;height: 66rpx;margin-left: 96rpx;margin-bottom: 62rpx;text-align: center;'></input>
+    <view style='display: flex;flex-direfction: row;'>
+      <view catchtap='_cancelModal' style='display: flex;flex-direction: row;border-bottom-left-radius:8rpx;width: 270rpx;height: 90rpx;'>
+        <image src="../../assets/images/icon-resetbtn.png" style='width: 270rpx;height: 90rpx;border-bottom-left-radius:8rpx;'></image>
+        <text style='position:absolute;color:#fff;font-size: 28rpx;line-height: 98rpx;margin-left: 108rpx;'>取消</text>
+      </view>
+      <view bindtap='_confirmModal' style='display: flex;flex-direction: row;width: 270rpx;height: 90rpx;border-bottom-right-radius:8rpx;'>
+        <image src='../../assets/images/icon-confirmbtn.png' style='width: 270rpx;height: 90rpx;border-bottom-right-radius:8rpx;'></image>
+        <text style='position:absolute;color: #fff;font-size: 28rpx;line-height: 98rpx;margin-left: 108rpx; ;'>确认</text>
+      </view>
+    </view>
+
+  </view>
 </view>

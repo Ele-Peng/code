@@ -6,7 +6,7 @@
 
 <title heading="{{heading}}" lastUrl="{{lastUrl}}">
 </title>
-<scroll-view scroll-y style='height: 1108rpx;position: fixed;background:#fff;'>
+<scroll-view scroll-y style='height: {{ screen_height - 80}}px;position: fixed;background:#fff;'>
   <view style='display:flex;flex-direction: row;height: 270rpx;width: 750rpx;'>
     <image src='{{detail.thumb}}' style='width: 220rpx;height: 220rpx;margin-top: 27rpx;margin-left: 26rpx; '></image>
     <view style='display: flex;flex-direction: column;font-size: 28rpx;margin-left: 16rpx;'>
@@ -74,11 +74,9 @@
     </view>
 
   </view>
-  <view style='height: 20rpx;width: 750rpx;background: #FFF;'> 
-  </view>
 </scroll-view>
 
-<view style='width: 750rpx;height: 98rpx;display: flex;flex-direction: row;position: fixed;margin-top: 1108rpx;'>
+<view style='width: 750rpx;height: 98rpx;display: flex;flex-direction: row;position: fixed;bottom: 0;'>
   <view style='width: 375rpx;background: #fff;color: #FF9906;text-align: center;line-height: 98rpx;' bindtap='join_shop_car'>
     加入购物车
   </view>

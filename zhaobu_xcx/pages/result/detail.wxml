@@ -1,17 +1,17 @@
 <!--publish.wxml-->
-<import src="../../components/dialog/dialog.wxml"/>
-<template is="dialog" data="{{ ...$wux.dialog }}"/>
+<import src="../../components/dialog/dialog.wxml" />
+<template is="dialog" data="{{ ...$wux.dialog }}" />
 
-<import src="../../components/toast/toast.wxml"/>
-<template is="toast" data="{{ ...$wux.toast }}"/>
+<import src="../../components/toast/toast.wxml" />
+<template is="toast" data="{{ ...$wux.toast }}" />
 
-<import src="../../components/loading/loading.wxml"/>
-<template is="loading" data="{{ ...$wux.loading }}"/>
+<import src="../../components/loading/loading.wxml" />
+<template is="loading" data="{{ ...$wux.loading }}" />
 
 
-<title heading="{{heading}}" lastUrl="{{lastUrl}}"> 
+<title heading="{{heading}}" lastUrl="{{lastUrl}}">
 </title>
-<view class="page" style="display:flex; flex-direction:column; height:100%" wx:if="{{detail.id}}">
+<scroll-view scroll-y class="page" style="display:flex; flex-direction:column; height:{{ 716/812 * screen_height }}px;position: fixed;" wx:if="{{detail.id}}">
   <view style="flex: 1 0 auto">
     <view class="page  __bd" style="padding-bottom: 15px">
       <view class="weui-cells" style="margin-top: 0px">
@@ -117,49 +117,49 @@
 
       <view class="weui-cells">
         <view class="weui-cell">
-            <view class="weui-cell__bd">
-                <view class="weui-uploader">
-                    <view class="weui-uploader__hd" style='font-size: 28rpx;'>
-                        <p class="weui-uploader__title" >候选布料图片</p>
-                    </view>
-                    <view class="weui-uploader__bd" style="display: flex; flex-wrap: wrap; justify-content:space-between">
-                        <view wx:for="{{detail.images}}" wx:key="{{index}}" class="weui-uploader__files">
-                          <image style="width: {{image_block_size}}; height: {{image_block_size}}" data-index="{{index}}" bindtap="onPreviewImage" class="weui-uploader__img" src="{{item.thumb}}"/>
-                        </view>
-                        <view wx:for="{{empty_images}}" class="weui-uploader__files" wx:key="">
-                          <image style="width: {{image_block_size}}; height: {{image_block_size}}" class="weui-uploader__img" src=""/>
-                        </view>
-                    </view>
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd" style='font-size: 28rpx;'>
+                <p class="weui-uploader__title">候选布料图片</p>
+              </view>
+              <view class="weui-uploader__bd" style="display: flex; flex-wrap: wrap; justify-content:space-between">
+                <view wx:for="{{detail.images}}" wx:key="{{index}}" class="weui-uploader__files">
+                  <image style="width: {{image_block_size}}; height: {{image_block_size}}" data-index="{{index}}" bindtap="onPreviewImage" class="weui-uploader__img" src="{{item.thumb}}" />
                 </view>
+                <view wx:for="{{empty_images}}" class="weui-uploader__files" wx:key="">
+                  <image style="width: {{image_block_size}}; height: {{image_block_size}}" class="weui-uploader__img" src="" />
+                </view>
+              </view>
             </view>
+          </view>
         </view>
       </view>
 
       <view class="weui-cells" wx:if="{{ detail.shop_img.thumb }}" style='font-size: 28rpx;'>
         <view class="weui-cell">
-            <view class="weui-cell__bd">
-                <view class="weui-uploader">
-                    <view class="weui-uploader__hd">
-                        <p class="weui-uploader__title">店铺门脸图片</p>
-                    </view>
-                    <view class="weui-uploader__bd" style="display: flex; flex-wrap: wrap; justify-content:space-between">
-                        <view class="weui-uploader__files">
-                          <image style="width: {{image_block_size}}; height: {{image_block_size}}" bindtap="onPreviewShopImage" class="weui-uploader__img" src="{{ detail.shop_img.thumb }}"/>
-                        </view>
-                    </view>
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <p class="weui-uploader__title">店铺门脸图片</p>
+              </view>
+              <view class="weui-uploader__bd" style="display: flex; flex-wrap: wrap; justify-content:space-between">
+                <view class="weui-uploader__files">
+                  <image style="width: {{image_block_size}}; height: {{image_block_size}}" bindtap="onPreviewShopImage" class="weui-uploader__img" src="{{ detail.shop_img.thumb }}" />
                 </view>
+              </view>
             </view>
+          </view>
         </view>
       </view>
     </view>
   </view>
+</scroll-view>
 
-  <view style="flex: 0 0 auto; width: 100%; margin-top: 0px; display:flex;">
-    <button wx:if="{{user_type == 'user' }}" class="weui-btn" type="primary" bindtap="onPurchase" style="flex-grow: 1;background-color:#FF9906;">
-      我要采购
-    </button>
-    <button wx:if="{{user_type == 'agent' }}" class="weui-btn" type="primary" bindtap="onModify" style="margin-top: 0;flex-grow: 1;background-color:#FF9906;">
-      修改结果
-    </button>
-  </view>
+<view style="flex: 0 0 auto; width: 100%;display:flex;bottom: 0;position: fixed;">
+  <button wx:if="{{user_type == 'user' }}" class="weui-btn" type="primary" bindtap="onPurchase" style="flex-grow: 1;background-color:#FF9906;border-radius: 0rpx;">
+    我要采购
+  </button>
+  <button wx:if="{{user_type == 'agent' }}" class="weui-btn" type="primary" bindtap="onModify" style="margin-top: 0;flex-grow: 1;background-color:#FF9906;border-radius: 0rpx;">
+    修改结果
+  </button>
 </view>

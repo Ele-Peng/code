@@ -12,7 +12,7 @@
     <view class="weui-tab">
       <title heading="{{heading}}" lastUrl="{{lastUrl}}">
       </title>
-      <view class="weui-navbar" style="background-color:#fff;position:fixed;margin-top:128rpx;">
+      <view class="weui-navbar" style="background-color:#fff;position:fixed;margin-top:64px;">
         <block wx:for-items="{{tabs}}" wx:key="{{ index }}">
           <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : '' }}" bindtap="tabClick" style="display: flex;justify-content:center;">
             <view class="weui-navbar__title">{{ item }}</view>
@@ -22,10 +22,11 @@
         </block>
         <view class="weui-navbar__slider" style="left: {{ sliderLeft }}px; transform: translateX({{ sliderOffset }}px); -webkit-transform: translateX({{ sliderOffset }}px);"></view>
       </view>
-      <view >
-        <view  hidden="{{ activeIndex != 0 }}" style="height:100%">
-          <block wx:if="{{detail.user_id}}">
-            <scroll-view scroll-y style='{{ user_type == "user" && detail.status == "1" ? "height: 1074rpx;position:fixed;" : "height: 1160rpx;position: fixed;" }}' class="weui-cells" >
+      <view>
+        <view hidden="{{ activeIndex != 0 }}" >
+           <view wx:if="{{detail.user_id}}">
+            <scroll-view scroll-y style='{{ (user_type == "user" && detail.status == "1") ? "" : "" }}' class="weui-cells" >
+
               <view class="needsDetail" style='margin-top:68rpx;'>
 
                 <view class="needsDetailArea">
@@ -101,7 +102,7 @@
                   </view>
                 </view>
 
-                <view class="address" wx:if="{{detail.address}}" style='border: 1rpx solid #FFF;'>
+                <view class="address" wx:if="{{detail.address}}" style='border: 1rpx solid #FFF;margin-bottom: 10rpx;'>
                   <view class="addressText">收货地址</view>
                   <view style='display:flex;flex-direction:column;'>
                     <view class="addressValue" style='padding-top: 41rpx;'>{{detail.address.name}} {{detail.address.phone}}</view>
@@ -112,7 +113,7 @@
               </view>
 
             </scroll-view>
-          </block>
+          </view>
 
           <view wx:if="{{ user_type == 'agent' && detail.status == '5'}}" class="weui-cells" style="margin-bottom: 15px">
             <view class="weui-cells" style="margin-bottom: 15px;">
@@ -127,9 +128,9 @@
                 <view style="text-decoration: underline;" class="needsName" bindtap="onClickLogistics">修改物流信息</view>
               </view>
             </view>
-          </view>
+          </view> 
 
-          <button wx:if="{{ user_type == 'user' && detail.status == '1' }}" class="weui-btn" bindtap="onPayOrder" style="width: 100%;margin-top: 1114rpx; position: fixed;background-color:#FF9906;color:white;">
+          <button wx:if="{{ user_type == 'user' && detail.status == '1' }}" class="weui-btn" bindtap="onPayOrder" style="width: 100%;bottom: 0; position: fixed;background-color:#FF9906;color:white;">
             支付订单
           </button>
         </view>
@@ -139,7 +140,7 @@
         <view hidden="{{ activeIndex != 1 }}">
         <!-- h候选布料没有数据的样式 -->
           <template wx:if="{{result_list.length == 0}}" is="prompt" data="{{ ...$wux.prompt.msg_empty }}" />
-          <scroll-view scroll-y wx:else style="padding-bottom: 55px;height: 1038rpx;margin-top: 80rpx;position: fixed;">
+          <scroll-view scroll-y wx:else style="padding-bottom: 55px;height: {{ screen_height - 105 }}px;margin-top: 80rpx;position: fixed;font-size:28rpx;">
             <view class="weui-panel weui-panel_access" wx:key="" wx:for="{{ result_list }}" bindtap="onClickResult" data-id="{{item.id}}" style='margin-top:0rpx;'>
               <view class="weui-panel__hd panel-needs-list__hd">
                 <text>结果{{result_list.length - index}}</text>

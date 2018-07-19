@@ -1,11 +1,10 @@
-
-<import src="../../components/loading/loading.wxml"/>
-<template is="loading" data="{{ ...$wux.loading }}"/>
+<import src="../../components/loading/loading.wxml" />
+<template is="loading" data="{{ ...$wux.loading }}" />
 <title heading="{{ heading }}" lastUrl="{{ lastUrl }}">
 </title>
 
 
-<view class="container" style='position: fixed;height: 1334rpx;'>
+<view class="container" style='position: fixed;height: {{ screen_height }}px;'>
   <!-- 选项卡 面料详细 面料属性 相似推荐 -->
   <view class="{{currentTab==0?'swiper-tab':'swiper-none'}}">
     <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">面料详细</view>
@@ -17,10 +16,10 @@
     <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">面料属性</view>
     <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">相似推荐</view>
   </view>
-  <scroll-view scroll-y="true" style="height:1205rpx;position: fixed">
-    <swiper class="{{ currentTab == 0 ? 'swiper' : 'swiper-none'}}" current="{{currentTab}}" bindchange="swiperTab" style='position: fixed'>
-      <swiper-item style='position: fixed;'>
-        <scroll-view scroll-y style='height: 1100rpx;'>
+  <scroll-view scroll-y="true" style="width: 750rpx;height:{{ screen_height }}px;position: fixed">
+    <swiper current="{{currentTab}}" bindchange="swiperTab" style='position: fixed' style='{{ currentTab == 0 ? "width: 100%;height: 100%;position: fixed;" : "display: none;"}}'>
+      <swiper-item style="position: fixed;height: 100">
+        <scroll-view scroll-y style='height: {{  (1150 / 1334) * screen_height }}px;position: fixed;'>
           <view class="swiperView">
             <swiper class="swiperImg" indicator-dots="true" indicator-color="rgba(255,255,255,1)" indicator-active-color="#FF9906">
               <swiper-item>
@@ -54,7 +53,7 @@
           </view>
           <!-- 文字详情 -->
           <view>
-            <view class='display: flex;flex-direction: row;'>
+            <view class='display: flex;flex-direction: row;margin-top: 20rpx;'>
               <text class="clothName">{{detail.cloth}}</text>
             </view>
             <view class="daHuoYangBu" style='color:#FF9906;'>
@@ -194,7 +193,15 @@
 
           </view>
         </scroll-view>
-        <view class='find-buy-button' style='position: fixed;width: 750rpx;'>
+        <view wx:if="{{ screen_height <= 667}}" class='find-buy-button' style='position: fixed;width: 750rpx;top: {{ screen_height - (148/812*screen_height)}}px;'>
+          <view class='find-button' style='color: white;padding-left:147rpx;line-height:98rpx;'>
+            查布源
+          </view>
+          <view class='buy-button' bindtap="onClickBuy" style='color: white;padding-left:147rpx;line-height:98rpx;'>
+            认购
+          </view>
+        </view>
+        <view wx:else class='find-buy-button' style='position: fixed; width: 750rpx;top:{{ screen_height - (98/812*screen_height)}}px;'>
           <view class='find-button' style='color: white;padding-left:147rpx;line-height:98rpx;'>
             查布源
           </view>
@@ -207,15 +214,14 @@
       <swiper-item></swiper-item>
       <swiper-item></swiper-item>
     </swiper>
-    <swiper class="{{ currentTab != 0 ? 'swiper-white' : 'swiper-none'}}" current="{{currentTab}}" bindchange="swiperTab">
-      <swiper-item>
-
+    <swiper style="{{ currentTab != 0 ? 'width: 750rpx;position: fixed;height: 100%;' : 'display: none;'}}" current="{{currentTab}}" bindchange="swiperTab">
+      <swiper-item style="display: none;">
       </swiper-item>
-      <swiper-item style="margin-top: 108rpx;position: fixed;">
+      <swiper-item style="margin-top: 108rpx;">
         <!-- 面料属性文字详情 -->
-        <scroll-view class="mlsxArea" scroll-y style='height: 980rpx;'>
+        <view style='height: 78%;magrin-top: 10rpx;'>
           <view class='display: flex;flex-direction: row;'>
-            <text class="clothName">雪纺面料</text>
+            <text class="clothName">{{detail.cloth}}</text>
           </view>
           <view class="daHuoYangBu" style='color:#FF9906;'>
             <view class="xiangQing_left">
@@ -236,7 +242,7 @@
             </view>
             <view class="xiangQing_right">
               <text class="xiangQingWenzi">起订量:</text>
-              <text class="value">  {{detail.threshold}}</text>
+              <text class="value" wx:if="{{ detail.duration != '-1' }}">  {{detail.threshold}}</text>
             </view>
 
           </view>
@@ -244,7 +250,7 @@
           <view class="daHuoYangBu" style='margin-top: -15rpx;'>
             <view class="xiangQing_left">
               <text class="xiangQingWenzi">货期:</text>
-              <text class="value">  {{detail.duration}}</text>
+              <text class="value" wx:if="{{ detail.duration != '-1' }}">  {{detail.duration}}</text>
             </view>
 
             <view class="xiangQing_right">
@@ -300,7 +306,7 @@
           <view class="horizon">
           </view>
 
-          <view class='mlsx-area-detail'>
+          <view class='mlsx-area-detail' style='top: {{ screen_height - 400}}px'>
             <view class='left-mlsx'>
               <view class='left-props'>门　　幅:</view>
               <view class='left-value' wx:if='{{ detail.width != null }}'>{{ detail.width }}厘米</view>
@@ -371,8 +377,8 @@
 
           <view class='mlsx-area-detail'>
             <view class='left-mlsx'>
-              <view class='left-props'>针数|支数:</view>
-              <view class='left-value'>{{ detail.zhenshu }}</view>
+              <view class='left-props' style='width:128rpx'>针数|支数:</view>
+              <view class='left-value' style='width: 247rpx;'>{{ detail.zhenshu }}</view>
             </view>
             <view class='right-mlsx'>
               <view class='right-props'>表面工艺:</view>
@@ -398,8 +404,16 @@
               <view class='left-value'>{{ detail.unit == 'k' ? '元/千克' : '' }}</view>
             </view>
           </view>
-        </scroll-view>
-        <view class='find-buy-button' style='position: fixed;width: 750rpx;'>
+        </view>
+        <view wx:if="{{ screen_height <= 667}}" class='find-buy-button' style='position: fixed;width: 750rpx;top: {{ screen_height - (212/812*screen_height)}}px;'>
+          <view class='find-button' style='color: white;padding-left:147rpx;line-height:98rpx;'>
+            查布源
+          </view>
+          <view class='buy-button' bindtap="onClickBuy" style='color: white;padding-left:147rpx;line-height:98rpx;'>
+            认购
+          </view>
+        </view>
+        <view wx:else class='find-buy-button' style='position: fixed; width: 750rpx;top:{{ screen_height - (154/812*screen_height)}}px;'>
           <view class='find-button' style='color: white;padding-left:147rpx;line-height:98rpx;'>
             查布源
           </view>

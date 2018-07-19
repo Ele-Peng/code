@@ -10,9 +10,11 @@ Page({
     is_click: 0,
     is_pay: false,
     is_show_pay: false,
-    db_id: 0
+    db_id: 0,
+    screen_height: 0
   },
   onLoad: function (options) {
+    this.getSystemInfo();
     console.log(options)
     var app = getApp();
     // 页面初始化 options为页面跳转所带来的参数
@@ -96,6 +98,18 @@ Page({
         currentTab: options.currentTab
       });
     }
+  },
+  getSystemInfo() {
+    const that = this
+    wx.getSystemInfo({
+      success(res) {
+        that.setData({
+          screen_height: res.windowHeight,
+        })
+        console.log(that.data.screen_height)
+        that.data.windowWidth = res.windowWidth
+      }
+    })
   },
   /**
   * 生命周期函数--监听页面显示

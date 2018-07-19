@@ -5,9 +5,9 @@
     <view bindtap='redToLast'>
       <image src="../../assets/images/icon-lt.png" style="padding-top: 40rpx;width:20rpx;height: 34rpx;padding-left:26rpx;padding-bottom:27rpx;padding-right: 100rpx;"></image>
     </view> 
-    <view style='color:white;width:460rpx;text-align:center;font-size: 36rpx;margin-top: 30rpx;'>{{heading}}</view>
+    <view style='color:white;width:460rpx;text-align:center;font-size: 36rpx;margin-top: 36rpx;'>{{heading}}</view>
   </view>
   <!-- <view wx:if="{{ lastUrl != '' }}" class="left" bindtap='redToLast'>←</view> 
   <view wx:if="{{ lastUrl != '' }}" class="center">{{ heading }}</view> -->
-  <view wx:else class="center" style="margin-top: -90rpx;">{{ heading }}</view>
+  <view wx:else class="center" style="margin-top: -84rpx;">{{ heading }}</view>
 </view>

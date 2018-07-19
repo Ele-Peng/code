@@ -32,12 +32,14 @@ Page({
     picker_addresses: [],
     receive_addr_id: -1,
     addr_inited: false,
+    screen_height: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getSystemInfo();
     console.log(options);
     var threshold = 0;
     if (!isNaN(options.threshold)) {
@@ -54,6 +56,19 @@ Page({
       threshold: threshold,
     });
     this.loadAddresses();
+    
+  },
+
+  getSystemInfo() {
+    const that = this
+    wx.getSystemInfo({
+      success(res) {
+        that.setData({
+          screen_height: res.windowHeight,
+        })
+        that.data.windowWidth = res.windowWidth
+      }
+    })
   },
 
   loadAddresses: function () {

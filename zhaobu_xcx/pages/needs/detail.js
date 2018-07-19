@@ -34,6 +34,7 @@ Page({
     input_message: '',
     voice_mode: false,
     show_username: false,
+    screen_height: 0
   },
 
   timer: null,
@@ -46,7 +47,8 @@ Page({
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
           image_block_size: (res.windowWidth - 75) / 4 + 'px',
-          button_top: res.windowHeight - 47
+          button_top: res.windowHeight - 47,
+          screen_height: res.screenHeight
         })
         console.log(that.data.button_top);
         console.log(res.windowHeight + 14);

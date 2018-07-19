@@ -112,19 +112,41 @@ Page({
   },
 
   enterScanCode: function(e) {
-    var that = this;
-    wx.navigateTo({
-      url: '../twxx/twxx?cloth_id=' + that.data.cloth_id,
-    }),
-    $wuxToast.show({
-      type: 'success',
-      timer: 1500,
-      color: '#fff',
-      text: '认购成功',
-      success: function () {
-        wx.navigateBack();
+    // var that = this;
+    // wx.navigateTo({
+    //   url: '../twxx/twxx?cloth_id=' + that.data.cloth_id,
+    // }),
+    // $wuxToast.show({
+    //   type: 'success',
+    //   timer: 1500,
+    //   color: '#fff',
+    //   text: '认购成功',
+    //   success: function () {
+    //     wx.navigateBack();
+    //   }
+    // })
+    var that = this
+    wx.request({
+      url: 'http://web.ngrok.52xygame.cn/has_key/?sk_id=' + that.data.cloth_id,
+      header: {
+        'Content-Type': 'application/json',
+      },
+      success: function (res) {
+        if (res.data.data == true) {
+          wx.showModal({
+            title: '成功',
+            content: '数据库中有此色卡',
+            showCancel: false
+          })
+        } else {
+          wx.showModal({
+            title: '失败',
+            content: '数据库中暂无此色卡',
+            showCancel: false
+          })
+        }
       }
-    })
-  },
+    });
+   },
 
 })

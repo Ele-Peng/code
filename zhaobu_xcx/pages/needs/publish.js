@@ -16,7 +16,7 @@ Page({
       { value: 'h', name: '样布', },
       { value: 'p', name: '图片', },
     ],
-
+    screen_height: 0,
     time_type_items: [
       { value: '1', name: '1天', },
       { value: '3', name: '3天', },

@@ -1,5 +1,7 @@
 // pages/byindex/home_page.js
-import { $wuxToast } from '../../components/wux'
+import {
+  $wuxToast
+} from '../../components/wux'
 
 Page({
 
@@ -8,7 +10,7 @@ Page({
    */
   data: {
     isIpxpro: false,
-    btuBottom:"",
+    btuBottom: "",
     tracker: false,
     agent: false,
     mode: 'user',
@@ -23,55 +25,76 @@ Page({
     autoplay: false,
     interval: 5000,
     duration: 1000,
-    tagClass: [
-      { name: "3D数码印花" },
-      { name: "3D数码印花" },
-      { name: "3D数码印花" },
-      { name: "3D数码印花" },
-      { name: "数码印花" },
-      { name: "数码印花" },
-      { name: "3D数码印花" },
-      { name: "3D数码印花" },
-      { name: "3D数码印花" },
-      { name: "3D数码印花" },
-      { name: "3D数码印花" },
-      { name: "数码印花" },
-      { name: "数码印花" },
-      { name: "3D数码印花" },
+    screen_height: 0,
+    tagClass: [{
+        name: "3D数码印花"
+      },
+      {
+        name: "3D数码印花"
+      },
+      {
+        name: "3D数码印花"
+      },
+      {
+        name: "3D数码印花"
+      },
+      {
+        name: "数码印花"
+      },
+      {
+        name: "数码印花"
+      },
+      {
+        name: "3D数码印花"
+      },
+      {
+        name: "3D数码印花"
+      },
+      {
+        name: "3D数码印花"
+      },
+      {
+        name: "3D数码印花"
+      },
+      {
+        name: "3D数码印花"
+      },
+      {
+        name: "数码印花"
+      },
+      {
+        name: "数码印花"
+      },
+      {
+        name: "3D数码印花"
+      },
     ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    this.doLogin();
-    const app = getApp();
+
+  getSystemInfo() {
+    const that = this
     wx.getSystemInfo({
-      success: function (res) {
-        //model中包含着设备信息
-        console.log(res.model)
-        var model = res.model
-        if (model.search('iPhone X') != -1) {
-          app.globalData.isIpx = true;
-          this.setData({
-            isIpxpro: app.globalData.isIpx
-          });
-        } else {
-          app.globalData.isIpx = false;
-          
-        }
+      success(res) {
+        that.setData({
+          screen_height: res.windowHeight,
+        })
+        that.data.windowWidth = res.windowWidth
       }
     })
-    let isPhone = app.globalData.isIpx;
-    if(isPhone){
-      this.setData({
-        btuBottom:"68rpx",
-      })
-    }
   },
 
-  onLoggedIn: function () {
+  onLoad: function(options) {
+    this.doLogin();
+    this.getSystemInfo();
+  },
+
+  
+
+  onLoggedIn: function() {
     var tracker = wx.getStorageSync('tracker') == '1';
     var agent = wx.getStorageSync('agent') == '1';
     if (tracker) {
@@ -108,7 +131,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     //获得title 标题栏组件
     this.title = this.selectComponent("#title");
     //获得searchbar 搜索框组件
@@ -124,44 +147,44 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.doLogin();
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
-  
+
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
@@ -251,17 +274,17 @@ Page({
   // }
 
 
-  doLogin: function () {
+  doLogin: function() {
     var that = this;
     wx.login({
-      success: function (res) {
+      success: function(res) {
         if (res.code) {
           that.requestUserInfo(res.code);
         } else {
           console.log('获取用户登录态失败！' + res.errMsg)
         }
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res);
       }
     });
@@ -286,11 +309,11 @@ Page({
     var that = this;
     wx.getUserInfo({
       withCredentials: true,
-      success: function (res) {
+      success: function(res) {
         console.log(res);
         that.loginBuyuan(code, res.encryptedData, res.iv)
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res);
         if (res.errMsg.indexOf('getUserInfo:fail') >= 0) {
           //  需要重新获取授权
@@ -313,8 +336,12 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded',
       },
-      data: { 'code': code, 'encrypted_data': encryptedData, 'iv': iv },
-      success: function (res) {
+      data: {
+        'code': code,
+        'encrypted_data': encryptedData,
+        'iv': iv
+      },
+      success: function(res) {
         console.log(res)
         if (res.header['Set-Cookie']) {
           var cookies = res.header['Set-Cookie'];

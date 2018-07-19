@@ -21,18 +21,19 @@ Page({
     from_src: '',
     empty_images: [],
     image_block_size: '',
+    screen_height: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getSystemInfo();
     console.log(options);
     var needs_id = options.needs_id;
     var order_id = options.order_id;
     var result_id = options.id;
     var goods_id = options.goods_id;
-
     console.log(result_id);
     this.setData({
       needs_id: needs_id,
@@ -43,9 +44,7 @@ Page({
       goods_id: goods_id,
       lastUrl: getApp().globalData.lastUrl,
     });
-    this.getSystemInfo();
     this.loadResultDetail();
-
     if (typeof(result_id) != 'undefined') {
       this.loadResultExtras();
     }
@@ -58,6 +57,7 @@ Page({
         that.setData({
           image_block_size: (res.windowWidth - 75) / 4 + 'px',
           button_top: res.windowHeight - 45,
+          screen_height: res.windowHeight
         })
       }
     })

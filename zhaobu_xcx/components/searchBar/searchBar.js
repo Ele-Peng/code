@@ -34,29 +34,54 @@ Component({
     tempFilePaths: {
       type: Array,
       value: ''
+    },
+    cloth_id: {
+      type: Number,
+      value: -1
+    },
+    isShow: {
+      type: Boolean,
+      value: false
+    },
+    screen_height: {
+      type: Number,
+      value: 0
     }
   },
   methods: {
     takePhoto() {
       var that = this;
+      var that = this;
       wx.chooseImage({
-        count: 1, // 默认9 
-        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有 
-        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有 
-        success: function(res) {
-          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片 
+        count: 1,
+        sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+        success: function (res) {
+
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          var tempFilePaths = res.tempFilePaths;
           that.setData({
-            tempFilePaths: res.tempFilePaths
+            tempFilePaths: tempFilePaths,
+            isShow: true
           })
         }
+      });
+      wx.getSystemInfo({
+        success: function(res) {
+          that.setData({
+            screen_height: res.screenHeight
+          })
+          
+        },
       })
     },
+
     search_index() {
       wx.navigateTo({
         url: '../../pages/search/search',
       })
     },
-    onClickScan: function() {
+    onClickScan: function () {
       var that = this;
       var show;
       wx.scanCode({
@@ -86,7 +111,7 @@ Component({
             text: '暂不支持该二维码的内容',
           });
         },
-        complete: (res) => {}
+        complete: (res) => { }
       });
     },
     // bindPickerChange: function (e) {
@@ -98,5 +123,133 @@ Component({
 
     //   }
     // },
-  }
+
+    bindKeyInput: function (e) {
+      console.log(e);
+      this.setData({
+        cloth_id: parseInt(e.detail.value)
+      })
+    },
+
+    _cancelModal: function (e) {
+      this.setData({
+        isShow: !this.data.isShow
+      });
+    },
+    _confirmModal: function () {
+      var that = this
+      upload(that, that.data.tempFilePaths);
+      that.setData({
+        isShow: false
+      })
+      function upload(page, path) {
+        var data = {};
+        if (that.data.cloth_id > 0) {
+          data['sk_id'] = that.data.cloth_id
+        }
+        wx.showModal({
+          title: '提示',
+          content: '是否使用加强版',
+          success: function (res) {
+            if (res.confirm) {
+              wx.showToast({
+                icon: "loading",
+                title: "正在上传"
+              });
+              data['is_softmax'] = true;
+              console.log(data)
+              wx.uploadFile({
+                url: 'http://web.ngrok.52xygame.cn/check_image',
+                filePath: path[0],
+                name: 'img',
+                data: data,
+                header: {
+                  "Content-Type": "multipart/form-data"
+                },
+                formData: data,
+                success: function (res) {
+                  var isFind = false
+                  console.log(res.data);
+                  if (res.statusCode != 200) {
+                    wx.showModal({
+                      title: '提示',
+                      content: '上传失败',
+                      showCancel: false
+                    })
+                  } else {
+                    if (res.data.info) {
+                      isFind = true
+                    }
+                  }
+                  var app = getApp();
+                  app.globalData.check_cloth_list = JSON.parse(res.data).data;
+                  wx.navigateTo({
+                    url: '../../pages/clothPreview_test/clothPreview?isFind=' + isFind,
+                  })
+                },
+                fail: function (e) {
+                  console.log(e);
+                  wx.showModal({
+                    title: '提示',
+                    content: '上传失败',
+                    showCancel: false
+                  })
+                },
+                complete: function () {
+                  wx.hideToast();  //隐藏Toast
+                }
+              })
+            } else {
+              wx.showLoading({
+                icon: "loading",
+                title: "正在上传"
+              });
+              console.log(data)
+              wx.uploadFile({
+                url: 'http://web.ngrok.52xygame.cn/check_image',
+                filePath: path[0],
+                name: 'img',
+                header: {
+                  "Content-Type": "multipart/form-data"
+                },
+                formData: data,
+                success: function (res) {
+                  var isFind = false
+                  console.log(res.data);
+                  if (res.statusCode != 200) {
+                    wx.showModal({
+                      title: '提示',
+                      content: '上传失败',
+                      showCancel: false
+                    })
+                    return;
+                  } else {
+                    if (res.data.info) {
+                      isFind = true
+                    }
+                    var app = getApp();
+                    app.globalData.check_cloth_list = JSON.parse(res.data).data;
+                    wx.navigateTo({
+                      url: '../../pages/clothPreview_test/clothPreview?isFind=' + isFind,
+                    })
+                  }
+                },
+                fail: function (e) {
+                  console.log(e);
+                  wx.showModal({
+                    title: '提示',
+                    content: '上传失败',
+                    showCancel: false
+                  })
+                },
+                complete: function () {
+                  wx.hideLoading();  //隐藏Toast
+                }
+              })
+            }
+          }
+        })
+      }
+    }
+  },
 })

@@ -18,9 +18,9 @@
 
 <title heading="{{heading}}" lastUrl="{{lastUrl}}"> 
 </title>
-<view style="height: 1206rpx;position: fixed;width: 750rpx;background:#FCFCFC;">
+<view style="height: {{ screen_height > 667 ? (1000 / 1334 * screen_height) : screen_height }}px;position: fixed;width: 750rpx;background:#FCFCFC;">
   <form report-submit="true" bindsubmit="onSubmit">
-  <scroll-view scroll-y style="position: fixed;height: 1000rpx;; overflow: auto">
+  <scroll-view scroll-y style="height: {{ screen_height > 667 ? (1300 / 1334 * screen_height) : ( 980 / 1334 * screen_height ) }}px;overflow: auto;">
     <view>
       <view class="weui-cells" style="margin-top: 0px;borde-color:#FCFCFC;">
 
@@ -50,7 +50,8 @@
             </view>
             <view class="weui-cell__bd">
               <text wx:if="{{ selected_market_name.length > 0 }}" class="weui-input">{{selected_market_name}}</text>
-              <text wx:else class="weui-input weui-input_hint">请选择目标市场</text>
+              <text wx:else class="weui-input weui-input_hint">请选择目标市场</
+              text>
             </view>
             <view class="weui-cell__ft_in-access" />
         </view>
@@ -153,9 +154,10 @@
       </view>
     </view>
   </scroll-view>
-  <button formType="submit" class="weui-btn" type="primary" style="position: fixed; top: 1120rpx; width: 600rpx; height:80rpx;line-height: 80rpx; background-color: #FF9906;font-size: 28rpx;margin-left: 75rpx;">
-    发布
-  </button>
+  
   </form>
 
 </view>
+<button formType="submit" class="weui-btn" type="primary" style="position: fixed; top: {{ screen_height > 667 ? (500 / 812 * screen_height) : ( 670 / 812 * screen_height) }}px; width: 600rpx; height:80rpx;line-height: 80rpx; background-color: #FF9906;font-size: 28rpx;margin-left: 75rpx;">
+    发布
+  </button>

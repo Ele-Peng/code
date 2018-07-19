@@ -1,6 +1,10 @@
 // pages/detail/detail.js
-import { $wuxDialog } from '../../components/wux'
-import { $wuxLoading } from '../../components/wux'
+import {
+  $wuxDialog
+} from '../../components/wux'
+import {
+  $wuxLoading
+} from '../../components/wux'
 
 Page({
 
@@ -8,10 +12,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    backHome: true,
     key_map: {},
     width: 0,
     height: 0,
-    heading: "面料预览",
+    heading: "面料阅览",
     search_text: '最新发布',
     isShow: false,
     lastUrl: "",
@@ -205,22 +210,19 @@ Page({
         '无弹力': {}
       }
     },
-    screen_height: 0
+    screen_height: 0,
+    id_list: {},
+    isFind: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.getSystemInfo();
-    var app = getApp();
-    // 页面初始化 options为页面跳转所带来的参数
-    // console.log(app.globalData.is_shows)
-    // app.editTabBar3();//添加tabBar数据
-    // this.setData({
-    //   is_shows: app.globalData.is_shows
-    // })
-    this.getList();
+    this.setData({
+      isFind: options.isFind
+    })
   },
 
   getSystemInfo() {
@@ -235,17 +237,17 @@ Page({
     })
   },
 
-  showLoading: function () {
+  showLoading: function() {
     $wuxLoading.show({
       text: '数据加载中',
     });
   },
 
-  hideLoading: function () {
+  hideLoading: function() {
     $wuxLoading.hide();
   },
 
-  getList: function () {
+  getList: function() {
     this.showLoading();
     var that = this;
     wx.request({
@@ -259,7 +261,7 @@ Page({
         size: that.data.size,
       },
       method: 'GET',
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         var n = 0;
         for (var i in res.data.data) {
@@ -289,6 +291,7 @@ Page({
           cloth_list_right: that.data.cloth_list_right
         });
         that.hideLoading();
+        console.log(that.data.isFind);
       }
     })
   },
@@ -296,11 +299,124 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     var that = this;
+    var that = this;
+    var app = getApp();
+    var data = app.globalData.check_cloth_list;
+    console.log(data);
+    var id_list = {}
+    var sk_id = '';
+    for (var i in data) {
+      if (sk_id != '') {
+        sk_id = sk_id + ',';
+      }
+      sk_id = sk_id + data[i][0];
+      id_list[data[i][0]] = {};
+    }
 
+    console.log(id_list);
+
+    // 页面初始化 options为页面跳转所带来的参数
+    // console.log(app.globalData.is_shows)
+    // app.editTabBar3();//添加tabBar数据
+    // this.setData({
+    //   is_shows: app.globalData.is_shows
+    // })
+    //this.getList();
+
+    var n = 0;
+
+    for (var i in id_list) {
+      if (n % 2 == 0) {
+        that.data.cloth_list_left.push({
+          cloth: i
+        });
+      } else {
+        that.data.cloth_list_right.push({
+          cloth: i
+        });
+      }
+      n += 1;
+    }
+
+    that.setData({
+      cloth_list_left: that.data.cloth_list_left,
+      cloth_list_right: that.data.cloth_list_right,
+      id_list: id_list
+    });
+
+    wx.showLoading({
+      title: '获取图片列表...',
+    })
+
+    wx.request({
+      url: 'http://web.ngrok.52xygame.cn/get_image?token=BYLIJYGRDW&sk_id=' + sk_id,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      method: 'GET',
+      success: function(res) {
+        console.log(res.data);
+        var id_list = that.data.id_list;
+        for (var i in res.data.data) {
+          if (res.data.data[i][0].length != 0) {
+            id_list[i].img_list = res.data.data[i][1][0];
+          } else if (res.data.data[i][1].length != 0) {
+            id_list[i].img_list = res.data.data[i][2][0];
+          } else if (res.data.data[i][2].length != 0) {
+            id_list[i].img_list = res.data.data[i][0][0];
+          } else if (res.data.data[i][3].length != 0) {
+            id_list[i].img_list = res.data.data[i][1][0];
+          }
+        }
+
+        var n = 0;
+
+        that.data.cloth_list_left = []
+        that.data.cloth_list_right = []
+
+        for (var i in that.data.id_list) {
+          console.log(id_list[i].img_list);
+          if (n % 2 == 0) {
+            that.data.cloth_list_left.push({
+              cloth: i,
+              thumb: id_list[i].img_list
+            });
+          } else {
+            that.data.cloth_list_right.push({
+              cloth: i,
+              thumb: id_list[i].img_list
+            });
+          }
+          n += 1;
+        }
+
+        console.log(that.data.cloth_list_left);
+        console.log(that.data.cloth_list_right);
+
+        that.setData({
+          cloth_list_left: that.data.cloth_list_left,
+          cloth_list_right: that.data.cloth_list_right,
+          id_list: id_list
+        });
+
+        wx.hideLoading();
+        console.log(that.data.isFind);
+        if (that.data.isFind == true) {
+          wx.showModal({
+            title: '提示',
+            content: '查询成功',
+            showCancel: false
+          })
+        }
+      },
+      fail: function(res) {
+        console.log(res.data);
+      }
+    })
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
           width: res.windowWidth,
           height: res.windowHeight
@@ -314,7 +430,7 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       method: 'GET',
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         var list = res.data.data
         var key_map = {}
@@ -322,7 +438,7 @@ Page({
           for (var j in list[i].options) {
             key_map[list[i].options[j].verbal] = {
               key: list[i].options[j].value,
-              father_key: list[i].key 
+              father_key: list[i].key
             }
           }
         }
@@ -337,7 +453,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     //获得title 标题栏组件
     this.title = this.selectComponent("#title");
     //获得searchbar 搜索框组件
@@ -351,62 +467,62 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
   //点击按钮指定的hiddenmodalput弹出框  
-  promptPrice: function () {
+  promptPrice: function() {
     this.setData({
       hiddenmodalput: !this.data.hiddenmodalput
     })
   },
   //取消按钮  
-  cancel: function () {
+  cancel: function() {
     this.setData({
       hiddenmodalput: true
     });
   },
   //确认  
-  confirm: function () {
+  confirm: function() {
     this.setData({
       hiddenmodalput: true
     })
   },
-  slider4changeMax: function (e) {
+  slider4changeMax: function(e) {
     this.setData({
       max_price: e.detail.value
     });
   },
-  slider4changeMin: function (e) {
+  slider4changeMin: function(e) {
     this.setData({
       min_price: e.detail.value
     });
@@ -416,7 +532,7 @@ Page({
       });
     }
   },
-  nextPage: function (e) {
+  nextPage: function(e) {
     var that = this;
     that.setData({
       page: that.data.page + 1
@@ -425,7 +541,7 @@ Page({
   },
 
   // 点击大类
-  chose_a_f: function (e) {
+  chose_a_f: function(e) {
     var that = this;
     var chose_a = e.target.dataset.chose_idx;
     var br = that.data.type_relation;
@@ -462,7 +578,7 @@ Page({
   },
 
   // 点击中类
-  chose_b_f: function (e) {
+  chose_b_f: function(e) {
     var that = this;
     var chose_a = that.data.chose_a;
     var chose_b = e.target.dataset.chose_idx;
@@ -534,7 +650,7 @@ Page({
   },
 
   // 点击小类
-  chose_c_f: function (e) {
+  chose_c_f: function(e) {
     var that = this;
     var chose_a = that.data.chose_a;
     var chose_b = that.data.chose_b;
@@ -545,7 +661,7 @@ Page({
 
     if (br[chose_a][chose_b][chose_c].is_chose) {
       br[chose_a][chose_b][chose_c].is_chose = false;
-      
+
       // 处理第二大类
       var flag2 = true;
 
@@ -584,7 +700,7 @@ Page({
     });
   },
 
-  trash_b: function (e) {
+  trash_b: function(e) {
     console.log(e);
     var that = this;
     var chose_a = that.data.chose_a;
@@ -605,11 +721,11 @@ Page({
     });
   },
 
-  getChoseType: function (e) {
+  getChoseType: function(e) {
 
   },
 
-  show_close: function (e) {
+  show_close: function(e) {
     var that = this;
     that.setData({
       isShow: !that.data.isShow,
@@ -617,7 +733,7 @@ Page({
     that.getChoseType();
   },
 
-  my_submit: function (e) {
+  my_submit: function(e) {
     var that = this;
     var temp = '';
     for (var i in that.data.chose_c) {
@@ -641,7 +757,7 @@ Page({
     that.show_close();
   },
 
-  show_paixu: function (e) {
+  show_paixu: function(e) {
     var that = this;
     that.setData({
       is_show_paixu: !that.data.is_show_paixu
@@ -649,7 +765,7 @@ Page({
   },
 
   // 最新发布 order_by: time
-  latest_publish: function (e) {
+  latest_publish: function(e) {
     var that = this;
     that.setData({
       // is_show_paixu: false,
@@ -663,7 +779,7 @@ Page({
   },
 
   // 热门布料 order_by: hot
-  hotest_cloth: function (e) {
+  hotest_cloth: function(e) {
     var that = this;
     that.setData({
       // is_show_paixu: false,
@@ -677,7 +793,7 @@ Page({
   },
 
   // 新品推荐 order_by: newest
-  newest_recom: function (e) {
+  newest_recom: function(e) {
     var that = this;
     that.setData({
       // is_show_paixu: false,
@@ -690,13 +806,13 @@ Page({
     // getList();
   },
 
-  chose_image: function (e) {
+  chose_image: function(e) {
     var that = this;
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
+      success: function(res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
 
@@ -704,7 +820,7 @@ Page({
           url: 'https://by.edenhe.com/api/shibie', //仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: 'file',
-          success: function (res) {
+          success: function(res) {
             var data = res.data
             //do something
             console.log(res.data);
@@ -730,7 +846,7 @@ Page({
     })
   },
 
-  show_item: function (e) {
+  show_item: function(e) {
     var that = this
     that.data.is_shows[e.target.dataset.cloth_id] = false
     this.setData({
@@ -747,7 +863,7 @@ Page({
   },
 
   //modal隐藏
-  hideModal: function (e) {
+  hideModal: function(e) {
     if (e) {
       let type = e.currentTarget.dataset.type;
       if (type == 'mask' && !this.data.backdrop) {
@@ -758,20 +874,19 @@ Page({
   },
 
   //modal显示
-  showModal: function () {
+  showModal: function() {
     if (!this.data.isShow) {
       this._toggleModal();
     }
   },
 
   //切换modal的显示还是隐藏
-  _toggleModal: function () {
+  _toggleModal: function() {
     if (!this.data.animated) {
       this.setData({
         isShow: !this.data.isShow
       })
-    }
-    else {
+    } else {
       let isShow = !this.data.isShow;
       this._executeAnimation(isShow);
     }
@@ -780,7 +895,7 @@ Page({
   },
 
   //根据需求执行动画
-  _executeAnimation: function (isShow) {
+  _executeAnimation: function(isShow) {
 
     let animation = this.animation;
     if (isShow) {
@@ -792,20 +907,19 @@ Page({
         isShow: true
       })
 
-      setTimeout(function () {
+      setTimeout(function() {
         animation.opacity(1).step()
         this.setData({
           animationData: animation.export()
         })
       }.bind(this), 50)
-    }
-    else {
+    } else {
       animation.opacity(0).step()
       this.setData({
         animationData: animation.export()
       })
 
-      setTimeout(function () {
+      setTimeout(function() {
         this.setData({
           isShow: isShow
         })
@@ -815,20 +929,20 @@ Page({
   },
 
 
-  _cancelModal: function () {
+  _cancelModal: function() {
     console.log("点击确认了");
 
     var key = '';
     var that = this;
     var br = that.data.type_relation;
     var key_map = that.data.key_map;
-    
+
     var result_map = {};
     // 重写
     for (var i in br) {
       if (br[i].is_chose) {
         for (var j in br[i]) {
-          if (j != 'is_chose' && j != '其它'  && br[i][j].is_chose) {
+          if (j != 'is_chose' && j != '其它' && br[i][j].is_chose) {
             if (key_map[j] && result_map[key_map[j].father_key]) {
               console.log(key_map[j].father_key)
               result_map[key_map[j].father_key] = result_map[key_map[j].father_key] + ',' + key_map[j].key;
@@ -879,7 +993,7 @@ Page({
     this.triggerEvent("cancelEvent");
   },
 
-  _confirmModal: function () {
+  _confirmModal: function() {
     console.log("点击重置了");
 
     var that = this;
@@ -908,11 +1022,11 @@ Page({
     this.triggerEvent("confirmEvent");
   },
 
-  _confirmEventFirst: function () {
+  _confirmEventFirst: function() {
     console.log("点击确定了!");
     this.Modal.hideModal();
   },
-  _cancelEvent: function () {
+  _cancelEvent: function() {
     console.log("点击取消!");
   },
 

@@ -9,7 +9,8 @@ App({
     currentTab: 0,
     item: {},
     lastUrl: "",
-    isIpx: false
+    isIpx: false,
+    check_cloth_list: []
   },
   
 })

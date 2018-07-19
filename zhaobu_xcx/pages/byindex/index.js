@@ -18,6 +18,7 @@ Page({
     needs_alert: false,
     orders_alert: false,
     logged_in: false,
+    screen_height: 0
   },
 
   getSystemInfo() {

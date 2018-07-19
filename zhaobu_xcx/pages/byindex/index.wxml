@@ -6,7 +6,7 @@
 </title>
 
 
-<scroll-view scroll-y="true" style="height:1268rpx;" class="container" >
+<scroll-view scroll-y="true" style="height:{{ screen_height - 33}}px;position: fixed;" class="container" >
   <view class="account">
     <text>普通账号</text>
   </view>

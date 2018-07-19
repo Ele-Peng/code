@@ -15,7 +15,7 @@
         <view class="weui-navbar__slider" style="left: {{ sliderLeft }}px; transform: translateX({{ sliderOffset }}px); -webkit-transform: translateX({{ sliderOffset }}px);"></view>
       </view>
       <view class="weui-tab__panel">
-        <scroll-view scroll-y style="{{user_type == 'user' && detail.status == 'u' ? 'height: 1010rpx;position: fixed;' : 'height: 1100rpx;position: fixed;'}}" class="weui-tab__content" hidden="{{ activeIndex != 0 }}">
+        <scroll-view scroll-y style="{{user_type == 'user' && detail.status == 'u' ? '' : ''}}" class="weui-tab__content" hidden="{{ activeIndex != 0 }}">
           <block wx:if="{{detail.id}}">
             <view class="weui-cells" style="margin-top: 0">
 

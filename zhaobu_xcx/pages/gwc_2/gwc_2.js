@@ -21,7 +21,8 @@ Page({
     last_pos_x: -1,
     amount: -1,
     edit_idx: -1,
-    t_amount: ''
+    t_amount: '',
+    screen_height: 0
   },
 
   showLoading: function () {
@@ -58,14 +59,30 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+
+  getSystemInfo() {
+    const that = this
+    wx.getSystemInfo({
+      success(res) {
+        that.setData({
+          screen_height: res.windowHeight,
+        })
+        that.data.windowWidth = res.windowWidth
+      }
+    })
   },
+
+  
+  onLoad: function (options) {
+    this.getSystemInfo();
+  },
+
 
   get_card: function() {
     this.showLoading();
     var that = this;
     wx.request({
-      url: 'http://by.edenhe.com/api/cart/',
+      url: 'https://by.edenhe.com/api/cart/',
       header: {
         'Content-Type': 'application/json',
         'Cookie': wx.getStorageSync('cookie')
@@ -327,7 +344,7 @@ Page({
     var that = this;
 
     wx.request({
-      url: 'http://by.edenhe.com/api/cart/' + that.data.gwc[idx].id + '/remove/',
+      url: 'https://by.edenhe.com/api/cart/' + that.data.gwc[idx].id + '/remove/',
       method: 'POST',
       header: {
         Cookie: wx.getStorageSync('cookie'),
@@ -450,7 +467,7 @@ Page({
     console.log(data)
     console.log(that.data.gwc[idx].id)
     wx.request({
-      url: 'http://by.edenhe.com/api/cart/' + that.data.gwc[idx].id + '/change/',
+      url: 'https://by.edenhe.com/api/cart/' + that.data.gwc[idx].id + '/change/',
       method: 'POST',
       header: {
         Cookie: wx.getStorageSync('cookie'),
