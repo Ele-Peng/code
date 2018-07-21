@@ -76,6 +76,7 @@
               <view class="xiangQing_right">
                 <text class="xiangQingWenzi">起订量:</text>
                 <text class="value" wx:if="{{ detail.duration != '-1' }}">  {{detail.threshold}}</text>
+                <text class="value" wx:else>暂无</text>
               </view>
 
             </view>
@@ -84,12 +85,13 @@
               <view class="xiangQing_left">
                 <text class="xiangQingWenzi">货期:</text>
                 <text class="value" wx:if="{{ detail.duration != '-1' }}">  {{detail.duration}}</text>
+                <text wx:else class="value">  暂无</text>
               </view>
 
               <view class="xiangQing_right">
                 <text class="xiangQingWenzi">原色卡编号:</text>
-                <text wx:if="{{detail.userLevel==1}}" class="value">  无权查看</text>
-                <text wx:else class="value">  {{db_id}}</text>
+                <text wx:if="{{detail.userLevel==1 && db_id!=null}}" class="value">{{ db_id }}</text>
+                <text wx:else class="value">  无权查看</text>
               </view>
 
             </view>
@@ -113,7 +115,7 @@
               </view>
               <view class="xiangQing_right">
                 <text class="xiangQingWenzi">挂样货位:</text>
-                <text>  {{detail.put_pos}}</text>
+                <text class="value">  {{detail.put_pos}}</text>
               </view>
             </view>
 
@@ -150,7 +152,7 @@
 
             <view style='display:flex;flex-direction: column;'>
               <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;'>
-                <text class="value" catchtap="onMoreTap2">全局图</text>
+                <text class="value" catchtap="onMoreTap2">色卡全貌</text>
               </view>
               <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%;">
                 <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
@@ -165,7 +167,7 @@
 
             <view style='display:flex;flex-direction: column;'>
               <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;'>
-                <text class="value" catchtap="onMoreTap2">局部图</text>
+                <text class="value" catchtap="onMoreTap2">颜色展示</text>
               </view>
               <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%;">
                 <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
@@ -179,7 +181,7 @@
 
             <view style='display:flex;flex-direction: column;'>
               <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;'>
-                <text class="value" catchtap="onMoreTap2">色卡色样图</text>
+                <text class="value" catchtap="onMoreTap2">面料局部</text>
               </view>
               <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%;">
                 <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
@@ -226,23 +228,25 @@
           <view class="daHuoYangBu" style='color:#FF9906;'>
             <view class="xiangQing_left">
               <text class="xiangQingWenzi">大货:</text>
-              <text class="value"> {{detail.price}}  </text>
-              <text class="xiangQingWenzi"> 元/{{detail.display_unit}}</text>
+              <text class="value" wx:if='{{detail.price != null}}'> {{detail.price}} 元/{{detail.display_unit}} </text>
+              <text class='value' wx:else>暂无</text>
             </view>
             <view class="xiangQing_right">
               <text class="xiangQingWenzi">样布:</text>
-              <text class="value"> {{detail.sample_price}}</text>
-              <text class="xiangQingWenzi"> 元/{{detail.display_unit}}</text>
+              <text class="value" wx:if='{{detail.sample_price != null }}'> {{detail.sample_price}}元/米</text>
+              <text class='value' wx:else>暂无</text>
             </view>
           </view>
           <view class="daHuoYangBu" style='margin-top: -15rpx;'>
             <view class="xiangQing_left">
               <text class="xiangQingWenzi">货号:</text>
-              <text class="value">暂无</text>
+              <text class="value" wx:if='{{detail.cloth_id != null}}'>{{ detail.cloth_id }}</text>
+              <text class='value' wx:else>暂无</text>
             </view>
             <view class="xiangQing_right">
               <text class="xiangQingWenzi">起订量:</text>
-              <text class="value" wx:if="{{ detail.duration != '-1' }}">  {{detail.threshold}}</text>
+              <text class="value" wx:if="{{ detail.threshold != '-1' }}">  {{detail.threshold}}</text>
+              <text class="value" wx:else>暂无</text>
             </view>
 
           </view>
@@ -251,12 +255,13 @@
             <view class="xiangQing_left">
               <text class="xiangQingWenzi">货期:</text>
               <text class="value" wx:if="{{ detail.duration != '-1' }}">  {{detail.duration}}</text>
+              <text class="value" wx:else>暂无</text>
             </view>
 
             <view class="xiangQing_right">
               <text class="xiangQingWenzi">原色卡编号:</text>
-              <text wx:if="{{detail.userLevel==1}}" class="value">  无权查看</text>
-              <text wx:else class="value">  {{db_id}}</text>
+              <text wx:if="{{detail.userLevel==1 && db_id!=null}}" class="value">  {{db_id}}</text>
+              <text wx:else class="value"> 无权查看 </text>
             </view>
 
           </view>
@@ -310,10 +315,12 @@
             <view class='left-mlsx'>
               <view class='left-props'>门　　幅:</view>
               <view class='left-value' wx:if='{{ detail.width != null }}'>{{ detail.width }}厘米</view>
+              <view class='left-value' wx:else> 暂无</view>
             </view>
             <view class='right-mlsx'>
               <view class='right-props'>图　　案:</view>
-              <view class='right-value'>{{ detail.pattern }}暂无</view>
+              <view class='right-value' wx:if="{{ detail.pattern != null}}">{{ detail.pattern }}</view>
+              <view class='right-value' wx:else> 暂无</view>
             </view>
           </view>
 
@@ -321,21 +328,25 @@
             <view class='left-mlsx'>
               <view class='left-props'>克　　重:</view>
               <view class='left-value' wx:if='{{ detail.kezhong != null }}'>{{ detail.kezhong }}克</view>
+              <view class='left-value' wx:else> 暂无</view>
             </view>
             <view class='right-mlsx'>
               <view class='right-props'>适用季节:</view>
-              <view class='right-value'>{{ detail.season }}</view>
+              <view class='right-value' wx:if='{{ detail.season != null }}'>{{ detail.season }}</view>
+              <view class='right-value' wx:else> 暂无</view>
             </view>
           </view>
 
           <view class='mlsx-area-detail'>
             <view class='left-mlsx'>
               <view class='left-props'>成分明细:</view>
-              <view class='left-value'>{{ detail.detail }}</view>
+              <view class='left-value' wx:if="{{ detail.detail != null}}">{{ detail.detail }}</view>
+              <view class='left-value' wx:else> 暂无</view>
             </view>
             <view class='right-mlsx'>
               <view class='right-props'>适用品类:</view>
-              <view class='right-value'>{{ detail.category }}</view>
+              <view class='right-value' wx:if="{{ detail.category != null}}">{{ detail.category }}</view>
+              <view class='right-value' wx:else> 暂无</view>
             </view>
           </view>
 
@@ -343,21 +354,25 @@
             <view class='left-mlsx'>
               <view class='left-props'>空　　差:</view>
               <view class='left-value' wx:if='{{ detail.kongcha != null }}'>{{ detail.kongcha }}千克</view>
+              <view class='left-value' wx:else> 暂无</view>
             </view>
             <view class='right-mlsx'>
               <view class='right-props'>材质分类:</view>
-              <view class='right-value'>{{ detail.material }}</view>
+              <view class='right-value' wx:if="{{ detail.material != null}}">{{ detail.material }}</view>
+              <view class='right-value' wx:else> 暂无</view>
             </view>
           </view>
 
           <view class='mlsx-area-detail'>
             <view class='left-mlsx'>
               <view class='left-props'>是否足称:</view>
-              <view class='left-value'>{{ detail.measure}}</view>
+              <view class='left-value' wx:if="{{ detail.measure != null}}">{{ detail.measure }}</view>
+              <view class='left-value' wx:else> 暂无</view>
             </view>
             <view class='right-mlsx'>
               <view class='right-props'>织法分类:</view>
-              <view class='right-value'>{{ detail.zhifa }}</view>
+              <view class='right-value' wx:if="{{ detail.zhifa}}">{{ detail.zhifa }}</view>
+              <view class='right-value' wx:else> 暂无</view>
             </view>
           </view>
 
@@ -367,10 +382,12 @@
             <view class='left-mlsx'>
               <view class='left-props'>纸 管 重:</view>
               <view class='left-value' wx:if='{{ detail.zhiguan != null }}'>{{ detail.zhiguan }}千克</view>
+              <view class='left-value' wx:else> 暂无</view>
             </view>
             <view class='right-mlsx'>
               <view class='right-props'>织法工艺:</view>
-              <view class='right-value'>{{ detail.zhifa_craft }}</view>
+              <view class='right-value' wx:if="{{ detail.zhifa_craft != null }}">{{ detail.zhifa_craft }}</view>
+              <view class='right-value' wx:else> 暂无</view>
             </view>
           </view>
 
@@ -378,11 +395,13 @@
           <view class='mlsx-area-detail'>
             <view class='left-mlsx'>
               <view class='left-props' style='width:128rpx'>针数|支数:</view>
-              <view class='left-value' style='width: 247rpx;'>{{ detail.zhenshu }}</view>
+              <view class='left-value' style='width: 247rpx;' wx:if="{{ detail.zhenshu != null}}">{{ detail.zhenshu }}</view>
+              <view class='left-value' wx:else> 暂无</view> 
             </view>
             <view class='right-mlsx'>
               <view class='right-props'>表面工艺:</view>
-              <view class='right-value'>{{ detail.surface_craft }}</view>
+              <view class='right-value' wx:if="{{ detail.surface_craft != null }}">{{ detail.surface_craft }}</view>
+              <view class='right-value' wx:else>暂无</view>
             </view>
           </view>
 
@@ -390,18 +409,21 @@
           <view class='mlsx-area-detail'>
             <view class='left-mlsx'>
               <view class='left-props'>弹　　力:</view>
-              <view class='left-value'>{{detail.elastic}}</view>
+              <view class='left-value' wx:if="{{ detail.elastic != null }}">{{detail.elastic}}</view>
+              <view class='left-value' wx:else> 暂无</view>
             </view>
             <view class='right-mlsx'>
               <view class='right-props'>底面工艺:</view>
-              <view class='right-value'>{{ detail.back_color_craft }}</view>
+              <view class='right-value' wx:if='{{ detail.back_color_craft != null}}'>{{ detail.back_color_craft }}</view>
+              <view class='right-value' wx:else> 暂无</view>
             </view>
           </view>
 
           <view class='mlsx-area-detail'>
             <view class='left-mlsx'>
               <view class='left-props'>单　　位:</view>
-              <view class='left-value'>{{ detail.unit == 'k' ? '元/千克' : '' }}</view>
+              <view class='left-value' wx:if="{{ detail.unit != null }}">{{ detail.unit == 'k' ? '元/千克' : '' }}</view>
+              <view class='left-value' wx:else> 暂无</view>
             </view>
           </view>
         </view>

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/byindex/home_page",
+    "pages/byindex/none",
     "pages/clothPreview_test/clothPreview",
     "pages/search/search",
     "pages/ksrg/ksrg",

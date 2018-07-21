@@ -13,8 +13,9 @@
 
   <view class='mine-record' bindtap='onClickNeeds'>
     <view class="record-title">
-      <view class='record-title-txt'>
+      <view class='record-title-txt' style='display: flex;flex-direction: row;'>
         <text>找布记录</text>
+        <view  wx:if="{{needs_alert}}" class="red_dot"/>
       </view>
       <image src="../../assets/images/icon-gt.png"></image>
     </view>
@@ -45,8 +46,9 @@
 
   <view class='mine-record' style="margin-top: 10rpx;" bindtap='onClickOrders'>
     <view class="record-title">
-      <view class='record-title-txt'>
+      <view class='record-title-txt' style='display: flex;flex-direction: row;'>
         <text>订购记录</text>
+        <view  wx:if="{{orders_alert}}" class="red_dot"/>
       </view>
       <image src="../../assets/images/icon-gt.png"></image>
     </view>

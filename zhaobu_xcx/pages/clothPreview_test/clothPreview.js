@@ -361,13 +361,13 @@ Page({
         var id_list = that.data.id_list;
         for (var i in res.data.data) {
           if (res.data.data[i][0].length != 0) {
-            id_list[i].img_list = res.data.data[i][1][0];
-          } else if (res.data.data[i][1].length != 0) {
-            id_list[i].img_list = res.data.data[i][2][0];
-          } else if (res.data.data[i][2].length != 0) {
             id_list[i].img_list = res.data.data[i][0][0];
-          } else if (res.data.data[i][3].length != 0) {
+          } else if (res.data.data[i][1].length != 0) {
             id_list[i].img_list = res.data.data[i][1][0];
+          } else if (res.data.data[i][2].length != 0) {
+            id_list[i].img_list = res.data.data[i][2][0];
+          } else if (res.data.data[i][3].length != 0) {
+            id_list[i].img_list = res.data.data[i][3][0];
           }
         }
 

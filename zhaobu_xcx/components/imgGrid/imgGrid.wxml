@@ -19,7 +19,7 @@
             <image src="../../assets/images/testImg/icon-homePage.jpg"></image>
             <view class="grid-3-pos">当季趋势</view>
           </view>
-          <view class='grid-4' bind="choseSelected_4">
+          <view class='grid-4' bindtap="choseSelected_4">
             <image src="../../assets/images/testImg/icon-homePage.jpg"></image>
             <view class="grid-4-pos">时尚热卖</view>
           </view>

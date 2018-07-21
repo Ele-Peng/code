@@ -1,47 +1,42 @@
-// pages/dfkdd/dfkdd.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    dingdan: {},
-    heading: "订单详情"
+    heading: "布源",
+    lastUrl: '',
+    screen_height: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    wx.request({
-      url: 'http://39.104.71.13:8001/dingdan/',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (res) {
-        //将获取到的json数据，存在名字叫detail的这个数组中
-        that.setData({
-          dingdan: res.data.data
-          //res代表success函数的事件对，data是固定的
-        });
-      }
-    });
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    var that = this;
+    wx.getSystemInfo({
+      success: function(res) {
+        that.setData({
+          screen_height: res.screenHeight
+        })
+      },
+    })
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    //获得title 标题栏组件
     this.title = this.selectComponent("#title");
-    getApp().globalData.lastUrl = '../order/order_list'
+    getApp().globalData.lastUrl = '../order/general_detail_list'
     this.setData({
       lastUrl: getApp().globalData.lastUrl,
     });
@@ -51,34 +46,41 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+    
+  },
+
+  backHome: function (e) {
+    console.log('asd');
+    wx.switchTab({
+      url: '../../pages/byindex/home_page',
+    })
   }
 })

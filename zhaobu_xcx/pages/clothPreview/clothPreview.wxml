@@ -45,7 +45,9 @@
               <view class="clothName" style='font-size: 26rpx;color: #000000;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 300rpx;'>{{item.cloth}}</view>
               <view class="idLogo" style='font-size: 24rpx;color: #909090;'>
                 <text class="idArea">色卡货位:{{item.put_pos}}</text>
-                <text class="idArea">{{item.display_unit}}</text>
+                <text class="idArea" wx:if="{{ item.display_unit == '千克'}}">{{item.kongcha == null ? '空差暂无' : item.kongcha }}</text>
+                <text class="idArea" wx:elif="{{ item.display_unit == '米'}}">{{item.measure == null ? '足称暂无' : item.measure }}</text>
+                <text class="idArea" wx:elif="{{ item.display_unit == '码'}}">{{item.measure == null ? '足称暂无' : item.measure }}</text>
                 <view style='display: flex;flex-direction: row;margin-top: 0rpx;width: 336rpx;'>
                   <view class="idArea" style='color:#FC5656;display: flex;flex-direction: row;width: 180rpx;margin-top: 0rpx;'>￥
                     <text style='font-size: 32rpx;margin-top:-8rpx;'>{{item.price}}</text>
@@ -70,7 +72,9 @@
               <view class="clothName" style='font-size: 26rpx;color: #000000;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 300rpx;'>{{item.cloth}}</view>
               <view class="idLogo" style='font-size: 24rpx;color: #909090;'>
                 <text class="idArea">色卡货位:{{item.put_pos}}</text>
-                <text class="idArea">{{item.display_unit}}</text>
+                <text class="idArea" wx:if="{{ item.display_unit == '千克'}}">{{item.kongcha == null ? '空差暂无' : item.kongcha }}{{item.zhiguan == null ? '纸管暂无' : item.zhiguan }}</text>
+                <text class="idArea" wx:elif="{{ item.display_unit == '米'}}">{{item.measure == null ? '足称暂无' : item.measure }}</text>
+                <text class="idArea" wx:elif="{{ item.display_unit == '码'}}">{{item.measure == null ? '足称暂无' : item.measure }}</text>
                 <view style='display: flex;flex-direction: row;margin-top: 0rpx;width: 336rpx;'>
                   <view class="idArea" style='color:#FC5656;display: flex;flex-direction: row;width: 180rpx;margin-top: 0rpx;'>￥
                     <text style='font-size: 32rpx;margin-top:-8rpx;'>{{item.price}}</text>

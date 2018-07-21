@@ -19,10 +19,16 @@ Component({
   methods: {
     redToLast: function () {
       var url = getApp().globalData.lastUrl
-      getApp().globalData.lastUrl = ""
-      wx.navigateBack({
-        delta: 1
-      })
+      if (url != -1) {
+        getApp().globalData.lastUrl = ""
+        wx.navigateBack({
+          delta: 1
+        })
+      } else {
+        wx.switchTab({
+          url: '../../pages/byindex/home_page',
+        })
+      }
     }
   }
 })

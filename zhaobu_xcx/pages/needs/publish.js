@@ -75,6 +75,7 @@ Page({
           screen_height: res.windowHeight,
         })
         console.log(that.data.image_block_size);
+        console.log(that.data.screen_height);
       }
     })
   },

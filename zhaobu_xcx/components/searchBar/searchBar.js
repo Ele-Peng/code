@@ -183,8 +183,11 @@ Component({
                   }
                   var app = getApp();
                   app.globalData.check_cloth_list = JSON.parse(res.data).data;
-                  wx.navigateTo({
+                  wx.redirectTo({
                     url: '../../pages/clothPreview_test/clothPreview?isFind=' + isFind,
+                    success: function (res) {
+                      app.globalData.lastUrl = -1;
+                    }
                   })
                 },
                 fail: function (e) {

@@ -8,9 +8,9 @@
 
 <import src="../../components/loading/loading.wxml" />
 <template is="loading" data="{{ ...$wux.loading }}" />
-
-<view class="page" style="height: 100%;">
-  <view style="height: 100%; overflow: auto">
+<title heading="{{ heading }}" lastUrl="{{ lastUrl}}"></title>
+<scroll-view scroll-y style="height: {{ 1200/1334 * screen_height}}px;width: 100%;background: #FCFCFC;position: fixed;">
+  <view style="height: 100%; overflow: auto;width: 100%;">
     <view class="page__bd" style="padding-bottom: 66px">
 
       <view class="weui-cells">
@@ -47,11 +47,13 @@
           </view>
         </view>
       </view>
+
     </view>
   </view>
-  <view bindtap="submit_event">
-    <button class="weui-btn" type="primary" style="position: absolute; top: {{screen_height - 46}}px; width: 100%; margin-top: 0">
-      确认修改
-    </button>
-  </view>
+
+</scroll-view>
+<view bindtap="submit_event">
+  <button class="weui-btn" type="primary" style="position: fixed; margin-top: {{ 1120/ 1334 * screen_height}}px;width: 100%;background: #FF9906;border-radius: 0rpx;">
+    确认修改
+  </button>
 </view>

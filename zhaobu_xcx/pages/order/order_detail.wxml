@@ -178,8 +178,8 @@
           前往支付
         </button>
       </view>
-      <view wx:if="{{user_type == 'agent' && (detail.status == 'n' || detail.status == 'c' || detail.status == 'p')}}" hidden="{{ activeIndex != 1 }}" bindtap="edit_event">
-        <button class="weui-btn" type="primary" style="position: absolute; top: {{screen_height - 46}}px; width: 100%; margin-top: 0">
+       <view wx:if="{{user_type == 'agent' && (detail.status == 'n' || detail.status == 'c' || detail.status == 'p')}}" hidden="{{ activeIndex != 1 }}" bindtap="edit_event"> 
+        <button class="weui-btn" type="primary" style="position: fixed; margin-top: {{ 920/1334 * screen_height }}px; width: 100%; background: #FF9906;border-radius: 0rpx;">
           {{ update_btn_text[detail.status] }}
         </button>
       </view>

@@ -22,7 +22,7 @@
           颜色: {{chose_show_text}}
         </view>
       </view>
-      <view wx:if="{{chose_type == '大货'}}" style='color: #FC5656;font-size: 26rpx;'>￥{{detail.price}}/米</view>
+      <view wx:if="{{chose_type == '大货'}}" style='color: #FC5656;font-size: 26rpx;'>￥{{detail.price}}/{{detail.display_unit}}</view>
       <view wx:if="{{chose_type == '样布'}}" style='color: #FC5656;font-size: 26rpx;'>￥{{detail.sample_price}}/米</view>
     </view>
   </view>
@@ -58,7 +58,7 @@
   </view>
 
   <view >
-    <view style='color: #15181D;padding-left: 26rpx;'>
+    <view style='color: #15181D;padding-left: 26rpx;font-size: 28rpx;'>
       颜色
     </view>
     <view style='display: flex;flex-direction: row;flex-wrap:wrap;justify-content:left;'>

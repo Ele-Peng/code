@@ -141,7 +141,7 @@
         <!-- h候选布料没有数据的样式 -->
           <template wx:if="{{result_list.length == 0}}" is="prompt" data="{{ ...$wux.prompt.msg_empty }}" />
           <scroll-view scroll-y wx:else style="padding-bottom: 55px;height: {{ screen_height - 105 }}px;margin-top: 80rpx;position: fixed;font-size:28rpx;">
-            <view class="weui-panel weui-panel_access" wx:key="" wx:for="{{ result_list }}" bindtap="onClickResult" data-id="{{item.id}}" style='margin-top:0rpx;'>
+            <view class="weui-panel weui-panel_access" wx:key="" wx:for="{{ result_list }}" bindtap="onClickResult" data-id="{{item.id}}" style='margin-top:20rpx;'>
               <view class="weui-panel__hd panel-needs-list__hd">
                 <text>结果{{result_list.length - index}}</text>
                 <text>{{item.display_time}}</text>
@@ -177,25 +177,25 @@
               </view>
             </view>
           </scroll-view>
-          <button wx:if="{{ user_type == 'agent' && (detail.status == '3' || detail.status == '6' || detail.status == 'a' || detail.status == 'c')}}" class="weui-btn" type="primary" bindtap="onAddResult" style="height: 48px; width: 100%;position: absolute; margin-top: 1108rpx;">
+          <button wx:if="{{ user_type == 'agent' && (detail.status == '3' || detail.status == '6' || detail.status == 'a' || detail.status == 'c')}}" class="weui-btn" type="primary" bindtap="onAddResult" style="height: 48px; width: 100%;position: absolute; margin-top: 1108rpx;border-radius: 0rpx;">
             新增候选布料
           </button>
           <view wx:if="{{ user_type == 'user' && result_list.length > 0 && (detail.status == '6' || detail.status == 'c') }}" style="width: 100%;position: fixed; bottom:0px; margin-top: 1108rpx; display: flex">
             <block wx:if="{{detail.status == '6'}}">
               <form report-submit="true" bindsubmit="onContinueOrder" style="width: 50%">
-                <button formType="submit" class="weui-btn" type="primary" style="line-height: 48px;background-color:#F6B220;border-radius: 0rpx;border: 1rpx solid #fff;">
+                <button formType="submit" class="weui-btn" type="primary" style="line-height: 48px;background-color:#F6B220;border-radius: 0rpx;border: 1rpx solid #fff;border-radius: 0rpx;">
                   继续找布
                 </button>
               </form>
               <form report-submit="true" bindsubmit="onFinishOrder" style="width: 50%">
-                <button formType="submit" class="weui-btn" type="primary" style="line-height: 48px;background-color:#FB5353;border-radius: 0rpx;">
+                <button formType="submit" class="weui-btn" type="primary" style="line-height: 48px;background-color:#FB5353;border-radius: 0rpx;border-radius: 0rpx;">
                   结束找布
                 </button>
               </form>
             </block>
             <block wx:else>
               <form report-submit="true" bindsubmit="onFinishOrder" style="width: 100%">
-                <button formType="submit" class="weui-btn" type="primary" style="line-height: 48px;background-color:#FB5353;">
+                <button formType="submit" class="weui-btn" type="primary" style="line-height: 48px;background-color:#FB5353;border-radius: 0rpx;">
                   结束找布
                 </button>
               </form>

@@ -11,6 +11,7 @@ Page({
   data: {
     selected_images: [
     ],
+    heading: "上传信息",
     empty_images: [], //  上传图片里的占位符，让布局更好看一些
     image_block_size: '0',
     screen_height: 0,
@@ -81,7 +82,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    getApp().globalData.lastUrl = '../order/order_list'
+    this.setData({
+      lastUrl: getApp().globalData.lastUrl,
+    });
   },
 
   /**

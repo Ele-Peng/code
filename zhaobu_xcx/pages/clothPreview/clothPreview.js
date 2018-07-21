@@ -11,7 +11,7 @@ Page({
     key_map: {},
     width: 0,
     height: 0,
-    heading: "面料预览",
+    heading: "面料阅览",
     search_text: '最新发布',
     isShow: false,
     lastUrl: "",
@@ -76,7 +76,7 @@ Page({
           '平纹': {},
           '斜纹': {},
           '缎纹': {},
-          '其它': {},
+          '其它梭织': {},
         },
         '针织': {
           '罗纹布': {},
@@ -95,7 +95,7 @@ Page({
           '针织缎纹': {},
           '起绒/毛布': {},
           '网眼布': {},
-          '其它': {}
+          '其它针织': {}
         },
         '无纺布': {
           '皮革': {},
@@ -120,7 +120,7 @@ Page({
           '帆布': {},
           '缎纹/贡缎': {},
           '棉竹节': {},
-          '其它': {}
+          '其它(棉)': {}
         },
         '麻类': {
           '大麻': {},
@@ -129,7 +129,7 @@ Page({
           '亚麻': {},
           '苎麻': {},
           '麻混纺': {},
-          '其它': {}
+          '其它(麻)': {}
         },
         '化纤': {
           '粘胶': {},
@@ -138,7 +138,7 @@ Page({
           '空气层': {},
           '氨纶': {},
           '腈纶': {},
-          '其它': {}
+          '其它(化纤)': {}
         },
         '混纺': {
           '棉毛混纺': {},
@@ -150,7 +150,7 @@ Page({
           '锦棉': {},
           'N/C': {},
           'CVC': {},
-          '其它': {}
+          '其它(混纺)': {}
         },
         '皮毛': {
           '毛毡': {},
@@ -163,7 +163,7 @@ Page({
           '羊绒': {},
           '法兰绒': {},
           '麦呢': {},
-          '其它': {}
+          '其它(皮毛)': {}
         },
         '新型纤维': {
           '天丝': {},
@@ -181,7 +181,7 @@ Page({
           '罗': {},
           '绸': {},
           '绫': {},
-          '其它': {}
+          '其它(丝)': {}
         }
       },
       '所在市场': {
@@ -189,8 +189,7 @@ Page({
         '柯桥': {},
         '盛泽': {},
         '石狮': {},
-        '织里': {},
-        '其它': {}
+        '织里': {}
       },
       '货期': {
         '现货': {},
@@ -200,12 +199,13 @@ Page({
         '14天以上': {}
       },
       '弹性': {
-        '单向弹性': {},
-        '四面弹性': {},
-        '无弹力': {}
+        '单向': {},
+        '四面': {},
+        '无': {}
       }
     },
-    screen_height: 0
+    screen_height: 0,
+    search_type: 0
   },
 
   /**
@@ -220,6 +220,9 @@ Page({
     // this.setData({
     //   is_shows: app.globalData.is_shows
     // })
+    this.setData({
+      search_type : options.type
+    })
     this.getList();
   },
 
@@ -248,49 +251,178 @@ Page({
   getList: function () {
     this.showLoading();
     var that = this;
-    wx.request({
-      url: 'https://by.edenhe.com/api/record/samples/?' + that.data.key,
-      header: {
-        Cookie: wx.getStorageSync('cookie'),
-        'content-type': 'application/json' // 默认值
-      },
-      data: {
-        page: that.data.page,
-        size: that.data.size,
-      },
-      method: 'GET',
-      success: function (res) {
-        console.log(res.data);
-        var n = 0;
-        for (var i in res.data.data) {
-          var flag = false;
-          for (var j in that.data.is_shows) {
-            if (j == res.data.data[i].clothID) {
-              flag = true;
-              break;
+    if (this.data.search_type == 1) {
+      wx.request({
+        url: 'https://by.edenhe.com/api/selected/boutique/',
+        header: {
+          Cookie: wx.getStorageSync('cookie'),
+          'content-type': 'application/json' // 默认值
+        },
+        method: 'GET',
+         success: function(res) {
+          console.log(res.data);
+          var n = 0;
+          for (var i in res.data.data) {
+            var flag = false;
+            for (var j in that.data.is_shows) {
+              if (j == res.data.data[i].clothID) {
+                flag = true;
+                break;
+              }
             }
+            if (!flag) {
+              that.data.is_shows[res.data.data[i].clothID] = true
+            }
+            that.data.cloth_list.push(res.data.data[i]);
+            // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
+            if (n % 2 == 0) {
+              that.data.cloth_list_left.push(res.data.data[i]);
+            } else {
+              that.data.cloth_list_right.push(res.data.data[i]);
+            }
+            n += 1;
           }
-          if (!flag) {
-            that.data.is_shows[res.data.data[i].clothID] = true
-          }
-          that.data.cloth_list.push(res.data.data[i]);
-          // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
-          if (n % 2 == 0) {
-            that.data.cloth_list_left.push(res.data.data[i]);
-          } else {
-            that.data.cloth_list_right.push(res.data.data[i]);
-          }
-          n += 1;
+          that.setData({
+            is_shows: that.data.is_shows,
+            cloth_list: that.data.cloth_list,
+            cloth_list_left: that.data.cloth_list_left,
+            cloth_list_right: that.data.cloth_list_right
+          });
+          that.hideLoading();
         }
-        that.setData({
-          is_shows: that.data.is_shows,
-          cloth_list: that.data.cloth_list,
-          cloth_list_left: that.data.cloth_list_left,
-          cloth_list_right: that.data.cloth_list_right
-        });
-        that.hideLoading();
-      }
-    })
+      })
+    } else if (this.data.search_type == 2) {
+      wx.request({
+        url: 'https://by.edenhe.com/api/selected/newest/',
+        header: {
+          Cookie: wx.getStorageSync('cookie'),
+          'content-type': 'application/json' // 默认值
+        },
+        method: 'GET',
+        success: function (res) {
+          console.log(res.data);
+          var n = 0;
+          for (var i in res.data.data) {
+            var flag = false;
+            for (var j in that.data.is_shows) {
+              if (j == res.data.data[i].clothID) {
+                flag = true;
+                break;
+              }
+            }
+            if (!flag) {
+              that.data.is_shows[res.data.data[i].clothID] = true
+            }
+            that.data.cloth_list.push(res.data.data[i]);
+            // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
+            if (n % 2 == 0) {
+              that.data.cloth_list_left.push(res.data.data[i]);
+            } else {
+              that.data.cloth_list_right.push(res.data.data[i]);
+            }
+            n += 1;
+          }
+          that.setData({
+            is_shows: that.data.is_shows,
+            cloth_list: that.data.cloth_list,
+            cloth_list_left: that.data.cloth_list_left,
+            cloth_list_right: that.data.cloth_list_right
+          });
+          that.hideLoading();
+        }
+      })
+    } else if (this.data.search_type == 3) {
+      wx.request({
+        url: '',
+      })
+    } else if (this.data.search_type == 4) {
+      wx.request({
+        url: 'https://by.edenhe.com/api/selected/popular',
+        header: {
+          Cookie: wx.getStorageSync('cookie'),
+          'content-type': 'application/json' // 默认值
+        },
+        method: 'GET',
+        success: function (res) {
+          console.log(res.data);
+          var n = 0;
+          if (res.data.length == null) {
+            console.log("none goods");
+          }
+          for (var i in res.data.data) {
+            var flag = false;
+            for (var j in that.data.is_shows) {
+              if (j == res.data.data[i].clothID) {
+                flag = true;
+                break;
+              }
+            }
+            if (!flag) {
+              that.data.is_shows[res.data.data[i].clothID] = true
+            }
+            that.data.cloth_list.push(res.data.data[i]);
+            // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
+            if (n % 2 == 0) {
+              that.data.cloth_list_left.push(res.data.data[i]);
+            } else {
+              that.data.cloth_list_right.push(res.data.data[i]);
+            }
+            n += 1;
+          }
+          that.setData({
+            is_shows: that.data.is_shows,
+            cloth_list: that.data.cloth_list,
+            cloth_list_left: that.data.cloth_list_left,
+            cloth_list_right: that.data.cloth_list_right
+          });
+          that.hideLoading();
+        }
+      })
+    } else {
+      wx.request({
+        url: 'https://by.edenhe.com/api/record/samples/?' + that.data.key,
+        header: {
+          Cookie: wx.getStorageSync('cookie'),
+          'content-type': 'application/json' // 默认值
+        },
+        data: {
+          page: that.data.page,
+          size: that.data.size,
+        },
+        method: 'GET',
+        success: function (res) {
+          console.log(res.data);
+          var n = 0;
+          for (var i in res.data.data) {
+            var flag = false;
+            for (var j in that.data.is_shows) {
+              if (j == res.data.data[i].clothID) {
+                flag = true;
+                break;
+              }
+            }
+            if (!flag) {
+              that.data.is_shows[res.data.data[i].clothID] = true
+            }
+            that.data.cloth_list.push(res.data.data[i]);
+            // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
+            if (n % 2 == 0) {
+              that.data.cloth_list_left.push(res.data.data[i]);
+            } else {
+              that.data.cloth_list_right.push(res.data.data[i]);
+            }
+            n += 1;
+          }
+          that.setData({
+            is_shows: that.data.is_shows,
+            cloth_list: that.data.cloth_list,
+            cloth_list_left: that.data.cloth_list_left,
+            cloth_list_right: that.data.cloth_list_right
+          });
+          that.hideLoading();
+        }
+      })
+    }
   },
 
   /**

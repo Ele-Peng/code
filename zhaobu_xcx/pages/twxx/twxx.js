@@ -199,8 +199,9 @@ Page({
   onClickBuy: function() {
     var that = this;
     wx.navigateTo({
-      url: '../../pages/subscribe/subscribe?cloth_id=' + that.data.cloth_id,
+      url: '../../pages/subscribe/subscribe?cloth_id=' + that.data.cloth_id + '&type=0',
     })
+    console.log(that.data.cloth_id);
   },
 
   // 多张图预览
