@@ -11,7 +11,8 @@ Page({
     is_pay: false,
     is_show_pay: false,
     db_id: 0,
-    screen_height: 0
+    screen_height: 0,
+    result_id: 0,
   },
   onLoad: function (options) {
     this.getSystemInfo();
@@ -98,7 +99,34 @@ Page({
         currentTab: options.currentTab
       });
     }
+
+    var url = '';
+    var result_id = this.data.cloth_id;
+    url = 'https://by.edenhe.com/api/cloth/from_goods/' + this.data.cloth_id + "/";
+    console.log(wx.getStorageSync('cookie'))
+    wx.request({
+      url: url,
+      method: 'get',
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+      },
+      success: function (res) {
+        console.log(res.data);
+        that.setData({
+          db_id: res.data.data.card_id,
+          result_id: res.data.data.id,
+        })
+        that.hideLoading();
+      },
+      fail: function (res) {
+        console.log(res.data);
+        that.hideLoading();
+      }
+    });
+
+    
   },
+
   getSystemInfo() {
     const that = this
     wx.getSystemInfo({
@@ -199,7 +227,7 @@ Page({
   onClickBuy: function() {
     var that = this;
     wx.navigateTo({
-      url: '../../pages/subscribe/subscribe?cloth_id=' + that.data.cloth_id + '&type=0',
+      url: '../../pages/subscribe/subscribe?result_id=' + that.data.result_id + '&type=0&cloth_id=' + that.data.cloth_id,
     })
     console.log(that.data.cloth_id);
   },

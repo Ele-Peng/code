@@ -43,12 +43,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.getSystemInfo();
     console.log(options);
     if (options.type == 0) {
       // 从详情页进来
       this.setData({
+        result_id: options.result_id,
         cloth_id: options.cloth_id,
         search_type: options.type
       })
@@ -61,6 +62,7 @@ Page({
         from_needs_id: options.needs_id,
         from_order_id: options.order_id,
         cloth_id: options.cloth_id,
+        result_id: options.cloth_id,
         price: options.price,
         sample_price: options.sample_price,
         unit: options.unit,
@@ -83,7 +85,7 @@ Page({
     })
   },
 
-  loadAddresses: function() {
+  loadAddresses: function () {
     var that = this;
     wx.request({
       url: 'https://by.edenhe.com/api/address/',
@@ -91,7 +93,7 @@ Page({
       header: {
         Cookie: wx.getStorageSync('cookie'),
       },
-      success: function(res) {
+      success: function (res) {
         console.log(res.data);
         var addresses = res.data.data;
         var address_diaplay_list = [];
@@ -114,23 +116,23 @@ Page({
         });
         console.log(that.data)
       },
-      fail: function(res) {
+      fail: function (res) {
         console.log(res.data);
       }
     });
   },
 
-  showLoading: function() {
+  showLoading: function () {
     $wuxLoading.show({
       text: '数据加载中',
     });
   },
 
-  hideLoading: function() {
+  hideLoading: function () {
     $wuxLoading.hide();
   },
 
-  loadClothColors: function(cloth_id) {
+  loadClothColors: function (cloth_id) {
     var url = "https://by.edenhe.com/api/cloth/" + cloth_id + "/colors/";
     var that = this;
     console.log(url);
@@ -140,7 +142,7 @@ Page({
       header: {
         Cookie: wx.getStorageSync('cookie'),
       },
-      success: function(res) {
+      success: function (res) {
         console.log(res.data);
         var colors = res.data.data;
         for (var j = 0; j < colors.length; j++) {
@@ -162,7 +164,7 @@ Page({
           })
         }
       },
-      fail: function(res) {
+      fail: function (res) {
         console.log(res.data);
       }
     });
@@ -171,56 +173,33 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
     var that = this;
+    var reslut_id = that.data.result_id;
+    that.loadClothColors(reslut_id);
+    var url = 'https://by.edenhe.com/api/cloth/' + reslut_id + '/';
 
-    that.loadClothColors(that.data.cloth_id);
-    if (that.data.search_type == 0) {
-      var url = 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/';
-      wx.request({
-        url: url,
-        header: {
-          Cookie: wx.getStorageSync('cookie'),
-        },
-        success: function (res) {
-          console.log(res)
-          //将获取到的json数据，存在名字叫detail的这个数组中
-          that.setData({
-            detail: res.data.data,
-            //res代表success函数的事件对，data是固定的
-          });
-        }
-      })
-    } else {
-      var url = 'https://by.edenhe.com/api/cloth/' + that.data.cloth_id + '/';
-
-      if (that.data.db_id) {
-        url = url + that.data.db_id;
+    wx.request({
+      url: url,
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+      },
+      success: function (res) {
+        console.log(res)
+        //将获取到的json数据，存在名字叫detail的这个数组中
+        that.setData({
+          detail: res.data.data,
+          //res代表success函数的事件对，data是固定的
+        });
       }
-
-      console.log(url);
-      wx.request({
-        url: url,
-        header: {
-          Cookie: wx.getStorageSync('cookie'),
-        },
-        success: function (res) {
-          console.log(res)
-          //将获取到的json数据，存在名字叫detail的这个数组中
-          that.setData({
-            detail: res.data.data,
-            //res代表success函数的事件对，data是固定的
-          });
-        }
-      });
-    }
+    });
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
     getApp().globalData.lastUrl = '../order/general_order_list'
     this.setData({
@@ -231,45 +210,45 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
 
-  chose_type: function(e) {
+  chose_type: function (e) {
     this.setData({
       chose_type: e.currentTarget.dataset.chose_type
     })
   },
 
-  bindKeyInput: function(e) {
+  bindKeyInput: function (e) {
     var idx = e.currentTarget.dataset.idx;
     var colors = this.data.image_colors;
     colors[idx].count = parseInt(e.detail.value);
@@ -279,7 +258,7 @@ Page({
     this.update_status();
   },
 
-  update_status: function() {
+  update_status: function () {
 
     var colors = this.data.image_colors;
     var tex = '';
@@ -308,7 +287,7 @@ Page({
     })
   },
 
-  join_shop_car: function() {
+  join_shop_car: function () {
 
     var colors = this.data.image_colors;
     var price = 0;
@@ -322,18 +301,18 @@ Page({
     }
 
     var from_needs_id = this.data.from_needs_id;
-    if (!from_needs_id || typeof(from_needs_id) == "undefined") {
+    if (!from_needs_id || typeof (from_needs_id) == "undefined") {
       from_needs_id = 0;
     }
     var from_order_id = this.data.from_order_id;
-    if (!from_order_id || typeof(from_order_id) == "undefined") {
+    if (!from_order_id || typeof (from_order_id) == "undefined") {
       from_order_id = 0;
     }
 
     var data = {
       'needs': from_needs_id,
       'order': from_order_id,
-      'cloth': this.data.cloth_id,
+      'cloth': this.data.result_id,
       'address': this.data.receive_addr_id,
     };
 
@@ -380,12 +359,12 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       data: data,
-      success: function(res) {
+      success: function (res) {
         console.log(res.data);
         that.hideLoading();
         that.showPaymentOK();
       },
-      fail: function(res) {
+      fail: function (res) {
         console.log(res.data);
         that.hideLoading();
         that.showPaymentFailed();
@@ -393,7 +372,7 @@ Page({
     });
   },
 
-  onSubmit: function(e) {
+  onSubmit: function (e) {
 
     var colors = this.data.image_colors;
     var price = 0;
@@ -437,26 +416,26 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       data: data,
-      success: function(res) {
+      success: function (res) {
         console.log(res.data);
       },
-      fail: function(res) {
+      fail: function (res) {
         console.log(res.data);
       }
     });
   },
-  showPaymentOK: function() {
+  showPaymentOK: function () {
     $wuxToast.show({
       type: 'success',
       timer: 1500,
       color: '#fff',
       text: '提交成功',
-      success: function() {
+      success: function () {
         wx.navigateBack();
       }
     })
   },
-  showSubmitFailed: function() {
+  showSubmitFailed: function () {
     $wuxToast.show({
       type: 'cancel',
       timer: 1500,
