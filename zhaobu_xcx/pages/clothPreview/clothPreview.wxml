@@ -40,7 +40,7 @@
         <view class="col-6" style='margin-left: 10rpx;'>
           <view class="detailArea" wx:for="{{cloth_list_left}}" wx:for-item="item" wx:for-index="idx" wx:key="unique">
             <view class="detailArea" style='background-color:white;'>
-              <image wx:if="{{!item.thumb}}" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.cloth_id}}" bindtap='show_item' />
+              <image wx:if="{{!item.thumb}}" src="../../assets/images/testImg/icon-homePage.png" data-cloth_id="{{item.cloth_id}}" bindtap='show_item' />
               <image wx:if="{{item.thumb}}" src="{{item.thumb}}" data-cloth_id="{{item.cloth_id}}" bindtap='show_item' />
               <view class="clothName" style='font-size: 26rpx;color: #000000;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 300rpx;'>{{item.cloth}}</view>
               <view class="idLogo" style='font-size: 24rpx;color: #909090;'>
@@ -67,7 +67,7 @@
         <view class="col-6">
           <view class="detailArea" wx:for="{{cloth_list_right}}" wx:for-item="item" wx:for-index="idx" wx:key="unique">
             <view class="detailArea" style='background-color:white;'>
-              <image wx:if="{{!item.thumb}}" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.cloth_id}}" bindtap='show_item' />
+              <image wx:if="{{!item.thumb}}" src="../../assets/images/testImg/icon-homePage.png" data-cloth_id="{{item.cloth_id}}" bindtap='show_item' />
               <image wx:if="{{item.thumb}}" src="{{item.thumb}}" data-cloth_id="{{item.cloth_id}}" bindtap='show_item' />
               <view class="clothName" style='font-size: 26rpx;color: #000000;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 300rpx;'>{{item.cloth}}</view>
               <view class="idLogo" style='font-size: 24rpx;color: #909090;'>

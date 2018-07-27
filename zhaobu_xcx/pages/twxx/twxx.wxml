@@ -19,7 +19,7 @@
   <scroll-view scroll-y="true" style="width: 750rpx;height:{{ screen_height }}px;position: fixed">
     <swiper current="{{currentTab}}" bindchange="swiperTab" style='position: fixed' style='{{ currentTab == 0 ? "width: 100%;height: 100%;position: fixed;" : "display: none;"}}'>
       <swiper-item style="position: fixed;height: 100">
-        <scroll-view scroll-y style='height: {{  (1150 / 1334) * screen_height }}px;position: fixed;'>
+        <scroll-view scroll-y style='height: {{  (1112 / 1334) * screen_height }}px;position: fixed;'>
           <view class="swiperView">
             <swiper class="swiperImg" indicator-dots="true" indicator-color="rgba(255,255,255,1)" indicator-active-color="#FF9906">
               <swiper-item>
@@ -65,7 +65,7 @@
               <view class="xiangQing_right">
                 <text class="xiangQingWenzi">样布:</text>
                 <text class="value"> {{detail.sample_price}}</text>
-                <text class="xiangQingWenzi"> 元/{{detail.display_unit}}</text>
+                <text class="xiangQingWenzi"> 元/米</text>
               </view>
             </view>
             <view class="daHuoYangBu">
@@ -422,7 +422,7 @@
           <view class='mlsx-area-detail'>
             <view class='left-mlsx'>
               <view class='left-props'>单　　位:</view>
-              <view class='left-value' wx:if="{{ detail.unit != null }}">{{ detail.unit == 'k' ? '元/千克' : '' }}</view>
+              <view class='left-value' wx:if="{{ detail.display_unit}}">元/{{ detail.display_unit }}</view>
               <view class='left-value' wx:else> 暂无</view>
             </view>
           </view>

@@ -143,7 +143,6 @@ Page({
   * 生命周期函数--监听页面显示
   */
   onShow: function () {
-    this.showLoading();
     getApp().globalData.lastUrl = '../order/order_list'
     this.setData({
       lastUrl: getApp().globalData.lastUrl,

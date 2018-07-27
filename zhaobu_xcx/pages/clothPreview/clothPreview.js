@@ -276,12 +276,43 @@ Page({
             that.data.cloth_list.push(res.data.data[i]);
             // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
             if (n % 2 == 0) {
-              that.data.cloth_list_left.push(res.data.data[i]);
+              if (res.data.data[i].thumb) {
+                that.data.cloth_list_left.push(res.data.data[i]);
+              }
             } else {
-              that.data.cloth_list_right.push(res.data.data[i]);
+               if (res.data.data[i].thumb) {
+                 that.data.cloth_list_right.push(res.data.data[i]);
+               }
             }
             n += 1;
           }
+           if (res.data.length == null) {
+             console.log("none goods");
+           }
+           for (var i in res.data.data) {
+             var flag = false;
+             for (var j in that.data.is_shows) {
+               if (j == res.data.data[i].clothID) {
+                 flag = true;
+                 break;
+               }
+             }
+             if (!flag) {
+               that.data.is_shows[res.data.data[i].clothID] = true
+             }
+             that.data.cloth_list.push(res.data.data[i]);
+             // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
+             if (n % 2 == 0) {
+               if (!res.data.data[i].thumb) {
+                 that.data.cloth_list_left.push(res.data.data[i]);
+               }
+             } else {
+               if (!res.data.data[i].thumb) {
+                 that.data.cloth_list_right.push(res.data.data[i]);
+               }
+             }
+             n += 1;
+           }
           that.setData({
             is_shows: that.data.is_shows,
             cloth_list: that.data.cloth_list,

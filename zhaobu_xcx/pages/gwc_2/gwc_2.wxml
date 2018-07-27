@@ -19,7 +19,6 @@
     <view style='background: #FF9906;text-align: center;width: 600rpx;height: 80rpx;margin-top: 152rpx;margin-left: 75rpx;border-radius: 40rpx;color: white;line-height: 80rpx;'>看最新布料</view>
   </view>
 
-
   <!-- 购物车为空 -->
   <!-- <view wx:if="{{gwc.all_items.length == 0}}" class='none-goods'>
     <image src='../../assets/images/icon-none-goods.png' class='none-goods-img'></image>
@@ -52,7 +51,8 @@
             <image wx:if="{{item.checked}}" class="checkImg" src="../../assets/images/icon-check.png" data-check_index="{{idx}}" bindtap='onCheckIndex'></image>
             <image wx:if="{{!item.checked}}" class="checkImg" src="../../assets/images/icon-noncheck.png" data-check_index="{{idx}}" bindtap='onCheckIndex'></image>
             <!-- 接口还需添加颜色，面料的图片失效 -->
-            <image class="clothImg" src="{{item.thumb}}" data-cloth_id="{{item.id}}" data-is_pay="{{item.is_pay}}" bindtap="show_item"></image>
+            <image wx:if="{{ item.thumb }}" class="clothImg" src="{{item.thumb}}" data-cloth_id="{{item.id}}" data-is_pay="{{item.is_pay}}" bindtap="show_item"></image>
+            <image wx:else class='clothImg' src='../../assets/images/testImg/icon-homePage.png' data-cloth_id="{{ item.id}}" data-is_pay="{{ item.is_pay }}" bindtap="show_item"></image>
             <view class="rgArea">
               <view style='display: flex;flex-direction: row;margin-left: 0rpx;'>
                 <view>{{item.id}}{{item.name}}</view>

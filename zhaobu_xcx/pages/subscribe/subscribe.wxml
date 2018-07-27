@@ -6,7 +6,7 @@
 
 <title heading="{{heading}}" lastUrl="{{lastUrl}}">
 </title>
-<scroll-view scroll-y style='height: {{ screen_height - 80}}px;position: fixed;background:#fff;'>
+<scroll-view scroll-y style='height: {{ 554 / 667 * screen_height }}px;position: fixed;background:#fff;'>
   <view style='display:flex;flex-direction: row;height: 270rpx;width: 750rpx;'>
     <image src='{{detail.thumb}}' style='width: 220rpx;height: 220rpx;margin-top: 27rpx;margin-left: 26rpx; '></image>
     <view style='display: flex;flex-direction: column;font-size: 28rpx;margin-left: 16rpx;'>
