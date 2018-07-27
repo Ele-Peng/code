@@ -1,1 +1,22 @@
 /* pages/colorStyle/index.wxss */
+.radioArea {
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  height: 85%;
+  background: #FFF;
+  margin-top: 128rpx;
+  font-size: 28rpx;
+  position: fixed;
+}
+
+.radio-item {
+  border: 1rpx solid #F5F5F5;
+  width: 750rpx;
+  display: flex;
+  flex-direction: row;
+  height: 68rpx;
+  padding-top: 20rpx;
+  padding-left: 26rpx;
+}

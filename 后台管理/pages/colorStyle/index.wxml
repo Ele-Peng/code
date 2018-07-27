@@ -1,2 +1,16 @@
 <!--pages/colorStyle/index.wxml-->
-<text>pages/colorStyle/index.wxml</text>
+<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+<form report-submit="true" bindsubmit="onSubmit">
+
+  <scroll-view scroll-y class='radioArea'>
+    <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radio" wx:for="{{items}}" class='radio-item'>
+        <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+      </label>
+    </radio-group>
+  </scroll-view>
+  
+  <button formType="submit" class="weui-btn" type="primary" style="position: fixed;width: 100%;bottom: 0;background: #FF9906;border-radius: 0px;">
+    提交设置
+  </button>
+</form>

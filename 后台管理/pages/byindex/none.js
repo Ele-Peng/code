@@ -80,7 +80,7 @@ Page({
   backHome: function (e) {
     console.log('asd');
     wx.switchTab({
-      url: '../../pages/byindex/home_page',
+      url: '../../pages/byindex/index',
     })
   }
 })

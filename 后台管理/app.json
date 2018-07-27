@@ -18,7 +18,8 @@
     "pages/class/index",
     "pages/colorStyle/index",
     "pages/search/index",
-    "pages/printQRCode/index"
+    "pages/printQRCode/index",
+    "pages/byindex/none"
   ],
   "window": {
     "navigationStyle": "custom"

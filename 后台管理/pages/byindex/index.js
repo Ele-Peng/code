@@ -32,7 +32,7 @@ Page({
       {
         title: 'putPos',
         remark: '色卡货位设置',
-        url: '../../pages/putPos/index',
+        url: '../../pages/byindex/none',
         icon: '../../assets/images/icon-putPos.png',
       },
       {
@@ -44,7 +44,7 @@ Page({
       {
         title: 'colorCount',
         remark: '色卡库存设置',
-        url: '../../pages/colorCount/index',
+        url: '../../pages/byindex/none',
         icon: '../../assets/images/icon-colorCount.png',
       },
       {
@@ -56,8 +56,14 @@ Page({
       {
         title: 'printQRCode',
         remark: '打印二维码',
-        url: '../../pages/printQRCode/index',
+        url: '../../pages/byindex/none',
         icon: '../../assets/images/icon-printQRCode.png',
+      },
+      {
+        title: 'colorStyle',
+        remark: '颜色样式设置',
+        url: '../../pages/colorStyle/index',
+        icon: '../../assets/images/icon-colorStyle.png',
       }
     ],
   },
