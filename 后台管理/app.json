@@ -1,0 +1,9 @@
+{
+  "pages": [
+    "pages/byindex/index"
+  ],
+  "window": {
+    "navigationStyle": "custom"
+  },
+  "debug": true
+}
