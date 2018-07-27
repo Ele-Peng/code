@@ -1,6 +1,24 @@
 {
   "pages": [
-    "pages/byindex/index"
+    "pages/byindex/index",
+    "pages/download/index",
+    "pages/addGoods/index",
+    "pages/colorCount/index",
+    "pages/duration/index",
+    "pages/putPos/index",
+    "pages/price/index",
+    "pages/provider/index",
+    "pages/info/index",
+    "pages/welcome/binding",
+    "pages/welcome/index",
+    "pages/byindex/auth",
+    "pages/toast/index",
+    "pages/picker/index",
+    "pages/season/index",
+    "pages/class/index",
+    "pages/colorStyle/index",
+    "pages/search/index",
+    "pages/printQRCode/index"
   ],
   "window": {
     "navigationStyle": "custom"

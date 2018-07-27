@@ -1,0 +1,5 @@
+<!--pages/duration/index.wxml-->
+<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+
+<view>
+</view>

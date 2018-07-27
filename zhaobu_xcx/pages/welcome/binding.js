@@ -10,6 +10,7 @@ Page({
    */
   data: {
     phone: "",
+    screen_height: 0
   },
 
   /**
@@ -19,18 +20,29 @@ Page({
   
   },
 
+
+  getSystemInfo() {
+    const that = this
+    wx.getSystemInfo({
+      success(res) {
+        that.setData({
+          screen_height: res.windowHeight,
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    this.getSystemInfo();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
   },
 
   /**

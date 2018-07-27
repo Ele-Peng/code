@@ -7,5 +7,8 @@ App({
   },
   onHide: function () {
     
-  }
+  },
+  globalData: {
+    lastUrl: ""
+  },
 })

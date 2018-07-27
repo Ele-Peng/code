@@ -2,45 +2,66 @@
 <title heading="{{ heading }}"></title>
 
 <view class="page-content" style='margin-top: 128rpx;'>
-	<view class="mod_switch">
-        <view class="items">
-        	<view class="item {{ type === 'grid' ? 'current' : '' }}" data-type="grid" bindtap="modSwitch">
-	            <view class="ico_grid">
-	            	<image wx:if="{{ type === 'table' }}" class="ico_img" src="../../assets/images/iconfont-grid.png" />
-	            	<image wx:if="{{ type === 'grid' }}" class="ico_img" src="../../assets/images/iconfont-grid-active.png" />
-	            </view>
-	            <text class="text">网格视图</text>
-	        </view>
-	        <view class="item {{ type === 'table' ? 'current' : '' }}" data-type="table" bindtap="modSwitch">
-	            <view class="ico_list">
-	            	<image wx:if="{{ type === 'grid' }}" class="ico_img" src="../../assets/images/iconfont-list.png" />
-	            	<image wx:if="{{ type === 'table' }}" class="ico_img" src="../../assets/images/iconfont-list-active.png" />
-	            </view>
-	            <text class="text">列表视图</text>
-	        </view>
+  <view class="mod_switch">
+    <view class="items">
+      <view class="item {{ type === 'grid' ? 'current' : '' }}" data-type="grid" bindtap="modSwitch">
+        <view class="ico_grid">
+          <image wx:if="{{ type === 'table' }}" class="ico_img" src="../../assets/images/iconfont-grid.png" />
+          <image wx:if="{{ type === 'grid' }}" class="ico_img" src="../../assets/images/iconfont-grid-active.png" />
         </view>
+        <text class="text">网格视图</text>
+      </view>
+      <view class="item {{ type === 'table' ? 'current' : '' }}" data-type="table" bindtap="modSwitch">
+        <view class="ico_list">
+          <image wx:if="{{ type === 'grid' }}" class="ico_img" src="../../assets/images/iconfont-list.png" />
+          <image wx:if="{{ type === 'table' }}" class="ico_img" src="../../assets/images/iconfont-list-active.png" />
+        </view>
+        <text class="text">列表视图</text>
+      </view>
     </view>
-	<view class="page-body">
-		<view class="weui-cells weui-cells_after-title" wx:if="{{ type === 'table' }}">
-			<block wx:for="{{ components }}" wx:key="">
-			    <navigator url="{{ item.url }}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-			        <view class="weui-cell__hd">
-			            <image src="{{ item.icon }}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
-			        </view>
-			        <view class="weui-cell__bd">{{ item.title }}</view>
-			        <view class="weui-cell__ft weui-cell__ft_in-access">{{ item.remark }}</view>
-			    </navigator>
-		    </block>
-		</view>
-		<view class="grids grids-small" wx:if="{{ type === 'grid' }}">
-			<block wx:for="{{ components }}" wx:key="">
-				<navigator url="{{ item.url }}" class="grid">
-					<view class="grid_icon">
-						<image class="grid_img" src="{{ item.icon }}" alt="" />
-					</view>
-					<view class="grid_label">{{ item.remark }}</view>
-				</navigator>
-			</block>
-		</view>
-	</view>
+  </view>
+  <view class="page-body">
+    <view class="weui-cells weui-cells_after-title" wx:if="{{ type === 'table' }}">
+      <block wx:for="{{ components }}" wx:key="">
+        <navigator url="{{ item.url }}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__hd">
+            <image src="{{ item.icon }}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+          </view>
+          <view class="weui-cell__bd">{{ item.title }}</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{ item.remark }}</view>
+        </navigator>
+      </block>
+    </view>
+    <view class="grids grids-small" wx:if="{{ type === 'grid' }}">
+      <block wx:for="{{ components }}" wx:key="">
+        <view class="grid" data-urlText="{{ item.url }}" bindtap='showQRCode' > 
+          <view class="grid_icon">
+            <image class="grid_img" src="{{ item.icon }}" alt="" />
+          </view>
+          <view class="grid_label">{{ item.remark }}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+
+<view animation="{{animationData}}" hidden="{{!isShow}}" class='modal'>
+
+  <view data-type="mask" catchtap='hideModal' class='modal-mask'></view>
+
+  <view class="modal-layer" style='width: 540rpx;height: 340rpx;margin-left:105rpx;margin-top: {{ 338/1334*screen_height }}px;background: #FFF;border-radius: 8rpx;'>
+    <label style='text-align: center;margin-top: 44rpx;'>扫一扫</label>
+    <input placeholder='请输入id' bindinput="bindKeyInput" style='border-radius: 8rpx; border: 1rpx solid #F5F5F5;margin-top: 52rpx;width: 348rpx;height: 66rpx;margin-left: 96rpx;margin-bottom: 62rpx;text-align: center;color: black;'></input>
+    <view style='display: flex;flex-direfction: row;'>
+      <view catchtap='_cancelModal' style='display: flex;flex-direction: row;border-bottom-left-radius:8rpx;width: 270rpx;height: 90rpx;'>
+        <image src="../../assets/images/icon-resetbtn.png" style='width: 270rpx;height: 90rpx;border-bottom-left-radius:8rpx;'></image>
+        <text style='position:absolute;color:#fff;font-size: 28rpx;line-height: 98rpx;margin-left: 108rpx;'>取消</text>
+      </view>
+      <view catchtap='_confirmModal' style='display: flex;flex-direction: row;width: 270rpx;height: 90rpx;border-bottom-right-radius:8rpx;'>
+        <image src='../../assets/images/icon-confirmbtn.png' style='width: 270rpx;height: 90rpx;border-bottom-right-radius:8rpx;'></image>
+        <text style='position:absolute;color: #fff;font-size: 28rpx;line-height: 98rpx;margin-left: 108rpx; ;'>下一步</text>
+      </view>
+    </view>
+
+  </view>
 </view>

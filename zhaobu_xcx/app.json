@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/byindex/home_page",
+    "pages/welcome/binding",
     "pages/byindex/none",
     "pages/clothPreview_test/clothPreview",
     "pages/search/search",
@@ -13,7 +14,6 @@
     "pages/byindex/auth",
     "pages/byindex/index",
     "pages/index/index",
-    "pages/welcome/binding",
     "pages/order/pay",
     "pages/order/update",
     "pages/rater/index",

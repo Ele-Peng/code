@@ -159,6 +159,6 @@
   </form>
 
 </view>
-  <button formType="submit" class="weui-btn" type="primary" style="position: fixed;height: 80rpx;width: 750rpx; top: 89%;width: 600rpx; height:80rpx;line-height: 80rpx; background-color: #FF9906;font-size: 28rpx;margin-left: 75rpx;">
-    发布
-  </button>
+<button formType="submit" class="weui-btn" type="primary" style="position: fixed;height: 80rpx;width: 750rpx; top: 89%;width: 600rpx; height:80rpx;line-height: 80rpx; background-color: #FF9906;font-size: 28rpx;margin-left: 75rpx;">
+  发布
+</button>
