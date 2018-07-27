@@ -5,7 +5,58 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    heading: "后台管理系统",
+    type: `grid`, 
+    components: [
+      {
+        title: 'info',
+        remark: '完善信息',
+        url: '',
+        icon: '../../assets/images/icon-info.png',
+      },
+      {
+        title: 'provider',
+        remark: '供应商设置',
+        url: '',
+        icon: '../../assets/images/icon-provider.png',
+      },
+      {
+        title: 'price',
+        remark: '价格设置',
+        url: '',
+        icon: '../../assets/images/icon-price.png',
+      },
+      {
+        title: 'putPos',
+        remark: '货位设置',
+        url: '',
+        icon: '../../assets/images/icon-putPos.png',
+      },
+      {
+        title: 'duration',
+        remark: '货期设置',
+        url: '',
+        icon: '../../assets/images/icon-duration.png',
+      },
+      {
+        title: 'colorCount',
+        remark: '色卡库存设置',
+        url: '',
+        icon: '../../assets/images/icon-colorCount.png',
+      },
+      {
+        title: 'addGoods',
+        remark: '添加近似商品',
+        url: '',
+        icon: '../../assets/images/icon-addGoods.png',
+      },
+      {
+        title: 'download',
+        remark: '下架',
+        url: '',
+        icon: '../../assets/images/icon-download.png',
+      }
+    ],
   },
 
   /**
@@ -62,5 +113,11 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+
+  modSwitch(e) {
+    this.setData({
+      type: e.currentTarget.dataset.type,
+    })
+  },
 })
