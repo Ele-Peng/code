@@ -33,7 +33,8 @@
                   </view>
                 </view>
                 <view class='statusPanel'>
-                  <image src="{{item.thumb}}"></image>
+                  <image wx:if="{{ item.thumb != '' }}" src="{{item.thumb}}"></image>
+                  <image wx:else src="../../assets/images/testImg/icon-homePage.png"></image>
                   <view class='leftStatus'>
                     <view style='display:flex;flex-direction:row;'>
                       <text class="statusName">状态：</text>

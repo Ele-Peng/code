@@ -35,7 +35,7 @@
   <view style='display:block;margin-top: 20rpx;'>
     <!-- <view style="{{isShow ? 'display:block;' : 'display: none;'}}"> -->
     <view class="fgx"></view>
-    <scroll-view class="row listDetailArea" scroll-y="true" style="height: {{ screen_height - 117}}px;" bindscrolltolower='nextPage'>
+    <scroll-view class="row listDetailArea" scroll-y="true" style="height: {{ 1117 / 1334 * screen_height}}px;" bindscrolltolower='nextPage'>
       <view class="col">
         <view class="col-6" style='margin-left: 10rpx;'>
           <view class="detailArea" wx:for="{{cloth_list_left}}" wx:for-item="item" wx:for-index="idx" wx:key="unique">
@@ -290,7 +290,7 @@
           </view>
         </view>
       </scroll-view>
-      <view class="modal-footer" style='position:fixed;margin-top: {{ screen_height - 80}}px;width: 610rpx;height: 98rpx;display:flex;flex-direction: row;'>
+      <view class="modal-footer" style='position:fixed;margin-top: {{ 1114 / 1334 * screen_height }}px;width: 610rpx;height: 98rpx;display:flex;flex-direction: row;'>
         <view catchtap='_confirmModal' style='display: flex;flex-direction: row;'>
           <image src="../../assets/images/icon-resetbtn.png" style='width: 305rpx;height: 98rpx;'></image>
           <text style='position:absolute;color:#fff;font-size: 28rpx;line-height: 98rpx;margin-left: 125rpx;'>重置</text>
