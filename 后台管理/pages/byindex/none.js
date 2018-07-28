@@ -79,8 +79,8 @@ Page({
 
   backHome: function (e) {
     console.log('asd');
-    wx.switchTab({
-      url: '../../pages/byindex/index',
+    wx.navigateBack({
+      url: '../../pages/byindex/index'
     })
   }
 })
