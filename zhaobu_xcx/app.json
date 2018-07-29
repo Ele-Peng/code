@@ -61,7 +61,8 @@
     "pages/team/team_members",
     "pages/team/create",
     "pages/team/info",
-    "pages/dfkdd/dfkdd"
+    "pages/dfkdd/dfkdd",
+    "pages/sjd/sjd"
   ],
   "window": {
     "navigationStyle": "custom"
