@@ -1,5 +1,6 @@
 /* pages/twxx/twxx.js */
 import { $wuxLoading } from '../../components/wux'
+import { $wuxDialog } from '../../components/wux'
 Page({
   data: {
     heading:"面料详情",
@@ -14,6 +15,8 @@ Page({
     screen_height: 0,
     result_id: 0,
   },
+
+
   onLoad: function (options) {
     this.getSystemInfo();
     console.log(options)
@@ -40,11 +43,11 @@ Page({
     console.log(this.data)
 
     // 是否点击查布源
-    if (options.is_click) {
-      this.setData({
-        is_click: options.is_click
-      })
-    }
+    // if (options.is_click) {
+    //   this.setData({
+    //     is_click: options.is_click
+    //   })
+    // }
 
     // 是否有原色卡编号
     if (options.db_id) {
@@ -54,16 +57,16 @@ Page({
     }
 
     // 如果已经支付，并且点击了查布源
-    if (this.data.is_pay == true && this.data.is_click != 0) {
-      wx.redirectTo({
-        url: '../by/by',
-      })
-      return;
-    } else if (this.data.is_click == 1) {
-      this.setData({
-        is_show_pay: true
-      })
-    }
+    // if (this.data.is_pay == true && this.data.is_click != 0) {
+    //   wx.redirectTo({
+    //     url: '../by/by',
+    //   })
+    //   return;
+    // } else if (this.data.is_click == 1) {
+    //   this.setData({
+    //     is_show_pay: true
+    //   })
+    // }
     var that = this;
 
     var url = 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/';
@@ -135,7 +138,6 @@ Page({
           screen_height: res.windowHeight,
         })
         console.log(that.data.screen_height)
-        that.data.windowWidth = res.windowWidth
       }
     })
   },
@@ -180,28 +182,28 @@ Page({
     }
   },
   //更多颜色查看
-  onMoreTap: function (e) {
-    console.log("123");
-    var that = this;
-    wx.navigateTo({
-      url: '../../pages/gm/gm?page=1&cloth_id=' + that.data.cloth_id,
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  },
+  // onMoreTap: function (e) {
+  //   console.log("123");
+  //   var that = this;
+  //   wx.navigateTo({
+  //     url: '../../pages/gm/gm?page=1&cloth_id=' + that.data.cloth_id,
+  //     success: function (res) { },
+  //     fail: function (res) { },
+  //     complete: function (res) { },
+  //   })
+  // },
 
   //更多颜色查看
-  onMoreTap2: function (e) {
-    console.log("123");
-    var that = this;
-    wx.navigateTo({
-      url: '../../pages/gm/gm?page=0&cloth_id=' + that.data.cloth_id,
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  },
+  // onMoreTap2: function (e) {
+  //   console.log("123");
+  //   var that = this;
+  //   wx.navigateTo({
+  //     url: '../../pages/gm/gm?page=0&cloth_id=' + that.data.cloth_id,
+  //     success: function (res) { },
+  //     fail: function (res) { },
+  //     complete: function (res) { },
+  //   })
+  // },
 
   show_item: function (e) {
     wx.redirectTo({
@@ -209,19 +211,6 @@ Page({
     })
   },
 
-  // 支付事件
-  pay_event: function (e) {
-    wx.navigateTo({
-      url: '../fkxx/fkxx',
-    })
-  },
-
-  // 取消支付事件
-  depay_event: function (e) {
-    this.setData({
-      is_show_pay: false
-    })
-  },
 
   onClickBuy: function() {
     var that = this;
@@ -253,6 +242,31 @@ Page({
       current: "../../assets/images/testImg/icon-homePage.jpg",
       urls: urls,
     });
-  }
+  },
+
+  onSearch: function (e) {
+    $wuxDialog.open({
+      title: '查布源',
+      content: '付费后，可查看布料详细来源',
+      buttons: [
+        {
+          text: '我按错了',
+        },
+        {
+
+          text: '我要查布源',
+          type: 'weui-dialog__btn_warn',
+          onTap(e) {
+            // that.doPay(e.detail.formId);
+            // that.doPay();
+          },
+        },
+      ],
+    })
+  },
+
+  // doPay: function () {
+
+  // }
 })
 
