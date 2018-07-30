@@ -68,9 +68,9 @@ Page({
     //   })
     // }
     var that = this;
-
+    console.log(that.data.cloth_id);
     var url = 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/';
-    // var url = 'http://by.edenhe.com/api/record/sample/113650243742891/';
+    // var url = 'https://by.edenhe.com/api/record/sample/93338500599527/';
 
     if (that.data.db_id) {
       url = url + that.data.db_id;

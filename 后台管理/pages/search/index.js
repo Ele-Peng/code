@@ -1,7 +1,7 @@
 /* pages/twxx/twxx.js */
 Page({
   data: {
-    heading:"面料详情",
+    heading:"商品搜索",
     lastUrl:"",
     detail: {},
     currentTab: 0,

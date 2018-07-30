@@ -119,30 +119,34 @@
             </view>
 
             <view style='display:flex;flex-direction: column;'>
-              <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;'>
+              <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;display:flex;flex-direction: row;'>
                 <text class="value">色卡全貌</text>
+                <view wx:if="{{ !detail.image_global }}" class="value" style='padding-left: 50rpx;'>暂无</view>
               </view>
-              <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%;" wx:for="{{ detail.image_global }}">
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='show_item' />
+              <scroll-view wx:if="{{ detail.image_global }}" class="xstjContainer" scroll-x="true" style="width: 100%;" >
+                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" wx:for="{{ detail.image_global }}"src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='show_item' />
               </scroll-view>
             </view>
 
 
             <view style='display:flex;flex-direction: column;'>
-              <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;'>
+              <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;display:flex;flex-direction: row;'>
                 <text class="value">颜色展示</text>
+                <view wx:if="{{ !detail.image_colors }}" class="value" style='padding-left: 50rpx;'>暂无</view>
               </view>
-              <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%;" wx:for="{{ detail.image_colors }}">
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='show_item' />
+              <scroll-view wx:if="{{ detail.image_colors }}" class="xstjContainer" scroll-x="true" style="width: 100%;">
+                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" wx:for="{{ detail.image_colors }}" src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='show_item' />
               </scroll-view>
             </view>
 
             <view style='display:flex;flex-direction: column;'>
-              <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;'>
-                <text class="value">面料局部</text>
+              <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;display:flex;flex-direction: row;'>
+                <text class="value">面料局部</text> 
+                <view wx:if="{{ !detail.image_local }}" class="value" style='padding-left: 50rpx;'>暂无</view>
               </view>
-              <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%;" wx:for="{{ detail.image_local }}">
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='show_item' />
+              
+              <scroll-view wx:if="{{ detail.image_local }}" class="xstjContainer" scroll-x="true" style="width: 100%;">
+                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;"  wx:for="{{ detail.image_local }}" src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='show_item' />
               </scroll-view>
             </view>
 

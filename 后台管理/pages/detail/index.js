@@ -9,7 +9,7 @@ Page({
     key_map: {},
     width: 0,
     height: 0,
-    heading: "面料阅览",
+    heading: "成分大小类",
     search_text: '最新发布',
     isShow: false,
     lastUrl: "",

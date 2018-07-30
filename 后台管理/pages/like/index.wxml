@@ -1,2 +1,3 @@
 <!--pages/like/index.wxml-->
 <title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+
