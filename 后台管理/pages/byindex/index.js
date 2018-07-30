@@ -10,6 +10,7 @@ Page({
     heading: "后台管理系统",
     isShow: false,
     type: `grid`, 
+    amount: 0,
     components: [
       {
         title: 'season',
@@ -230,7 +231,6 @@ Page({
           wx.setStorageSync('binded', 'phone' in res.data.data.binding);
           wx.setStorageSync('agent', res.data.data.agent ? 1 : 0);
           wx.setStorageSync('tracker', res.data.data.tracker ? 1 : 0);
-          that.onLoggedIn();
           if (!('phone' in res.data.data.binding)) {
             wx.redirectTo({
               url: "../welcome/binding",
@@ -333,11 +333,28 @@ Page({
 
   _confirmModal: function (e) {
     var that = this;
-    wx.navigateTo({
-      url: that.data.navigateToUrl,
-    })
     that.setData({
       isShow: !that.data.isShow
     });
+    wx.navigateTo({
+      url: that.data.navigateToUrl + "?cloth_id=" + that.data.amount,
+    })
+  },
+
+  scanCode: function() {
+    var that = this;
+    // 只允许从相机扫码
+    wx.scanCode({
+      onlyFromCamera: true,
+      success: (res) => {
+        console.log(res);
+        var code = res.result
+        code = code.split(':')[2]
+        code = code.split('-')[0]
+        that.setData({
+          amount: code
+        })
+      }
+    })
   }
 })

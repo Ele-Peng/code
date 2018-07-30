@@ -38,6 +38,9 @@ Page({
    */
   onLoad: function (options) {
     this.getSystemInfo();
+    this.setData({
+      cloth_id: options.cloth_id
+    })
   },
 
   /**
@@ -128,6 +131,10 @@ Page({
 
   onSubmit: function (e) {
     console.log(e);
+
+    var that = this;
+    
+    /*
     if (this.data.selected_matching.length == 0) {
       $wuxToast.show({
         type: 'forbidden',
@@ -137,6 +144,7 @@ Page({
       });
       return;
     }
+    */
 
     if (e.detail.value.price == 0) {
       $wuxToast.show({
@@ -157,5 +165,37 @@ Page({
       });
       return;
     }
-  }
+
+
+    var data = {
+      price: e.detail.value.price,
+      sample_price: e.detail.value.sample_price
+    }
+
+    console.log(data);
+
+    wx.request({
+      url: 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/',
+      method: 'POST',
+      data: data,
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      success: function (res) {
+        wx.showToast({
+          title: '修改成功',
+        })
+        console.log(res.data);
+      },
+      fail: function (res) {
+        console.log(res.data);
+        wx.showToast({
+          title: '修改失败',
+        })
+      }
+    });
+
+  },
+
 })

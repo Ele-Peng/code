@@ -50,8 +50,8 @@
   <view data-type="mask" catchtap='hideModal' class='modal-mask'></view>
 
   <view class="modal-layer" style='width: 540rpx;height: 340rpx;margin-left:105rpx;margin-top: {{ 338/1334*screen_height }}px;background: #FFF;border-radius: 8rpx;'>
-    <label style='text-align: center;margin-top: 44rpx;'>扫一扫</label>
-    <input placeholder='请输入id' bindinput="bindKeyInput" style='border-radius: 8rpx; border: 1rpx solid #F5F5F5;margin-top: 52rpx;width: 348rpx;height: 66rpx;margin-left: 96rpx;margin-bottom: 62rpx;text-align: center;color: black;'></input>
+    <label style='text-align: center;margin-top: 44rpx;' bindtap='scanCode'>扫一扫</label>
+    <input placeholder='请输入id' bindinput="bindKeyInput" style='border-radius: 8rpx; border: 1rpx solid #F5F5F5;margin-top: 52rpx;width: 348rpx;height: 66rpx;margin-left: 96rpx;margin-bottom: 62rpx;text-align: center;color: black;' value='{{amount}}'></input>
     <view style='display: flex;flex-direfction: row;'>
       <view catchtap='_cancelModal' style='display: flex;flex-direction: row;border-bottom-left-radius:8rpx;width: 270rpx;height: 90rpx;'>
         <image src="../../assets/images/icon-resetbtn.png" style='width: 270rpx;height: 90rpx;border-bottom-left-radius:8rpx;'></image>

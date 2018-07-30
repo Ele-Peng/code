@@ -10,6 +10,7 @@ Page({
     heading: "颜色设置",
     lastUrl: "",
     index: 0,
+    cloth_id: -1,
     matching_type_items: [
       { value: '春', name: '春', },
       { value: '夏', name: '夏', },
@@ -24,7 +25,43 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+
+    this.setData({
+      cloth_id: options.cloth_id
+    })
+
+    wx.showLoading({
+      title: '加载中...',
+    })
+    wx.request({
+      url: 'http://by.edenhe.com/api/record/sample/options?season=1&category=1&style=1',
+      header: {
+        'Content-Type': 'application/json',
+        'Cookie': wx.getStorageSync('cookie')
+      },
+      success: function (res) {
+        console.log(res.data)
+        var matching_type_items = []
+        for (var i in res.data.data.season) {
+          matching_type_items.push({
+            value: res.data.data.season[i].id,
+            name: res.data.data.season[i].name
+          })
+        }
+        that.setData({
+          matching_type_items: matching_type_items
+        })
+        wx.hideLoading();
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '连接失败',
+          content: '请重新启动微信小程序',
+        })
+        wx.hideLoading();
+      }
+    });
   },
 
   /**
@@ -38,10 +75,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
+
     getApp().globalData.lastUrl = '../order/general_order_list'
     this.setData({
       lastUrl: getApp().globalData.lastUrl,
     });
+
   },
 
   /**
@@ -114,6 +154,7 @@ Page({
   },
 
   onSubmit: function (e) {
+
     if (this.data.selected_matching.length == 0) {
       $wuxToast.show({
         type: 'forbidden',
@@ -123,6 +164,36 @@ Page({
       });
       return;
     }
-    console.log(e);
+
+    var that = this;
+
+    var data = {
+      season: that.data.selected_matching
+    };
+
+    console.log(that.data.cloth_id);
+
+    wx.request({
+      url: 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/',
+      method: 'POST',
+      data: data,
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      success: function (res) {
+        wx.showToast({
+          title: '修改成功',
+        })
+        console.log(res.data);
+      },
+      fail: function (res) {
+        console.log(res.data);
+        wx.showToast({
+          title: '修改失败',
+        })
+      }
+    });
+
   }
 })
