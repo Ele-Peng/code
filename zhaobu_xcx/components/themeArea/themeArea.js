@@ -19,6 +19,11 @@ Component({
       wx.navigateTo({
         url: '../../pages/ksrg/ksrg',
       })
+    },
+    onClickSJD: function () {
+      wx.navigateTo({
+        url: '../../pages/sjd/sjd',
+      })
     }
   }
 

@@ -7,7 +7,7 @@
     <image src="../../assets/images/icon-theme-2.png"></image>
     <text>快速认购</text>
   </view>
-  <view class="theme-3">
+  <view class="theme-3" bindtap='onClickSJD'>
     <image src="../../assets/images/icon-theme-3.png"></image>
     <text>我的设计单</text>
   </view>

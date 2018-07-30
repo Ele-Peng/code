@@ -1,0 +1,56 @@
+/* pages/sjd/sjd.wxss */
+
+.box {
+  height: 340rpx;
+  z-index: 0;
+  margin: 50rpx 0;
+}
+.box .club {
+  height: 140rpx;
+  width: 140rpx;
+  position: relative;
+  display: inline-block;
+}
+.club image {
+  height: 140rpx;
+  width: 140rpx;
+}
+.club text {
+  display: block;
+  width: 100%;
+  font-size: 12rpx;
+  line-height: 40rpx;
+  text-align: center;
+  background: #FF9906;
+  color: white;
+}
+.box .club:nth-child(1) {
+  transform: scale(1.8, 1.8) translateX(-120rpx);
+  opacity: 0.2;
+  z-index: 10;
+}
+.box .club:nth-child(2) {
+  transform: scale(2.8,2.8) translateX(-80rpx);
+  opacity: 0.5;
+  z-index: 100;
+}
+.box .club:nth-child(3) {
+  transform: scale(3.8,3.8);
+  z-index: 1000;
+}
+.box .club:nth-child(4) {
+  transform: scale(2.8,2.8) translateX(80rpx);
+  opacity: 0.5;
+  z-index: 100;
+}
+.box .club:nth-child(5) {
+  transform: scale(1.4, 1.4) translateX(120rpx);
+  opacity: 0.2;
+  z-index: 10;
+}
+.box .club:nth-child(1) text,
+.box .club:nth-child(2) text,
+.box .club:nth-child(4) text,
+.box .club:nth-child(5) text{
+  visibility: hidden;
+}

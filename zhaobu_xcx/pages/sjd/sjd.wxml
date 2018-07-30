@@ -1,0 +1,27 @@
+<!--pages/sjd/sjd.wxml-->
+<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+<view style='height: 30%;width: 750rpx; text-align: right;position: fixed;'>
+  <text style='color: #FF9906;font-size: 36rpx;padding-top: 40rpx;padding-right: 20rpx;'>您找到 0/10</text>
+</view>
+<view style="white-space: nowrap;position: fixed;margin-top: 50%;padding-left: 20rpx;" class="box" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend">
+  <view class="club" animation="{{animation1}}" bindtap="scrollLeft">
+    <image src="{{imgs[0]}}" />
+  </view>
+  <view class="club" animation="{{animation2}}" bindtap="scrollLeft">
+    <image src="{{imgs[1]}}" />
+  </view>
+  <view class="club" animation="{{animation3}}">
+    <image src="{{imgs[2]}}" />
+  </view>
+  <view class="club" animation="{{animation4}}" bindtap="scrollRight">
+    <image src="{{imgs[3]}}" />
+  </view>
+  <view class="club" animation="{{animation5}}" bindtap="scrollRight">
+    <image src="{{imgs[4]}}" />
+  </view>
+</view>
+
+<view style='display: flex;flex-direction: row;position: fixed;margin-top: 100%;'>
+  <image style="height: 91rpx;width: 611rpx;padding-left: 70rpx;" src='../../assets/images/icon-button-background.png'></image>
+  <text style='font-size: 28rpx;margin-left: -350rpx;line-height: 91rpx;color: white;'>扫一扫</text>
+</view>
