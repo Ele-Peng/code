@@ -1,11 +1,25 @@
-// pages/colorCount/index.js
+// pages/season/index.js
+import { $wuxPicker } from '../../components/by'
+import { $wuxToast } from '../../components/by'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    heading: "色卡库存设置",
+    lastUrl: "",
+    index: 0,
+    cloth_id: -1,
+    matching_type_items: [
+      { value: '1', name: '1', },
+      { value: '2', name: '2', },
+      { value: '3', name: '3', },
+      { value: '4', name: '4', },
+      { value: '5', name: '5', }
+    ],
+    selected_matching: '',
+    selected_matching_name: '',
   },
 
   /**
@@ -26,7 +40,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    getApp().globalData.lastUrl = '../order/general_order_list'
+    this.setData({
+      lastUrl: getApp().globalData.lastUrl,
+    });
   },
 
   /**
@@ -62,5 +79,77 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  chosecolorCount: function () {
+    var values = [];
+    var that = this;
+    for (var i = 0; i < this.data.matching_type_items.length; i++) {
+      values.push(this.data.matching_type_items[i].name);
+    }
+    console.log(values);
+    $wuxPicker.init('matching', {
+      title: "请选择色卡库存",
+      cols: [
+        {
+          textAlign: 'center',
+          values: values,
+        }
+      ],
+      value: [0],
+      onChange(p) {
+        console.log(p)
+        var name = "";
+        var value = "";
+        for (var i = 0; i < that.data.matching_type_items.length; i++) {
+          if (p.value[0] == that.data.matching_type_items[i].name) {
+            name = that.data.matching_type_items[i].name;
+            value = that.data.matching_type_items[i].value;
+          }
+        }
+        this.setData({
+          selected_matching: value,
+          selected_matching_name: name
+        })
+      },
+    });
+  },
+
+  onSubmit: function (e) {
+
+    if (this.data.selected_matching.length == 0) {
+      $wuxToast.show({
+        type: 'forbidden',
+        timer: 2000,
+        color: '#fff',
+        text: '请选择色卡库存',
+      });
+      return;
+    }
+
+    var that = this;
+
+    var data = {
+      season: that.data.selected_matching
+    };
+
+    console.log(that.data.cloth_id);
+
+    wx.request({
+      url: '',
+      success: function (res) {
+        wx.showToast({
+          title: '修改成功',
+        })
+        console.log(res.data);
+      },
+      fail: function (res) {
+        console.log(res.data);
+        wx.showToast({
+          title: '修改失败',
+        })
+      }
+    });
+
   }
 })

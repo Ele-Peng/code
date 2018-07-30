@@ -15,7 +15,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: 'http://39.104.71.13:8001/dingdan/',
+      url: 'https://xiangyangxiaodui.cn/dingdan/',
       header: {
         'Content-Type': 'application/json'
       },
@@ -25,6 +25,7 @@ Page({
           dingdan: res.data.data
           //res代表success函数的事件对，data是固定的
         });
+        console.log(that.data.dingdan);
       }
     });
   },
@@ -80,5 +81,9 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  choseAddress: function () {
+    
   }
 })

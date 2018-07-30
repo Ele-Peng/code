@@ -93,18 +93,18 @@ Page({
     let touchDot = this.data.touchDot;
     let time = this.data.time;
     console.log("touchMove: " + touchMove + ", touchDot: " + touchDot + ", diff: " + (touchMove - touchDot));
-    //向左滑动
-    if (touchMove - touchDot <= -100 && time < 10 && !this.data.done) {
-      console.log("向左滑动");
-      this.data.done = true;
-      this.scrollLeft();
-    }
-    //向右滑动
-    if (touchMove - touchDot >= 100 && time < 10 && !this.data.done) {
-      console.log("向右滑动");
-      this.data.done = true;
-      this.scrollRight();
-    }
+
+    // if (touchMove - touchDot <= -100 && time < 10 && !this.data.done) {
+    //   console.log("向左滑动");
+    //   this.data.done = true;
+    //   this.scrollLeft();
+    // }
+    // //向右滑动
+    // if (touchMove - touchDot >= 100 && time < 10 && !this.data.done) {
+    //   console.log("向右滑动");
+    //   this.data.done = true;
+    //   this.scrollRight();
+    // }
   },
   //触摸结束事件
   touchend: function (e) {
@@ -148,7 +148,7 @@ Page({
     this.animation5 = animation5;
 
     this.animation1.translateX(-60).opacity(0).step();
-    this.animation2.translateX(-150).opacity(0.5).scale(1.8, 1.8).step();
+    this.animation2.translateX(-150).opacity(0).scale(1.8, 1.8).step();
     this.animation3.translateX(-110).opacity(0.5).scale(3.8, 3.8).step();
     this.animation4.translateX(-70).opacity(1).scale(2.8, 2.8).step();
     this.animation5.translateX(-30).opacity(0.5).scale(3.8, 3.8).step();
@@ -164,11 +164,11 @@ Page({
 
     var that = this;
     setTimeout(function () {
-      that.animation1.translateX(-50).opacity(0.2).scale(1.8, 1.8).step({ duration: 0, timingFunction: 'linear' });
-      that.animation2.translateX(-40).opacity(0.5).scale(2.8, 2.8).step({ duration: 0, timingFunction: 'linear' });
+      that.animation1.translateX(-150).opacity(0).scale(1.8, 1.8).step({ duration: 0, timingFunction: 'linear' });
+      that.animation2.translateX(-140).opacity(0.5).scale(2.8, 2.8).step({ duration: 0, timingFunction: 'linear' });
       that.animation3.translateX(0).opacity(1).scale(3.8, 3.8).step({ duration: 0, timingFunction: 'linear' });
-      that.animation4.translateX(40).opacity(0.5).scale(2.8, 2.8).step({ duration: 0, timingFunction: 'linear' });
-      that.animation5.translateX(50).opacity(0.2).scale(1.8, 1.8).step({ duration: 0, timingFunction: 'linear' });
+      that.animation4.translateX(140).opacity(0.5).scale(2.8, 2.8).step({ duration: 0, timingFunction: 'linear' });
+      that.animation5.translateX(150).opacity(0).scale(1.8, 1.8).step({ duration: 0, timingFunction: 'linear' });
       that.setData({
         animation1: animation1.export(),
         animation2: animation2.export(),
@@ -226,7 +226,7 @@ Page({
     this.animation1.translateX(30).opacity(0.5).scale(1.8, 1.8).step();
     this.animation2.translateX(70).opacity(1).scale(2.8, 2.8).step();
     this.animation3.translateX(110).opacity(0.5).scale(3.8, 3.8).step();
-    this.animation4.translateX(120).opacity(0.2).scale(1.8, 1.8).step();
+    this.animation4.translateX(120).opacity(0).scale(1.8, 1.8).step();
     this.animation5.translateX(130).opacity(0).step();
 
 
@@ -240,11 +240,11 @@ Page({
 
     var that = this;
     setTimeout(function () {
-      that.animation1.translateX(-50).opacity(0.2).scale(1.8, 1.8).step({ duration: 0, timingFunction: 'linear' });
+      that.animation1.translateX(-50).opacity(0).scale(1.8, 1.8).step({ duration: 0, timingFunction: 'linear' });
       that.animation2.translateX(-40).opacity(0.5).scale(2.8, 2.8).step({ duration: 0, timingFunction: 'linear' });
       that.animation3.translateX(0).opacity(1).scale(3.8, 3.8).step({ duration: 0, timingFunction: 'linear' });
       that.animation4.translateX(40).opacity(0.5).scale(2.8, 2.8).step({ duration: 0, timingFunction: 'linear' });
-      that.animation5.translateX(50).opacity(0.2).scale(1.8, 1.8).step({ duration: 0, timingFunction: 'linear' });
+      that.animation5.translateX(50).opacity(0).scale(1.8, 1.8).step({ duration: 0, timingFunction: 'linear' });
       that.setData({
         animation1: animation1.export(),
         animation2: animation2.export(),
@@ -263,5 +263,13 @@ Page({
         imgs: array
       })
     }.bind(this), 195)
+  },
+
+  onScanQRCode: function () {
+    wx.scanCode({
+      success: (res) => {
+        console.log(res)
+      }
+    })
   }
 })

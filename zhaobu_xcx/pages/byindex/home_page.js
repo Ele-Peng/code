@@ -92,8 +92,6 @@ Page({
     this.getSystemInfo();
   },
 
-  
-
   onLoggedIn: function() {
     var tracker = wx.getStorageSync('tracker') == '1';
     var agent = wx.getStorageSync('agent') == '1';
@@ -124,7 +122,7 @@ Page({
         orders_alert: false,
         logged_in: true,
       })
-    }
+    } 
     this.getSystemInfo();
   },
 
@@ -148,7 +146,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.doLogin();
+    // this.doLogin();
   },
 
   /**
@@ -372,5 +370,6 @@ Page({
         }
       }
     });
-  }
+  },
+  
 })

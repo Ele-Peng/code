@@ -1,2 +1,23 @@
 <!--pages/colorCount/index.wxml-->
-<text>pages/colorCount/index.wxml</text>
+<import src="../../components/picker/picker.wxml" />
+<template is="picker" data="{{ ...$wux.picker.matching }}" />
+<import src="../../components/toast/toast.wxml" />
+<template is="toast" data="{{ ...$wux.toast }}" />
+
+<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+<form report-submit="true" bindsubmit="onSubmit">
+  <view class='colorCountArea'>
+    <label>色卡库存</label>
+    <view class="colorCountArea-item" bindtap="chosecolorCount">
+      <view class="weui-cell__bd">
+        <text wx:if="{{ selected_matching_name.length > 0 }}" class="weui-input">{{selected_matching_name}}</text>
+        <text wx:else class="weui-input weui-input_hint">色卡库存选择</text>
+      </view>
+    </view>
+  </view>
+
+  <button formType="submit" class="weui-btn" type="primary" style="position: fixed;width: 100%;bottom: 0;background: #FF9906;border-radius: 0px;">
+    提交设置
+  </button>
+</form>
+

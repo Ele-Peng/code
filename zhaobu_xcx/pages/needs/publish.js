@@ -388,7 +388,7 @@ Page({
       'matching': this.data.selected_matching,
     };
     console.log(data);
-
+    console.log(e);
     wx.request({
       url: 'https://by.edenhe.com/api/needs/?form_id=' + e.detail.formId,
       method: 'post',
@@ -631,6 +631,7 @@ Page({
     this.showLoading();
     var that = this;
     console.log(wx.getStorageSync('cookie'))
+    console.log(needs_id)
     wx.request({
       url: 'https://by.edenhe.com/api/pay/create/',
       method: 'post',

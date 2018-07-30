@@ -1,6 +1,4 @@
 // pages/detail/detail.js
-import { $wuxDialog } from '../../components/wux'
-import { $wuxLoading } from '../../components/wux'
 
 Page({
 
@@ -221,7 +219,7 @@ Page({
     //   is_shows: app.globalData.is_shows
     // })
     this.setData({
-      search_type : options.type
+      search_type: options.type
     })
   },
 
@@ -258,7 +256,7 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         method: 'GET',
-         success: function(res) {
+        success: function (res) {
           console.log(res.data);
           var n = 0;
           for (var i in res.data.data) {
@@ -279,39 +277,39 @@ Page({
                 that.data.cloth_list_left.push(res.data.data[i]);
               }
             } else {
-               if (res.data.data[i].thumb) {
-                 that.data.cloth_list_right.push(res.data.data[i]);
-               }
+              if (res.data.data[i].thumb) {
+                that.data.cloth_list_right.push(res.data.data[i]);
+              }
             }
             n += 1;
           }
-           if (res.data.length == null) {
-             console.log("none goods");
-           }
-           for (var i in res.data.data) {
-             var flag = false;
-             for (var j in that.data.is_shows) {
-               if (j == res.data.data[i].clothID) {
-                 flag = true;
-                 break;
-               }
-             }
-             if (!flag) {
-               that.data.is_shows[res.data.data[i].clothID] = true
-             }
-             that.data.cloth_list.push(res.data.data[i]);
-             // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
-             if (n % 2 == 0) {
-               if (!res.data.data[i].thumb) {
-                 that.data.cloth_list_left.push(res.data.data[i]);
-               }
-             } else {
-               if (!res.data.data[i].thumb) {
-                 that.data.cloth_list_right.push(res.data.data[i]);
-               }
-             }
-             n += 1;
-           }
+          if (res.data.length == null) {
+            console.log("none goods");
+          }
+          for (var i in res.data.data) {
+            var flag = false;
+            for (var j in that.data.is_shows) {
+              if (j == res.data.data[i].clothID) {
+                flag = true;
+                break;
+              }
+            }
+            if (!flag) {
+              that.data.is_shows[res.data.data[i].clothID] = true
+            }
+            that.data.cloth_list.push(res.data.data[i]);
+            // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
+            if (n % 2 == 0) {
+              if (!res.data.data[i].thumb) {
+                that.data.cloth_list_left.push(res.data.data[i]);
+              }
+            } else {
+              if (!res.data.data[i].thumb) {
+                that.data.cloth_list_right.push(res.data.data[i]);
+              }
+            }
+            n += 1;
+          }
           that.setData({
             is_shows: that.data.is_shows,
             cloth_list: that.data.cloth_list,
@@ -484,7 +482,7 @@ Page({
           for (var j in list[i].options) {
             key_map[list[i].options[j].verbal] = {
               key: list[i].options[j].value,
-              father_key: list[i].key 
+              father_key: list[i].key
             }
           }
         }
@@ -708,7 +706,7 @@ Page({
 
     if (br[chose_a][chose_b][chose_c].is_chose) {
       br[chose_a][chose_b][chose_c].is_chose = false;
-      
+
       // 处理第二大类
       var flag2 = true;
 
@@ -985,13 +983,13 @@ Page({
     var that = this;
     var br = that.data.type_relation;
     var key_map = that.data.key_map;
-    
+
     var result_map = {};
     // 重写
     for (var i in br) {
       if (br[i].is_chose) {
         for (var j in br[i]) {
-          if (j != 'is_chose' && j != '其它'  && br[i][j].is_chose) {
+          if (j != 'is_chose' && j != '其它' && br[i][j].is_chose) {
             if (key_map[j] && result_map[key_map[j].father_key]) {
               console.log(key_map[j].father_key)
               result_map[key_map[j].father_key] = result_map[key_map[j].father_key] + ',' + key_map[j].key;
@@ -1079,7 +1077,7 @@ Page({
     console.log("点击取消!");
   },
 
-  touch_cancel: function(e) {
+  touch_cancel: function (e) {
     if (this.data.isShow) {
       if (e.changedTouches[0].clientX <= this.data.width * 0.185) {
         this.setData({

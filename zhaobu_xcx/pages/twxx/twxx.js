@@ -36,9 +36,9 @@ Page({
       })
     }
 
-    this.setData({
-      is_pay: app.globalData.is_pay
-    })
+    // this.setData({
+    //   is_pay: app.globalData.is_pay
+    // })
 
     console.log(this.data)
 
@@ -70,6 +70,7 @@ Page({
     var that = this;
 
     var url = 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/';
+    // var url = 'http://by.edenhe.com/api/record/sample/113650243742891/';
 
     if (that.data.db_id) {
       url = url + that.data.db_id;
@@ -90,9 +91,9 @@ Page({
         app.globalData.show_cloth = that.data.detail;
         //app.globalData.userLevel = that.data.detail.userLevel;
         console.log(that.data.detail);
-        that.setData({
-          is_pay: that.data.detail.is_show_pay
-        })
+        // that.setData({
+        //   is_pay: that.data.detail.is_show_pay
+        // })
         app.globalData.is_pay = that.data.detail.is_show_pay;
         that.hideLoading();
       }

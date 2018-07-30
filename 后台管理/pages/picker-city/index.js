@@ -1,4 +1,4 @@
-// pages/printQRCode/index.js
+// pages/picker-city/index.js
 Page({
 
   /**

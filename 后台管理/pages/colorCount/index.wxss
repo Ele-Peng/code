@@ -1,1 +1,27 @@
 /* pages/colorCount/index.wxss */
+.colorCountArea {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 88rpx;
+  margin-top: 128rpx;
+  position: fixed;
+  background: #FFF;
+  font-size: 28rpx;
+}
+
+.colorCountArea label {
+  height: 88rpx;
+  padding-left: 26rpx;
+  width: 120rpx;
+  line-height: 88rpx;
+}
+
+.colorCountArea-item {
+  width: 604rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #15181D;
+  height: 88rpx;
+  line-height: 88rpx;
+}

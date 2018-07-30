@@ -1,11 +1,11 @@
-// pages/putPos/index.js
+// pages/like/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    heading: "色卡货位设置",
+    heading: "相似商品设置",
     lastUrl: ""
   },
 

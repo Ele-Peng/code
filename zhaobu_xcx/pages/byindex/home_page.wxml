@@ -32,7 +32,9 @@
 
   </scroll-view>
 </view>
-<view wx:else style="display: flex; align-items: center;margin-top: 20%; flex-direction: column">
+<!-- <view wx:else style="display: flex; align-items: center;margin-top: 20%; flex-direction: column">
   <image src="../../assets/images/logo-large.png" style="margin-top: 100px;width: 100%;height: 300px" mode="aspectFit" />
   <view style="margin-top: 20px; color: #666">正在登录，请稍候</view>
-</view>
+</view> -->
+<navigator wx:else url="../../pages/welcome/index">
+</navigator>

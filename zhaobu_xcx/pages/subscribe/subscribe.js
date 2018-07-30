@@ -176,9 +176,9 @@ Page({
   onReady: function () {
 
     var that = this;
-    var reslut_id = that.data.result_id;
-    that.loadClothColors(reslut_id);
-    var url = 'https://by.edenhe.com/api/cloth/' + reslut_id + '/';
+    var result_id = that.data.result_id;
+    that.loadClothColors(result_id);
+    var url = 'https://by.edenhe.com/api/cloth/' + result_id + '/';
 
     wx.request({
       url: url,
@@ -387,7 +387,7 @@ Page({
 
 
     var data = {
-      'cloth': this.data.cloth_id,
+      'cloth': this.data.reslut,
       'address': this.data.receive_addr_id,
     };
 
@@ -424,6 +424,82 @@ Page({
       }
     });
   },
+
+  onSubmit_2: function (e) {
+
+    var colors = this.data.image_colors;
+    var price = 0;
+    var sum = 0;
+    var that = this;
+
+    if (that.data.chose_type == '样布') {
+      price = that.data.detail.sample_price;
+    } else {
+      price = that.data.detail.price;
+    }
+
+
+    var data = {
+      'cloth': this.data.result_id,
+      'address': this.data.receive_addr_id,
+    };
+
+    if (that.data.chose_type == '样布') {
+      data.is_sample = 1;
+    } else {
+      data.is_sample = 0;
+    }
+
+    for (var i in colors) {
+      if (colors[i].count != 0) {
+        data[colors[i].id] = colors[i].count;
+        sum = sum + colors[i].count;
+      }
+    }
+
+    data.amount = sum;
+
+    console.log(data);
+
+    wx.request({
+      url: 'https://by.edenhe.com/api/order/',
+      method: 'post',
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      data: data,
+      success: function (res) {
+        console.log(res.data);
+        wx.request({
+          url: 'https://by.edenhe.com/api/pay/create/',
+          method: 'post',
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Cookie: wx.getStorageSync('cookie'),
+          },
+          data: {
+            'id': res.data.data.id,
+            'type': 's',
+          },
+          success: function (res) {
+            console.log(res.data);
+            that.preparePay(res.data.data.id);
+          },
+          fail: function (res) {
+            console.log(res.data);
+            that.hideLoading();
+            that.showPaymentFailed();
+          }
+        });
+      },
+      fail: function (res) {
+        console.log(res.data);
+      }
+    });
+  },
+
+
   showPaymentOK: function () {
     $wuxToast.show({
       type: 'success',

@@ -1,8 +1,0 @@
-<!--pages/putPos/index.wxml-->
-<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
-<form report-submit="true" bindsubmit="onSubmit">
-  <view class='putPosArea'>
-    <label>色卡货位</label>
-    <input placeholder='请输入色卡货位'></input>
-  </view>
-</form>

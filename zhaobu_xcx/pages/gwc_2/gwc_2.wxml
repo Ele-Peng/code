@@ -3,6 +3,8 @@
 <template is="toast" data="{{ ...$wux.toast }}"/>
 <import src="../../components/loading/loading.wxml"/>
 <template is="loading" data="{{ ...$wux.loading }}"/>
+<import src="../../components/dialog/dialog.wxml" />
+<template is="dialog" data="{{ ...$wux.dialog }}" />
 
 <title heading="{{ heading }}">
 </title>
@@ -125,6 +127,7 @@
     </view>
   </view>
 </view>
+
 
 <view animation="{{animationData}}" hidden="{{!isShow}}" class='modal'>
 

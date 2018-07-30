@@ -31,9 +31,9 @@ Page({
         icon: '../../assets/images/icon-price.png',
       },
       {
-        title: 'putPos',
-        remark: '色卡货位设置',
-        url: '../../pages/byindex/none',
+        title: 'like',
+        remark: '相似商品设置',
+        url: '../../pages/like/index',
         icon: '../../assets/images/icon-putPos.png',
       },
       {
@@ -45,7 +45,7 @@ Page({
       {
         title: 'colorCount',
         remark: '色卡库存设置',
-        url: '../../pages/byindex/none',
+        url: '../../pages/colorCount/index',
         icon: '../../assets/images/icon-colorCount.png',
       },
       {
@@ -55,10 +55,10 @@ Page({
         icon: '../../assets/images/icon-search.png',
       },
       {
-        title: 'printQRCode',
-        remark: '打印二维码',
-        url: '../../pages/byindex/none',
-        icon: '../../assets/images/icon-printQRCode.png',
+        title: 'detail',
+        remark: '成分大小类',
+        url: '../../pages/detail/index',
+        icon: '../../assets/images/icon-detail.png',
       },
       {
         title: 'colorStyle',
@@ -85,6 +85,7 @@ Page({
    */
   onLoad: function (options) {
     this.getSystemInfo();
+    this.doLogin();
   },
 
   /**
@@ -356,5 +357,20 @@ Page({
         })
       }
     })
-  }
+  },
+  doLogin: function () {
+    var that = this;
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          that.requestUserInfo(res.code);
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
+        }
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    });
+  },
 })

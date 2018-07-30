@@ -7,7 +7,6 @@
 .addAdressArea{
   display: flex;
   flex-direction: column;
-  height:140rpx;
 }
 
 .addImg{

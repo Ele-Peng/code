@@ -39,7 +39,7 @@
       <text style='position: absolute;line-height: 48rpx;margin-left: 36rpx;font-size: 24rpx;color: #15181D'>大货</text>
     </view>
     <view wx:if="{{chose_type == '样布'}}" style='background: #FF9906;border-radius: 20rpx;width: 118rpx;height: 48rpx;margin-left: 20rpx;' data-chose_type='样布' bindtap='chose_type'>
-      <text style='position: absolute;line-height: 48rpx;margin-left: 36rpx;font-size: 24rpx;color: white;'>米样</text>
+      <text style='position: absolute;line-height: 48rpx;margin-left: 36rpx;font-size: 24rpx;color: white;'>样布</text>
     </view>
       <view wx:if="{{chose_type == '大货'}}" style='background: #F7F7F7;border-radius: 20rpx;width: 118rpx;height: 48rpx;margin-left: 20rpx;' data-chose_type='样布' bindtap='chose_type'>
         <text style='position: absolute;line-height: 48rpx;margin-left: 36rpx;font-size: 24rpx;color: #15181D;'>样布</text>
@@ -76,11 +76,16 @@
   </view>
 </scroll-view>
 
-<view style='width: 750rpx;height: 98rpx;display: flex;flex-direction: row;position: fixed;bottom: 0;'>
+<view wx:if="{{ chose_type == '大货' }}" style='width: 750rpx;height: 98rpx;display: flex;flex-direction: row;position: fixed;bottom: 0;'>
   <view style='width: 375rpx;background: #fff;color: #FF9906;text-align: center;line-height: 98rpx;' bindtap='join_shop_car'>
     加入购物车
   </view>
   <view style='width: 375rpx;background: #FC5656;color: #FFF;text-align: center;line-height: 98rpx;' bindtap='onSubmit'>
+    立即购买
+  </view>
+</view>
+<view wx:else style='width: 750rpx;height: 98rpx;display: flex;flex-direction: row;position: fixed;bottom: 0;'>
+  <view style='width: 100%;background: #FC5656;color: #FFF;text-align: center;line-height: 98rpx;' bindtap='onSubmit_2'>
     立即购买
   </view>
 </view>

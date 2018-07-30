@@ -25,26 +25,20 @@
           <view class="swiperView">
             <swiper class="swiperImg" indicator-dots="true" indicator-color="rgba(255,255,255,1)" indicator-active-color="#FF9906">
               <swiper-item>
-                <image src="../../assets/images/testImg/icon-homePage.jpg" mode="aspectFill" bindtap='onPreivewTitleImg' />
+                <image src="{{ detail.image_global[0] }}"></image>
+              </swiper-item>
+              <swiper-item wx:for="{{ detail.image_colors }}">
+                <image src="{{ item }}" mode="aspectFill" bindtap='onPreivewTitleImg' />
               </swiper-item>
               <swiper-item>
-                <image src="../../assets/images/testImg/icon-homePage.jpg" mode="aspectFill" bindtap='onPreivewTitleImg' />
-              </swiper-item>
-              <swiper-item>
-                <image src="../../assets/images/testImg/icon-homePage.jpg" mode="aspectFill" bindtap='onPreivewTitleImg' />
-              </swiper-item>
-              <swiper-item>
-                <image src="../../assets/images/testImg/icon-homePage.jpg" mode="aspectFill" bindtap='onPreivewTitleImg' />
-              </swiper-item>
-              <swiper-item>
-                <image src="../../assets/images/testImg/icon-homePage.jpg" mode="aspectFill" bindtap='onPreivewTitleImg' />
+                <image src="{{ detail.image_local[0] }}" mode="aspectFill" bindtap='onPreivewTitleImg' />
               </swiper-item>
             </swiper>
           </view>
           <!-- 文字详情 -->
           <view>
             <view class='display: flex;flex-direction: row;margin-top: 20rpx;'>
-              <text class="clothName">{{detail.cloth}}</text>
+              <view class="clothName">{{detail.cloth}}</view>
             </view>
             <view class="daHuoYangBu" style='color:#FF9906;'>
               <view class="xiangQing_left">
@@ -61,7 +55,8 @@
             <view class="daHuoYangBu">
               <view class="xiangQing_left">
                 <text class="xiangQingWenzi">货号:</text>
-                <text class="value">暂无</text>
+                <text class="value" wx:if='{{detail.cloth_id != null}}'>{{ detail.cloth_id }}</text>
+                <text class='value' wx:else>暂无</text>
               </view>
               <view class="xiangQing_right">
                 <text class="xiangQingWenzi">起订量:</text>
@@ -80,8 +75,8 @@
 
               <view class="xiangQing_right">
                 <text class="xiangQingWenzi">原色卡编号:</text>
-                <text wx:if="{{detail.userLevel==1 && db_id!=null}}" class="value">{{ db_id }}</text>
-                <text wx:else class="value">  无权查看</text>
+                <text wx:if="{{is_show_pay != false && db_id!=null}}" class="value">{{ db_id }}</text>
+                <text wx:else class="value">  去查布源</text>
               </view>
 
             </view>
@@ -127,13 +122,8 @@
               <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;'>
                 <text class="value">色卡全貌</text>
               </view>
-              <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%;">
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
+              <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%;" wx:for="{{ detail.image_global }}">
+                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='show_item' />
               </scroll-view>
             </view>
 
@@ -142,13 +132,8 @@
               <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;'>
                 <text class="value">颜色展示</text>
               </view>
-              <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%;">
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
+              <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%;" wx:for="{{ detail.image_colors }}">
+                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='show_item' />
               </scroll-view>
             </view>
 
@@ -156,13 +141,8 @@
               <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;'>
                 <text class="value">面料局部</text>
               </view>
-              <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%;">
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="../../assets/images/testImg/icon-homePage.jpg" data-cloth_id="{{item.id}}" bindtap='show_item' />
+              <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%;" wx:for="{{ detail.image_local }}">
+                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='show_item' />
               </scroll-view>
             </view>
 
@@ -208,9 +188,9 @@
       </swiper-item>
       <swiper-item style="margin-top: 108rpx;">
         <!-- 面料属性文字详情 -->
-        <view style='height: 78%;magrin-top: 10rpx;'>
+        <scroll-view scroll-y style='height: 78%;magrin-top: 10rpx;'>
           <view class='display: flex;flex-direction: row;'>
-            <text class="clothName">{{detail.cloth}}</text>
+            <view class="clothName">{{detail.cloth}}</view>
           </view>
           <view class="daHuoYangBu" style='color:#FF9906;'>
             <view class="xiangQing_left">
@@ -247,8 +227,8 @@
 
             <view class="xiangQing_right">
               <text class="xiangQingWenzi">原色卡编号:</text>
-              <text wx:if="{{detail.userLevel==1 && db_id!=null}}" class="value">  {{db_id}}</text>
-              <text wx:else class="value"> 无权查看 </text>
+              <text wx:if="{{is_show_pay != false && db_id!=null}}" class="value">  {{db_id}}</text>
+              <text wx:else class="value"> 去查布源 </text>
             </view>
 
           </view>
@@ -272,7 +252,7 @@
             </view>
             <view class="xiangQing_right">
               <text class="xiangQingWenzi">挂样货位:</text>
-              <text>  {{detail.put_pos}}</text>
+              <text class="value">  {{detail.put_pos}}</text>
             </view>
           </view>
 
@@ -301,7 +281,7 @@
             </view>
             <view class='right-mlsx'>
               <view class='right-props'>图　　案:</view>
-              <view class='right-value' wx:if="{{ detail.pattern != null}}">{{ detail.pattern }}</view>
+              <view class='right-value' wx:if="{{ detail.style != null}}">{{ detail.style }}</view>
               <view class='right-value' wx:else> 暂无</view>
             </view>
           </view>
@@ -378,7 +358,7 @@
             <view class='left-mlsx'>
               <view class='left-props' style='width:128rpx'>针数|支数:</view>
               <view class='left-value' style='width: 247rpx;' wx:if="{{ detail.zhenshu != null}}">{{ detail.zhenshu }}</view>
-              <view class='left-value' wx:else> 暂无</view> 
+              <view class='left-value' wx:else> 暂无</view>
             </view>
             <view class='right-mlsx'>
               <view class='right-props'>表面工艺:</view>
@@ -408,7 +388,7 @@
               <view class='left-value' wx:else> 暂无</view>
             </view>
           </view>
-        </view>
+        </scroll-view>
         <!-- 非iPhoneX 未付费 -->
         <view wx:if="{{ screen_height <= 667 && is_show_pay != true}}" class='find-buy-button' style='position: fixed;width: 750rpx;top: {{ screen_height - (212/812*screen_height)}}px;'>
           <view class='find-button' style='color: white;padding-left:147rpx;line-height:98rpx;' bindtap='onSearch'>
@@ -443,8 +423,8 @@
 
       <!-- 相似推荐 -->
       <swiper-item>
-        <view class="xstArea" style='margin-top: 38rpx;'>
-        <view class="qianLine">
+        <view class="xstArea" style='margin-top: 88rpx;'>
+          <view class="qianLine">
           </view>
           <view class="tktj">
             <view class="leftLine"></view>

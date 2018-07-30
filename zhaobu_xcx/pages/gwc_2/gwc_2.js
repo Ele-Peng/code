@@ -1,6 +1,7 @@
 // pages/gwc_2/gwc_2.js
 import { $wuxToast } from '../../components/wux'
 import { $wuxLoading } from '../../components/wux'
+import { $wuxDialog } from '../../components/wux'
 
 
 Page({
@@ -371,7 +372,7 @@ Page({
       amount: e.target.dataset.amount,
       edit_idx: e.target.dataset.idx,
       t_amount: ''
-    })
+    });
   },
 
   //modal隐藏
