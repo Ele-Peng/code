@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "title": "/components/title/title",
+    "wux-tabs": "../../components/tabs/index",
+    "wux-tab": "../../components/tab/index",
+    "wux-cell-group": "../../components/cell-group/index",
+    "wux-cell": "../../components/cell/index"
+  }
+}

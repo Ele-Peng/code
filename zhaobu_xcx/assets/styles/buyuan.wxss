@@ -517,14 +517,14 @@ radio-group {
   width: 151rpx;
   height: 151rpx;
   margin-left: 300rpx;
-  margin-top: 85rpx;
+  margin-top: 25rpx;
 }
 
 .account-rank text {
   width: 65rpx;
   position: absolute;
   color: #fff;
-  margin-top: 120rpx;
+  margin-top: 60rpx;
   margin-left: -103rpx;
   font-size: 28rpx;
 }

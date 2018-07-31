@@ -95,6 +95,12 @@
     <image class="mine-image-right" src="../../assets/images/icon-gt.png"></image>
   </view>
 
+  <view class='mine-list' style='margin-top: 10rpx;' bindtap='onClickHelper'>
+    <image class='mine-image-left' src="../../assets/images/icon-helper.png" ></image>
+    <text>帮助与反馈</text>
+    <image class="mine-image-right" src="../../assets/images/icon-gt.png"></image>
+  </view>
+
   <view class='account-rank' style='height: 260rpx;'>
     <image src="../../assets/images/icon-account-rank.png"></image>
     <text>企业账号</text>

@@ -157,7 +157,14 @@ Page({
     });
   },
   
-
+  /**
+   * 帮助与反馈
+   */
+  onClickHelper: function() {
+    wx.navigateTo({
+      url: '../../pages/helper/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
