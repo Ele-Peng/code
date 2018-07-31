@@ -1,5 +1,7 @@
 // byindex.js
-import { $wuxToast } from '../../components/wux'
+import {
+  $wuxToast
+} from '../../components/wux'
 
 Page({
 
@@ -40,19 +42,19 @@ Page({
     })
   },
 
-  onClickNeeds: function (e) {
+  onClickNeeds: function(e) {
     wx.navigateTo({
       url: '/pages/needs/general_needs_list?tab=0&user_type=user',
     })
   },
 
-  onClickOrders: function (e) {
+  onClickOrders: function(e) {
     wx.navigateTo({
       url: '/pages/order/general_order_list?tab=0&user_type=user',
     })
   },
 
-  onClickAgentNeeds: function (e) {
+  onClickAgentNeeds: function(e) {
     wx.navigateTo({
       url: '/pages/needs/general_needs_list?tab=0&user_type=agent',
     })
@@ -64,13 +66,13 @@ Page({
     })
   },
 
-  onClickAgentOrders: function (e) {
+  onClickAgentOrders: function(e) {
     wx.navigateTo({
       url: '/pages/order/general_order_list?tab=0&user_type=agent',
     })
   },
 
-  onClickTrackerOrders: function (e) {
+  onClickTrackerOrders: function(e) {
     wx.navigateTo({
       url: '/pages/order/general_order_list?tab=0&user_type=tracker',
     })
@@ -82,13 +84,13 @@ Page({
     })
   },
 
-  onClickAddress: function (e) {
+  onClickAddress: function(e) {
     wx.navigateTo({
       url: '/pages/address/address_list',
     })
   },
 
-  switchMode: function (e) {
+  switchMode: function(e) {
     var mode = 'user'
     if (this.data.mode == 'user') {
       if (this.data.tracker) {
@@ -110,11 +112,22 @@ Page({
   /**
    * 二维码扫一扫函数
    */
-  onClickScan: function () {
+  onClickScan: function() {
     var that = this;
     var show;
     wx.scanCode({
       success: (res) => {
+        var regex = /q=team:(\w+)/
+        var group = res.result.match(regex);
+        if (group) {
+          console.log(group[1]);
+          var url = '../team/info?code=' + group[1];
+          console.log(url);
+          wx.navigateTo({
+            url: url
+          });
+          return;
+        }
         var strs = res.result.split(':')
 
         strs = strs[2];
@@ -140,66 +153,17 @@ Page({
           text: '暂不支持该二维码的内容',
         });
       },
-      complete: (res) => {
-      }
+      complete: (res) => {}
     });
   },
-  // onClickScan: function (e) {
-  //   var that = this;
-  //   wx.scanCode({
-  //     complete: function(r) {
-  //       console.log(r)
-  //       if (!('result' in r)) {
-  //         return;
-  //       }
-  //       var regex = /q=needs:(\w+)/
-  //       var group = r.result.match(regex);
-  //       if (group) {
-  //         console.log(group[1]); 
-  //         wx.navigateTo({ url: '/pages/needs/detail?type=' + that.data.mode
-  //              + '&id=' + group[1] });
-  //         return;
-  //       }
-
-  //       regex = /q=sp:(\w+)\-(\w+)/
-  //       group = r.result.match(regex);  
-  //       if (group) {
-  //         console.log(group[1], group[2]);
-  //         var url = '../shelf/goods?from=shelf&goods_id=' + group[1] + '&type=' + that.data.mode + '&db_id=' + group[2];
-  //         console.log(url);
-  //         wx.navigateTo({
-  //           url: url
-  //         });
-  //         return;
-  //       }
-
-  //       regex = /q=team:(\w+)/
-  //       group = r.result.match(regex);
-  //       if (group) {
-  //         console.log(group[1]);
-  //         var url = '../team/info?code=' + group[1];
-  //         console.log(url);
-  //         wx.navigateTo({
-  //           url: url
-  //         });
-  //         return;
-  //       }
-  //       $wuxToast.show({
-  //         type: 'forbidden',
-  //         timer: 2000,
-  //         color: '#fff',
-  //         text: '暂不支持该二维码的内容',
-  //       });
-  //     }
-  //   });
-  // },
+  
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     // if (options.logged_in) {
-      // this.onLoggedIn();
+    // this.onLoggedIn();
     // } else {
     getApp().globalData.lastUrl = '../byindex/index'
     this.doLogin();
@@ -243,49 +207,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.getAlerts()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
+  onReachBottom: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     return {
       title: '布源网小程序',
       path: 'pages/byindex/index',
@@ -300,7 +264,7 @@ Page({
       header: {
         Cookie: wx.getStorageSync('cookie'),
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         var needs_alert = false;
         var orders_alert = false;
@@ -316,23 +280,23 @@ Page({
           })
         }
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res.data);
       }
     });
   },
 
-  doLogin: function () {
+  doLogin: function() {
     var that = this;
     wx.login({
-      success: function (res) {
+      success: function(res) {
         if (res.code) {
           that.requestUserInfo(res.code);
         } else {
           console.log('获取用户登录态失败！' + res.errMsg)
         }
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res);
       }
     });
@@ -344,11 +308,11 @@ Page({
     var that = this;
     wx.getUserInfo({
       withCredentials: true,
-      success: function (res) {
+      success: function(res) {
         console.log(res);
         that.loginBuyuan(code, res.encryptedData, res.iv)
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res);
         if (res.errMsg.indexOf('getUserInfo:fail') >= 0) {
           //  需要重新获取授权
@@ -371,8 +335,12 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded',
       },
-      data: { 'code': code, 'encrypted_data': encryptedData, 'iv': iv },
-      success: function (res) {
+      data: {
+        'code': code,
+        'encrypted_data': encryptedData,
+        'iv': iv
+      },
+      success: function(res) {
         console.log(res)
         if (res.header['Set-Cookie']) {
           var cookies = res.header['Set-Cookie'];

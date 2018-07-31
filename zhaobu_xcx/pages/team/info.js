@@ -10,6 +10,8 @@ Page({
    */
   data: {
     team_info: undefined,
+    heading: "团队信息",
+    lastUrl: ""
   },
 
   team_code: undefined,
@@ -34,7 +36,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    //获得title 标题栏组件
+    this.title = this.selectComponent("#title");
+    getApp().globalData.lastUrl = '../order/order_list'
+    this.setData({
+      lastUrl: getApp().globalData.lastUrl,
+    });
   },
 
   /**

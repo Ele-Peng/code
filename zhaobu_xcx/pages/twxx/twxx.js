@@ -14,6 +14,7 @@ Page({
     db_id: 0,
     screen_height: 0,
     result_id: 0,
+    similar_list: []
   },
 
 
@@ -128,7 +129,25 @@ Page({
       }
     });
 
-    
+    var url = 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/similar/';
+    wx.request({
+      url: url,
+      method: 'get',
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+      },
+      success: function (res) {
+        console.log(res.data);
+        that.setData({
+          similar_list: ''
+        })
+        that.hideLoading();
+      },
+      fail: function (res) {
+        console.log(res.data);
+        that.hideLoading();
+      }
+    })
   },
 
   getSystemInfo() {
@@ -251,6 +270,7 @@ Page({
     if (e.currentTarget.dataset.localurl) {
       urls.push(e.currentTarget.dataset.localurl[0]);
     }
+    console.log(urls);
     wx.previewImage({
       current: urls[parseInt(index)],
       urls: urls,

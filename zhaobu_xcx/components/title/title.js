@@ -19,6 +19,7 @@ Component({
   methods: {
     redToLast: function () {
       var url = getApp().globalData.lastUrl
+      console.log(url);
       if (url != -1) {
         getApp().globalData.lastUrl = ""
         wx.navigateBack({

@@ -24,7 +24,7 @@
         <text>您尚未加入任何团队。</text>
       </view>
       <view wx:elif="{{team_info.name && team_info.pending}}" class="weui-cell weui-cell_input" style="height: 66px">
-        <text>您已申请加入{{team_info.name}}，正在等待管理员批准。</text>
+        <text style='padding-left: 30rpx;'>您已申请加入{{team_info.name}}，正在等待管理员批准。</text>
       </view>
       <block wx:else>
         <view class="weui-cell weui-cell_input" style="height: 66px" bindtap="onClickMembers">

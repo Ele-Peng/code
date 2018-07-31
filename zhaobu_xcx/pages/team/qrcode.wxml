@@ -2,7 +2,7 @@
   <title heading="{{heading}}" lastUrl="{{lastUrl}}">
 </title>
 <view class="page__bd" style="position:fixed;width:750rpx;background-color:#FCFCFC;height:1334rpx;">
-    <view class="weui-cells__tips">提示：用小程序的扫一扫功能扫描本二维码。</view>
+    <view class="weui-cells__tips" style='color: #FF9906;'>提示：用小程序的扫一扫功能扫描本二维码。</view>
     <canvas style="width: 200px; height: 200px; margin: 30px auto;" canvas-id="qrcode" bindtap="previewImage"></canvas>
 </view>
 </view>

@@ -24,8 +24,9 @@
         <scroll-view scroll-y style='height: {{  (1112 / 1334) * screen_height }}px;position: fixed;'>
           <view class="swiperView">
             <swiper class="swiperImg" indicator-dots="true" indicator-color="rgba(255,255,255,1)" indicator-active-color="#FF9906">
-              <swiper-item wx:if="{{ detail.image_colors[0] }}" >
-                <image src="{{ detail.image_colors[0] }}" mode="aspectFill" bindtap='onPreivewTitleImg' data-colorsUrl="{{ detail.image_colors }}" data-globalUrl="{{ detail.image_global }}" data-localUrl="{{ detail.image_local }}" data-index="0"></image>
+              <swiper-item  >
+                <image wx:if="{{ detail.image_colors[0] }}" src="{{ detail.image_colors[0] }}" mode="aspectFill" bindtap='onPreivewTitleImg' data-colorsUrl="{{ detail.image_colors }}" data-globalUrl="{{ detail.image_global }}" data-localUrl="{{ detail.image_local }}" data-index="0" ></image>
+                <image src='../../assets/images/testImg/icon-homePage.png'></image>
               </swiper-item>
               <swiper-item wx:if="{{ detail.image_global[0] }}" >
                 <image src="{{ detail.image_global[0] }}"mode="aspectFill" bindtap='onPreivewTitleImg' data-colorsUrl="{{ detail.image_colors }}" data-globalUrl="{{ detail.image_global }}" data-localUrl="{{ detail.image_local }}" data-index='1'></image>

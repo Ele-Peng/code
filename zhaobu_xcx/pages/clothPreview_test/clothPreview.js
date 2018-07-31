@@ -360,10 +360,10 @@ Page({
         console.log(res.data);
         var id_list = that.data.id_list;
         for (var i in res.data.data) {
-          if (res.data.data[i][0].length != 0) {
-            id_list[i].img_list = res.data.data[i][0][0];
-          } else if (res.data.data[i][1].length != 0) {
+          if (res.data.data[i][1].length != 0) {
             id_list[i].img_list = res.data.data[i][1][0];
+          } else if (res.data.data[i][0].length != 0) {
+            id_list[i].img_list = res.data.data[i][0][0];
           } else if (res.data.data[i][2].length != 0) {
             id_list[i].img_list = res.data.data[i][2][0];
           } else if (res.data.data[i][3].length != 0) {
@@ -458,7 +458,7 @@ Page({
     this.title = this.selectComponent("#title");
     //获得searchbar 搜索框组件
     this.searchBar = this.selectComponent("#searchBar");
-    getApp().globalData.lastUrl = '../order/order_list'
+    getApp().globalData.lastUrl = -1
     this.setData({
       lastUrl: getApp().globalData.lastUrl,
     });

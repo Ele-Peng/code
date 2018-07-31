@@ -236,6 +236,7 @@ Component({
                       url: '../../pages/clothPreview_test/clothPreview?isFind=' + isFind,
                     })
                   }
+                  wx.hideLoading();
                 },
                 fail: function (e) {
                   console.log(e);
