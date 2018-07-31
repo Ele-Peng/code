@@ -206,11 +206,6 @@ Page({
   //   })
   // },
 
-  show_item: function (e) {
-    wx.redirectTo({
-      url: '../twxx/twxx?cloth_id=' + e.target.dataset.cloth_id
-    })
-  },
 
 
   onClickBuy: function() {
@@ -223,10 +218,11 @@ Page({
 
   // 多张图预览
   onPreviewImage: function (e) {
+    console.log(e);
     var index = e.currentTarget.dataset.index;
     var urls = [];
-    for (var i = 0; i < this.data.detail.images.length; i++) {
-      urls.push(this.data.detail.images[i].url);
+    for (var i = 0; i < e.currentTarget.dataset.imgurls.length ; i++) {
+      urls.push(e.currentTarget.dataset.imgurls[i]);
     }
 
     wx.previewImage({
@@ -237,10 +233,26 @@ Page({
 
   // 主题图预览
   onPreivewTitleImg: function (e) {
+    console.log(e);
+    var index = e.currentTarget.dataset.index;
     var urls = [];
-    urls.push("../../assets/images/testImg/icon-homePage.jpg");
+    if (e.currentTarget.dataset.colorsurl) {
+      urls.push(e.currentTarget.dataset.colorsurl[0]);
+    }
+    if (e.currentTarget.dataset.globalurl) {
+      urls.push(e.currentTarget.dataset.globalurl[0]);
+    }
+    if (e.currentTarget.dataset.colorsurl) {
+      urls.push(e.currentTarget.dataset.colorsurl[1]);
+    }
+    if (e.currentTarget.dataset.colorsurl) {
+      urls.push(e.currentTarget.dataset.colorsurl[2]);
+    }
+    if (e.currentTarget.dataset.localurl) {
+      urls.push(e.currentTarget.dataset.localurl[0]);
+    }
     wx.previewImage({
-      current: "../../assets/images/testImg/icon-homePage.jpg",
+      current: urls[parseInt(index)],
       urls: urls,
     });
   },

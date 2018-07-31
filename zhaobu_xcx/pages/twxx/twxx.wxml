@@ -24,14 +24,20 @@
         <scroll-view scroll-y style='height: {{  (1112 / 1334) * screen_height }}px;position: fixed;'>
           <view class="swiperView">
             <swiper class="swiperImg" indicator-dots="true" indicator-color="rgba(255,255,255,1)" indicator-active-color="#FF9906">
-              <swiper-item>
-                <image src="{{ detail.image_global[0] }}"></image>
+              <swiper-item wx:if="{{ detail.image_colors[0] }}" >
+                <image src="{{ detail.image_colors[0] }}" mode="aspectFill" bindtap='onPreivewTitleImg' data-colorsUrl="{{ detail.image_colors }}" data-globalUrl="{{ detail.image_global }}" data-localUrl="{{ detail.image_local }}" data-index="0"></image>
               </swiper-item>
-              <swiper-item wx:for="{{ detail.image_colors }}">
-                <image src="{{ item }}" mode="aspectFill" bindtap='onPreivewTitleImg' />
+              <swiper-item wx:if="{{ detail.image_global[0] }}" >
+                <image src="{{ detail.image_global[0] }}"mode="aspectFill" bindtap='onPreivewTitleImg' data-colorsUrl="{{ detail.image_colors }}" data-globalUrl="{{ detail.image_global }}" data-localUrl="{{ detail.image_local }}" data-index='1'></image>
               </swiper-item>
-              <swiper-item>
-                <image src="{{ detail.image_local[0] }}" mode="aspectFill" bindtap='onPreivewTitleImg' />
+              <swiper-item wx:if="{{ detail.image_colors[1] }}" >
+                <image src="{{ detail.image_colors[1] }}" mode="aspectFill" bindtap='onPreivewTitleImg' data-colorsUrl="{{ detail.image_colors }}" data-globalUrl="{{ detail.image_global }}" data-localUrl="{{ detail.image_local }}" data-index='2'></image>
+              </swiper-item>
+              <swiper-item  wx:if="{{ detail.image_colors[2] }}" >
+                <image src="{{ detail.image_colors[2] }}"mode="aspectFill" bindtap='onPreivewTitleImg' data-colorsUrl="{{ detail.image_colors }}" data-globalUrl="{{ detail.image_global }}" data-localUrl="{{ detail.image_local }}" data-index='3'></image>
+              </swiper-item>
+              <swiper-item wx:if="{{ detail.image_local[0] }}">
+                <image src="{{ detail.image_local[0] }}" mode="aspectFill" bindtap='onPreivewTitleImg' data-colorsUrl="{{ detail.image_colors }}" data-globalUrl="{{ detail.image_global }}" data-localUrl="{{ detail.image_local }}" data-index='4'/>
               </swiper-item>
             </swiper>
           </view>
@@ -118,13 +124,13 @@
               </view>
             </view>
 
-            <view style='display:flex;flex-direction: column;'>
+             <view style='display:flex;flex-direction: column;'>
               <view class="xiangQing_left" style='margin-bottom: 20rpx;font-size: 28rpx;display:flex;flex-direction: row;'>
                 <text class="value">色卡全貌</text>
                 <view wx:if="{{ !detail.image_global }}" class="value" style='padding-left: 50rpx;'>暂无</view>
               </view>
               <scroll-view wx:if="{{ detail.image_global }}" class="xstjContainer" scroll-x="true" style="width: 100%;" >
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" wx:for="{{ detail.image_global }}"src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='show_item' />
+                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" wx:for="{{ detail.image_global }}"src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='onPreviewImage'  data-imgUrls="{{ detail.image_global }}" data-index="{{ index }}"/>
               </scroll-view>
             </view>
 
@@ -135,7 +141,7 @@
                 <view wx:if="{{ !detail.image_colors }}" class="value" style='padding-left: 50rpx;'>暂无</view>
               </view>
               <scroll-view wx:if="{{ detail.image_colors }}" class="xstjContainer" scroll-x="true" style="width: 100%;">
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" wx:for="{{ detail.image_colors }}" src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='show_item' />
+                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;" wx:for="{{ detail.image_colors }}" src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='onPreviewImage'  data-imgUrls="{{ detail.image_colors }}" data-index="{{ index }}"/>
               </scroll-view>
             </view>
 
@@ -146,7 +152,7 @@
               </view>
               
               <scroll-view wx:if="{{ detail.image_local }}" class="xstjContainer" scroll-x="true" style="width: 100%;">
-                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;"  wx:for="{{ detail.image_local }}" src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='show_item' />
+                <image style="width: 273rpx;height: 273rpx;margin-left: 15rpx;"  wx:for="{{ detail.image_local }}" src="{{ item }}" data-cloth_id="{{item.id}}" bindtap='onPreviewImage'  data-imgUrls="{{ detail.image_local }}" data-index="{{ index }}"/>
               </scroll-view>
             </view>
 
