@@ -635,3 +635,38 @@ radio-group {
   line-height: 70rpx;
 }
 
+.article-title {
+  margin-top: 30rpx;
+  margin-left: 26rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  height: 88rpx;
+  width: 698rpx;
+  background: #FFF;
+  color: #15181D;
+  border-bottom: 1rpx solid #F5F5F5;
+  line-height: 88rpx;
+}
+
+.sub-title {
+  margin-top: 30rpx;
+  margin-left: 26rpx;
+  width: 698rpx;
+  background: #fff;
+  color: #15181D;
+  font-size: 28rpx;
+}
+
+.sub-content {
+  margin-left: 26rpx;
+  background: #fff;
+  width: 698rpx;
+  color: #15181D;
+  font-size: 28rpx;
+}
+
+.content-bold {
+  font-weight: bold;
+}
+
+

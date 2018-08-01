@@ -1,0 +1,58 @@
+<!--pages/helper/need_list.wxml-->
+<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+<view style='background: #fff;'>
+  <view class='article-title'>我的找布记录(找布需求列表)</view>
+
+  <view class="sub-title">
+    <text>1、页面介绍</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     您的所有找布需求的展示中心，按“进行中”、“已完成”、“待支付”、和“已失效”等状态分开展示。\n
+     ①　待支付：您提交的未支付的找布需求，您可以从这里找到需求重新发起支付；\n
+     ②　进行中：正在为您找寻面料的订单，找寻中订单的呈现的状态分别为“竞标中”、“找布中”、“已有结果”、“结果回寄中”，您可以通过点按订单缩略图查看订单详情并进行相应的订单操作；\n
+     ③　已完成：您已经满意并结束找布的订单，在该订单列表中，点击订单缩略图可以进去查看订单详情，进去后点按找布对话可查看您之前的找布互动过程，您还可以点按候选布料来查看您的需求找寻过程中的所有候选结果，并从详情中发起认购大货和样布的操作。
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>2、问：如何查看已找到的面料结果？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     从找布订单列表点按任何一个已有结果的找布需求进入需求详情页，再点击该页面顶部中间的标签“候选布料”进入到候选布料列表页，点任何一个结果您将可以看到该找布结果的详细介绍。
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>3、问：找布过程中有疑问或额外需求如何跟找布专员沟通？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     从找布订单列表点按目标找布需求进入需求详情页，再点击该页面顶部右边的标签“找布对话”进入到找布互动页面，您可以像微信对话那样发送文字/语音/图片信息给您的专属找布专员，找布专员会根据您的信息对找布过程做相应的调整。
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>4、问：满意找布结果后该如何结束找布？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     进入想要结束找布的订单详情页，查看候选结果，在候选结果页底布点击 “结束找布” 来结束本次找布服务。您也可以从帮助页面找到退款入口，选择不满意找布结果并无理由退款。在已有结果的情况下选择无理由退款，您将只能退回找布佣金中的基础部分费用和运费，也即柯桥78元，广州128元；
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>5、问：什么是订单详情页？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     订单详情页即您的需求在找寻和认购过程中的订单信息展示页面，分为需求详情 和 认购详情。\n
+采购订单详情页由三部分组成：①采购详情，包括订单的最新状态和订单的具体细节；②订单对应的布料详情；③互动对话区，这里客户可以就采购过程同跟单员进行互动对话。\n
+找布订单的详情页也由三部分组成：①需求详情；②候选布料；③找布对话。
+    </text>
+  </view>
+  <wux-cell-group title="您可能还需要">
+      <wux-cell title="意见反馈" url="../../pages/helper/feedback" openType="navigateTo" is-link></wux-cell>
+    </wux-cell-group>
+</view>

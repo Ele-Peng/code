@@ -1,0 +1,67 @@
+<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+<view style='background: #fff;'>
+  <view class='article-title'>发布需求</view>
+
+  <view class="sub-title">
+    <text>1、问：寄样类型有哪些，有什么区别？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     寄样类型是您提供的找布目标布样的类型，布源提供样衣、样布、图片三种类型供您选择。三种类型都需要按样品图要求上传布样图片。\n
+a.样衣，请拍摄需要找的面料所在部位（可在展开更多选填栏中的样品描述栏中进行备注说明）的图片，同时参照图1所示的样品图范例要求上传布样图片。注：若一件样衣有多种面料需要寻找，请分开提交找布需求，以便工作人员更快捷高效的为您服务。\n
+b.样布，参照图1所示的样品图范例要求上传布样图片。注：每个订单只能包含一种类型的布样（允许包含不同颜色，但须保证同类花型和一样的底布），同个需求的不同颜色的布样请装订在一起。\n
+c.图片，选择图片时，您只需上传图片，无需寄送布样。图片规格请参照样品图拍摄要求上传。\n
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>2、样品图上传有什么要求？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     如下图所示，请把带刻度数字的标尺置于平铺整齐的目标面料上，并拍摄一张带标尺的布样平铺图，这将有助于我们确定花型和花型对应的尺寸。您同时需要拍摄一张样布的局部图，以便工作人员知悉样品底布信息。（必要时，您可多拍几张您要找寻面料的图片）
+    </text>
+    <text class='content-bold'>样品图如下</text>
+    <!-- <image src="../../assets/images/publish_q2.png" style='width: 698rpx;height: 3012rpx;' mode='aspectFit' bindtap='onPreviewImage'></image> -->
+    <view style='display: flex;flex-direction: row;text-align: center;width: 698rx;'>
+      <text style='width: 50%;'>色卡花型图</text>
+      <text style='width: 50%;'>局部细节图</text>
+    </view>
+    <!-- <image src="../../assets/images/publish_q2_2.png" style='width: 698rpx;' mode='aspectFit'></image> -->
+    <image src="../../assets/images/icon-homePage.png" style='width: 698rpx;' mode='aspectFit'></image>
+  </view>
+
+  <view class="sub-title">
+    <text>3、问：什么是允许时间？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     您选择的允许时间将作为找布条件之一，但不会影响找布结果。我们会根据您提供的允许时间安排找布专员为您服务。时效将是专员考评标准之一，所以当您选择允许时间为一天时，我们会为您安排最高效的市场和业务员，但您需要在当天19：00点前对找布结果作出接受与否的决定，以保证需求的时效性要求。如果您选择多天，我们将在一个市场找不到的情况下为您在另一个市场重新寻找，找布专员也将没有当天必须找到的考核要求。注：允许时间不包含样品和找布结果物流来往所需的时间，即需求发往市场以及回寄的在途时间，以物流签收记录为准，若下午2点前签收，则当天便算作一天。
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>4、问：目标市场柯桥和广州有什么区别？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     一般来说，梭织面料我们建议您优先考虑柯桥市场，而针织面料在广州有更多的选择和价格优势；同时，目标市场不同会导致整个找布过程耗时的差异，因运费和市场规模不同的原因我们收取的找布服务费用也将不同。
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>5、问：匹配程度是什么意思？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     匹配程度是找布结果与客户提供的目标布样的匹配度。我们主要按照花型和材质分三种匹配程度：
+相似匹配为最弱匹配，代理仅需找到同样底布的面料，或是按照设计师指定的风格和面料用途匹配找寻面料，而对于图案花纹的要求并不高；
+较为匹配是底布一致，图案也有很高的相似度，但允许因不同供应商而带来的较为明显的颜色和花型上的略微不同；
+高度匹配是底布一致，颜色和图案的相似度也需要非常高，不容许明显的色差和图案属性（如图形大小，图形配色）的不同。
+设计师没有明确目标图案的、仅按风格和功用收集系列色卡请选择相似匹配；以样找布或以图找布请选择后两者。
+    </text>
+  </view>
+  <wux-cell-group title="您可能还需要">
+      <wux-cell title="意见反馈" url="../../pages/helper/feedback" openType="navigateTo" is-link></wux-cell>
+    </wux-cell-group>
+</view>

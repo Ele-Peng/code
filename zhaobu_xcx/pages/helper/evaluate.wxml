@@ -1,0 +1,44 @@
+<!--pages/helper/evaluate.wxml-->
+<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+<view style='background: #fff;'>
+  <view class='article-title'>反馈评价</view>
+
+  <view class="sub-title">
+    <text>1、反馈评价体系？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     您的订单在完成订购或找寻的情况下，对市场找布专员和跟单员进行评分的入口，也是为工作人员提供提升建议的渠道。在这里，您可以给对方的服务进行星级评分（按照下述五个维度），也可选中系统预先提供的简短评语。提交评价后将会立即生效，您的评价将决定对方的信用等级，并影响到对方后期的使用体验，请客观真实的描述您的评价内容。
+本平台五星评价模型，您可以按照下面5个维度的服务质量对业务员进行评价，星级越高表示您对服务越满意；
+·<text class='content-bold'>诚心</text>：是否真诚的为客户解决需求，而不是敷衍了事；售前售后是否始终如一；
+·<text class='content-bold'>贴心</text>：是否主动为客户解决一些重要却未被提及的要求；有没有帮助客户去了解一些客户未考虑到的产品属性和服务细节； 
+·<text class='content-bold'>细心</text>：是否服务得足够细心，有没有因为个人的习惯与重视不够，导致一些不必要的问题；
+·<text class='content-bold'>耐心</text>：是否耐心的回答客户的问题，是否对长时间无果的服务依旧抱有初恋般的耐心；
+·<text class='content-bold'>舒心</text>：是否能秉持客户至上的原则，全程热情的为客户服务；是否让客户享受整个服务，而不是心生不快；是否能够快速响应客户疑问。
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>2、如何提交反馈评价？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     当找布完成后客户和找布专员可以互相提交对此次合作方的评价。用户完成评价后，将会自动跳转至查看反馈页。
+    </text>
+  </view>
+
+    <view class="sub-title">
+    <text>3、我收到的评价有什么用？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     找布专员和跟单员同样也可以对客户进行评价，以作为后期供应商和服务商为客户提供服务的参考。因此，请务必诚信、礼貌、实事求是的进行您的业务，否则您一样会收到不良评价，改评价有可能影响您日后的使用体验和订单贷款资质。
+    </text>
+  </view>
+
+  <wux-cell-group title="您可能还需要">
+      <wux-cell title="意见反馈" url="../../pages/helper/feedback" openType="navigateTo" is-link></wux-cell>
+    </wux-cell-group>
+</view>
+
+

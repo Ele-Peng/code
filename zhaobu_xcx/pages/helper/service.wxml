@@ -1,0 +1,74 @@
+<!--pages/helper/service.wxml-->
+<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+<view style='background: #fff;'>
+  <view class='article-title'>找布服务费说明</view>
+
+  <view class="sub-title">
+    <text>1、找布费用构成</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     我们将根据您选择的目标市场收取相应的找布费用，具体费用明细如下表所示：
+    </text>
+    <image src="../../assets/images/service.png" style='width: 698rpx;' mode='aspectFit'></image>
+  </view>
+
+  <view class="sub-title">
+    <text>2、什么情况下能退款？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     在色卡信息要求寄回来之前，都可以申请退款。
+    </text>
+    <text class='content-bold'>采购流程如下</text>
+    <image src="../../assets/images/order-list.png" style='width: 698rpx;height: 3012rpx;' mode='aspectFit' bindtap='onPreviewImage'></image>
+  </view>
+
+  <view class="sub-title">
+    <text>3、退款的金额什么时候退回？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     退款申请并审核通过后，我们最晚将在2个工作日内完成退款。
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>4、什么时候退款都一样么？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+    不一样，退款分为找不到相符结果申请的退款，和不满意找布结果申请的无理由退款两种：
+②　找不到包括找布专员没找到任何符合要求的结果，和故意提交了不相符的色卡；这两种情况下，客户都将能退回所有的找布费用。同时，对于找布专员提交了不相符色卡的情况，我们将人工核验，核查找布专员是否为了拿到找布费乱提交色卡；如果属实，我们将退回您所有费用（包括运费），同时找布专员评分下调，计入不良找布率；
+③　客户不满意无理由退款是指客户对于找到的结果因价格等各种因素不太满意而在色卡回寄前要求退款；
+④　退款费用：因找不到造成的退款我们将退还全额费用；不满意无理由退款将只能退还部分金额，包括基础服务费和运费；也即柯桥退78元，广州退128元；
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>5、为什么无理由退款要扣留服务费？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     无理由退款的前提是找布业务员已经为您找到相符的面料，您出于自身不喜欢，或者改变了产品计划而放弃的找布。不同于找不到面料的情况，我们的找布业务员不仅付出了劳动，还为您比对筛选了不同供应商的相符面料，这部分付出，理应得到相应的补偿，这是对业务员付出努力和劳动的肯定。否则，如果业务员经常无偿找布，会打击他们的积极性、降低找布的服务质量。
+注：您若因为对找寻结果如价格等因素不满意而要求退款，平台可随时接受退款。但这有可能导致您的信用分被下调。
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>6、找布业务员不按要求提交候选面料怎么办？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     我们将通过合理的考核机制来激励业务员，促使他们更用心的为您提供五心服务；尽管如此，我们不能保证每一位合作的业务员都能尽职尽责的为所有服务。如果您碰到服务欠佳的找布业务员，您可以进行如下操作：
+a. 如果您满意结果，您可以依旧确认找布并回寄结果，但是您可以如实的评价该业务员，这样虽然不能对该次服务带来实质上的改变，但是至少我们能减少这种情况再日后再次发生，也能对怠慢服务的业务员做出一定程度的惩处；
+b.如果您不满意结果，您可以申请退款，并备注结果不符合，我们将核实该次服务，若属实，您将得到全额退款； 若不属实，您将按照无理由退款的方式得到部分退款；
+    </text>
+  </view>
+
+
+  
+  <wux-cell-group title="您可能还需要">
+      <wux-cell title="意见反馈" url="../../pages/helper/feedback" openType="navigateTo" is-link></wux-cell>
+    </wux-cell-group>
+</view>

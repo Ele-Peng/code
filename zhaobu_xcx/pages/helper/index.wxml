@@ -1,8 +1,10 @@
 <!--pages/helper/index.wxml-->
+<import src="../../components/dialog/dialog.wxml" />
+<template is="dialog" data="{{ ...$wux.dialog }}" />
 <title heading="{{ heading }}" lastUrl="{{ lastUrl }}">
 </title>
 <view class="page__bd">
-  <wux-tabs default-current="tab1" >
+  <wux-tabs default-current="tab1">
     <wux-tab key="tab1" title="全部问题" data-index="0" bindtap="onchange">
     </wux-tab>
     <wux-tab key="tab2" title="用户协议" data-index="1" bindtap="onchange">
@@ -12,14 +14,29 @@
   </wux-tabs>
   <view wx:if="{{ index == 0}}">
     <view style='height: 88rpx;'></view>
-    <wux-cell-group title="热门问题">
-      <wux-cell title="寄样类型有哪些，有什么区别？" url="../../pages/byindex/index" openType="switchTab" is-link></wux-cell>
+    <view style='position: fixed;width: 100%;'>
+      <wux-cell-group title="问题类型">
+      <wux-cell title="发布需求" url="../../pages/helper/publish" openType="navigateTo" is-link></wux-cell>
+      <wux-cell title="发布需求选填项" url="../../pages/helper/publish_extra" openType="navigateTo" is-link></wux-cell>
+      <wux-cell title="我的找布记录（找布需求列表）" url="../../pages/helper/need_list" openType="navigateTo" is-link></wux-cell>
+      <wux-cell title="我的订购记录" url="../../pages/helper/order_list" openType="navigateTo" is-link></wux-cell>
+      <wux-cell title="找布服务收费说明" url="../../pages/helper/service" openType="navigateTo" is-link></wux-cell>
+      <wux-cell title="互动对话" url="../../pages/helper/conversation" openType="navigateTo" is-link></wux-cell>
+      <wux-cell title="反馈评价" url="../../pages/helper/evaluate" openType="navigateTo" is-link></wux-cell>
+      <wux-cell title="地址管理" url="../../pages/helper/address" openType="navigateTo" is-link></wux-cell>
     </wux-cell-group>
+    <wux-cell-group title="找布说明">
+      <wux-cell title="找布流程(对外)" url="../../pages/helper/prgress" openType="navigateTo" is-link></wux-cell>
+    </wux-cell-group>
+    </view>
   </view>
   <view wx:if="{{ index == 1}}">
-    
+
   </view>
   <view wx:if="{{ index == 2}}">
-    
+    <view style='height: 128rpx;'></view>
+    <image src='../../assets/images/icon-fat-face.png' mode='widthFix' class='clock'></image>
+    <view class='tel'>欢迎呼叫本平台人工客服联系方式</view>
+    <view class='telphone' bindtap='onclickPhone'>0572-3158811</view>
   </view>
 </view>

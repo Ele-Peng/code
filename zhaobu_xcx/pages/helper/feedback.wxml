@@ -1,0 +1,3 @@
+<!--pages/helper/feedback.wxml-->
+<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+<image src='../../assets/images/icon-fat-face.png' style='width: 100%;'></image>

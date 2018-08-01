@@ -1,0 +1,62 @@
+<!--pages/helper/publish_extra.wxml-->
+<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+<view style='background: #fff;'>
+  <view class='article-title'>发布需求选填项</view>
+
+  <view class="sub-title">
+    <text>1、问：需求描述有什么用？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     如果图片无法展示您需要的面料特性，您可以在这里填写目标面料的材质、手感、属性等信息，以便为您找到更符合您需求的面料。
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>2、问：什么是期望价格？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     同样花型和底布的面料由于供应商的不同经常会出现价格上的不小差别。因此，您可以填写你期望的面料价格，我们将为您尽可能找寻不高于您期望价格的面料供您筛选，以更高效和合理的满足您的需求。
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>3、问：什么是工艺需求</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     仅在您需要某种特殊的面料工艺时才有必要填写这项内容，您需要输入您所想要的面料工艺名称或描述，如：复合、水洗等。
+    </text>
+  </view>
+
+  <view class="sub-title">
+    <text>4、问：打赏金额（找布费用）是什么？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     为了让找布专员和布源团队提供更优质的服务，我们会对每次找布收取一定的服务费，费用构成如下：
+    </text>
+    <image src="../../assets/images/publish-extra.png" style='width: 698rpx;' mode='aspectFit'></image>
+  </view>
+
+  <view class="sub-title">
+    <text>5、问：如何删除已上传的图片，已新增的地址等信息？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     您可以长按图片或地址信息进行删除，删除过程不可恢复，请谨慎操作。
+    </text>
+  </view>
+  <view class="sub-title">
+    <text>6、问：找布需求发布后就不能更改了？</text>
+  </view>
+  <view class='sub-content'>
+    <text>
+     为了让业务员为您提供更准确的服务，找布需求发布后将不允许修改。如果您实在需要修改需求内容，请致电我们客服，让在线跟单员从后台为您修改需求内容。
+    </text>
+  </view>
+  <wux-cell-group title="您可能还需要">
+      <wux-cell title="意见反馈" url="../../pages/helper/feedback" openType="navigateTo" is-link></wux-cell>
+  </wux-cell-group>
+</view>
