@@ -441,7 +441,7 @@ Page({
 
     var data = {
       'cloth': this.data.result_id,
-      'address': this.data.receive_addr_id,
+      'address': 60,
     };
 
     if (that.data.chose_type == '样布') {
@@ -471,27 +471,63 @@ Page({
       data: data,
       success: function (res) {
         console.log(res.data);
+        var order_id = res.data.data.id
         wx.request({
-          url: 'https://by.edenhe.com/api/pay/create/',
-          method: 'post',
+          url: 'https://by.edenhe.com/api/order/' + order_id + '/status/',
+          method: 'POST',
+          data: {
+            'status': 'm',
+            'remark': '系统自动确认',
+          },
           header: {
             'Content-Type': 'application/x-www-form-urlencoded',
             Cookie: wx.getStorageSync('cookie'),
           },
-          data: {
-            'id': res.data.data.id,
-            'type': 's',
-          },
           success: function (res) {
-            console.log(res.data);
-            that.preparePay(res.data.data.id);
+            console.log(res)
+            wx.request({
+              url: 'https://by.edenhe.com/api/order/' + order_id + '/status/',
+              method: 'POST',
+              data: {
+                'status': 'u',
+                'remark': '系统自动确认',
+              },
+              header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                Cookie: wx.getStorageSync('cookie'),
+              },
+              success: function (res) {
+                wx.request({
+                  url: 'https://by.edenhe.com/api/pay/create/',
+                  method: 'post',
+                  header: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    Cookie: wx.getStorageSync('cookie'),
+                  },
+                  data: {
+                    'id': order_id,
+                    'type': 's',
+                  },
+                  success: function (res) {
+                    console.log(res.data);
+                    that.preparePay(res.data.data.id);
+                  },
+                  fail: function (res) {
+                    console.log(res.data);
+                    that.hideLoading();
+                    that.showPaymentFailed();
+                  }
+                });
+              },
+              fail: function (res) {
+                console.log(res.data);
+              }
+            })
           },
           fail: function (res) {
             console.log(res.data);
-            that.hideLoading();
-            that.showPaymentFailed();
           }
-        });
+        })
       },
       fail: function (res) {
         console.log(res.data);
@@ -518,5 +554,111 @@ Page({
       color: '#fff',
       text: '提交失败',
     })
-  }
+  },
+
+  startPayment: function (needs_id) {
+    this.showLoading();
+    var that = this;
+    console.log(wx.getStorageSync('cookie'))
+    console.log(needs_id)
+    wx.request({
+      url: 'https://by.edenhe.com/api/pay/create/',
+      method: 'post',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Cookie: wx.getStorageSync('cookie'),
+      },
+      data: {
+        'id': needs_id,
+        'type': 'n',
+      },
+      success: function (res) {
+        console.log(res.data);
+        that.preparePay(res.data.data.id);
+      },
+      fail: function (res) {
+        console.log(res.data);
+        that.hideLoading();
+        that.showPaymentFailed();
+      }
+    });
+  },
+
+  preparePay: function (order_id) {
+    var that = this;
+    console.log(wx.getStorageSync('cookie'));
+    wx.request({
+      url: 'https://by.edenhe.com/api/pay/' + order_id + '/prepare/?platform=xc',
+      method: 'get',
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+      },
+      success: function (res) {
+        console.log(res.data);
+        that.hideLoading();
+        that.startWXPay(order_id, res.data.data);
+      },
+      fail: function (res) {
+        console.log(res.data);
+        that.hideLoading();
+        that.showPaymentFailed();
+      }
+    });
+  },
+
+  startWXPay(order_id, data) {
+    // appid:"wxd931d7672c96f87d"
+    // noncestr:"4dd937e9a341463bb718b6c5462a03ac"
+    // package:"prepay_id=wx20170821231109664c2a5a390676680221"
+    // sign:"55B40BFEE1BF8AA2B1CD4539183AA755"
+    // signtype:"MD5"
+    // timestamp:1503328269
+    var that = this;
+    wx.requestPayment({
+      'appId': data.appid,
+      'timeStamp': '' + data.timestamp,
+      'nonceStr': data.noncestr,
+      'package': data.package,
+      'signType': data.signtype,
+      'paySign': data.sign,
+      'success': function (res) {
+        console.log(res);
+        that.showPaymentOK();
+      },
+      'fail': function (res) {
+        console.log(res);
+        that.showPaymentFailed();
+      }
+    })
+  },
+
+  showPaymentFailed: function () {
+    $wuxToast.show({
+      type: 'cancel',
+      timer: 1500,
+      color: '#fff',
+      text: '支付失败',
+      success: function () {
+        wx.redirectTo({
+          url: '/pages/needs/general_needs_list?tab=2',
+        })
+      }
+    })
+  },
+
+  showPaymentOK: function () {
+    wx.setStorageSync('needs_inprogress_changed', true)
+    wx.setStorageSync('needs_unpaid_changed', true)
+    $wuxToast.show({
+      type: 'success',
+      timer: 1500,
+      color: '#fff',
+      text: '支付成功',
+      success: function () {
+        wx.redirectTo({
+          url: '/pages/needs/general_needs_list',
+        })
+      }
+    })
+  },
 })
