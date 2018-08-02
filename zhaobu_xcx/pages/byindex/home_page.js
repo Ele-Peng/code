@@ -17,9 +17,9 @@ Page({
     logged_in: false,
     heading: "布源",
     imgUrls: [
-      '../../assets/images/icon-title_1.png',
-      '../../assets/images/icon-title_1.png',
-      '../../assets/images/icon-title_1.png',
+      'http://pbzxb700b.bkt.clouddn.com/icon-title_1.png',
+      'http://pbzxb700b.bkt.clouddn.com/icon-title_1.png',
+      'http://pbzxb700b.bkt.clouddn.com/icon-title_1.png',
     ],
     indicatorDots: false,
     autoplay: false,

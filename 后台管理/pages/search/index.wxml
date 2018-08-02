@@ -78,8 +78,8 @@
 
               <view class="xiangQing_right">
                 <text class="xiangQingWenzi">原色卡编号:</text>
-                <text wx:if="{{is_show_pay != false && db_id!=null}}" class="value">{{ db_id }}</text>
-                <text wx:else class="value">  去查布源</text>
+                <text wx:if="{{ !detail.sample_code  }}" class="value">暂无</text>
+                <text wx:else class="value">  {{ detail.sample_code }}</text>
               </view>
 
             </view>
@@ -111,13 +111,13 @@
             <view class="daHuoYangBu" style='color:#FC5656;'>
               <view class="xiangQing_left">
                 <text class="xiangQingWenzi">供应商:</text>
-                <text wx:if="{{ is_show_pay==false }}" class="value">  去查布源</text>
+                <text wx:if="{{ !detail.provider }}" class="value">  暂无</text>
                 <text wx:else class="value">  {{detail.provider}}</text>
               </view>
               <view class="xiangQing_right">
                 <text class="xiangQingWenzi">联系电话:</text>
-                <text wx:if="{{ is_show_pay==false }}" class="value">  去查布源</text>
-                <text wx:else class="value">  暂无</text>
+                <text wx:if="{{ !detail.phone }}" class="value">  暂无</text>
+                <text wx:else class="value">  {{ detail.phone }}</text>
               </view>
             </view>
 
@@ -204,8 +204,8 @@
 
             <view class="xiangQing_right">
               <text class="xiangQingWenzi">原色卡编号:</text>
-              <text wx:if="{{is_show_pay != false && db_id!=null}}" class="value">  {{db_id}}</text>
-              <text wx:else class="value"> 去查布源 </text>
+              <text wx:if="{{!detail.sample_code}}" class="value">  暂无</text>
+              <text wx:else class="value"> {{detail.sample_code}}</text>
             </view>
 
           </view>
@@ -237,13 +237,13 @@
           <view class="daHuoYangBu" style='color:#FC5656;margin-top: -10rpx;'>
             <view class="xiangQing_left">
               <text class="xiangQingWenzi">供应商:</text>
-              <text wx:if="{{ is_show_pay==false }}" class="value">  去查布源</text>
+              <text wx:if="{{!detail.provider}}" class="value">  暂无</text>
               <text wx:else class="value">  {{detail.provider}}</text>
             </view>
             <view class="xiangQing_right">
               <text class="xiangQingWenzi">联系电话:</text>
-              <text wx:if="{{ is_show_pay==false }}" class="value">  去查布源</text>
-              <text wx:else class="value">暂无</text>
+              <text wx:if="{{ !detail.phone }}" class="value">  暂无</text>
+              <text wx:else class="value">{{ detail.phone }}</text>
             </view>
           </view>
           <!-- 分割线 -->

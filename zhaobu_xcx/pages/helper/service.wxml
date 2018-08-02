@@ -10,7 +10,7 @@
     <text>
      我们将根据您选择的目标市场收取相应的找布费用，具体费用明细如下表所示：
     </text>
-    <image src="../../assets/images/service.png" style='width: 698rpx;' mode='aspectFit'></image>
+    <image src="http://pbzxb700b.bkt.clouddn.com/service.png" style='width: 698rpx;' mode='aspectFit' bindtap='onPreivewImg' data-index="0" data-imgs="http://pbzxb700b.bkt.clouddn.com/service.png"></image>
   </view>
 
   <view class="sub-title">
@@ -20,8 +20,6 @@
     <text>
      在色卡信息要求寄回来之前，都可以申请退款。
     </text>
-    <text class='content-bold'>采购流程如下</text>
-    <image src="../../assets/images/order-list.png" style='width: 698rpx;height: 3012rpx;' mode='aspectFit' bindtap='onPreviewImage'></image>
   </view>
 
   <view class="sub-title">

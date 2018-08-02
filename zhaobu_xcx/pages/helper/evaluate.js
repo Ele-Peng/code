@@ -67,5 +67,18 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+
+  onPreivewImg: function (e) {
+    console.log(e);
+    var index = e.currentTarget.dataset.index;
+    var urls = [];
+    if (e.currentTarget.dataset.imgs) {
+      urls.push(e.currentTarget.dataset.imgs);
+    }
+    wx.previewImage({
+      current: urls[parseInt(index)],
+      urls: urls,
+    });
+  },
 })

@@ -47,7 +47,7 @@
 收到货后，您在核验面料无误的情况下确认本次交易，对供应商进行评价（系统会在您收货三天后自动结束该次交易）。
     </text>
     <text class='content-bold'>采购流程如下</text>
-    <image src="../../assets/images/order-list.png" style='width: 698rpx;height: 3012rpx;' mode='aspectFit' bindtap='onPreviewImage'></image>
+    <image src="http://pbzxb700b.bkt.clouddn.com/order-list.png" style='width: 698rpx;height: 3012rpx;' mode='aspectFit' bindtap='onPreivewImg' data-index="0" data-imgs="http://pbzxb700b.bkt.clouddn.com/order-list.png"></image>
   </view>
 
   <view class="sub-title">

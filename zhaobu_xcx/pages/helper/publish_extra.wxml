@@ -37,7 +37,7 @@
     <text>
      为了让找布专员和布源团队提供更优质的服务，我们会对每次找布收取一定的服务费，费用构成如下：
     </text>
-    <image src="../../assets/images/publish-extra.png" style='width: 698rpx;' mode='aspectFit'></image>
+    <image src="http://pbzxb700b.bkt.clouddn.com/publish-extra.png" style='width: 698rpx;' mode='aspectFit' bindtap='onPreivewImg' data-index="0" data-imgs="http://pbzxb700b.bkt.clouddn.com/publish-extra.png"></image>
   </view>
 
   <view class="sub-title">

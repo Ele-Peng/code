@@ -22,13 +22,11 @@ c.图片，选择图片时，您只需上传图片，无需寄送布样。图片
      如下图所示，请把带刻度数字的标尺置于平铺整齐的目标面料上，并拍摄一张带标尺的布样平铺图，这将有助于我们确定花型和花型对应的尺寸。您同时需要拍摄一张样布的局部图，以便工作人员知悉样品底布信息。（必要时，您可多拍几张您要找寻面料的图片）
     </text>
     <text class='content-bold'>样品图如下</text>
-    <!-- <image src="../../assets/images/publish_q2.png" style='width: 698rpx;height: 3012rpx;' mode='aspectFit' bindtap='onPreviewImage'></image> -->
     <view style='display: flex;flex-direction: row;text-align: center;width: 698rx;'>
       <text style='width: 50%;'>色卡花型图</text>
       <text style='width: 50%;'>局部细节图</text>
     </view>
-    <!-- <image src="../../assets/images/publish_q2_2.png" style='width: 698rpx;' mode='aspectFit'></image> -->
-    <image src="../../assets/images/icon-homePage.png" style='width: 698rpx;' mode='aspectFit'></image>
+    <image src="http://pbzxb700b.bkt.clouddn.com/publish_q2_2.png" style='width: 698rpx;' mode='aspectFit' bindtap='onPreivewImg' data-index="0" data-imgs="http://pbzxb700b.bkt.clouddn.com/publish_q2_2.png"></image>
   </view>
 
   <view class="sub-title">
