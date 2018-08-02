@@ -18,6 +18,9 @@ Page({
     this.setData({
       items: [
         { name: options.cloth_id, value: options.cloth_id, checked: true}
+      ],
+      class_list: [
+        options.cloth_id
       ]
     })
   },
@@ -86,11 +89,14 @@ Page({
         code = code.split('-')[0]
 
         var items = that.data.items;
+        var class_list = that.data.class_list;
 
         items.push({ name: code, value: code, checked: true});
-
+        class_list.push(code);
+        
         that.setData({
-          items: items
+          items: items,
+          class_list: class_list
         })
       }
     })
@@ -130,13 +136,22 @@ Page({
 
   onSubmit: function(e) {
     var that = this;
-    var items = that.data.items;
+    var items = that.data.class_list;
     for (var i in items) {
       for (var j in items) {
-        if (j > i && items[i].checked) {
+        if (j > i) {
           this.add_similar(items[i].value, items[j].value);
         }
       }
     }
-  }
+  },
+
+  checkboxChange: function (e) {
+    var that = this;
+    that.setData({
+      class_list: e.detail.value
+    })
+    console.log(that.data.class_list)
+  },
+
 })
