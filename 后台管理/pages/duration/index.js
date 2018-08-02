@@ -11,11 +11,22 @@ Page({
     lastUrl: "",
     index: 0,
     matching_type_items: [
-      { value: '现货', name: '现货', },
-      { value: '1-3天', name: '1-3天', },
-      { value: '3-7天', name: '3-7天', },
-      { value: '7-14天', name: '7-14天', },
-      { value: '14天以上', name: '14天以上', }
+      { value: '1', name: '现货', },
+      { value: '2', name: '2天', },
+      { value: '3', name: '3天', },
+      { value: '4', name: '4天', },
+      { value: '5', name: '5天', },
+      { value: '6', name: '6天', },
+      { value: '7', name: '7天', },
+      { value: '8', name: '8天', },
+      { value: '9', name: '9天', },
+      { value: '10', name: '10天', },
+      { value: '11', name: '11天', },
+      { value: '12', name: '12天', },
+      { value: '13', name: '13天', },
+      { value: '14', name: '14天', },
+      { value: '15', name: '15天', },
+      { value: '16', name: '16天', }
     ],
     selected_matching: '',
     selected_matching_name: '',
@@ -25,7 +36,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      cloth_id: options.cloth_id
+    })
   },
 
   /**
@@ -130,26 +143,32 @@ Page({
     var that = this;
 
     var data = {
-      season: that.data.selected_matching
+      duration: parseInt(that.data.selected_matching)
     };
 
-    console.log(that.data.cloth_id);
+    console.log(data);
 
     wx.request({
-      url: '',
+      url: 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/',
+      method: 'POST',
+      data: data,
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
       success: function (res) {
         wx.showToast({
-          title: '设置成功',
+          title: '修改成功',
         })
         console.log(res.data);
       },
       fail: function (res) {
         console.log(res.data);
         wx.showToast({
-          title: '设置失败',
+          title: '修改失败',
         })
       }
     });
-
+    
   }
 })

@@ -26,7 +26,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      cloth_id: options.cloth_id
+    })
   },
 
   /**
@@ -130,13 +132,19 @@ Page({
     var that = this;
 
     var data = {
-      season: that.data.selected_matching
+      storage: parseInt(that.data.selected_matching)
     };
 
-    console.log(that.data.cloth_id);
+    console.log(data);
 
     wx.request({
-      url: '',
+      url: 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/',
+      method: 'POST',
+      data: data,
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
       success: function (res) {
         wx.showToast({
           title: '修改成功',
@@ -150,6 +158,7 @@ Page({
         })
       }
     });
+
 
   }
 })

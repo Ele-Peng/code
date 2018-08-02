@@ -1,1 +1,18 @@
 /* pages/like/index.wxss */
+.class-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  background-color: white;
+  margin-top: 128rpx;
+  position: fixed;
+}
+
+.checkbox-item {
+  border: 1rpx solid #F5F5F5;
+  width: 750rpx;
+  height: 68rpx;
+  padding-left: 26rpx;
+  padding-top: 20rpx;
+}

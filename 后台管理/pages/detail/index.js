@@ -25,50 +25,13 @@ Page({
     is_latest: false,
     is_hotest: false,
     is_newest: false,
-    chose_a: '开发时间', // 当前选择的大类
+    chose_a: '织法', // 当前选择的大类
     chose_b: '', // 当前选择的中类
     order_by: 'None', // 根据什么排序
     is_shows: {},
     is_checked: 1,
     key: '',
     type_relation: {
-      '开发时间': {
-        '2018年下': {},
-        '2018年上': {},
-        '2017年下': {},
-        '2017年上': {},
-        '2017年前': {}
-      },
-      '适用季节': {
-        '春': {},
-        '夏': {},
-        '秋': {},
-        '冬': {}
-      },
-      '图案': {
-        '人': {},
-        '动物': {},
-        '植物': {},
-        '圆点': {},
-        '条纹': {},
-        '格子': {},
-        '净色特种': {},
-        '素色': {},
-        '其它': {}
-      },
-      '适用品类': {
-        'T恤/打底衫': {},
-        '大衣': {},
-        '外套': {},
-        '衬衫': {},
-        '裤子': {},
-        '家居服': {},
-        '婴儿服装(哈衣/爬服)': {},
-        '棉衣/羽绒服/户外服': {},
-        '泳装': {},
-        '校服': {},
-        '其它': {}
-      },
       '织法': {
         '梭织': {
           '平纹': {},
@@ -181,25 +144,6 @@ Page({
           '绫': {},
           '其它(丝)': {}
         }
-      },
-      '所在市场': {
-        '广州': {},
-        '柯桥': {},
-        '盛泽': {},
-        '石狮': {},
-        '织里': {}
-      },
-      '货期': {
-        '现货': {},
-        '1-3天': {},
-        '3-7天': {},
-        '7-14天': {},
-        '14天以上': {}
-      },
-      '弹性': {
-        '单向': {},
-        '四面': {},
-        '无': {}
       }
     },
     screen_height: 0,
@@ -219,7 +163,7 @@ Page({
     //   is_shows: app.globalData.is_shows
     // })
     this.setData({
-      search_type: options.type
+      cloth_id: options.cloth_id
     })
   },
 
@@ -783,6 +727,11 @@ Page({
         for (var j in br[i]) {
           if (j != 'is_chose' && j != '其它' && br[i][j].is_chose) {
             if (key_map[j] && result_map[key_map[j].father_key]) {
+              wx.showModal({
+                title: '错误',
+                content: '第二大类只能选择一种',
+              });
+              return;
               console.log(key_map[j].father_key)
               result_map[key_map[j].father_key] = result_map[key_map[j].father_key] + ',' + key_map[j].key;
             } else if (key_map[j]) {
@@ -791,6 +740,11 @@ Page({
             for (var k in br[i][j]) {
               if (k != 'is_chose' && k != '其它' && br[i][j][k].is_chose) {
                 if (key_map[k] && result_map[key_map[k].father_key]) {
+                  wx.showModal({
+                    title: '错误',
+                    content: '第三大类只能选择一种',
+                  });
+                  return;
                   result_map[key_map[k].father_key] = result_map[key_map[k].father_key] + ',' + key_map[k].key;
                   console.log(key_map[k].father_key)
                 } else if (key_map[k]) {
@@ -805,29 +759,37 @@ Page({
 
     console.log(result_map);
 
+    var data = {};
     var flag = false;
     for (var i in result_map) {
-      if (flag) {
-        key = key + '&';
-      } else {
-        flag = true;
-      }
-      key = key + i + '=' + result_map[i];
+      data[i] = result_map[i];
     }
 
-    console.log(key)
+    console.log(data);
 
-    that.setData({
-      key: key,
-      cloth_list: [],
-      cloth_list_left: [],
-      cloth_list_right: []
+    wx.request({
+      url: 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/',
+      method: 'POST',
+      data: data,
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      success: function (res) {
+        wx.showToast({
+          title: '修改成功',
+        })
+        console.log(res.data);
+      },
+      fail: function (res) {
+        console.log(res.data);
+        wx.showToast({
+          title: '修改失败',
+        })
+      }
     });
 
-    that.setData({
-      is_shows: that.data.is_shows,
-    })
-    that.getList();
+
     this.hideModal();
     this.triggerEvent("cancelEvent");
   },
