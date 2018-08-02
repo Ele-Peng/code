@@ -20,7 +20,9 @@ Page({
     needs_alert: false,
     orders_alert: false,
     logged_in: false,
-    screen_height: 0
+    screen_height: 0,
+    name: '普通会员',
+    pay_money: 0,
   },
 
   getSystemInfo() {
@@ -175,6 +177,7 @@ Page({
     getApp().globalData.lastUrl = '../byindex/index'
     this.doLogin();
     // }
+
   },
 
   onLoggedIn: function() {
@@ -218,11 +221,66 @@ Page({
 
   },
 
+  qiandao: function () {
+    var that = this;
+
+    wx.request({
+      url: 'https://by.edenhe.com/api/bind/check',
+      method: 'POST',
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+      },
+      success: function (res) {
+        console.log(res.data);
+        wx.showModal({
+          title: '提示',
+          content: res.data.msg,
+        })
+        that.onShow()
+      },
+      fail: function (res) {
+        console.log(res.data);
+      }
+    });
+
+  },
+
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
     this.getAlerts()
+    var that = this;
+
+    wx.request({
+      url: 'https://by.edenhe.com/api/bind/team_vip',
+      method: 'get',
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+      },
+      success: function (res) {
+        console.log(res.data);
+        var vip = res.data.data.vip_lvl;
+        var name = '普通会员';
+        if (vip == 1) {
+          name = '青铜会员';
+        } else if (vip == 2) {
+          name = '黄金会员';
+        } else if (vip == 3) {
+          name = '钻石会员';
+        }
+        that.setData({
+          name: name,
+          pay_money: res.data.data.pay_money,
+          score: res.data.data.score,
+        })
+      },
+      fail: function (res) {
+        console.log(res.data);
+      }
+    });
+
+
   },
 
   /**

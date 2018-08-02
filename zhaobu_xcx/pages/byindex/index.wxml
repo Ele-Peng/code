@@ -8,7 +8,8 @@
 
 <scroll-view scroll-y="true" style="height:{{ screen_height - 33}}px;position: fixed;" class="container" >
   <view class="account">
-    <text>普通账号</text>
+    <text>{{name}}  积分:{{score}}  消费:{{pay_money}}</text>
+    <text bindtap='qiandao'> 签到</text>
   </view>
 
   <view class='mine-record' bindtap='onClickNeeds'>
