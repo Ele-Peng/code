@@ -1,6 +1,10 @@
 {
   "pages": [
     "pages/byindex/home_page",
+    "pages/pay/sample",
+    "pages/pay/needs",
+    "pages/pay/search",
+    "pages/pay/original",
     "pages/helper/index",
     "pages/helper/publish",
     "pages/helper/publish_extra",

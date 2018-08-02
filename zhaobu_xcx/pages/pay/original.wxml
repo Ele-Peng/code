@@ -1,0 +1,48 @@
+<!--pages/pay/original.wxml-->
+<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+<form bindsubmit="formSubmit" style='position: fixed;width: 100%;'>
+  <view class='pay-area'>
+    <view class='original-left'>
+      <view class='original-left-top'>需支付</view>
+      <view class='original-left-bottom'>积分仅能抵扣退换险和服务费</view>
+    </view>
+    <!-- <view class='original-right-one'>
+      <text>8折<text class='right-only-money'>￥78.4</text></text>
+    </view> -->
+    <view class='original-right-two'>
+      <text style='padding-top: 10rpx;'>8折<text class='right-only-money'>￥78.4</text></text>
+      <text>使用123积分抵扣123</text>
+    </view>
+  </view>
+  <view class='withdraw-area' bindtap='onWithdraw'>
+    <view class='withdraw-left'>退换险</view>
+    <!-- 未选中 -->
+    <view wx:if="{{ !is_withdraw }}" class='withdraw-center-right'>￥0.0</view>
+    <view wx:if="{{ is_withdraw }}" class='withdraw-center'>￥5.0</view>
+    <image wx:if="{{ is_withdraw }}" class="withdraw-right" src='../../assets/images/icon-checked.png' ></image>
+  </view>
+  <view class='pay-service'>
+    <view class='pay-service-left'>服务费</view>
+    <image src='../../assets/images/icon-service.png' class='pay-service-center'></image>
+    <view class='pay-service-right'>￥50.0</view>
+  </view>
+  <view class='check-pay'>
+    <view class='check-pay-simple' bindtap='onCheck_1'>
+      <image class="check-pay-left" src='../../assets/images/icon-logo-in.png'></image>
+      <text>积分支付</text>
+      <image wx:if="{{ is_check_1 }}" class="check-pay-right" src='../../assets/images/icon-check.png' style='padding-left: 491rpx;'></image>
+      <image wx:if="{{ !is_check_1 }}" class="check-pay-right" src='../../assets/images/icon-noncheck.png' style='padding-left: 491rpx;'></image>
+    </view>
+    <view class='check-pay-simple' bindtap='onCheck_2'>
+      <image class="check-wechat-left" src='../../assets/images/icon-wechat.png'></image>
+      <text>微信支付</text>
+      <image wx:if="{{ is_check_2 }}" class="check-pay-right" src='../../assets/images/icon-check.png'></image>
+      <image wx:if="{{ !is_check_2 }}" class="check-pay-right" src='../../assets/images/icon-noncheck.png'></image>
+    </view>
+  </view>
+
+
+  <view class="btn-area" style='position: fixed;bottom: 0;width: 100%;'>
+    <button class="weui-btn" type="primary" formType="submit" style='background: #FF9906;border-radius: 0rpx;'>确认支付</button>
+  </view>
+</form>

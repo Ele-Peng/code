@@ -17,9 +17,9 @@ Page({
     logged_in: false,
     heading: "布源",
     imgUrls: [
-      '../../assets/images/testImg/icon-homePage.jpg',
-      '../../assets/images/testImg/icon-homePage.jpg',
-      '../../assets/images/testImg/icon-homePage.jpg'
+      '../../assets/images/icon-title_1.png',
+      '../../assets/images/icon-title_1.png',
+      '../../assets/images/icon-title_1.png',
     ],
     indicatorDots: false,
     autoplay: false,

@@ -290,8 +290,12 @@ Page({
           text: '我要查布源',
           type: 'weui-dialog__btn_warn',
           onTap(e) {
-            // that.doPay(e.detail.formId);
-            // that.doPay();
+            wx.navigateTo({
+              url: '../../pages/pay/search',
+              success: function(res) {},
+              fail: function(res) {},
+              complete: function(res) {},
+            })
           },
         },
       ],
