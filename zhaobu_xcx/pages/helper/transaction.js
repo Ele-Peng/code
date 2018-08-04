@@ -1,11 +1,11 @@
-// pages/helper/feedback.js
+// pages/helper/transaction.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    heading: "意见反馈",
+    heading: "会员电子交易协议",
     lastUrl: ""
   },
 
@@ -68,18 +68,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-
-  onPreivewImg: function (e) {
-    console.log(e);
-    var index = e.currentTarget.dataset.index;
-    var urls = [];
-    if (e.currentTarget.dataset.imgs) {
-      urls.push(e.currentTarget.dataset.imgs);
-    }
-    wx.previewImage({
-      current: urls[parseInt(index)],
-      urls: urls,
-    });
-  },
+  }
 })
