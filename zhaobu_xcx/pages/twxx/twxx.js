@@ -1,6 +1,7 @@
 /* pages/twxx/twxx.js */
 import { $wuxLoading } from '../../components/wux'
 import { $wuxDialog } from '../../components/wux'
+import { $wuxToast } from '../../components/wux'
 Page({
   data: {
     heading:"面料详情",
@@ -71,7 +72,7 @@ Page({
     var that = this;
     console.log(that.data.cloth_id);
     var url = 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/';
-    // var url = 'https://by.edenhe.com/api/record/sample/93338500599527/';
+    // var url = 'https://by.edenhe.com/api/record/sample/70295352591593/';
 
     if (that.data.db_id) {
       url = url + that.data.db_id;
@@ -129,7 +130,8 @@ Page({
       }
     });
 
-    var url = 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/similar/';
+    var url = 'https://by.edenhe.com/api/record/sample/' + this.data.cloth_id + '/similar/';
+    // var url = 'https://by.edenhe.com/api/record/sample/70295352591593/similar/';
     wx.request({
       url: url,
       method: 'get',
@@ -139,7 +141,7 @@ Page({
       success: function (res) {
         console.log(res.data);
         that.setData({
-          similar_list: ''
+          similar_list: res.data.data
         })
         that.hideLoading();
       },
@@ -243,11 +245,30 @@ Page({
     for (var i = 0; i < e.currentTarget.dataset.imgurls.length ; i++) {
       urls.push(e.currentTarget.dataset.imgurls[i]);
     }
-
     wx.previewImage({
       current: urls[parseInt(index)],
       urls: urls,
     });
+  },
+
+  onPreviewOnlyImage: function (e) {
+    var index = 0;
+    var urls =[];
+    if (e.currentTarget.dataset.imgurls) {
+      urls.push(e.currentTarget.dataset.imgurls);
+      wx.previewImage({
+        current: 0,
+        urls: urls,
+      });
+    } else {
+      $wuxToast.show({
+        type: 'cancel',
+        duration: 1500,
+        color: '#fff',
+        text: '暂无图片',
+        success: () => console.log('取消操作')
+      })
+    }
   },
 
   // 主题图预览

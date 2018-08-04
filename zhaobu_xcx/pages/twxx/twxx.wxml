@@ -2,6 +2,9 @@
 <template is="loading" data="{{ ...$wux.loading }}" />
 <import src="../../components/dialog/dialog.wxml" />
 <template is="dialog" data="{{ ...$wux.dialog }}" />
+<import src="../../components/toast/toast.wxml" />
+<template is="toast" data="{{ ...$wux.toast }}" />
+
 <title heading="{{ heading }}" lastUrl="{{ lastUrl }}">
 </title>
 
@@ -418,9 +421,9 @@
           </view>
           <!-- 推荐图 -->
           <scroll-view class="xstjContainer" scroll-x="true" style="width: 100%">
-            <view wx:for="{{detail.guess}}" wx:key="id">
-              <image src="{{item.cover}}" data-cloth_id="{{item.id}}" bindtap='show_item' />
-              <text>{{item.title}}</text>
+            <view wx:for="{{ similar_list }}" wx:key="id">
+              <image src="{{item.thumb}}" data-cloth_id="{{item.id}}" bindtap='onPreviewOnlyImage'  data-imgUrls="{{ detail.thumb }}" data-index="{{ index }}" />
+              <text style=''>{{item.cloth}}</text>
             </view>
           </scroll-view>
         </view>

@@ -22,7 +22,7 @@ Page({
       'http://pbzxb700b.bkt.clouddn.com/icon-title_1.png',
     ],
     indicatorDots: false,
-    autoplay: false,
+    autoplay: true,
     interval: 5000,
     duration: 1000,
     screen_height: 0,

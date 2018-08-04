@@ -15,6 +15,9 @@
 <import src="../../components/loading/loading.wxml" />
 <template is="loading" data="{{ ...$wux.loading }}" />
 
+<import src="../../components/notification/notification.wxml" />
+<template is="notification" data="{{ ...$wux.notification }}" />
+
 
 <title heading="{{heading}}" lastUrl="{{lastUrl}}">
 </title>

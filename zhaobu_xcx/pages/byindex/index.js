@@ -23,6 +23,7 @@ Page({
     screen_height: 0,
     name: '普通会员',
     pay_money: 0,
+    is_sign_in: false
   },
 
   getSystemInfo() {
@@ -171,13 +172,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // if (options.logged_in) {
-    // this.onLoggedIn();
-    // } else {
     getApp().globalData.lastUrl = '../byindex/index'
-    this.doLogin();
-    // }
-
+    this.doLogin()
   },
 
   onLoggedIn: function() {
@@ -237,6 +233,9 @@ Page({
           content: res.data.msg,
         })
         that.onShow()
+        that.setData({
+          is_sign_in: true
+        })
       },
       fail: function (res) {
         console.log(res.data);

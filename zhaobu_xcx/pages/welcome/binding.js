@@ -10,7 +10,11 @@ Page({
    */
   data: {
     phone: "",
-    screen_height: 0
+    screen_height: 0,
+    items: [
+      { name: 'protocol_1', value: '会员电子签约协议' },
+      { name: 'protocol_2', value: '会员电子交易协议' }
+    ]
   },
 
   /**
@@ -239,4 +243,8 @@ Page({
   hideLoading: function () {
     $wuxLoading.hide();
   },
+
+  radioChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value)
+  }
 })

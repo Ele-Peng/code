@@ -323,7 +323,7 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 100%;
+  width: 200rpx;
   height: 26px;
   line-height: 26px;
   overflow: hidden;
@@ -331,6 +331,9 @@
   font-size: 25rpx;
   font-weight: lighter;
   top: 255rpx;
+  -space: nowrap; 
+  text-overflow: ellipsis;
+  padding-left: 26rpx;
 }
 .closeArea{
   width:600rpx;

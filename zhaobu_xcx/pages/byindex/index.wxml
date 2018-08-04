@@ -1,45 +1,45 @@
-<import src="../../components/toast/toast.wxml"/>
-<template is="toast" data="{{ ...$wux.toast }}"/>
+<import src="../../components/toast/toast.wxml" />
+<template is="toast" data="{{ ...$wux.toast }}" />
 
 
 <title heading="{{heading}}">
 </title>
 
 
-<scroll-view scroll-y="true" style="height:{{ screen_height - 33}}px;position: fixed;" class="container" >
+<scroll-view scroll-y="true" style="height:{{ screen_height - 33}}px;position: fixed;" class="container">
   <view class="account">
-    <text>{{name}}  积分:{{score}}  消费:{{pay_money}}</text>
-    <text bindtap='qiandao'> 签到</text>
+    <view>{{name}}  积分:{{score}}  消费:{{pay_money}}</view>
+    <image src='../../assets/images/icon-sign-in.png' style='width: 60rpx;height: 60rpx;padding-left: 20rpx;padding-top: 20rpx; ' bindtap='qiandao'> </image>
   </view>
 
   <view class='mine-record' bindtap='onClickNeeds'>
     <view class="record-title">
       <view class='record-title-txt' style='display: flex;flex-direction: row;'>
         <text>找布记录</text>
-        <view  wx:if="{{needs_alert}}" class="red_dot"/>
+        <view wx:if="{{needs_alert}}" class="red_dot" />
       </view>
       <image src="../../assets/images/icon-gt.png"></image>
     </view>
     <view class='record-images'>
       <view class="record-image-1">
-        <image  src="../../assets/images/icon-clock.png" ></image>
-          <text>{{needsStatus[0]}}</text>
-          <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge" ></view>
+        <image src="../../assets/images/icon-clock.png"></image>
+        <text>{{needsStatus[0]}}</text>
+        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge"></view>
       </view>
       <view class="record-image-2">
-        <image  src="../../assets/images/icon-welldone.png" ></image>
+        <image src="../../assets/images/icon-welldone.png"></image>
         <text>{{needsStatus[1]}}</text>
-        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge" ></view>
+        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge"></view>
       </view>
       <view class="record-image-3">
-        <image  src="../../assets/images/icon-wallet.png" ></image>
+        <image src="../../assets/images/icon-wallet.png"></image>
         <text>{{needsStatus[2]}}</text>
-        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge" ></view>
+        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge"></view>
       </view>
       <view class="record-image-4">
-        <image  src="../../assets/images/icon-warning.png" ></image>
+        <image src="../../assets/images/icon-warning.png"></image>
         <text>{{needsStatus[3]}}</text>
-        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge" ></view>
+        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge"></view>
       </view>
     </view>
   </view>
@@ -49,55 +49,55 @@
     <view class="record-title">
       <view class='record-title-txt' style='display: flex;flex-direction: row;'>
         <text>订购记录</text>
-        <view  wx:if="{{orders_alert}}" class="red_dot"/>
+        <view wx:if="{{orders_alert}}" class="red_dot" />
       </view>
       <image src="../../assets/images/icon-gt.png"></image>
     </view>
     <view class='record-images'>
       <view class="record-image-1">
-        <image  src="../../assets/images/icon-clock.png" ></image>
+        <image src="../../assets/images/icon-clock.png"></image>
         <text>{{orderStatus[0]}}</text>
-        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge" ></view>
+        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge"></view>
       </view>
       <view class="record-image-2">
-        <image  src="../../assets/images/icon-list.png" ></image>
+        <image src="../../assets/images/icon-list.png"></image>
         <text>{{orderStatus[1]}}</text>
-        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge" ></view>
+        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge"></view>
       </view>
       <view class="record-image-3">
-        <image  src="../../assets/images/icon-wallet.png" ></image>
+        <image src="../../assets/images/icon-wallet.png"></image>
         <text>{{orderStatus[2]}}</text>
-        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge" ></view>
+        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge"></view>
       </view>
       <view class="record-image-4">
-        <image  src="../../assets/images/icon-welldone.png" ></image>
+        <image src="../../assets/images/icon-welldone.png"></image>
         <text>{{orderStatus[3]}}</text>
-        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge" ></view>
+        <view wx:if="{{unread === true}}" class="weui-badge weui-badge_dot badge"></view>
       </view>
     </view>
   </view>
 
 
   <view class='mine-list' style='margin-top: 10rpx;' bindtap='my_team'>
-    <image class='mine-image-left' src="../../assets/images/icon-structure.png" ></image>
+    <image class='mine-image-left' src="../../assets/images/icon-structure.png"></image>
     <text>我的团队</text>
     <image class="mine-image-right" src="../../assets/images/icon-gt.png"></image>
   </view>
 
   <view class='mine-list' style='margin-top: 10rpx;' bindtap='my_address'>
-    <image class='mine-image-left' src="../../assets/images/icon-address.png" ></image>
+    <image class='mine-image-left' src="../../assets/images/icon-address.png"></image>
     <text>地址管理</text>
     <image class="mine-image-right" src="../../assets/images/icon-gt.png"></image>
   </view>
 
   <view class='mine-list' style='margin-top: 10rpx;' bindtap='onClickScan'>
-    <image class='mine-image-left' src="../../assets/images/icon-QRCode-colored.png" ></image>
+    <image class='mine-image-left' src="../../assets/images/icon-QRCode-colored.png"></image>
     <text>扫一扫</text>
     <image class="mine-image-right" src="../../assets/images/icon-gt.png"></image>
   </view>
 
   <view class='mine-list' style='margin-top: 10rpx;' bindtap='onClickHelper'>
-    <image class='mine-image-left' src="../../assets/images/icon-helper.png" ></image>
+    <image class='mine-image-left' src="../../assets/images/icon-helper.png"></image>
     <text>帮助与反馈</text>
     <image class="mine-image-right" src="../../assets/images/icon-gt.png"></image>
   </view>
@@ -107,7 +107,7 @@
     <text>企业账号</text>
   </view>
 
-<!-- </view>
+  <!-- </view>
 <view class="page" wx:if="{{logged_in}}">
   <view class="page__hd">
     <view class="page__title">布源网小程序</view>

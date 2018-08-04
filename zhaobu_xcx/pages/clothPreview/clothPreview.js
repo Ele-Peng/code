@@ -214,12 +214,6 @@ Page({
   onLoad: function (options) {
     this.getSystemInfo();
     var app = getApp();
-    // 页面初始化 options为页面跳转所带来的参数
-    // console.log(app.globalData.is_shows)
-    // app.editTabBar3();//添加tabBar数据
-    // this.setData({
-    //   is_shows: app.globalData.is_shows
-    // })
     this.setData({
       search_type : options.type
     })

@@ -1,8 +1,19 @@
 // publish.js
-import { $wuxPicker } from '../../components/wux'
-import { $wuxToast } from '../../components/wux'
-import { $wuxLoading } from '../../components/wux' 
-import { $wuxDialog } from '../../components/wux'
+import {
+  $wuxPicker
+} from '../../components/wux'
+import {
+  $wuxToast
+} from '../../components/wux'
+import {
+  $wuxLoading
+} from '../../components/wux'
+import {
+  $wuxDialog
+} from '../../components/wux'
+import {
+  $wuxNotification
+} from '../../components/wux'
 
 Page({
 
@@ -10,29 +21,62 @@ Page({
    * 页面的初始数据
    */
   data: {
-    heading:"发布需求",
-    needs_type_items: [
-      { value: 'c', name: '样衣', },
-      { value: 'h', name: '样布', },
-      { value: 'p', name: '图片', },
+    heading: "发布需求",
+    credit: "",
+    needs_type_items: [{
+        value: 'c',
+        name: '样衣',
+      },
+      {
+        value: 'h',
+        name: '样布',
+      },
+      {
+        value: 'p',
+        name: '图片',
+      },
     ],
     screen_height: 0,
-    time_type_items: [
-      { value: '1', name: '1天', },
-      { value: '3', name: '3天', },
-      { value: '0', name: '不限', },
+    time_type_items: [{
+        value: '1',
+        name: '1天',
+      },
+      {
+        value: '3',
+        name: '3天',
+      },
+      {
+        value: '0',
+        name: '不限',
+      },
     ],
 
-    market_type_items: [
-      { value: 'g', name: '广州', },
-      { value: 'k', name: '柯桥', },
-      { value: 'q', name: '其他', },
+    market_type_items: [{
+        value: 'g',
+        name: '广州',
+      },
+      {
+        value: 'k',
+        name: '柯桥',
+      },
+      {
+        value: 'q',
+        name: '其他',
+      },
     ],
 
-    matching_type_items: [
-      { value: 'a', name: '匹配材质', },
-      { value: 'f', name: '较为匹配', },
-      { value: 'v', name: '高度匹配', },
+    matching_type_items: [{
+        value: 'a',
+        name: '匹配材质',
+      },
+      {
+        value: 'f',
+        name: '较为匹配',
+      },
+      {
+        value: 'v',
+        name: '高度匹配',
+      },
     ],
 
     show_optional: false,
@@ -48,8 +92,7 @@ Page({
     input_desc: '',
     input_extra: '',
     input_price: '',
-    selected_images: [
-    ],
+    selected_images: [],
     empty_images: [], //  上传图片里的占位符，让布局更好看一些
     addresses: [],
     selected_address: -1,
@@ -83,75 +126,117 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     //  加载默认地址
     console.log(wx.getStorageSync('cookie'))
     this.getSystemInfo();
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     if (!this.data.addr_inited || wx.getStorageSync('address_changed')) {
       wx.setStorageSync('address_changed', false);
       this.loadAddresses();
     }
+    var that = this
+    wx.request({
+      url: 'https://by.edenhe.com/api/bind/team_vip',
+      method: 'get',
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+      },
+      success: function(res) {
+        console.log(res.data);
+        var vip = res.data.data.vip_lvl;
+        var name = '普通会员';
+        if (vip == 1) {
+          name = '青铜会员';
+        } else if (vip == 2) {
+          name = '黄金会员';
+        } else if (vip == 3) {
+          name = '钻石会员';
+        }
+        that.setData({
+          credit: name
+        })
+        console.log(that.data.credit);
+        $wuxNotification.show({
+          image: '../../assets/images/icon-logo-in.png',
+          title: '布源',
+          text: '欢迎您，尊敬的' + that.data.credit,
+          data: {
+            message: '逗你玩的!!!'
+          },
+          duration: 3000,
+          onClick(data) {
+            console.log(data)
+          },
+          onClose(data) {
+            console.log(data)
+          },
+        })
+      },
+      fail: function(res) {
+        console.log(res.data);
+      }
+    });
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
+  onReachBottom: function() {
+
   },
 
 
-  onInput: function(e) {
-  },
+  onInput: function(e) {},
 
-  toggleOptional: function (e) {
+  toggleOptional: function(e) {
     this.setData({
       show_optional: !this.data.show_optional
     });
   },
 
-  onLongTapImage: function (e) {
+  onLongTapImage: function(e) {
     var that = this;
     var index = e.target.dataset.index;
     $wuxDialog.open({
       title: '确认删除',
       content: '确定要删除这张图片吗？',
-      buttons: [
-        {
+      buttons: [{
           text: '我要删除',
           type: 'weui-dialog__btn_warn',
           onTap(e) {
@@ -171,27 +256,25 @@ Page({
     this.onSelectedImagesChanged(imgs);
   },
 
-  selectImage: function (e) {
-    var that = this; 
+  selectImage: function(e) {
+    var that = this;
     wx.chooseImage({
-      count: 8 - that.data.selected_images.length, 
+      count: 8 - that.data.selected_images.length,
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var temp_file_paths = []
         for (var i = 0; i < res.tempFilePaths.length; i++) {
-          temp_file_paths.push(
-            {
-              'remote': '', 
-              'index': temp_file_paths.length,  
-              'path': res.tempFilePaths[i],
-              'uploading': true,
-              'uploadResult': true,
-              'progress': 0,
-            }
-          );
+          temp_file_paths.push({
+            'remote': '',
+            'index': temp_file_paths.length,
+            'path': res.tempFilePaths[i],
+            'uploading': true,
+            'uploadResult': true,
+            'progress': 0,
+          });
         }
         temp_file_paths = that.data.selected_images.concat(temp_file_paths);
         that.onSelectedImagesChanged(temp_file_paths);
@@ -200,13 +283,13 @@ Page({
     })
   },
 
-  onSelectedImagesChanged: function (images) {
+  onSelectedImagesChanged: function(images) {
     var empty_file_paths = [];
     if (images.length < 3) { //  用占位符补齐第一行
       for (var i = 3 - images.length; i > 0; i--) {
         empty_file_paths.push(i);
       }
-    } else if (images.length >= 4 && images.length < 7) {  //  用占位符补齐第二行
+    } else if (images.length >= 4 && images.length < 7) { //  用占位符补齐第二行
       for (var i = 7 - images.length; i > 0; i--) {
         empty_file_paths.push(i);
       }
@@ -219,7 +302,7 @@ Page({
     });
   },
 
-  startUploading: function () {
+  startUploading: function() {
     var have_upload_jobs = false;
     for (var i = 0; i < this.data.selected_images.length; i++) {
       if (this.data.selected_images[i].uploading) {
@@ -233,15 +316,17 @@ Page({
     }
   },
 
-  doUploading: function (path) {
+  doUploading: function(path) {
     console.log("uploading " + path)
     var that = this
     var uploadTask = wx.uploadFile({
       url: 'https://by.edenhe.com/api/upload/image/',
       filePath: path,
       name: 'image',
-      header: { Cookie: wx.getStorageSync('cookie')},
-      success: function (res) {
+      header: {
+        Cookie: wx.getStorageSync('cookie')
+      },
+      success: function(res) {
         console.log(res);
         var data = JSON.parse(res.data);
         console.log(data);
@@ -261,7 +346,7 @@ Page({
           selected_images: images,
         })
       },
-      fail: function (res) {
+      fail: function(res) {
         var data = JSON.parse(res.data);
         console.log(data);
         var images = that.data.selected_images;
@@ -397,29 +482,29 @@ Page({
         'Cookie': wx.getStorageSync('cookie'),
       },
       data: data,
-      success: function (res) {
+      success: function(res) {
         console.log(res);
         that.hideLoading();
         that.startPayment(res.data.data.id);
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res);
         that.hideLoading();
       },
     });
   },
 
-  showLoading: function () {
+  showLoading: function() {
     $wuxLoading.show({
       text: '正在提交',
     });
   },
 
-  hideLoading: function () {
+  hideLoading: function() {
     $wuxLoading.hide();
   },
 
-  onClickHelpFee: function () {
+  onClickHelpFee: function() {
     console.log("help fee");
   },
 
@@ -432,12 +517,10 @@ Page({
     console.log(values);
     $wuxPicker.init('market', {
       title: "请选择目标市场",
-      cols: [
-        {
-          textAlign: 'center',
-          values: values,
-        }
-      ],
+      cols: [{
+        textAlign: 'center',
+        values: values,
+      }],
       value: [0],
       onChange(p) {
         console.log(p)
@@ -458,7 +541,7 @@ Page({
     });
   },
 
-  onTapDemo: function () {
+  onTapDemo: function() {
     var values = [];
     var that = this;
     for (var i = 0; i < this.data.needs_type_items.length; i++) {
@@ -466,12 +549,10 @@ Page({
     }
     $wuxPicker.init('demo', {
       title: "请选择寄样类型",
-      cols: [
-        {
-          textAlign: 'center',
-          values: values,
-        }
-      ],
+      cols: [{
+        textAlign: 'center',
+        values: values,
+      }],
       value: [0],
       onChange(p) {
         console.log(p)
@@ -491,7 +572,7 @@ Page({
     });
   },
 
-  onTapTime: function () {
+  onTapTime: function() {
     var values = [];
     var that = this;
     for (var i = 0; i < this.data.time_type_items.length; i++) {
@@ -500,12 +581,10 @@ Page({
     console.log(values);
     $wuxPicker.init('time', {
       title: "请选择允许时间",
-      cols: [
-        {
-          textAlign: 'center',
-          values: values,
-        }
-      ],
+      cols: [{
+        textAlign: 'center',
+        values: values,
+      }],
       value: [0],
       onChange(p) {
         console.log(p)
@@ -525,7 +604,7 @@ Page({
     });
   },
 
-  onTapMatching: function () {
+  onTapMatching: function() {
     var values = [];
     var that = this;
     for (var i = 0; i < this.data.matching_type_items.length; i++) {
@@ -534,12 +613,10 @@ Page({
     console.log(values);
     $wuxPicker.init('matching', {
       title: "请选择匹配程度",
-      cols: [
-        {
-          textAlign: 'center',
-          values: values,
-        }
-      ],
+      cols: [{
+        textAlign: 'center',
+        values: values,
+      }],
       value: [0],
       onChange(p) {
         console.log(p)
@@ -559,7 +636,7 @@ Page({
     });
   },
 
-  loadAddresses: function () {
+  loadAddresses: function() {
     var that = this;
     wx.request({
       url: 'https://by.edenhe.com/api/address/',
@@ -567,14 +644,14 @@ Page({
       header: {
         Cookie: wx.getStorageSync('cookie'),
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         var addresses = res.data.data;
         var address_diaplay_list = [];
         var selected_address = -1;
         var receive_addr_id = -1;
         for (var i = 0; i < addresses.length; i++) {
-          address_diaplay_list.push(addresses[i].name + " " + addresses[i].phone + " " + 
+          address_diaplay_list.push(addresses[i].name + " " + addresses[i].phone + " " +
             addresses[i].prov_vb + addresses[i].city_vb + addresses[i].county_vb + addresses[i].detail);
           if (addresses[i].is_default) {
             selected_address = i;
@@ -588,13 +665,13 @@ Page({
           receive_addr_id: receive_addr_id,
         });
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res.data);
       }
     });
   },
 
-  onTapAddress: function () {
+  onTapAddress: function() {
     if (this.data.addresses.length > 0) {
       var values = this.data.picker_addresses;
       var that = this;
@@ -605,12 +682,10 @@ Page({
       console.log(values);
       $wuxPicker.init('addresses', {
         title: "请选择收货地址",
-        cols: [
-          {
-            textAlign: 'center',
-            values: values,
-          }
-        ],
+        cols: [{
+          textAlign: 'center',
+          values: values,
+        }],
         value: [selected_index],
         onChange(p) {
           console.log(p)
@@ -643,11 +718,11 @@ Page({
         'id': needs_id,
         'type': 'n',
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         that.preparePay(res.data.data.id);
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res.data);
         that.hideLoading();
         that.showPaymentFailed();
@@ -655,7 +730,7 @@ Page({
     });
   },
 
-  preparePay: function (order_id) {
+  preparePay: function(order_id) {
     var that = this;
     console.log(wx.getStorageSync('cookie'));
     wx.request({
@@ -664,12 +739,12 @@ Page({
       header: {
         Cookie: wx.getStorageSync('cookie'),
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         that.hideLoading();
         that.startWXPay(order_id, res.data.data);
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res.data);
         that.hideLoading();
         that.showPaymentFailed();
@@ -692,11 +767,11 @@ Page({
       'package': data.package,
       'signType': data.signtype,
       'paySign': data.sign,
-      'success': function (res) {
+      'success': function(res) {
         console.log(res);
         that.showPaymentOK();
       },
-      'fail': function (res) {
+      'fail': function(res) {
         console.log(res);
         that.showPaymentFailed();
       }
@@ -725,7 +800,7 @@ Page({
       timer: 1500,
       color: '#fff',
       text: '支付成功',
-      success: function () {
+      success: function() {
         wx.redirectTo({
           url: '/pages/needs/general_needs_list',
         })
