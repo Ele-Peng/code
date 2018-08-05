@@ -684,7 +684,7 @@ Page({
       color: '#fff',
       text: '支付失败',
       success: function () {
-        wx.redirectTo({
+        wx.navigateTo({
           url: '/pages/order/general_order_list?tab=2',
         })
       }
@@ -700,7 +700,7 @@ Page({
       color: '#fff',
       text: '支付成功',
       success: function () {
-        wx.redirectTo({
+        wx.navigateTo({
           url: '/pages/order/general_order_list',
         })
       }

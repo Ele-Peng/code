@@ -294,7 +294,5 @@ Page({
     }
   },
 
-  onCheck: function () {
-    
-  }
+  
 })

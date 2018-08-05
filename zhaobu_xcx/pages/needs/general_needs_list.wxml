@@ -25,11 +25,8 @@
               <template is="prompt" data="{{ ...$wux.prompt.msg_empty }}" />
             </view>
             <view wx:else>
-              <view class="{{ activeIndex == 2 ? 'panelBorder' : 'panelBorderCol'}}" style="background-color: white;}}" wx:key="" wx:for="{{ needs_data[index] }}" data-id="{{item.id}}">
-                <view wx:if="{{ activeIndex == 2}}" bindtap='onCheck'>
-                  <image src="../../assets/images/icon-check.png" style='width: 50rpx;height: 50rpx;padding-top: 130rpx;padding-right: 20rpx;'></image>
-                </view>
-                <view style='display: flex;flex-direction: column;' bindtap="onClickNeeds"  data-id="{{item.id}}">
+              <view class="panelBorderCol" style="background-color: white;}}" wx:key="" wx:for="{{ needs_data[index] }}" data-id="{{item.id}}" bindtap="onClickNeeds">
+                <view style='display: flex;flex-direction: column;'   data-id="{{item.id}}">
                   <view class='titlePanel'>
                     <text class="left">编号{{item.id}}</text>
                     <view class='{{ activeIndex == 2 ? "right" : "rightCol" }}'>
@@ -74,8 +71,3 @@
   </view>
 </view>
 
-<view wx:if="{{ activeIndex == 2 && needs_data[activeIndex].length != 0}}" style='position: fixed;'>
-  <button formType="submit" class="weui-btn" type="primary" style="position: relative;height: 80rpx;width: 750rpx;width: 400rpx; height:80rpx;line-height: 80rpx; background-color: #FF9906;font-size: 28rpx;margin-left: 175rpx;z-index: 9999;margin-top: -55%;">
-    确认支付
-  </button>
-</view>

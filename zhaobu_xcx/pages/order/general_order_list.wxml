@@ -5,6 +5,9 @@
 <import src="../../components/button/button.wxml"/>
 <template is="button" data="{{ ...$wux.button.br }}"/>
 
+<import src="../../components/toast/toast.wxml"/>
+<template is="toast" data="{{ ...$wux.toast }}"/>
+
 
 <view class="page">
   <view class="page__bd">
@@ -27,9 +30,10 @@
           </view>
           <view wx:else>
 
-            <view class="{{ activeIndex == 2 ? 'panelBorder' : 'panelBorderCol'}}" style="background-color: white" wx:key="" wx:for="{{ orders_data[index] }}" data-id="{{item.id}}">
+            <view class="{{ activeIndex == 2 ? 'panelBorder' : 'panelBorderCol'}}" style="background-color: white" wx:key="" wx:for="{{ orders_data[index] }}"  wx:for-index="idx" data-id="{{item.id}}">
                 <view wx:if="{{ activeIndex == 2}}">
-                  <image src="../../assets/images/icon-check.png" style='width: 50rpx;height: 50rpx;padding-top: 130rpx;padding-right: 20rpx;'></image>
+                  <image wx:if="{{item.checked}}" src="../../assets/images/icon-check.png" style='width: 50rpx;height: 50rpx;padding-top: 130rpx;padding-right: 20rpx;' bindtap="un_check_zhifu" data-idx="{{idx}}"></image>
+                  <image wx:if="{{!item.checked}}" src="../../assets/images/icon-noncheck.png" style='width: 50rpx;height: 50rpx;padding-top: 130rpx;padding-right: 20rpx;' bindtap="check_zhifu" data-idx="{{idx}}"></image>
                 </view>
                 <view style='display: flex;flex-direction: column;' bindtap="onClickOrder"  data-id="{{item.id}}">
                   <view class='titlePanel'>
@@ -73,8 +77,8 @@
   </view>
 </view>
 
-<view wx:if="{{ activeIndex == 2 && needs_data[activeIndex].length != 0}}" style='position: fixed;'>
-  <button formType="submit" class="weui-btn" type="primary" style="position: relative;height: 80rpx;width: 750rpx;width: 400rpx; height:80rpx;line-height: 80rpx; background-color: #FF9906;font-size: 28rpx;margin-left: 175rpx;z-index: 9999;margin-top: -55%;">
+<view wx:if="{{ activeIndex == 2 && order_data[activeIndex].length != 0 && has_zhifu_checked}}" style='position: fixed;'>
+  <button formType="submit" class="weui-btn" type="primary" style="position: relative;height: 80rpx;width: 750rpx;width: 400rpx; height:80rpx;line-height: 80rpx; background-color: #FF9906;font-size: 28rpx;margin-left: 175rpx;z-index: 9999;margin-top: -55%;" bindtap='submit_zhifu'>
     确认支付
   </button>
 </view>
