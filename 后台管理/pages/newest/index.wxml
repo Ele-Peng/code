@@ -1,0 +1,19 @@
+<!--pages/newest/index.wxml-->
+<import src="../../components/toast/toast.wxml" />
+<template is="toast" data="{{ ...$wux.toast }}" />
+
+<title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
+<form report-submit="true" bindsubmit="onSubmit">
+  <view class='class-group'>
+    <checkbox-group bindchange="checkboxChange">
+      <label class="checkbox" wx:for="{{items}}">
+        <view class='checkbox-item'>
+          <checkbox value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+        </view>
+      </label>
+    </checkbox-group>
+  </view>
+  <button formType="submit" class="weui-btn" type="primary" style="position: fixed;width: 100%;bottom: 0;background: #FF9906;border-radius: 0px;">
+    提交设置
+  </button>
+</form>

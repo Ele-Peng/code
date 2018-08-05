@@ -9,7 +9,7 @@
 <title heading="{{heading}}" lastUrl="{{lastUrl}}">
 </title>
 
-<view class="container" style="position: fixed; height: 1234rpx; width: 100%; display: flex; flex-direction: column; justify-content:space-between;">
+<view class="container" style="position: fixed; height: 92%; width: 100%; display: flex; flex-direction: column; justify-content:space-between;">
 	<view >
         <view wx:if="{{address.length==0}}" style='background-color:#FCFCFC;'>
           <image src="../../assets/images/icon-noneAddress.png" style='width:366rpx;height:256rpx;margin-top:220rpx;margin-left:192rpx;'></image>

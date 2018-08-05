@@ -18,7 +18,7 @@
   </view> -->
   <view wx:if="{{gwc.length == 0}}" style='position: fixed;width: 750rpx;height: {{ screen_height - 64}}px;background: #FFF;padding-bottom: {{ screen_height - 442}}px;'>
     <image src='../../assets/images/icon-none-goods.png' style='width: 366rpx;height: 243rpx;margin-top: 310rpx;margin-left: 193rpx;'></image>
-    <view style='background: #FF9906;text-align: center;width: 600rpx;height: 80rpx;margin-top: 152rpx;margin-left: 75rpx;border-radius: 40rpx;color: white;line-height: 80rpx;'>看最新布料</view>
+    <view style='background: #FF9906;text-align: center;width: 600rpx;height: 80rpx;margin-top: 152rpx;margin-left: 75rpx;border-radius: 40rpx;color: white;line-height: 80rpx;' bindtap='newCloth'>看最新布料</view>
   </view>
 
   <!-- 购物车为空 -->

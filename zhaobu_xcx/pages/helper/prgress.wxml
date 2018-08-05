@@ -3,34 +3,15 @@
 <view style='background: #fff;'>
   <view class='article-title'>找布说明</view>
 
-    <view class="sub-title">
+  <view class="sub-title">
     <text>找布流程（对外）</text>
   </view>
   <view class='sub-content'>
     <text>
      ·用户通过微信公众号或者小程序 发布需求  或者 直接致电我们客服
-     ·<text class='content-bold'>以样找布</text>
-1.派单中心指定就近业务员上门取件
-2.业务员上门完善找布需求，收取样品，当场用保密包装袋装好
-3.后台指派合适找布专员
-4.包裹拿回中心，发往各个市场；
-5.样布到达各个市场，找布专员取样；
-6.专员开始找布，找到之后在小程序后台提交候选结果；
-7.客户收到 结果提交 提醒，查看结果并进行相应操作     
-8.客户不满意，则继续找布；客户取消找布，根据取消原因 结束找布
-9.满意找布结果后，专员送色卡回市场负责人处
-10.色卡回寄到织里
-11.业务员将色卡送到客户处
-12.代理和客户反馈评价此次找布
-·<text class='content-bold'>以图找布</text>
-1.后台指派合适找布专员
-2.专员开始找布，找到之后在小程序后台提交候选结果；
-3.客户收到 结果提交 提醒，查看结果并进行相应操作     
-4.客户不满意，则继续找布；客户取消找布，根据取消原因 结束找布
-5.满意找布结果后，专员送色卡回市场负责人处
-6.色卡回寄到织里
-7.业务员将色卡送到客户处
-8.代理和客户反馈评价此次找布
+     ·<text class='content-bold'>以样找布</text> 1.派单中心指定就近业务员上门取件 2.业务员上门完善找布需求，收取样品，当场用保密包装袋装好 3.后台指派合适找布专员 4.包裹拿回中心，发往各个市场； 5.样布到达各个市场，找布专员取样； 6.专员开始找布，找到之后在小程序后台提交候选结果； 7.客户收到 结果提交 提醒，查看结果并进行相应操作      8.客户不满意，则继续找布；客户取消找布，根据取消原因 结束找布 9.满意找布结果后，专员送色卡回市场负责人处 10.色卡回寄到织里 11.业务员将色卡送到客户处 12.代理和客户反馈评价此次找布
+    ·
+    <text class='content-bold'>以图找布</text> 1.后台指派合适找布专员 2.专员开始找布，找到之后在小程序后台提交候选结果； 3.客户收到 结果提交 提醒，查看结果并进行相应操作      4.客户不满意，则继续找布；客户取消找布，根据取消原因 结束找布 5.满意找布结果后，专员送色卡回市场负责人处 6.色卡回寄到织里 7.业务员将色卡送到客户处 8.代理和客户反馈评价此次找布
     </text>
     <image src="http://pbzxb700b.bkt.clouddn.com/publish_q2.png" style='width: 698rpx;height: 3012rpx;' mode='aspectFit' bindtap='onPreivewImg' data-index="0" data-imgs="http://pbzxb700b.bkt.clouddn.com/publish_q2.png"></image>
   </view>
@@ -65,8 +46,6 @@
   </view>
 
   <wux-cell-group title="您可能还需要">
-      <wux-cell title="意见反馈" url="../../pages/helper/feedback" openType="navigateTo" is-link></wux-cell>
-    </wux-cell-group>
+    <wux-cell title="意见反馈" url="../../pages/helper/index?index=2" openType="navigateTo" is-link></wux-cell>
+  </wux-cell-group>
 </view>
-
-

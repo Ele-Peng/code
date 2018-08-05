@@ -53,7 +53,7 @@
 
 </scroll-view>
 <view bindtap="submit_event">
-  <button class="weui-btn" type="primary" style="position: fixed; margin-top: {{ 1120/ 1334 * screen_height}}px;width: 100%;background: #FF9906;border-radius: 0rpx;">
+  <button class="weui-btn" type="primary" style="position: fixed; bottom: 0;width: 100%;background: #FF9906;border-radius: 0rpx;">
     确认修改
   </button>
 </view>

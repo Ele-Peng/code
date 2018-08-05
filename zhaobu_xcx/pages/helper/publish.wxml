@@ -60,6 +60,6 @@ c.图片，选择图片时，您只需上传图片，无需寄送布样。图片
     </text>
   </view>
   <wux-cell-group title="您可能还需要">
-      <wux-cell title="意见反馈" url="../../pages/helper/feedback" openType="navigateTo" is-link></wux-cell>
-    </wux-cell-group>
+    <wux-cell title="意见反馈" url="../../pages/helper/index?index=2" openType="navigateTo" is-link></wux-cell>
+  </wux-cell-group>
 </view>

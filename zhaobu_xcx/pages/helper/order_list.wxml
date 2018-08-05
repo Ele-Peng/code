@@ -122,6 +122,6 @@
   </view>
 
   <wux-cell-group title="您可能还需要">
-      <wux-cell title="意见反馈" url="../../pages/helper/feedback" openType="navigateTo" is-link></wux-cell>
-    </wux-cell-group>
+    <wux-cell title="意见反馈" url="../../pages/helper/index?index=2" openType="navigateTo" is-link></wux-cell>
+  </wux-cell-group>
 </view>

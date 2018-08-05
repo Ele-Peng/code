@@ -9,7 +9,7 @@
 <scroll-view scroll-y="true" style="height:{{ screen_height - 33}}px;position: fixed;" class="container">
   <view class="account">
     <view>{{name}}  积分:{{score}}  消费:{{pay_money}}</view>
-    <image src='../../assets/images/icon-sign-in.png' style='width: 60rpx;height: 60rpx;padding-left: 20rpx;padding-top: 20rpx; ' bindtap='qiandao'> </image>
+    <image src='../../assets/images/icon-sign-in.png' style='width: 40rpx;height: 40rpx;padding-left: 20rpx;padding-top: 28rpx; ' bindtap='qiandao'> </image>
   </view>
 
   <view class='mine-record' bindtap='onClickNeeds'>

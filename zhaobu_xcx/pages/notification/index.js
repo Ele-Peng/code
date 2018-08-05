@@ -11,7 +11,7 @@ Page({
 			data: {
 				message: '逗你玩的!!!'
 			}, 
-			time: 3000, 
+			time: 300, 
 			onClick(data) {
 				console.log(data)
 			},

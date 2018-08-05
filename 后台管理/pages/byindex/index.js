@@ -65,7 +65,25 @@ Page({
         remark: '颜色样式设置',
         url: '../../pages/colorStyle/index',
         icon: '../../assets/images/icon-colorStyle.png',
-      }
+      },
+      {
+        title: 'boutique',
+        remark: '精品设置',
+        url: '../../pages/boutique/index',
+        icon: '../../assets/images/icon-boutique.png',
+      },
+      {
+        title: 'newest',
+        remark: '最新设置',
+        url: '../../pages/newest/index',
+        icon: '../../assets/images/icon-newest.png',
+      },
+      {
+        title: 'popular',
+        remark: '热卖设置',
+        url: '../../pages/popular/index',
+        icon: '../../assets/images/icon-popular.png',
+      },
     ],
   },
 

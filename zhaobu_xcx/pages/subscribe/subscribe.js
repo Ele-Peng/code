@@ -368,6 +368,9 @@ Page({
       success: function (res) {
         console.log(res.data);
         that.hideLoading();
+        wx.showToast({
+          title: '加入成功',
+        })
       },
       fail: function (res) {
         console.log(res.data);
@@ -388,8 +391,7 @@ Page({
       return addresses[0].id
     } else {
       wx.showToast({
-        title: '错误',
-        content: '请到我的地址添加地址，不然无法下单',
+        title: '暂无地址',
       })
       return -1
     }
@@ -433,8 +435,7 @@ Page({
 
     if (sum == 0) {
       wx.showToast({
-        title: '提示',
-        content: '请选择购买数量，不能为0',
+        title: '数量不能为0'
       })
       return
     }
@@ -452,8 +453,7 @@ Page({
       data: data,
       success: function (res) {
         wx.showToast({
-          title: '提示',
-          content: '下单成功(大货仅支持线下)',
+          title: '下单成功',
         })
         console.log(res.data);
         wx.navigateTo({

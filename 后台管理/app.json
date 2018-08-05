@@ -16,7 +16,10 @@
     "pages/class/index",
     "pages/colorStyle/index",
     "pages/search/index",
-    "pages/byindex/none"
+    "pages/byindex/none",
+    "pages/boutique/index",
+    "pages/popular/index",
+    "pages/newest/index"
   ],
   "window": {
     "navigationStyle": "custom"

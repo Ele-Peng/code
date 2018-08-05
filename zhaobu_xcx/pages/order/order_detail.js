@@ -235,5 +235,15 @@ Page({
     wx.navigateTo({
       url: './update?type=' + that.data.user_type + '&status=' + that.data.detail.status + '&id=' + that.data.detail.id,
     })
+  },
+
+  check_event: function (e) {
+    var that = this;
+    wx.navigateTo({
+      url: './update?type=' + that.data.user_type + '&status=' + that.data.detail.status + '&id=' + that.data.detail.id,
+    })
+    console.log(that.data.user_type);
+    console.log(that.data.detail.status);
+
   }
 })

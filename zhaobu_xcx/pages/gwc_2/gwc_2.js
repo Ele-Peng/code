@@ -73,13 +73,13 @@ Page({
     })
   },
 
-  
+
   onLoad: function (options) {
     this.getSystemInfo();
   },
 
 
-  get_card: function() {
+  get_card: function () {
     this.showLoading();
     var that = this;
     wx.request({
@@ -242,32 +242,45 @@ Page({
   },
 
   submit: function (e) {
-    var temp_gwc = {};
-    temp_gwc = [];
+    var ids = ''
     var n = 0;
     // 遍历所有商品，并加入到订单中
+
+    var that = this;
+
+    var flag = false
     for (var i in this.data.gwc) {
-      var flag = false;
-      for (var j in this.data.gwc[i].items) {
-        if (this.data.gwc[i].items[j].checked) {
-          if (!flag) {
-            temp_gwc.push({});
-            temp_gwc[n].shop_name = this.data.gwc[i].shop_name;
-            temp_gwc[n].shop_name = this.data.gwc[i].shop_id;
-            temp_gwc[n].items = [];
-            flag = true;
-          }
-          temp_gwc[n].items.push(this.data.gwc[i].items[j])
+      if (this.data.gwc[i].checked) {
+        if (flag) {
+          ids = ids + ',';
+        } else {
+          flag = true;
         }
-      }
-      if (flag) {
-        n += 1;
+        ids = ids + this.data.gwc[i].id
       }
     }
-    getApp().globalData.gwc = temp_gwc;
-    wx.navigateTo({
-      url: '../dfkdd/dfkdd',
-    })
+    console.log(ids)
+
+    wx.request({
+      url: 'https://by.edenhe.com/api/cart/order/',
+      method: 'POST',
+      data: {
+        id: ids
+      },
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      success: function (res) {
+        console.log(res);
+        for (var i in that.data.gwc) {
+          if (that.data.gwc[i].checked) {
+            that.delete_cart(that.data.gwc[i].id)
+          }
+        }
+      }
+    });
+
   },
 
   touch_start: function (e) {
@@ -339,13 +352,12 @@ Page({
     })
   },
 
-  delete_item: function(e) {
-    console.log(e);
-    var idx = e.currentTarget.dataset.idx;
+  delete_cart: function(id) {
+
     var that = this;
 
     wx.request({
-      url: 'https://by.edenhe.com/api/cart/' + that.data.gwc[idx].id + '/remove/',
+      url: 'https://by.edenhe.com/api/cart/' + id + '/remove/',
       method: 'POST',
       header: {
         Cookie: wx.getStorageSync('cookie'),
@@ -364,7 +376,13 @@ Page({
 
   },
 
-  onShowModal: function(e) {
+  delete_item: function (e) {
+    console.log(e);
+    var idx = e.currentTarget.dataset.idx;
+    this.delete_cart(that.data.gwc[idx].id)
+  },
+
+  onShowModal: function (e) {
     var that = this;
     console.log(e);
     that.setData({
@@ -443,20 +461,20 @@ Page({
     }
   },
 
-  _cancelModal: function(e) {
+  _cancelModal: function (e) {
     this.setData({
       isShow: !this.data.isShow
     });
   },
 
-  bindKeyInput: function(e) {
+  bindKeyInput: function (e) {
     console.log(e);
     this.setData({
       amount: parseInt(e.detail.value)
     })
   },
 
-  _confirmModal: function(e) {
+  _confirmModal: function (e) {
     var idx = this.data.edit_idx;
     var amount = this.data.amount;
     var that = this;
@@ -488,5 +506,11 @@ Page({
         that.showPaymentFailed();
       }
     });
+  },
+
+  newCloth: function (e) {
+    wx.navigateTo({
+      url: '../../pages/clothPreview/clothPreview?type=2',
+    })
   }
 })

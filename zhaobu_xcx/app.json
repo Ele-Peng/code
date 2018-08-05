@@ -54,7 +54,6 @@
     "pages/about/index",
     "pages/needs/publish",
     "pages/needs/needs_list",
-    "pages/agent/apply",
     "pages/address/address_list",
     "pages/address/create",
     "pages/needs/detail",

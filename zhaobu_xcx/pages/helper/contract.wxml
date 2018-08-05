@@ -1,7 +1,7 @@
 <!--pages/helper/contract.wxml-->
 <title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
 <view style='background: #FFF;'>
-  <view class='article-title'>布源会员协议</view>
+  <view class='article-title'>布源会员注册协议</view>
   <view class="sub-title">
     <text class='content-bold'>一、协议的范围</text>
   </view>
@@ -20,12 +20,7 @@
   </view>
   <view class='sub-content'>
     <text>
-     2.1 关于收费
-		甲方向乙方支付费用共计人民币           元/年；于协议签订后7日内一次性付清。
-	2.2 服务期限
-		服务时间:       年    月     日到    年    月   日
-	2.3 服务实行
-		平台以微信小程序或独立app创建的面料交易、面料数据信息展示、面料匹配寻找等方式在内的各种形态（包括线下服务形态）向您提供的各项服务。
+     布源以微信小程序或独立app创建的面料交易、面料数据信息展示、面料匹配寻找等方式在内的各种形态（包括线下服务形态）向您提供的各项服务。
     </text>
   </view>
 
@@ -92,7 +87,7 @@
   </text>
 </view>
 
-<wux-cell-group title="您可能还需要">
-      <wux-cell title="意见反馈" url="../../pages/helper/index?index=2" openType="navigateTo" is-link></wux-cell>
-    </wux-cell-group>
+  <wux-cell-group title="您可能还需要">
+    <wux-cell title="意见反馈" url="../../pages/helper/index?index=2" openType="navigateTo" is-link></wux-cell>
+  </wux-cell-group>
 </view>

@@ -172,13 +172,18 @@
           </view>
         </view>
       </view>
-      <view wx:if="{{user_type == 'user' && detail.status == 'u'}}" hidden="{{ activeIndex != 0 }}" bindtap="pay_event">
-        <button class="weui-btn" type="primary" style="position: fixed;margin-top: 1012rpx;width: 100%;background: #FF9906;">
-        <!-- top: {{screen_height - 46}}px; -->
+      <view wx:if="{{user_type == 'user' && detail.status == 'u'}}" hidden="{{ activeIndex != 1 }}" bindtap="pay_event">
+        <button class="weui-btn" type="primary" style="position: fixed;bottom: 0;width: 100%;background: #FF9906;border-radius: 0rpx;">
+          <!-- top: {{screen_height - 46}}px; -->
           前往支付
         </button>
       </view>
-       <view wx:if="{{user_type == 'agent' && (detail.status == 'n' || detail.status == 'c' || detail.status == 'p')}}" hidden="{{ activeIndex != 1 }}" bindtap="edit_event"> 
+      <view wx:if="{{user_type == 'user' && detail.status == 's'}}" hidden="{{ activeIndex != 1 }}" bindtap="check_event">
+        <button class="weui-btn" type="primary" style="position: fixed;bottom: 0;width: 100%;background: #FF9906;border-radius: 0rpx;">
+          确认收货
+        </button>
+      </view>
+      <view wx:if="{{user_type == 'agent' && (detail.status == 'n' || detail.status == 'c' || detail.status == 'p')}}" hidden="{{ activeIndex != 1 }}" bindtap="edit_event">
         <button class="weui-btn" type="primary" style="position: fixed; margin-top: {{ 920/1334 * screen_height }}px; width: 100%; background: #FF9906;border-radius: 0rpx;">
           {{ update_btn_text[detail.status] }}
         </button>

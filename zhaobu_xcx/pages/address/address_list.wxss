@@ -42,7 +42,9 @@
 }
 
 .rightAddress image {
-  width: 29rpx;
-  height: 25rpx;
-  margin-top: 76rpx;
+  width: 25rpx;
+  height: 38rpx;
+  padding-top: 50rpx;
+  padding-bottom: 50rpx;
+  padding-right: 40rpx;
 }

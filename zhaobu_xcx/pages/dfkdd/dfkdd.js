@@ -15,7 +15,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: 'https://xiangyangxiaodui.cn/dingdan/',
+      url: 'https://by.edenhe.com/post/api/cart/order/?id=1',
       header: {
         'Content-Type': 'application/json'
       },
