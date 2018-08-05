@@ -22,47 +22,60 @@
         <block wx:for-items="{{ tabs }}" wx:key="{{ index }}">
           <view class="weui-tab__content" hidden="{{ activeIndex != index }}" bindtouchmove='touch_move'>
             <view wx:if="{{needs_data[index].length == 0}}" style='margin-top: -80rpx;'>
-              <template  is="prompt" data="{{ ...$wux.prompt.msg_empty }}" />
+              <template is="prompt" data="{{ ...$wux.prompt.msg_empty }}" />
             </view>
             <view wx:else>
-              <view class="panelBorder" style="background-color: white" wx:key="" wx:for="{{ needs_data[index] }}" bindtap="onClickNeeds" data-id="{{item.id}}">
-                <view class='titlePanel'>
-                  <text class="left">编号{{item.id}}</text>
-                  <view class='right'>
-                    <text>{{item.display_time}}</text>
+              <view class="{{ activeIndex == 2 ? 'panelBorder' : 'panelBorderCol'}}" style="background-color: white;}}" wx:key="" wx:for="{{ needs_data[index] }}" data-id="{{item.id}}">
+                <view wx:if="{{ activeIndex == 2}}" bindtap='onCheck'>
+                  <image src="../../assets/images/icon-check.png" style='width: 50rpx;height: 50rpx;padding-top: 130rpx;padding-right: 20rpx;'></image>
+                </view>
+                <view style='display: flex;flex-direction: column;' bindtap="onClickNeeds"  data-id="{{item.id}}">
+                  <view class='titlePanel'>
+                    <text class="left">编号{{item.id}}</text>
+                    <view class='{{ activeIndex == 2 ? "right" : "rightCol" }}'>
+                      <text>{{item.display_time}}</text>
+                    </view>
+                  </view>
+                  <view class='statusPanel'>
+                    <image wx:if="{{ item.thumb != '' }}" src="{{item.thumb}}"></image>
+                    <image wx:else src="../../assets/images/testImg/icon-homePage.png"></image>
+                    <view class='leftStatus'>
+                      <view style='display:flex;flex-direction:row;'>
+                        <text class="statusName">状态：</text>
+                        <text class='statusValue'>{{item.display_status}}</text>
+                      </view>
+                      <text class="price" wx:if="{{item.reward}}">￥{{item.reward}}</text>
+                      <text class="price" wx:if="{{item.price}}">￥{{item.price}}</text>
+                    </view>
+                    <view class='rightStatus'>
+                      <view style='display:flex;flex-direction:row;'>
+                        <text class=" statusName ">发布：</text>
+                        <text class='statusValue'>{{item.user}}</text>
+                      </view>
+                      <view wx:if="{{category==0}} " style='display:flex;flex-direction:row;padding-top: 10rpx;'>
+                        <text class="statusName ">市场：</text>
+                        <text class='statusValue'>{{item.market}}</text>
+                      </view>
+                    </view>
                   </view>
                 </view>
-                <view class='statusPanel'>
-                  <image wx:if="{{ item.thumb != '' }}" src="{{item.thumb}}"></image>
-                  <image wx:else src="../../assets/images/testImg/icon-homePage.png"></image>
-                  <view class='leftStatus'>
-                    <view style='display:flex;flex-direction:row;'>
-                      <text class="statusName">状态：</text>
-                      <text class='statusValue'>{{item.display_status}}</text>
-                    </view>
-                    <text class="price" wx:if="{{item.reward}}">￥{{item.reward}}</text>
-                    <text class="price" wx:if="{{item.price}}">￥{{item.price}}</text>
-                  </view>
-                  <view class='rightStatus'>
-                    <view style='display:flex;flex-direction:row;'>
-                      <text class=" statusName ">发布：</text>
-                      <text class='statusValue'>{{item.user}}</text>
-                    </view>
-                    <view wx:if="{{category==0}} " style='display:flex;flex-direction:row;padding-top: 10rpx;'>
-                      <text class="statusName ">市场：</text>
-                      <text class='statusValue'>{{item.market}}</text>
-                    </view>
-                  </view>
-                </view>
+
               </view>
 
               <view class="loadmore" wx:if="{{ needs_page_more[activeIndex] }}" bindtap='loadMoreNeeds'>
                 <text>查看更多</text>
               </view>
+
             </view>
           </view>
         </block>
       </view>
     </view>
   </view>
+</view>
+
+<view wx:if="{{ activeIndex == 2 && needs_data[activeIndex].length != 0}}" style='position: fixed;'>
+  <button formType="submit" class="weui-btn" type="primary" style="position: relative;height: 80rpx;width: 750rpx;width: 400rpx; height:80rpx;line-height: 80rpx; background-color: #FF9906;font-size: 28rpx;margin-left: 175rpx;z-index: 9999;margin-top: -55%;">
+    确认支付
+  </button>
 </view>

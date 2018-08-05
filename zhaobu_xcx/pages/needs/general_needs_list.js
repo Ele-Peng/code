@@ -292,5 +292,9 @@ Page({
     if (needs_page_more[activeIndex]) {
       this.loadMoreNeeds();
     }
+  },
+
+  onCheck: function () {
+    
   }
 })

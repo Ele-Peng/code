@@ -26,57 +26,38 @@
               <template  is="prompt" data="{{ ...$wux.prompt.msg_empty }}" />
           </view>
           <view wx:else>
-            <!-- <view class="weui-panel weui-panel_access" wx:key="" wx:for="{{ orders_data[index] }}" bindtap="onClickOrder" data-id="{{item.id}}">
-              <view class="weui-panel__hd panel-needs-list__hd">
-                <text>单号{{item.id}}</text>
-                <view>
-                <text wx:if="{{show_username}}" style="margin-right: 10px">发布：{{ item.user }}</text>
-                <text>{{item.display_time}}</text>
+
+            <view class="{{ activeIndex == 2 ? 'panelBorder' : 'panelBorderCol'}}" style="background-color: white" wx:key="" wx:for="{{ orders_data[index] }}" data-id="{{item.id}}">
+                <view wx:if="{{ activeIndex == 2}}">
+                  <image src="../../assets/images/icon-check.png" style='width: 50rpx;height: 50rpx;padding-top: 130rpx;padding-right: 20rpx;'></image>
                 </view>
-              </view>
-              <view class="weui-panel__bd">
-                <view class="weui-media-box panel-needs-list__bd">
-                  <image class="weui-uploader__img" src="{{item.thumb}}" />
-                  <view class="panel-needs-list__desc">
-                    <view class="panel-needs-list__desc_item">
-                      <text class="panel-needs-list__desc_title">状态：</text>
-                      <text>{{item.display_status}}</text>
+                <view style='display: flex;flex-direction: column;' bindtap="onClickOrder"  data-id="{{item.id}}">
+                  <view class='titlePanel'>
+                    <text class="left">单号{{item.id}}</text>
+                    <view class='right'>
+                      <text>{{item.display_time}}</text>
                     </view>
-                    <view class="panel-needs-list__desc_item">
-                      <text class="panel-needs-list__desc_title">款号：</text>
-                      <text>{{item.user_product}}</text>
-                    </view>
-                    <text class="panel-needs-list__desc_price">￥{{item.price}}</text>
                   </view>
-                </view>
-              </view>
-            </view> -->
-            <view class="panelBorder" style="background-color: white" wx:key="" wx:for="{{ orders_data[index] }}" bindtap="onClickOrder" data-id="{{item.id}}">
-                <view class='titlePanel'>
-                  <text class="left">单号{{item.id}}</text>
-                  <view class='right'>
-                    <text>{{item.display_time}}</text>
-                  </view>
-                </view>
-                <view class='statusPanel'>
-                  <image wx:if="{{ item.thumb != '' }}" src="{{item.thumb}}"></image>
-                  <image wx:else src="../../assets/images/testImg/icon-homePage.png"></image>
-                  <view class='leftStatus'>
-                    <view style='display:flex;flex-direction:row;'>
-                      <text class="statusName">状态：</text>
-                      <text class='statusValue'>{{item.display_status}}</text>
+                  <view class='statusPanel'>
+                    <image wx:if="{{ item.thumb != '' }}" src="{{item.thumb}}"></image>
+                    <image wx:else src="../../assets/images/testImg/icon-homePage.png"></image>
+                    <view class='leftStatus'>
+                      <view style='display:flex;flex-direction:row;'>
+                        <text class="statusName">状态：</text>
+                        <text class='statusValue'>{{item.display_status}}</text>
+                      </view>
+                      <text class="price" wx:if="{{item.reward}}">￥{{item.reward}}</text>
+                      <text class="price" wx:if="{{item.price}}">￥{{item.price}}</text>
                     </view>
-                    <text class="price" wx:if="{{item.reward}}">￥{{item.reward}}</text>
-                    <text class="price" wx:if="{{item.price}}">￥{{item.price}}</text>
-                  </view>
-                  <view wx:if="{{show_username}}" class='rightStatus'>
-                    <view style='display:flex;flex-direction:row;'>
-                      <text class=" statusName ">发布：</text>
-                      <text class='statusValue'>{{ item.user }}</text>
-                    </view>
-                    <view wx:if="{{category==0}} " style='display:flex;flex-direction:row;padding-top: 10rpx;'>
-                      <text class="statusName ">款号：</text>
-                      <text class='statusValue'>{{item.user_product}}</text>
+                    <view wx:if="{{show_username}}" class='rightStatus'>
+                      <view style='display:flex;flex-direction:row;'>
+                        <text class=" statusName ">发布：</text>
+                        <text class='statusValue'>{{ item.user }}</text>
+                      </view>
+                      <view wx:if="{{category==0}} " style='display:flex;flex-direction:row;padding-top: 10rpx;'>
+                        <text class="statusName ">款号：</text>
+                        <text class='statusValue'>{{item.user_product}}</text>
+                      </view>
                     </view>
                   </view>
                 </view>
@@ -90,4 +71,10 @@
       </view>
     </view>
   </view>
+</view>
+
+<view wx:if="{{ activeIndex == 2 && needs_data[activeIndex].length != 0}}" style='position: fixed;'>
+  <button formType="submit" class="weui-btn" type="primary" style="position: relative;height: 80rpx;width: 750rpx;width: 400rpx; height:80rpx;line-height: 80rpx; background-color: #FF9906;font-size: 28rpx;margin-left: 175rpx;z-index: 9999;margin-top: -55%;">
+    确认支付
+  </button>
 </view>

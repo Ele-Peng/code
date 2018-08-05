@@ -358,7 +358,7 @@ Page({
     console.log(data);
 
     wx.request({
-      url: 'http://by.edenhe.com/api/cart/',
+      url: 'https://by.edenhe.com/api/cart/',
       method: 'post',
       header: {
         Cookie: wx.getStorageSync('cookie'),

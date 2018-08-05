@@ -569,8 +569,18 @@ radio-group {
   height: 260rpx;
   border-bottom: 10px solid #FCFCFC;
   display: flex;
+  flex-direction: row;
+  padding-left: 26rpx;
+  border-radius: 1rpx solid #F5F5F5;
+}
+
+.panelBorderCol {
+  height: 260rpx;
+  border-bottom: 10px solid #FCFCFC;
+  display: flex;
   flex-direction: column;
   padding-left: 26rpx;
+  border-radius: 1rpx solid #F5F5F5;
 }
 
 .titlePanel {
@@ -584,14 +594,22 @@ radio-group {
 }
 
 .left {
-  width: 250rpx;
+  width: 200rpx;
 }
 
 .right {
+  width: 430rpx;
+  text-align: right;
+  margin-right: 24rpx;
+}
+
+
+.rightCol {
   width: 500rpx;
   text-align: right;
   margin-right: 24rpx;
 }
+
 
 .statusPanel {
   display: flex;
