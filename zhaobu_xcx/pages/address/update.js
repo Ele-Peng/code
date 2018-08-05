@@ -37,7 +37,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      updateAdd: {
+        name: options.name,
+        phone: options.phone,
+        city_vb: options.city_vb,
+        county_vb: options.county_vb,
+        prov_vb: options.prov_vb,
+        detail: options.detail
+      }
+    })
+    console.log(this.data.updateAdd)
   },
 
   /**
@@ -113,6 +123,7 @@ Page({
   },
 
   onSave: function (e) {
+    console.log(this.data.selected_code)
     if (this.data.name == "") {
       $wuxToast.show({
         type: 'forbidden',

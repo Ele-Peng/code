@@ -214,9 +214,11 @@ Page({
   onLoad: function (options) {
     this.getSystemInfo();
     var app = getApp();
-    this.setData({
-      search_type : options.type
-    })
+    if (options.type) {
+      this.setData({
+        search_type: options.type
+      })
+    }
   },
 
   getSystemInfo() {
@@ -244,192 +246,35 @@ Page({
   getList: function () {
     this.showLoading();
     var that = this;
+    var url = ''
     if (this.data.search_type == 1) {
-      wx.request({
-        url: 'https://by.edenhe.com/api/selected/boutique/',
-        header: {
-          Cookie: wx.getStorageSync('cookie'),
-          'content-type': 'application/json' // 默认值
-        },
-        method: 'GET',
-         success: function(res) {
-          console.log(res.data);
-          var n = 0;
-          for (var i in res.data.data) {
-            var flag = false;
-            for (var j in that.data.is_shows) {
-              if (j == res.data.data[i].clothID) {
-                flag = true;
-                break;
-              }
-            }
-            if (!flag) {
-              that.data.is_shows[res.data.data[i].clothID] = true
-            }
-            that.data.cloth_list.push(res.data.data[i]);
-            // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
-            if (n % 2 == 0) {
-              if (res.data.data[i].thumb) {
-                that.data.cloth_list_left.push(res.data.data[i]);
-              }
-            } else {
-               if (res.data.data[i].thumb) {
-                 that.data.cloth_list_right.push(res.data.data[i]);
-               }
-            }
-            n += 1;
-          }
-           if (res.data.length == null) {
-             console.log("none goods");
-           }
-           for (var i in res.data.data) {
-             var flag = false;
-             for (var j in that.data.is_shows) {
-               if (j == res.data.data[i].clothID) {
-                 flag = true;
-                 break;
-               }
-             }
-             if (!flag) {
-               that.data.is_shows[res.data.data[i].clothID] = true
-             }
-             that.data.cloth_list.push(res.data.data[i]);
-             // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
-             if (n % 2 == 0) {
-               if (!res.data.data[i].thumb) {
-                 that.data.cloth_list_left.push(res.data.data[i]);
-               }
-             } else {
-               if (!res.data.data[i].thumb) {
-                 that.data.cloth_list_right.push(res.data.data[i]);
-               }
-             }
-             n += 1;
-           }
-          that.setData({
-            is_shows: that.data.is_shows,
-            cloth_list: that.data.cloth_list,
-            cloth_list_left: that.data.cloth_list_left,
-            cloth_list_right: that.data.cloth_list_right
-          });
-          that.hideLoading();
-        }
-      })
+      url = 'https://by.edenhe.com/api/selected/boutique/'
     } else if (this.data.search_type == 2) {
-      wx.request({
-        url: 'https://by.edenhe.com/api/selected/newest/',
-        header: {
-          Cookie: wx.getStorageSync('cookie'),
-          'content-type': 'application/json' // 默认值
-        },
-        method: 'GET',
-        success: function (res) {
-          console.log(res.data);
-          var n = 0;
-          for (var i in res.data.data) {
-            var flag = false;
-            for (var j in that.data.is_shows) {
-              if (j == res.data.data[i].clothID) {
-                flag = true;
-                break;
-              }
-            }
-            if (!flag) {
-              that.data.is_shows[res.data.data[i].clothID] = true
-            }
-            that.data.cloth_list.push(res.data.data[i]);
-            // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
-            if (n % 2 == 0) {
-              that.data.cloth_list_left.push(res.data.data[i]);
-            } else {
-              that.data.cloth_list_right.push(res.data.data[i]);
-            }
-            n += 1;
-          }
-          that.setData({
-            is_shows: that.data.is_shows,
-            cloth_list: that.data.cloth_list,
-            cloth_list_left: that.data.cloth_list_left,
-            cloth_list_right: that.data.cloth_list_right
-          });
-          that.hideLoading();
-        }
-      })
+      url = 'https://by.edenhe.com/api/selected/newest/'
     } else if (this.data.search_type == 3) {
-      wx.request({
-        url: '',
-      })
+      url = ''
     } else if (this.data.search_type == 4) {
-      wx.request({
-        url: 'https://by.edenhe.com/api/selected/popular',
-        header: {
-          Cookie: wx.getStorageSync('cookie'),
-          'content-type': 'application/json' // 默认值
-        },
-        method: 'GET',
-        success: function (res) {
-          console.log(res.data);
-          var n = 0;
-          if (res.data.length == null) {
-            console.log("none goods");
-          }
-          for (var i in res.data.data) {
-            var flag = false;
-            for (var j in that.data.is_shows) {
-              if (j == res.data.data[i].clothID) {
-                flag = true;
-                break;
-              }
-            }
-            if (!flag) {
-              that.data.is_shows[res.data.data[i].clothID] = true
-            }
-            that.data.cloth_list.push(res.data.data[i]);
-            // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
-            if (n % 2 == 0) {
-              that.data.cloth_list_left.push(res.data.data[i]);
-            } else {
-              that.data.cloth_list_right.push(res.data.data[i]);
-            }
-            n += 1;
-          }
-          that.setData({
-            is_shows: that.data.is_shows,
-            cloth_list: that.data.cloth_list,
-            cloth_list_left: that.data.cloth_list_left,
-            cloth_list_right: that.data.cloth_list_right
-          });
-          that.hideLoading();
-        }
-      })
+      url = 'https://by.edenhe.com/api/selected/popular'
     } else {
-      wx.request({
-        url: 'https://by.edenhe.com/api/record/samples/?' + that.data.key,
-        header: {
-          Cookie: wx.getStorageSync('cookie'),
-          'content-type': 'application/json' // 默认值
-        },
-        data: {
-          page: that.data.page,
-          size: that.data.size,
-        },
-        method: 'GET',
-        success: function (res) {
-          console.log(res.data);
-          var n = 0;
-          for (var i in res.data.data) {
-            var flag = false;
-            for (var j in that.data.is_shows) {
-              if (j == res.data.data[i].clothID) {
-                flag = true;
-                break;
-              }
-            }
-            if (!flag) {
-              that.data.is_shows[res.data.data[i].clothID] = true
-            }
+      url = 'https://by.edenhe.com/api/record/samples/?' + that.data.key
+    }
+    wx.request({
+      url: url,
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+        'content-type': 'application/json' // 默认值
+      },
+      data: {
+        page: that.data.page,
+        size: that.data.size,
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res.data);
+        var n = 0;
+        for (var i in res.data.data) {
+          if (res.data.data[i].thumb) {
             that.data.cloth_list.push(res.data.data[i]);
-            // res.data.data[i].cloth = res.data.data[i].cloth.substr(10, 10);
             if (n % 2 == 0) {
               that.data.cloth_list_left.push(res.data.data[i]);
             } else {
@@ -437,16 +282,29 @@ Page({
             }
             n += 1;
           }
-          that.setData({
-            is_shows: that.data.is_shows,
-            cloth_list: that.data.cloth_list,
-            cloth_list_left: that.data.cloth_list_left,
-            cloth_list_right: that.data.cloth_list_right
-          });
-          that.hideLoading();
         }
-      })
-    }
+
+        for (var i in res.data.data) {
+          if (!res.data.data[i].thumb) {
+            that.data.cloth_list.push(res.data.data[i]);
+            if (n % 2 == 0) {
+              that.data.cloth_list_left.push(res.data.data[i]);
+            } else {
+              that.data.cloth_list_right.push(res.data.data[i]);
+            }
+            n += 1;
+          }
+        }
+
+        that.setData({
+          is_shows: that.data.is_shows,
+          cloth_list: that.data.cloth_list,
+          cloth_list_left: that.data.cloth_list_left,
+          cloth_list_right: that.data.cloth_list_right
+        });
+        that.hideLoading();
+      }
+    })
   },
 
   /**
@@ -478,7 +336,7 @@ Page({
           for (var j in list[i].options) {
             key_map[list[i].options[j].verbal] = {
               key: list[i].options[j].value,
-              father_key: list[i].key 
+              father_key: list[i].key
             }
           }
         }
@@ -574,11 +432,14 @@ Page({
     }
   },
   nextPage: function (e) {
-    var that = this;
-    that.setData({
-      page: that.data.page + 1
-    });
-    that.getList();
+    console.log(this.data.search_type)
+    if (this.data.search_type == 0) {
+      var that = this;
+      that.setData({
+        page: that.data.page + 1
+      });
+      that.getList();
+    }
   },
 
   // 点击大类
@@ -702,7 +563,7 @@ Page({
 
     if (br[chose_a][chose_b][chose_c].is_chose) {
       br[chose_a][chose_b][chose_c].is_chose = false;
-      
+
       // 处理第二大类
       var flag2 = true;
 
@@ -979,13 +840,13 @@ Page({
     var that = this;
     var br = that.data.type_relation;
     var key_map = that.data.key_map;
-    
+
     var result_map = {};
     // 重写
     for (var i in br) {
       if (br[i].is_chose) {
         for (var j in br[i]) {
-          if (j != 'is_chose' && j != '其它'  && br[i][j].is_chose) {
+          if (j != 'is_chose' && j != '其它' && br[i][j].is_chose) {
             if (key_map[j] && result_map[key_map[j].father_key]) {
               console.log(key_map[j].father_key)
               result_map[key_map[j].father_key] = result_map[key_map[j].father_key] + ',' + key_map[j].key;
@@ -1073,7 +934,7 @@ Page({
     console.log("点击取消!");
   },
 
-  touch_cancel: function(e) {
+  touch_cancel: function (e) {
     if (this.data.isShow) {
       if (e.changedTouches[0].clientX <= this.data.width * 0.185) {
         this.setData({

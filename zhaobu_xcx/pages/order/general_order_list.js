@@ -62,14 +62,6 @@ Page({
 
     this.getSystemInfo();
 
-    var tabWidth = this.data.windowWidth / this.data.tabs.length;
-    if (tabWidth < this.data.sliderWidth) {
-      this.data.sliderWidth = tabWidth
-    } else {
-      this.data.sliderLeft = (tabWidth - this.data.sliderWidth) / 2
-    }
-    console.log(tabWidth, this.data.sliderWidth, this.data.sliderLeft)
-
     var tabs = [];
     var show_username = false;
     var show_team = false;
@@ -88,6 +80,15 @@ Page({
       this.tab_status = this.tracker_tab_status;
       show_username = true;
     }
+
+    var tabWidth = this.data.windowWidth / tabs.length;
+    if (tabWidth < this.data.sliderWidth) {
+      this.data.sliderWidth = tabWidth
+    } else {
+      this.data.sliderLeft = (tabWidth - this.data.sliderWidth) / 2
+    }
+    console.log(tabWidth, this.data.sliderWidth, this.data.sliderLeft)
+
     this.setData({
       tabs: tabs,
       activeIndex: index,
@@ -97,6 +98,8 @@ Page({
       show_username: show_username,
       lastUrl: getApp().globalData.lastUrl,
     });
+
+    console.log(this.data)
     this.show_team = show_team;
 
     if (show_team) {

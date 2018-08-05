@@ -35,7 +35,7 @@
                 <view class="weui-media-box__title" style='font-size:28rpx;'>{{item.prov_vb}} {{item.city_vb}} {{item.county_vb}} {{item.detail}}</view>
             </view>
         </view>  -->
-        <view class='addressMan'  data-index="{{item.id}}" wx:for="{{ addresses }}"  wx:key="" bindlongtap="onLongTapAddress" bindtap="onTapAddress" >
+        <view class='addressMan'  data-index="{{item.id}}" wx:for="{{ addresses }}"  wx:key="" wx:for-index="idx" bindlongtap="onLongTapAddress" bindtap="onTapAddress" >
           <view class='addressArea' >
             <view class='leftAdderss' id="{{item.id}}" wx:if="{{item.is_default}}" value="{{item.id}}" >
               <image class="checked" src='../../assets/images/icon-selected.png'></image>
@@ -47,11 +47,11 @@
               </view>
               <text>{{item.prov_vb}} {{item.city_vb}} {{item.county_vb}} {{item.detail}}</text>
             </view>
-            <view class='rightAddress' wx:if="{{item.is_default}}" bindtap='onUpdateAddress'>
-              <image  src="../../assets/images/icon-edit.png"></image>
+            <view class='rightAddress' wx:if="{{item.is_default}}" bindtap='onUpdateAddress' data-idx='{{idx}}'>
+              <image  src="../../assets/images/icon-logo-in.png"></image>
             </view>
-            <view class='rightAddress' wx:else style='margin-left: 60rpx;' bindtap='onUpdateAddress'>
-              <image  src="../../assets/images/icon-edit.png"></image>
+            <view class='rightAddress' wx:else style='margin-left: 60rpx;' bindtap='onUpdateAddress' data-idx='{{idx}}'>
+              <image  src="../../assets/images/icon-logo.png"></image>
             </view>
           </view>
         </view>

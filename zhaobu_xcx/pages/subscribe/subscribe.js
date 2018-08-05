@@ -53,6 +53,7 @@ Page({
         cloth_id: options.cloth_id,
         search_type: options.type
       })
+      this.loadAddresses();
     } else {
       var threshold = 0;
       if (!isNaN(options.threshold)) {
@@ -309,11 +310,16 @@ Page({
       from_order_id = 0;
     }
 
+    var address = this.get_default_address()
+    if (address == -1) {
+      return;
+    }
+
     var data = {
       'needs': from_needs_id,
       'order': from_order_id,
       'cloth': this.data.result_id,
-      'address': this.data.receive_addr_id,
+      'address': address,
     };
 
     if (that.data.chose_type == '样布') {
@@ -362,14 +368,31 @@ Page({
       success: function (res) {
         console.log(res.data);
         that.hideLoading();
-        that.showPaymentOK();
       },
       fail: function (res) {
         console.log(res.data);
         that.hideLoading();
-        that.showPaymentFailed();
       }
     });
+  },
+
+  get_default_address: function() {
+    var addresses = this.data.addresses
+
+    for (var i in addresses) {
+      if (addresses[i].is_default) {
+        return addresses[i].id
+      }
+    }
+    if (addresses.length > 0) {
+      return addresses[0].id
+    } else {
+      wx.showToast({
+        title: '错误',
+        content: '请到我的地址添加地址，不然无法下单',
+      })
+      return -1
+    }
   },
 
   onSubmit: function (e) {
@@ -385,10 +408,14 @@ Page({
       price = that.data.detail.price;
     }
 
+    var address = this.get_default_address()
+    if (address == -1) {
+      return;
+    }
 
     var data = {
-      'cloth': this.data.reslut,
-      'address': this.data.receive_addr_id,
+      'cloth': this.data.result_id,
+      'address': address,
     };
 
     if (that.data.chose_type == '样布') {
@@ -404,6 +431,13 @@ Page({
       }
     }
 
+    if (sum == 0) {
+      wx.showToast({
+        title: '提示',
+        content: '请选择购买数量，不能为0',
+      })
+      return
+    }
     data.amount = sum;
 
     console.log(data);
@@ -417,7 +451,14 @@ Page({
       },
       data: data,
       success: function (res) {
+        wx.showToast({
+          title: '提示',
+          content: '下单成功(大货仅支持线下)',
+        })
         console.log(res.data);
+        wx.navigateTo({
+          url: '../order/general_order_list?tab=1',
+        })
       },
       fail: function (res) {
         console.log(res.data);
@@ -438,10 +479,14 @@ Page({
       price = that.data.detail.price;
     }
 
+    var address = this.get_default_address()
+    if (address == -1) {
+      return;
+    }
 
     var data = {
       'cloth': this.data.result_id,
-      'address': 60,
+      'address': address,
     };
 
     if (that.data.chose_type == '样布') {
@@ -640,7 +685,7 @@ Page({
       text: '支付失败',
       success: function () {
         wx.redirectTo({
-          url: '/pages/needs/general_needs_list?tab=2',
+          url: '/pages/order/general_order_list?tab=2',
         })
       }
     })
@@ -656,7 +701,7 @@ Page({
       text: '支付成功',
       success: function () {
         wx.redirectTo({
-          url: '/pages/needs/general_needs_list',
+          url: '/pages/order/general_order_list',
         })
       }
     })

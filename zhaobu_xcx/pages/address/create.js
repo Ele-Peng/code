@@ -22,6 +22,7 @@ Page({
     name: "",
     phone: "",
     detail: "",
+    t_default: false
   },
 
 
@@ -157,6 +158,22 @@ Page({
       data: {'county': this.data.selected_code, 'detail': this.data.detail, 'name': this.data.name, 'phone': this.data.phone},
       success: function (res) {
         console.log(res);
+        if (that.data.t_default) {
+          wx.request({
+            url: 'https://by.edenhe.com/api/address/' + res.data.data.id + '/default/',
+            method: 'post',
+            header: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Cookie': wx.getStorageSync('cookie'),
+            },
+            success: function (res) {
+              console.log(res);
+            },
+            fail: function (res) {
+              console.log(res);
+            },
+          });
+        }
         that.hideLoading();
         wx.setStorageSync('address_changed', true);
         wx.navigateBack();
@@ -187,4 +204,10 @@ Page({
       this.setData({ detail: e.detail.value });
     }
   },
+
+  switchChange: function(e) {
+    this.setData({
+      t_default: e.detail.value
+    })
+  }
 })

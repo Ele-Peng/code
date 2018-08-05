@@ -17,7 +17,6 @@
     "pages/helper/evaluate",
     "pages/helper/address",
     "pages/helper/prgress",
-    "pages/helper/feedback",
     "pages/helper/transaction",
     "pages/helper/contract",
     "pages/byindex/none",

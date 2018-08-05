@@ -4,12 +4,12 @@
 <title heading="{{ heading }}" lastUrl="{{ lastUrl }}">
 </title>
 <view class="page__bd">
-  <wux-tabs default-current="tab1">
-    <wux-tab key="tab1" title="全部问题" data-index="0" bindtap="onchange">
+  <wux-tabs default-current="{{ index }}">
+    <wux-tab key="0" title="全部问题" data-index="0" bindtap="onchange">
     </wux-tab>
-    <wux-tab key="tab2" title="用户协议" data-index="1" bindtap="onchange">
+    <wux-tab key="1" title="用户协议" data-index="1" bindtap="onchange">
     </wux-tab>
-    <wux-tab key="tab3" title="意见反馈" data-index="2" bindtap="onchange">
+    <wux-tab key="2" title="意见反馈" data-index="2" bindtap="onchange">
     </wux-tab>
   </wux-tabs>
   <view wx:if="{{ index == 0}}">

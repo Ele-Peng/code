@@ -40,7 +40,7 @@ Component({
         },
         method: 'GET',
         success: function (res) {
-          if (res.data.length == null) {
+          if (res.data.length == 0) {
             wx.navigateTo({
               url: '../../pages/byindex/none',
             })
@@ -56,7 +56,7 @@ Component({
 
     choseSelected_3() {
       wx.navigateTo({
-        url: '../../pages/clothPreview/clothPreview?type=3',
+        url: '../../pages/byindex/none',
       })
       console.log("ok");
     },
@@ -70,7 +70,7 @@ Component({
         },
         method: 'GET',
         success: function (res) {
-          if (res.data.length == null) {
+          if (res.data.length == 0) {
             wx.navigateTo({
               url: '../../pages/byindex/none',
             })

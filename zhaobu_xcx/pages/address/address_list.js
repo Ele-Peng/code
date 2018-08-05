@@ -108,28 +108,7 @@ Page({
   },
 
   onDefaultAddrChanged: function (e) {
-    var addresses = this.data.addresses;
-    for (var i = 0; i < this.data.addresses.length; i++) {
-      addresses[i].is_default = (addresses[i].id == e.target.id);
-    }
-    this.setData({
-      addresses: addresses,
-    });
-
-    wx.request({
-      url: 'https://by.edenhe.com/api/address/' + e.target.id + '/default/',
-      method: 'post',
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Cookie': wx.getStorageSync('cookie'),
-      },
-      success: function (res) {
-        console.log(res);
-      },
-      fail: function (res) {
-        console.log(res);
-      },
-    });
+    this.onDefault(e.target.id)
   },
 
   onNewAddress: function (e) {
@@ -212,14 +191,57 @@ Page({
         console.log(res);
       },
     });
+
+    if (addresses.length > 0) {
+      this.onDefault(addresses[0].id)
+    } else {
+      wx.showToast({
+        title: '暂无地址，请速添加',
+      })
+    }
   },
+
+  onDefault: function(id) {
+    var addresses = this.data.addresses;
+    for (var i = 0; i < this.data.addresses.length; i++) {
+      addresses[i].is_default = (addresses[i].id == id);
+    }
+    this.setData({
+      addresses: addresses,
+    });
+
+    wx.request({
+      url: 'https://by.edenhe.com/api/address/' + id + '/default/',
+      method: 'post',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Cookie': wx.getStorageSync('cookie'),
+      },
+      success: function (res) {
+        console.log(res);
+      },
+      fail: function (res) {
+        console.log(res);
+      },
+    });
+  },
+
   // 需要对接的接口
-  onUpdateAddress: function (id) {
+  onUpdateAddress: function (e) {
+    console.log(e)
+    var id = e.currentTarget.dataset.idx
+    var address = this.data.addresses[id]
+    this.onDefault(address.id)
+    /*
+    console.log(address)
     wx:wx.navigateTo({
-      url: '../../pages/address/update',
+      url: '../../pages/address/update?name=' + address.name + 
+      '&city_vb=' + address.city_vb + '&county_vb=' +
+      address.county_vb + '&detail=' + address.detail + '&phone=' + address.phone + '&prov_vb=' + address.prov_vb,
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
     })
+    */
   }
 })

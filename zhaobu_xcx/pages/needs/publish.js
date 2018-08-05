@@ -177,7 +177,7 @@ Page({
           data: {
             message: '逗你玩的!!!'
           },
-          duration: 3000,
+          duration: 300,
           onClick(data) {
             console.log(data)
           },
@@ -785,7 +785,7 @@ Page({
       color: '#fff',
       text: '支付失败',
       success: function() {
-        wx.redirectTo({
+        wx.navigateTo({
           url: '/pages/needs/general_needs_list?tab=2',
         })
       }
@@ -801,7 +801,7 @@ Page({
       color: '#fff',
       text: '支付成功',
       success: function() {
-        wx.redirectTo({
+        wx.navigateTo({
           url: '/pages/needs/general_needs_list',
         })
       }
