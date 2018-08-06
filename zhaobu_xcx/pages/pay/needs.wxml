@@ -1,18 +1,20 @@
 <!--pages/pay/needs.wxml-->
-<!--pages/pay/original.wxml-->
+<import src="../../components/toast/toast.wxml" />
+<import src="../../components/loading/loading.wxml" />
+<import src="../../components/dialog/dialog.wxml" />
+<import src="../../components/prompt/prompt.wxml" />
+
+<template is="toast" data="{{ ...$wux.toast }}" />
+<template is="loading" data="{{ ...$wux.loading }}" />
+<template is="dialog" data="{{ ...$wux.dialog }}" />
 <title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
 <form bindsubmit="formSubmit" style='position: fixed;width: 100%;'>
   <view class='pay-area'>
     <view class='original-left'>
       <view class='original-left-top'>需支付</view>
-      <view class='original-left-bottom'>积分仅能抵扣退换险和服务费</view>
     </view>
-    <!-- <view class='original-right-one'>
-      <text>8折<text class='right-only-money'>￥78.4</text></text>
-    </view> -->
-    <view class='original-right-two'>
-      <text style='padding-top: 10rpx;'>8折<text class='right-only-money'>￥78.4</text></text>
-      <text>使用123积分抵扣123</text>
+    <view class='original-right-one'>
+      <text><text class='right-only-money'>￥{{ amount }}</text></text>
     </view>
   </view>
   <view class='check-pay' style='margin-top: 136rpx;'>
@@ -67,6 +69,6 @@
   </view>
 
   <view class="btn-area" style='position: fixed;bottom: 0;width: 100%;'>
-    <button class="weui-btn" type="primary" formType="submit" style='background: #FF9906;border-radius: 0rpx;'>确认支付</button>
+    <button class="weui-btn" type="primary" style='background: #FF9906;border-radius: 0rpx;' bindtap='onSubmit'>确认支付</button>
   </view>
 </form>

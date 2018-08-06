@@ -1,10 +1,14 @@
 <!--pages/pay/sample.wxml-->
+<import src="../../components/toast/toast.wxml"/>
+<template is="toast" data="{{ ...$wux.toast }}"/>
+<import src="../../components/loading/loading.wxml"/>
+<template is="loading" data="{{ ...$wux.loading }}"/>
 <title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
 <form bindsubmit="formSubmit" style='position: fixed;width: 100%;'>
   <view class='pay-area'>
     <view class='pay-left'>需支付</view>
     <view class='pay-right-one'>
-      <text><text class='right-only-money'>￥78.4</text></text>
+      <text><text class='right-only-money'>￥30.0</text></text>
     </view>
     <!-- <view class='pay-right-two'>
     <text style='padding-top: 10rpx;'><text class='right-only-money'>￥78.4</text></text>
@@ -28,6 +32,6 @@
 
 
   <view class="btn-area" style='position: fixed;bottom: 0;width: 100%;'>
-    <button class="weui-btn" type="primary" formType="submit" style='background: #FF9906;border-radius: 0rpx;'>确认支付</button>
+    <button class="weui-btn" type="primary" formType="submit" style='background: #FF9906;border-radius: 0rpx;' bindtap='onSubmit'>确认支付</button>
   </view>
 </form>

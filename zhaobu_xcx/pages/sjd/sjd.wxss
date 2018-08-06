@@ -1,56 +1,88 @@
 /* pages/sjd/sjd.wxss */
 
+.background {
+  background: url(http://pbzxb700b.bkt.clouddn.com/icon-game-backgroud_1.jpg) no-repeat;
+  height: 100%;
+  width: 100%;
+}
+
 .box {
   height: 340rpx;
   z-index: 0;
   margin: 50rpx 0;
 }
+
 .box .club {
   height: 140rpx;
   width: 140rpx;
   position: relative;
   display: inline-block;
 }
+
 .club image {
   height: 140rpx;
   width: 140rpx;
 }
+
 .club text {
   display: block;
   width: 100%;
   font-size: 12rpx;
   line-height: 40rpx;
   text-align: center;
-  background: #FF9906;
+  background: #ff9906;
   color: white;
 }
+
 .box .club:nth-child(1) {
   transform: scale(1.8, 1.8) translateX(-120rpx);
   opacity: 0;
   z-index: 10;
 }
+
 .box .club:nth-child(2) {
-  transform: scale(2.8,2.8) translateX(-80rpx);
+  transform: scale(2.8, 2.8) translateX(-80rpx);
   opacity: 0.5;
   z-index: 100;
 }
+
 .box .club:nth-child(3) {
-  transform: scale(3.8,3.8);
+  transform: scale(3.8, 3.8);
   z-index: 1000;
 }
+
 .box .club:nth-child(4) {
-  transform: scale(2.8,2.8) translateX(80rpx);
+  transform: scale(2.8, 2.8) translateX(80rpx);
   opacity: 0.5;
   z-index: 100;
 }
+
 .box .club:nth-child(5) {
   transform: scale(1.4, 1.4) translateX(120rpx);
   opacity: 0;
   z-index: 10;
 }
-.box .club:nth-child(1) text,
-.box .club:nth-child(2) text,
-.box .club:nth-child(4) text,
-.box .club:nth-child(5) text{
+
+.box .club:nth-child(1) text, .box .club:nth-child(2) text,
+.box .club:nth-child(4) text, .box .club:nth-child(5) text {
   visibility: hidden;
 }
+
+.love {
+  width: 100rpx;
+  height: 100rpx;
+  position: absolute;
+  top: -100rpx;
+}
+
+  /* <!-- 动画 -->
+  <!-- <view wx:if="{{donghua}}" style='display: flex;flex-direction: row;position: fixed;margin-top: 100%;' bindtap='onNext'>
+    <view class='donghua'>
+      <image bindtap='hua' style='left:{{left1}}px' animation="{{animationData1}}" class='love' src='../../assets/images/icon-dollar.png'></image>
+      <image bindtap='hua' style='left:{{left2}}px' animation="{{animationData2}}" class='love' src='../../assets/images/icon-dollar.png'></image>
+      <image bindtap='hua' style='left:{{left3}}px' animation="{{animationData3}}" class='love' src='../../assets/images/icon-dollar.png'></image>
+      <image bindtap='hua' style='left:{{left4}}px' animation="{{animationData4}}" class='love' src='../../assets/images/icon-dollar.png'></image>
+      <image bindtap='hua' style='left:{{left5}}px' animation="{{animationData5}}" class='love' src='../../assets/images/icon-dollar.png'></image>
+      <image bindtap='hua' style='left:{{left6}}px' animation="{{animationData6}}" class='love' src='../../assets/images/icon-dollar.png'></image>
+    </view>
+  </view> --> */

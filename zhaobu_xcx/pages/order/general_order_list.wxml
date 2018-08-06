@@ -77,7 +77,7 @@
   </view>
 </view>
 
-<view wx:if="{{ activeIndex == 2 && order_data[activeIndex].length != 0 && has_zhifu_checked}}" style='position: fixed;'>
+<view wx:if="{{ activeIndex == 2 && order_data[activeIndex].length != 0 && has_zhifu_checked}}" style='position: fixed;' class='submitButton' animation='{{animationData}}'>
   <button formType="submit" class="weui-btn" type="primary" style="position: relative;height: 80rpx;width: 750rpx;width: 400rpx; height:80rpx;line-height: 80rpx; background-color: #FF9906;font-size: 28rpx;margin-left: 175rpx;z-index: 9999;margin-top: -55%;" bindtap='submit_zhifu'>
     确认支付
   </button>

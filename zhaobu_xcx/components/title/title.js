@@ -25,6 +25,20 @@ Component({
         wx.navigateBack({
           delta: 1
         })
+      } else if (url == -2) {
+        wx.showModal({
+          title: '提示',
+          content: '返回后再进入将扣除2积分(积分为0, 5, 10时除外)',
+          success: function (res) {
+            if (res.confirm) {
+              wx.switchTab({
+                url: '../../pages/byindex/home_page',
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
       } else {
         wx.switchTab({
           url: '../../pages/byindex/home_page',

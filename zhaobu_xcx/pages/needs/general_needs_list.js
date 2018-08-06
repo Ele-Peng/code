@@ -243,6 +243,7 @@ Page({
 
   onClickNeeds: function (e) {
     var needs_id = e.currentTarget.dataset.id;
+    console.log(e);
     wx.navigateTo({ url: 'detail?type=' + this.user_type + '&id=' + needs_id });
   },
 

@@ -29,6 +29,7 @@
                 <view style='display: flex;flex-direction: column;'   data-id="{{item.id}}">
                   <view class='titlePanel'>
                     <text class="left">编号{{item.id}}</text>
+                    <view wx:if="{{item.alert==1}}" class="red_dot" style="margin-left: 2px" />
                     <view class='{{ activeIndex == 2 ? "right" : "rightCol" }}'>
                       <text>{{item.display_time}}</text>
                     </view>

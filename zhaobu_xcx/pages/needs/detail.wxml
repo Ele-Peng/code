@@ -140,7 +140,7 @@
         <view hidden="{{ activeIndex != 1 }}">
         <!-- h候选布料没有数据的样式 -->
           <template wx:if="{{result_list.length == 0}}" is="prompt" data="{{ ...$wux.prompt.msg_empty }}" />
-          <scroll-view scroll-y wx:else style="padding-bottom: 55px;height: {{ screen_height - 105 }}px;margin-top: 80rpx;position: fixed;font-size:28rpx;">
+          <scroll-view scroll-y wx:else style="padding-bottom: 55px;height: 77%;margin-top: 80rpx;position: fixed;font-size:28rpx;">
             <view class="weui-panel weui-panel_access" wx:key="" wx:for="{{ result_list }}" bindtap="onClickResult" data-id="{{item.id}}" style='margin-top:20rpx;'>
               <view class="weui-panel__hd panel-needs-list__hd">
                 <text>结果{{result_list.length - index}}</text>

@@ -214,11 +214,51 @@ Page({
   onLoad: function (options) {
     this.getSystemInfo();
     var app = getApp();
+    var that = this;
     if (options.type) {
       this.setData({
         search_type: options.type
       })
     }
+    if (options.find_cloth) {
+      var app = getApp();
+      var data = app.globalData.check_cloth_list;
+      var n = 0;
+      for (var i in data) {
+        if (data[i].thumb) {
+          that.data.cloth_list.push(data[i]);
+          if (n % 2 == 0) {
+            that.data.cloth_list_left.push(data[i]);
+          } else {
+            that.data.cloth_list_right.push(data[i]);
+          }
+          n += 1;
+        }
+      }
+      for (var i in data) {
+        if (!data[i].thumb) {
+          that.data.cloth_list.push(data[i]);
+          if (n % 2 == 0) {
+            that.data.cloth_list_left.push(data[i]);
+          } else {
+            that.data.cloth_list_right.push(data[i]);
+          }
+          n += 1;
+        }
+      }
+
+      that.setData({
+        is_shows: that.data.is_shows,
+        cloth_list: that.data.cloth_list,
+        cloth_list_left: that.data.cloth_list_left,
+        cloth_list_right: that.data.cloth_list_right
+      });
+    } else {
+      this.getList();
+    }
+    this.setData({
+      isFind: options.isFind
+    })
   },
 
   getSystemInfo() {
@@ -360,7 +400,6 @@ Page({
     this.setData({
       lastUrl: getApp().globalData.lastUrl,
     });
-    this.getList();
   },
 
   /**

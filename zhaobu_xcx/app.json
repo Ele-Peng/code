@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/byindex/home_page",
+    "pages/animation/index",
     "pages/welcome/binding",
     "pages/byindex/auth",
     "pages/pay/original",

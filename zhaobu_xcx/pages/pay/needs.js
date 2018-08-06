@@ -1,4 +1,9 @@
 // pages/pay/needs.js
+
+import { $wuxToast } from '../../components/wux'
+import { $wuxLoading } from '../../components/wux'
+import { $wuxDialog } from '../../components/wux'
+import { $wuxPrompt } from '../../components/wux'
 Page({
 
   /**
@@ -10,14 +15,19 @@ Page({
     show_optional: true,
     is_check_1: false,
     is_check_2: false,
-    is_check_3: false
+    is_check_3: false,
+    amount: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      amount: options.amount,
+      needs_id: options.needs_id
+    })
+    console.log(options);
   },
 
   /**
@@ -96,5 +106,147 @@ Page({
     this.setData({
       is_check_3: !this.data.is_check_3
     });
+  },
+  onSubmit: function () {
+    this.preparePay(this.data.needs_id);
+  },
+
+  showLoading: function (hint) {
+    $wuxLoading.show({
+      text: hint,
+    });
+  },
+
+  hideLoading: function () {
+    $wuxLoading.hide();
+  },
+
+  preparePay: function (order_id) {
+    var that = this;
+    var pay_method = 'wechat'
+    if (that.data.is_check_1) {
+      pay_method = 'score'
+    }
+
+    console.log(wx.getStorageSync('cookie'));
+    wx.request({
+      url: 'https://by.edenhe.com/api/pay/' + order_id + '/prepare/?platform=xc',
+      method: 'get',
+      data: {
+        'pay_method': pay_method
+      },
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+      },
+      success: function (res) {
+        console.log(res.data);
+        that.hideLoading();
+        console.log(res.data.error)
+        if (res.data.error != 0 || pay_method == 'wechat') {
+          var content = '积分不足，是否使用微信支付'
+          if (pay_method == 'wechat') {
+            content = '是否使用微信支付'
+          }
+          wx.showModal({
+            title: '提示',
+            content: content,
+            success: function (res) {
+              if (res.confirm) {
+                wx.request({
+                  url: 'https://by.edenhe.com/api/pay/' + order_id + '/prepare/?platform=xc',
+                  method: 'get',
+                  data: {
+                    'pay_method': pay_method
+                  },
+                  header: {
+                    Cookie: wx.getStorageSync('cookie'),
+                  },
+                  success: function (res) {
+                    console.log(res.data);
+                    that.hideLoading();
+                    that.startWXPay(order_id, res.data.data);
+                  },
+                  fail: function (res) {
+                    console.log(res.data);
+                    that.hideLoading();
+                    that.showPaymentFailed();
+                  }
+                });
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        } else {
+          wx.showToast({
+            title: '支付成功',
+          })
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      },
+      fail: function (res) {
+        console.log(res.data);
+        that.hideLoading();
+        that.showPaymentFailed();
+      }
+    });
+  },
+
+  startWXPay(order_id, data) {
+    // appid:"wxd931d7672c96f87d"
+    // noncestr:"4dd937e9a341463bb718b6c5462a03ac"
+    // package:"prepay_id=wx20170821231109664c2a5a390676680221"
+    // sign:"55B40BFEE1BF8AA2B1CD4539183AA755"
+    // signtype:"MD5"
+    // timestamp:1503328269
+    var that = this;
+    wx.requestPayment({
+      'appId': data.appid,
+      'timeStamp': '' + data.timestamp,
+      'nonceStr': data.noncestr,
+      'package': data.package,
+      'signType': data.signtype,
+      'paySign': data.sign,
+      success: function (res) {
+        console.log(res);
+        that.showPaymentOK();
+      },
+      fail: function (res) {
+        console.log(res);
+        that.showPaymentFailed();
+      }
+    })
+  },
+
+  showPaymentFailed: function () {
+    $wuxToast.show({
+      type: 'cancel',
+      timer: 1500,
+      color: '#fff',
+      text: '支付失败',
+      success: function () {
+
+      }
+    })
+  },
+
+  showPaymentOK: function () {
+    wx.setStorageSync('needs_inprogress_changed', true)
+    wx.setStorageSync('needs_unpaid_changed', true)
+    var that = this
+    $wuxToast.show({
+      type: 'success',
+      timer: 1500,
+      color: '#fff',
+      text: '支付成功',
+      success: function () {
+        getApp().globalData.lastUrl = -1
+        wx.redirectTo({
+          url: '/pages/twxx/twxx?cloth_id=' + that.data.cloth_id,
+        })
+      }
+    })
   }
 })

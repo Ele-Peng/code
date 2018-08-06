@@ -415,7 +415,18 @@ Page({
       return;
     }
 
+    var from_needs_id = this.data.from_needs_id;
+    if (!from_needs_id || typeof (from_needs_id) == "undefined") {
+      from_needs_id = 0;
+    }
+    var from_order_id = this.data.from_order_id;
+    if (!from_order_id || typeof (from_order_id) == "undefined") {
+      from_order_id = 0;
+    }
+
     var data = {
+      'needs': from_needs_id,
+      'order': from_order_id,
       'cloth': this.data.result_id,
       'address': address,
     };
@@ -484,7 +495,18 @@ Page({
       return;
     }
 
+    var from_needs_id = this.data.from_needs_id;
+    if (!from_needs_id || typeof (from_needs_id) == "undefined") {
+      from_needs_id = 0;
+    }
+    var from_order_id = this.data.from_order_id;
+    if (!from_order_id || typeof (from_order_id) == "undefined") {
+      from_order_id = 0;
+    }
+
     var data = {
+      'needs': from_needs_id,
+      'order': from_order_id,
       'cloth': this.data.result_id,
       'address': address,
     };
@@ -551,7 +573,7 @@ Page({
                   },
                   data: {
                     'id': order_id,
-                    'type': 's',
+                    'type': 'c',
                   },
                   success: function (res) {
                     console.log(res.data);

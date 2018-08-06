@@ -15,7 +15,8 @@ Page({
     db_id: 0,
     screen_height: 0,
     result_id: 0,
-    similar_list: []
+    similar_list: [],
+    phone: 0
   },
 
 
@@ -36,6 +37,12 @@ Page({
       this.setData({
         cloth_id: app.globalData.cloth_id
       })
+    }
+
+    if (options.currentTab) {
+      that.setData({
+        currentTab: options.currentTab
+      });
     }
 
     // this.setData({
@@ -69,14 +76,33 @@ Page({
     //     is_show_pay: true
     //   })
     // }
+  },
+
+  getSystemInfo() {
+    const that = this
+    wx.getSystemInfo({
+      success(res) {
+        that.setData({
+          screen_height: res.windowHeight,
+        })
+        console.log(that.data.screen_height)
+      }
+    })
+  },
+  /**
+  * 生命周期函数--监听页面显示
+  */
+  onShow: function () {
+    var app = getApp()
+    getApp().globalData.lastUrl = '../order/order_list'
+    this.setData({
+      lastUrl: getApp().globalData.lastUrl,
+    });
     var that = this;
     console.log(that.data.cloth_id);
     var url = 'https://by.edenhe.com/api/record/sample/' + that.data.cloth_id + '/';
     // var url = 'https://by.edenhe.com/api/record/sample/70295352591593/';
 
-    if (that.data.db_id) {
-      url = url + that.data.db_id;
-    }
     wx.request({
       url: url,
       header: {
@@ -90,22 +116,28 @@ Page({
           detail: res.data.data,
           //res代表success函数的事件对，data是固定的
         });
+        if (that.data.detail.advanced) {
+          var phone_list = that.data.detail.factory.phone.split(/[,| |\*]/);
+          if (phone_list.length > 0) {
+            that.setData({
+              phone: phone_list[0]
+            })
+          } else {
+            that.setData({
+              phone: phone_list
+            })
+          }
+        }
         app.globalData.show_cloth = that.data.detail;
         //app.globalData.userLevel = that.data.detail.userLevel;
         console.log(that.data.detail);
-        // that.setData({
-        //   is_pay: that.data.detail.is_show_pay
-        // })
+        that.setData({
+          is_show_pay: that.data.detail.advanced
+        })
         app.globalData.is_pay = that.data.detail.is_show_pay;
         that.hideLoading();
       }
     });
-    if (options.currentTab) {
-      that.setData({
-        currentTab: options.currentTab
-      });
-    }
-
     var url = '';
     var result_id = this.data.cloth_id;
     url = 'https://by.edenhe.com/api/cloth/from_goods/' + this.data.cloth_id + "/";
@@ -150,27 +182,6 @@ Page({
         that.hideLoading();
       }
     })
-  },
-
-  getSystemInfo() {
-    const that = this
-    wx.getSystemInfo({
-      success(res) {
-        that.setData({
-          screen_height: res.windowHeight,
-        })
-        console.log(that.data.screen_height)
-      }
-    })
-  },
-  /**
-  * 生命周期函数--监听页面显示
-  */
-  onShow: function () {
-    getApp().globalData.lastUrl = '../order/order_list'
-    this.setData({
-      lastUrl: getApp().globalData.lastUrl,
-    });
   },
 
   showLoading: function () {
@@ -299,6 +310,7 @@ Page({
   },
 
   onSearch: function (e) {
+    var that = this;
     $wuxDialog.open({
       title: '查布源',
       content: '付费后，可查看布料详细来源',
@@ -312,7 +324,7 @@ Page({
           type: 'weui-dialog__btn_warn',
           onTap(e) {
             wx.navigateTo({
-              url: '../../pages/pay/search',
+              url: '../../pages/pay/search?cloth_id=' + that.data.cloth_id,
               success: function(res) {},
               fail: function(res) {},
               complete: function(res) {},

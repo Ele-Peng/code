@@ -1,4 +1,9 @@
 // pages/sjd/sjd.js
+import {
+  $wuxToast
+} from '../../components/wux'
+var animation = wx.createAnimation({})
+var i = 1; 
 Page({
 
   /**
@@ -7,15 +12,21 @@ Page({
   data: {
     heading: "开心小游戏",
     lastUrl: "",
-    imgs: [
-      "../../assets/images/testImg/icon-homePage.png",
-      "../../assets/images/testImg/icon-homePage.jpg",
-      "../../assets/images/testImg/icon-homePage.png",
-      "../../assets/images/testImg/icon-homePage.png",
-      "../../assets/images/testImg/icon-homePage.png",
-    ],
     z: 999999,
-    index: 0
+    index: 0,
+    is_win_first: false,
+    animationData: '',
+    donghua: true,
+    left1: Math.floor(Math.random() * 305 + 1),
+    left2: Math.floor(Math.random() * 305 + 1),
+    left3: Math.floor(Math.random() * 305 + 1),
+    left4: Math.floor(Math.random() * 305 + 1),
+    left5: Math.floor(Math.random() * 305 + 1),
+    left6: Math.floor(Math.random() * 305 + 1),
+    user_score: 0,
+    image_list:[],
+    image_index: 2,
+    image_check: [false,false,false,false,false]
   },
 
   /**
@@ -29,7 +40,39 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    var that = this;
+    wx.request({
+      url: 'https://by.edenhe.com/api/game/info',
+      method: 'get',
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+      },
+      success: function (res) {
+        console.log(res.data);
+        that.setData({
+          user_score: res.data.data.score
+        })
+      },
+      fail: function (res) {
+        console.log(res.data);
+      }
+    })
+    wx.request({
+      url: 'https://by.edenhe.com/api/game/get_cloth',
+      method: 'get',
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+      },
+      success: function (res) {
+        console.log(res.data);
+        that.setData({
+          image_list: res.data.data
+        })
+      },
+      fail: function (res) {
+        console.log(res.data);
+      }
+    })
   },
 
   /**
@@ -37,7 +80,7 @@ Page({
    */
   onShow: function() {
     this.title = this.selectComponent("#title");
-    getApp().globalData.lastUrl = '../order/order_list'
+    getApp().globalData.lastUrl = -2
     this.setData({
       lastUrl: getApp().globalData.lastUrl,
     });
@@ -79,16 +122,16 @@ Page({
   },
 
   //触摸开始事件
-  touchstart: function (e) {
+  touchstart: function(e) {
     console.log(e.touches[0].pageX);
     this.data.touchDot = e.touches[0].pageX;
     var that = this;
-    this.data.interval = setInterval(function () {
+    this.data.interval = setInterval(function() {
       that.data.time += 1;
     }, 100);
   },
   //触摸移动事件
-  touchmove: function (e) {
+  touchmove: function(e) {
     let touchMove = e.touches[0].pageX;
     let touchDot = this.data.touchDot;
     let time = this.data.time;
@@ -107,7 +150,7 @@ Page({
     // }
   },
   //触摸结束事件
-  touchend: function (e) {
+  touchend: function(e) {
     clearInterval(this.data.interval);
     this.data.time = 0;
     this.data.done = false;
@@ -163,12 +206,27 @@ Page({
     })
 
     var that = this;
-    setTimeout(function () {
-      that.animation1.translateX(-150).opacity(0).scale(1.8, 1.8).step({ duration: 0, timingFunction: 'linear' });
-      that.animation2.translateX(-140).opacity(0.5).scale(2.8, 2.8).step({ duration: 0, timingFunction: 'linear' });
-      that.animation3.translateX(0).opacity(1).scale(3.8, 3.8).step({ duration: 0, timingFunction: 'linear' });
-      that.animation4.translateX(140).opacity(0.5).scale(2.8, 2.8).step({ duration: 0, timingFunction: 'linear' });
-      that.animation5.translateX(150).opacity(0).scale(1.8, 1.8).step({ duration: 0, timingFunction: 'linear' });
+    setTimeout(function() {
+      that.animation1.translateX(-150).opacity(0).scale(1.8, 1.8).step({
+        duration: 0,
+        timingFunction: 'linear'
+      });
+      that.animation2.translateX(-140).opacity(0.5).scale(2.8, 2.8).step({
+        duration: 0,
+        timingFunction: 'linear'
+      });
+      that.animation3.translateX(0).opacity(1).scale(3.8, 3.8).step({
+        duration: 0,
+        timingFunction: 'linear'
+      });
+      that.animation4.translateX(140).opacity(0.5).scale(2.8, 2.8).step({
+        duration: 0,
+        timingFunction: 'linear'
+      });
+      that.animation5.translateX(150).opacity(0).scale(1.8, 1.8).step({
+        duration: 0,
+        timingFunction: 'linear'
+      });
       that.setData({
         animation1: animation1.export(),
         animation2: animation2.export(),
@@ -176,15 +234,25 @@ Page({
         animation4: animation4.export(),
         animation5: animation5.export()
       })
+      if (that.data.image_index == 4) {
+        that.setData({
+          image_index : 0
+        })
+      } else {
+        that.setData({
+          image_index : that.data.image_index + 1
+        })
+      }
+      console.log(that.data.image_index);
     }.bind(this), 195)
 
-    let array = this.data.imgs;
+    let array = this.data.image_list;
     let shift = array.shift();
     array.push(shift);
 
-    setTimeout(function () {
+    setTimeout(function() {
       this.setData({
-        imgs: array
+        image_list: array
       })
     }.bind(this), 195)
   },
@@ -239,12 +307,27 @@ Page({
     })
 
     var that = this;
-    setTimeout(function () {
-      that.animation1.translateX(-50).opacity(0).scale(1.8, 1.8).step({ duration: 0, timingFunction: 'linear' });
-      that.animation2.translateX(-40).opacity(0.5).scale(2.8, 2.8).step({ duration: 0, timingFunction: 'linear' });
-      that.animation3.translateX(0).opacity(1).scale(3.8, 3.8).step({ duration: 0, timingFunction: 'linear' });
-      that.animation4.translateX(40).opacity(0.5).scale(2.8, 2.8).step({ duration: 0, timingFunction: 'linear' });
-      that.animation5.translateX(50).opacity(0).scale(1.8, 1.8).step({ duration: 0, timingFunction: 'linear' });
+    setTimeout(function() {
+      that.animation1.translateX(-50).opacity(0).scale(1.8, 1.8).step({
+        duration: 0,
+        timingFunction: 'linear'
+      });
+      that.animation2.translateX(-40).opacity(0.5).scale(2.8, 2.8).step({
+        duration: 0,
+        timingFunction: 'linear'
+      });
+      that.animation3.translateX(0).opacity(1).scale(3.8, 3.8).step({
+        duration: 0,
+        timingFunction: 'linear'
+      });
+      that.animation4.translateX(40).opacity(0.5).scale(2.8, 2.8).step({
+        duration: 0,
+        timingFunction: 'linear'
+      });
+      that.animation5.translateX(50).opacity(0).scale(1.8, 1.8).step({
+        duration: 0,
+        timingFunction: 'linear'
+      });
       that.setData({
         animation1: animation1.export(),
         animation2: animation2.export(),
@@ -252,24 +335,138 @@ Page({
         animation4: animation4.export(),
         animation5: animation5.export()
       })
+      if (that.data.image_index == 0) {
+        that.setData({
+          image_index: 4
+        })
+      } else {
+        that.setData({
+          image_index: that.data.image_index - 1
+        })
+      }
+      console.log(that.data.image_index);
     }.bind(this), 195)
 
-    let array = this.data.imgs;
+    let array = this.data.image_list;
     let pop = array.pop();
     array.unshift(pop);
 
-    setTimeout(function () {
+    setTimeout(function() {
       this.setData({
-        imgs: array
+        image_list: array
       })
     }.bind(this), 195)
   },
 
-  onScanQRCode: function () {
+  onScanQRCode: function(e) {
+    var that = this;
+    // 只允许从相机扫码
     wx.scanCode({
+      onlyFromCamera: true,
       success: (res) => {
-        console.log(res)
+        console.log(res);
+        var code = res.result
+        code = code.split(':')[2]
+        code = code.split('-')[0]
+        console.log(e);
+        if (that.data.image_index.cloth_id != code) {
+          var data = {
+            "score": 1
+          }
+          wx.request({
+            url: 'https://by.edenhe.com/api/game/info/',
+            method: 'post',
+            header: {
+              Cookie: wx.getStorageSync('cookie'),
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            data: data,
+            success: function (res) {
+              console.log(res.data);
+              that.setData({
+                user_score: that.data.user_score + 1,
+              })
+              var tidx = that.data.image_index;
+
+              that.data.image_check[tidx] = true
+              that.setData({
+                image_check: that.data.image_check
+              })
+              that.data.image_check[that.data.image_index] = true;
+
+            },
+            fail: function (res) {
+              console.log(res.data);
+            }
+          })
+        } else {
+          console.log(code);
+          console.log('错了');
+        }
       }
     })
+    
+  },
+
+  onNext: function() {
+    this.setData({
+
+    })
+  },
+
+  donghua: function () {
+    setTimeout(function () {
+      animation.translateY(604).step({ duration: 1000 })
+      this.setData({
+        ["animationData" + i]: animation.export()
+      })
+      i++;
+    }.bind(this), 500)
+    if (i < 7) {
+      setTimeout(function () {
+        this.donghua()
+      }.bind(this), 500)
+    } else {
+      console.log(22)
+      setTimeout(function () {
+        this.setData({
+          donghua: false
+        })
+      }.bind(this), 4500)
+    }
+  },
+
+  onWin: function () {
+    var that = this
+    that.setData({
+      is_win_first: true
+    })
+    if (that.data.user_score > 4) {
+      that.setData({
+        is_win_first: true
+      })
+    }
+    if (that.data.is_win_first) {
+      var animation = wx.createAnimation({
+        duration: 1000,
+        timingFunction: 'linear'
+      })
+      console.log(animation);
+      that.animation = animation
+      animation.translateY(400).step()
+      that.setData({
+        animationData: animation.export()
+
+      })
+      console.log(that.data.animationData);
+      setTimeout(function () {
+        animation.translateY(0).step()
+        that.setData({
+          animationData: animation.export()
+        })
+      }, 200)
+      this.donghua()
+    }
   }
+
 })

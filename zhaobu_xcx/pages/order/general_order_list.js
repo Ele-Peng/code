@@ -22,6 +22,7 @@ Page({
     order_page_more: [true, true, true, true, true],
     show_username: false,
     has_zhifu_checked: false,
+    animationData: {}
   },
 
   user_type: 'user',
@@ -310,6 +311,30 @@ Page({
       has_zhifu_checked: flag,
       orders_data: orders_data
     })
+    var screen_height;
+    wx.getSystemInfo({
+      success(res) {
+        screen_height = res.screenHeight
+      }
+    })
+    var that = this;
+    var animation = wx.createAnimation({
+      duration: 1000,
+      timingFunction: 'linear'
+    })
+    that.animation = animation
+    animation.translateY((-1) * screen_height * 0.55).step()
+    that.setData({
+      animationData: animation.export()
+
+    })
+    console.log(that.data.animationData);
+    setTimeout(function () {
+      animation.translateY(0).step()
+      that.setData({
+        animationData: animation.export()
+      })
+    }, 200)
   },
 
   check_zhifu: function(e) {
@@ -320,6 +345,38 @@ Page({
       orders_data: orders_data,
       has_zhifu_checked: true,
     })
+    var screen_height;
+    wx.getSystemInfo({
+      success(res) {
+        screen_height = res.screenHeight
+      }
+    })
+    // 用that取代this，防止不必要的情况发生
+    var that = this;
+    // 创建一个动画实例
+    var animation = wx.createAnimation({
+      // 动画持续时间
+      duration: 500,
+      // 定义动画效果，当前是匀速
+      timingFunction: 'linear'
+    })
+    // 将该变量赋值给当前动画
+    that.animation = animation
+    // 先在y轴偏移，然后用step()完成一个动画
+    animation.translateY(screen_height * 0.55).step()
+    // 用setData改变当前动画
+    that.setData({
+      // 通过export()方法导出数据
+      animationData: animation.export()
+    })
+    console.log(that.data.animationData);
+    // 设置setTimeout来改变y轴偏移量，实现有感觉的滑动
+    setTimeout(function () {
+      animation.translateY(0).step()
+      that.setData({
+        animationData: animation.export()
+      })
+    }, 200)
   },
 
   submit_zhifu: function(e) {

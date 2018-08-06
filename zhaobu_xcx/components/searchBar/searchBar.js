@@ -159,17 +159,18 @@ Component({
               data['is_softmax'] = true;
               console.log(data)
               wx.uploadFile({
-                url: 'http://web.ngrok.52xygame.cn/check_image',
+                url: 'https://by.edenhe.com/api/cloth/find_cloth/',
                 filePath: path[0],
                 name: 'img',
                 data: data,
                 header: {
+                  Cookie: wx.getStorageSync('cookie'),
                   "Content-Type": "multipart/form-data"
                 },
                 formData: data,
                 success: function (res) {
                   var isFind = false
-                  console.log(res.data);
+                  console.log(JSON.parse(res.data));
                   if (res.statusCode != 200) {
                     wx.showModal({
                       title: '提示',
@@ -184,7 +185,7 @@ Component({
                   var app = getApp();
                   app.globalData.check_cloth_list = JSON.parse(res.data).data;
                   wx.redirectTo({
-                    url: '../../pages/clothPreview_test/clothPreview?isFind=' + isFind,
+                    url: '../../pages/clothPreview/clothPreview?find_cloth=1&isFind=' + isFind,
                     success: function (res) {
                       app.globalData.lastUrl = -1;
                     }

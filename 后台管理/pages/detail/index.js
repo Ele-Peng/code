@@ -242,7 +242,7 @@ Page({
     this.setData({
       lastUrl: getApp().globalData.lastUrl,
     });
-    this.getList();
+    // this.getList();
   },
 
   /**
@@ -318,7 +318,7 @@ Page({
     that.setData({
       page: that.data.page + 1
     });
-    that.getList();
+    // that.getList();
   },
 
   // 点击大类
@@ -534,7 +534,7 @@ Page({
       size: 10,
       chose_c_n: temp
     });
-    that.getList();
+    // that.getList();
     that.show_close();
   },
 

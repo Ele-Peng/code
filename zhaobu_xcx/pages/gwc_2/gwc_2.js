@@ -379,7 +379,7 @@ Page({
   delete_item: function (e) {
     console.log(e);
     var idx = e.currentTarget.dataset.idx;
-    this.delete_cart(that.data.gwc[idx].id)
+    this.delete_cart(this.data.gwc[idx].id)
   },
 
   onShowModal: function (e) {
