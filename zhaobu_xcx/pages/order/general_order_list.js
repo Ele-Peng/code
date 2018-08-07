@@ -56,6 +56,24 @@ Page({
       text: '暂时没有相关数据',
     }).show()
 
+    this.setData({
+      heading: "订购记录",
+      lastUrl: "",
+      tabs: [],
+      activeIndex: 0,
+      sliderOffset: 0,
+      sliderLeft: 0,
+      sliderWidth: 96,
+      windowWidth: 0,
+      order_loaded: [false, false, false, false, false],
+      order_loading: [false, false, false, false, false],
+      orders_data: [[], [], [], [], []],
+      order_page: [-1, -1, -1, -1, -1],
+      order_page_more: [true, true, true, true, true],
+      show_username: false,
+      has_zhifu_checked: false,
+      animationData: {}
+    })
     var index = 0;
     if (options.tab) {
       index = parseInt(options.tab);
@@ -116,23 +134,11 @@ Page({
   onShow: function () {
     if (this.data.activeIndex == 0) {
       if (wx.getStorageSync('order_inprogress_changed')) {
-        this.data.order_page[0] = -1;
-        this.data.order_page[1] = -1;
-        this.setData({
-          order_page: this.data.order_page,
-        })
-        this.loadOrderList(0);
-        this.loadOrderList(1);
+        this.onLoad({ tab: 0 });
       }
     } else {
       if (wx.getStorageSync('order_unpaid_changed')) {
-        this.data.order_page[1] = -1;
-        this.data.order_page[2] = -1;
-        this.setData({
-          order_page: this.data.order_page,
-        })
-        this.loadOrderList(1);
-        this.loadOrderList(2);
+        this.onLoad({tab: 2});
       }
     }
     console.log('asd')
@@ -410,8 +416,17 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
-        if (res.data.data.online_pay) {
-          that.preparePay(res.data.data.id);
+        if (res.data.error == -9) {
+          $wuxToast.show({
+            type: 'cancel',
+            timer: 1500,
+            color: '#fff',
+            text: '暂时只能二个订单一起支付'
+          })
+        } else if (res.data.data.online_pay) {
+          wx.navigateTo({
+            url: '../../pages/pay/sample?amount=' + res.data.data.amount + '&needs_id=' + res.data.data.id,
+          })
         } else {
           $wuxToast.show({
             type: 'cancel',

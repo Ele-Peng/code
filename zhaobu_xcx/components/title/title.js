@@ -20,15 +20,10 @@ Component({
     redToLast: function () {
       var url = getApp().globalData.lastUrl
       console.log(url);
-      if (url != -1) {
-        getApp().globalData.lastUrl = ""
-        wx.navigateBack({
-          delta: 1
-        })
-      } else if (url == -2) {
+      if (url == -2) {
         wx.showModal({
           title: '提示',
-          content: '返回后再进入将扣除2积分(积分为0, 5, 10时除外)',
+          content: '返回后再进入将扣除2积分，并且图片列表会刷新(积分为0, 5, 10时除外)',
           success: function (res) {
             if (res.confirm) {
               wx.switchTab({
@@ -39,9 +34,14 @@ Component({
             }
           }
         })
-      } else {
+      } else if (url == -1) {
         wx.switchTab({
           url: '../../pages/byindex/home_page',
+        })
+      } else {
+        getApp().globalData.lastUrl = ""
+        wx.navigateBack({
+          delta: 1
         })
       }
     }

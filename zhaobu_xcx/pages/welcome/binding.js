@@ -216,7 +216,7 @@ Page({
             timer: 2000,
             color: '#fff',
             text: '绑定成功',
-            success: () => wx.redirectTo({url: "../byindex/index?logged_in=1",})
+            success: () => wx.redirectTo({url: "../byindex/home_page?logged_in=1",})
           });
         } else {
           $wuxToast.show({

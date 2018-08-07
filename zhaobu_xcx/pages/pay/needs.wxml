@@ -3,10 +3,10 @@
 <import src="../../components/loading/loading.wxml" />
 <import src="../../components/dialog/dialog.wxml" />
 <import src="../../components/prompt/prompt.wxml" />
-
 <template is="toast" data="{{ ...$wux.toast }}" />
 <template is="loading" data="{{ ...$wux.loading }}" />
 <template is="dialog" data="{{ ...$wux.dialog }}" />
+
 <title heading="{{ heading }}" lastUrl="{{ lastUrl }}"></title>
 <form bindsubmit="formSubmit" style='position: fixed;width: 100%;'>
   <view class='pay-area'>
@@ -14,7 +14,7 @@
       <view class='original-left-top'>需支付</view>
     </view>
     <view class='original-right-one'>
-      <text><text class='right-only-money'>￥{{ amount }}</text></text>
+      <text><text class='right-only-money'>￥{{ amount * (vip.vip_lvl == 1 ? 0.8 : vip.vip_lvl == 2 ? 0.6 : vip.vip_lvl == 3 ? 0.0 : 1.0) }}</text></text>
     </view>
   </view>
   <view class='check-pay' style='margin-top: 136rpx;'>
@@ -32,7 +32,7 @@
     </view>
     <view class='check-pay-simple' bindtap='checkPay_3'>
       <image class="check-card-left" src='../../assets/images/icon-cloth-card.png'></image>
-      <text>找布卡<text style='color: #FC5656'>3</text>
+      <text>找布卡<text style='color: #FC5656'>{{vip.find_cloth_card}}</text>
       <text>次</text></text>
       <image wx:if="{{ is_check_3 }}" class="check-pay-right" src='../../assets/images/icon-check.png' style="padding-left: 450rpx;"></image>
       <image wx:if="{{ !is_check_3 }}" class="check-pay-right" style="padding-left: 450rpx;" src='../../assets/images/icon-noncheck.png'></image>
@@ -56,14 +56,17 @@
         <view class='credits-table-right credits-color'>免费</view>
       </view>
       <view class='credits-table'>
-        <view class='credits-table-left credits-color'>￥78.4</view>
-        <view class='credits-table-center credits-color'>￥58.8</view>
+        <view class='credits-table-left credits-color'>￥{{ amount *  0.8 }}</view>
+        <view class='credits-table-center credits-color'>￥{{ amount *  0.6 }}</view>
         <view class='credits-table-right credits-color'>￥0.0</view>
       </view>
       <view class='credits-table'>
-        <view class='credits-table-left credits-color'>已开通</view>
-        <view class='credits-table-center'>去开通</view>
-        <view class='credits-table-right'>去开通</view>
+        <view wx:if="{{ vip.vip_lvl == 1}}" class='credits-table-left credits-color'>已开通</view>
+        <view wx:else class='credits-table-center'>未开通</view>
+        <view wx:if="{{ vip.vip_lvl == 2}}" class='credits-table-center credits-color'>已开通</view>
+        <view wx:else class='credits-table-center'>未开通</view>
+        <view wx:if="{{ vip.vip_lvl == 3}}" class='credits-table-right credits-color'>已开通</view>
+        <view wx:else class='credits-table-right'>未开通</view>
       </view>
     </view>
   </view>

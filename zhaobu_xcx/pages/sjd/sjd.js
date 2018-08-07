@@ -41,6 +41,25 @@ Page({
    */
   onReady: function() {
     var that = this;
+    that.setData({
+      heading: "开心小游戏",
+      lastUrl: "",
+      z: 999999,
+      index: 0,
+      is_win_first: false,
+      animationData: '',
+      donghua: true,
+      left1: Math.floor(Math.random() * 305 + 1),
+      left2: Math.floor(Math.random() * 305 + 1),
+      left3: Math.floor(Math.random() * 305 + 1),
+      left4: Math.floor(Math.random() * 305 + 1),
+      left5: Math.floor(Math.random() * 305 + 1),
+      left6: Math.floor(Math.random() * 305 + 1),
+      user_score: 0,
+      image_list: [],
+      image_index: 2,
+      image_check: [false, false, false, false, false]
+    })
     wx.request({
       url: 'https://by.edenhe.com/api/game/info',
       method: 'get',
@@ -369,7 +388,7 @@ Page({
         code = code.split(':')[2]
         code = code.split('-')[0]
         console.log(e);
-        if (that.data.image_index.cloth_id != code) {
+        if (that.data.image_index.cloth_id == code) {
           var data = {
             "score": 1
           }
@@ -392,8 +411,20 @@ Page({
               that.setData({
                 image_check: that.data.image_check
               })
-              that.data.image_check[that.data.image_index] = true;
-
+              $wuxToast.show({
+                type: 'success',
+                timer: 500,
+                color: '#fff',
+                text: '恭喜你答对啦~',
+              })
+              setTimeout(function () {
+                $wuxToast.show({
+                  type: 'success',
+                  timer: 1500,
+                  color: '#fff',
+                  text: '本页答对4个可以进入下一关(如果积分不为5则扣除2积分)',
+                })
+              }, 1000)
             },
             fail: function (res) {
               console.log(res.data);
@@ -401,7 +432,23 @@ Page({
           })
         } else {
           console.log(code);
-          console.log('错了');
+          $wuxToast.show({
+            type: 'cancel',
+            timer: 500,
+            color: '#fff',
+            text: '答错啦!~',
+            success: function () {
+            }
+          })
+          
+          setTimeout( function() {
+            $wuxToast.show({
+              type: 'cancel',
+              timer: 1500,
+              color: '#fff',
+              text: '返回上一页，可以刷新图片列表(扣除2积分)',
+            })
+          }, 1000)
         }
       }
     })
@@ -409,9 +456,7 @@ Page({
   },
 
   onNext: function() {
-    this.setData({
-
-    })
+      this.onReady()
   },
 
   donghua: function () {
@@ -438,10 +483,14 @@ Page({
 
   onWin: function () {
     var that = this
-    that.setData({
-      is_win_first: true
-    })
-    if (that.data.user_score > 4) {
+    var num = 0
+    for (var i in that.data.image_check) {
+      if (that.data.image_check[i] == true) {
+        num = num + 1
+      }
+    }
+
+    if (num > 3) {
       that.setData({
         is_win_first: true
       })

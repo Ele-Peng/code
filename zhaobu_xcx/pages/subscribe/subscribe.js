@@ -577,7 +577,9 @@ Page({
                   },
                   success: function (res) {
                     console.log(res.data);
-                    that.preparePay(res.data.data.id);
+                    wx.navigateTo({
+                      url: '../../pages/pay/sample?amount=' + res.data.data.amount + '&needs_id=' + res.data.data.id,
+                    })
                   },
                   fail: function (res) {
                     console.log(res.data);

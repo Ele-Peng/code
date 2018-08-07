@@ -14,9 +14,14 @@ Page({
     lastUrl: "",
     show_optional: true,
     is_check_1: false,
-    is_check_2: false,
+    is_check_2: true,
     is_check_3: false,
-    amount: 0
+    amount: 0,
+    vip: {
+      find_cloth_card: 0,
+      score: 0,
+      vip_lvl: 0,
+    }
   },
 
   /**
@@ -28,6 +33,30 @@ Page({
       needs_id: options.needs_id
     })
     console.log(options);
+    var that = this;
+
+    wx.showLoading({
+      title: '正在加载',
+    })
+
+    wx.request({
+      url: 'https://by.edenhe.com/api/bind/team_vip',
+      method: 'get',
+      header: {
+        Cookie: wx.getStorageSync('cookie'),
+      },
+      success: function (res) {
+        console.log(res.data);
+        wx.hideLoading();
+        var vip = res.data.data;
+        that.setData({
+          vip: vip,
+        })
+      },
+      fail: function (res) {
+        console.log(res.data);
+      }
+    });
   },
 
   /**
@@ -91,22 +120,47 @@ Page({
   },
 
   checkPay_1: function () {
-    this.setData({
-      is_check_1: !this.data.is_check_1
-    });
+    if (this.data.is_check_1) {
+      this.setData({
+        is_check_1: false,
+      });
+    } else {
+      this.setData({
+        is_check_1: true,
+        is_check_2: false,
+        is_check_3: false,
+      });
+    }
   },
 
   checkPay_2: function () {
-    this.setData({
-      is_check_2: !this.data.is_check_2
-    });
+    if (this.data.is_check_2) {
+      this.setData({
+        is_check_2: false,
+      });
+    } else {
+      this.setData({
+        is_check_1: false,
+        is_check_2: true,
+        is_check_3: false,
+      });
+    }
   },
 
   checkPay_3: function () {
-    this.setData({
-      is_check_3: !this.data.is_check_3
-    });
+    if (this.data.is_check_3) {
+      this.setData({
+        is_check_3: false,
+      });
+    } else {
+      this.setData({
+        is_check_1: false,
+        is_check_2: false,
+        is_check_3: true,
+      });
+    }
   },
+  
   onSubmit: function () {
     this.preparePay(this.data.needs_id);
   },
@@ -130,7 +184,7 @@ Page({
 
     console.log(wx.getStorageSync('cookie'));
     wx.request({
-      url: 'https://by.edenhe.com/api/pay/' + order_id + '/prepare/?platform=xc',
+      url: 'https://by.edenhe.com/api/pay/' + order_id + '/prepare/?platform=xc&from_xcx=sc',
       method: 'get',
       data: {
         'pay_method': pay_method
@@ -153,7 +207,7 @@ Page({
             success: function (res) {
               if (res.confirm) {
                 wx.request({
-                  url: 'https://by.edenhe.com/api/pay/' + order_id + '/prepare/?platform=xc',
+                  url: 'https://by.edenhe.com/api/pay/' + order_id + '/prepare/?platform=xc&from_xcx=sc',
                   method: 'get',
                   data: {
                     'pay_method': pay_method
@@ -178,11 +232,18 @@ Page({
             }
           })
         } else {
-          wx.showToast({
-            title: '支付成功',
-          })
-          wx.navigateBack({
-            delta: 1
+          $wuxToast.show({
+            type: 'success',
+            timer: 1500,
+            color: '#fff',
+            text: '支付成功',
+            success: function () {
+              wx.setStorageSync('needs_inprogress_changed', true)
+              wx.setStorageSync('needs_unpaid_changed', true)
+              wx.navigateBack({
+                delta: 2
+              })
+            }
           })
         }
       },
@@ -242,9 +303,8 @@ Page({
       color: '#fff',
       text: '支付成功',
       success: function () {
-        getApp().globalData.lastUrl = -1
-        wx.redirectTo({
-          url: '/pages/twxx/twxx?cloth_id=' + that.data.cloth_id,
+        wx.navigateBack({
+          delta: 2
         })
       }
     })

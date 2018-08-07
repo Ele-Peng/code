@@ -337,7 +337,8 @@ Page({
       data: {
         'code': code,
         'encrypted_data': encryptedData,
-        'iv': iv
+        'iv': iv,
+        'from_xcx': 'sc'
       },
       success: function(res) {
         console.log(res)

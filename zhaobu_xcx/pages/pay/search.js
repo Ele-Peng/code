@@ -135,7 +135,7 @@ Page({
 
     console.log(wx.getStorageSync('cookie'));
     wx.request({
-      url: 'https://by.edenhe.com/api/pay/' + order_id + '/prepare/?platform=xc',
+      url: 'https://by.edenhe.com/api/pay/' + order_id + '/prepare/?platform=xc&from_xcx=sc',
       method: 'get',
       data: {
         'pay_method': pay_method
@@ -158,7 +158,7 @@ Page({
             success: function (res) {
               if (res.confirm) {
                 wx.request({
-                  url: 'https://by.edenhe.com/api/pay/' + order_id + '/prepare/?platform=xc',
+                  url: 'https://by.edenhe.com/api/pay/' + order_id + '/prepare/?platform=xc&from_xcx=sc',
                   method: 'get',
                   data: {
                     'pay_method': pay_method

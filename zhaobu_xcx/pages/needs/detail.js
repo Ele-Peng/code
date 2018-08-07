@@ -326,6 +326,7 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
+        that.hideLoading();
         wx.navigateTo({
           url: '../../pages/pay/needs?amount=' + that.data.detail.reward + '&needs_id=' + res.data.data.id,
         })

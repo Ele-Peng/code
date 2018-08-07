@@ -51,6 +51,23 @@ Page({
   user_needs_changed_key: ['needs_inprogress_changed', '', 'needs_unpaid_changed', ''],
 
   onLoad: function (options) {
+
+    this.setData({
+      heading: "找布记录",
+      tabs: [],
+      activeIndex: 0,
+      sliderOffset: 0,
+      sliderLeft: 0,
+      sliderWidth: 96,
+      windowHeight: 0,
+      windowWidth: 0,
+      needs_loaded: [],
+      needs_loading: [],
+      needs_data: [[], [], [], []],
+      needs_page: [-1, -1, -1, -1],
+      needs_page_more: [true, true, true, true],
+      show_username: false,
+    })
     var that = this;
     //获得title 标题栏组件
     this.title = this.selectComponent("#title");
@@ -122,7 +139,7 @@ Page({
     var index = this.data.activeIndex;
     if (this.needs_changed_key[index] != '') {
       if (wx.getStorageSync(this.needs_changed_key[index])) {
-        this.loadNeedsList(index);
+        this.onLoad({tab: index})
       }
     }
   },
@@ -290,7 +307,7 @@ Page({
 
   onReachBottom: function() {
     console.log("下拉事件");
-    if (needs_page_more[activeIndex]) {
+    if (this.data.needs_page_more[this.data.activeIndex]) {
       this.loadMoreNeeds();
     }
   },
