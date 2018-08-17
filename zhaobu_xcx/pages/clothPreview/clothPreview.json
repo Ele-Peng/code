@@ -1,9 +1,0 @@
-{
-  "navigationBarBackgroundColor": "#EDBA5F",
-  "navigationBarTitleText": "面料阅览",
-  "navigationBarTextStyle": "white",
-  "usingComponents": {
-    "title": "/components/title/title",
-    "searchBar": "/components/searchBar/searchBar"
-  }
-}

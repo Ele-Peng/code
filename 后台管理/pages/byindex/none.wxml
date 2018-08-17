@@ -1,9 +1,0 @@
-<title heading="{{ heading }}" lastUrl="{{ lastUrl}}"></title>
-<view style='width:100%;height: 100%;background: #FFF;position: fixed;display: flex;flex-direction: column;'>
-  <image src="../../assets/images/icon-none.png" style='width: 366rpx;height: 366rpx;margin-top: {{338 / 1334 * screen_height }}px;margin-left: 192rpx;'></image>
-  <text style='text-align:center;color: #15181D: #E4E4E4;font-size: 28rpx;'>程序员小哥哥正在后台为您添加数据，敬请期待。</text>
-  <view style='display: flex;width: 100%;height: 91rpx;flex-direction: row;color: #FFF;font-size: 30rpx;margin-top: 20rpx' bindtap='backHome'>
-    <image src='../../assets/images/icon-button-background.png' style='width:611rpx;height: 91rpx;margin-left: 60rpx;'></image>
-    <text style='margin-left: -375rpx;line-height: 91rpx;'>回首页看看</text>
-  </view>
-</view>

@@ -1,8 +1,0 @@
-{
-  "navigationBarBackgroundColor": "#EDBA5F",
-  "navigationBarTitleText": "待付款的订单",
-  "navigationBarTextStyle": "white",
-  "usingComponents": {
-    "title": "/components/title/title"
-  }
-}
