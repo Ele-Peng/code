@@ -22,7 +22,7 @@
 //   return max
 // };
 
-// O(n)
+// O(n) 左右夹逼
 var maxArea = function(height) {
   let max = 0
   for (let i = 0, j = height.length - 1; i < j; ) {
