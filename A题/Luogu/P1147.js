@@ -29,11 +29,12 @@ function sumFormula(a0, an) {
 function sum(n) {
     let res = [];
     let sumArr = [0];
+    debugger
     for (let i = 1; i < n; i ++) {
         sumArr[i] = sumArr[i - 1] + i;
     }
-    for (let i = 1; i < n; i ++) {
-        for (let j = n; j > 0; j --) {
+    for (let i = 0; i < n; i ++) {
+        for (let j = n; j >= 0; j --) {
             if (sumArr[j] - sumArr[i] === n) {
                 res.push(i + 1, j);
             }
