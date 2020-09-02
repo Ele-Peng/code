@@ -11,7 +11,7 @@ int main() {
     cin >> a[i];
   }
   sum[0] = a[0];
-  int max = 0;
+  int max = a[0];
   for (int i = 1; i <= k; i ++) {
     res[i - 1] = sum[i - 1];
     sum[i] = sum[i - 1] + a[i];
