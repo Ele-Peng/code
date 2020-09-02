@@ -1,5 +1,5 @@
 function P3150(n) {
-    if (n % 4 === 0) {
+    if (n % 2 === 0) {
         console.log("pb wins");
     } else {
         console.log("zs wins");

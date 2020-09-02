@@ -9,9 +9,9 @@
       "command": "/usr/bin/g++",
       "args": [
         "-g",
-        "${workspaceFolder}/A题/Luogu/hello.cpp",
+        "${workspaceFolder}/A题/Luogu/P4136.cpp",
         "-o",
-        "${workspaceFolder}/A题/Luogu/hello.o"
+        "${workspaceFolder}/A题/Luogu/luogu.o"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
