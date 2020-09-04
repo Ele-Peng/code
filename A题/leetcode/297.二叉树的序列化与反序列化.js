@@ -24,23 +24,19 @@
 const null_symbol = "#";
 
 var serialize = function(root) {
-    if (root == null) return null_symbol;
-    let str = [];
-    str = serializeHelper(root, str) || [];
-    return str.toString();
+  if (root === null) return null_symbol;
+  let str = [];
+  str = serializeHelper(root, str);
+  return str.toString();
 };
 
 function serializeHelper(root, str) {
-  if (root === null) {
-    str.push(null_symbol);
-    return ;
-  }
-  str.push(root.val);
+  if (root === null) return str.push(null_symbol);
   serializeHelper(root.left, str);
   serializeHelper(root.right, str);
+  str.push(root.val);
   return str;
 }
-
 /**
  * Decodes your encoded data to tree.
  *
@@ -48,17 +44,18 @@ function serializeHelper(root, str) {
  * @return {TreeNode}
  */
 var deserialize = function(data) {
-    let nodes = data.split(",");
-    return deserializeHelper(nodes);
+  let nodes = data.split(",");
+  return deserializeHelper(nodes);
+
 };
 
 function deserializeHelper(nodes) {
-  if ((nodes && !nodes.length) || (nodes == null)) return null;
-  let first = nodes.shift();
-  if (first == null_symbol) return null;
+  if ((!nodes) || (nodes && !nodes.length)) return null;
+  let first = nodes.pop();
+  if (first === null_symbol) return null;
   let root = new TreeNode(parseInt(first, 10));
-  root.left = deserializeHelper(nodes);
   root.right = deserializeHelper(nodes);
+  root.left = deserializeHelper(nodes);
   return root;
 }
 
