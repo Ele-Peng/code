@@ -26,17 +26,20 @@ const null_symbol = "#";
 var serialize = function(root) {
   if (root === null) return null_symbol;
   let str = [];
-  str = serializeHelper(root, str);
+  let queue = [];
+  queue.push(root);
+  while(queue && queue.length) {
+    let cur = queue.shift();
+    if (cur == null) {
+      str.push(null_symbol);
+      continue;
+    }
+    str.push(cur.val);
+    queue.push(cur.left);
+    queue.push(cur.right);
+  }
   return str.toString();
 };
-
-function serializeHelper(root, str) {
-  if (root === null) return str.push(null_symbol);
-  serializeHelper(root.left, str);
-  serializeHelper(root.right, str);
-  str.push(root.val);
-  return str;
-}
 /**
  * Decodes your encoded data to tree.
  *
@@ -44,20 +47,30 @@ function serializeHelper(root, str) {
  * @return {TreeNode}
  */
 var deserialize = function(data) {
+  if (data === null_symbol) return null;
   let nodes = data.split(",");
-  return deserializeHelper(nodes);
-
-};
-
-function deserializeHelper(nodes) {
-  if ((!nodes) || (nodes && !nodes.length)) return null;
-  let first = nodes.pop();
-  if (first === null_symbol) return null;
-  let root = new TreeNode(parseInt(first, 10));
-  root.right = deserializeHelper(nodes);
-  root.left = deserializeHelper(nodes);
+  let root = new TreeNode(parseInt(nodes[0], 10));
+  let queue = [];
+  queue.push(root);
+  for (let i = 1; i < nodes.length;) {
+    let parent = queue.shift();
+    let left = nodes[i ++];
+    if (left !== null_symbol) {
+      parent.left = new TreeNode(parseInt(left, 10));
+      queue.push(parent.left);
+    } else {
+      parent.left = null;
+    }
+    let right = nodes[i ++];
+    if (right !== null_symbol) {
+      parent.right = new TreeNode(parseInt(right, 10));
+      queue.push(parent.right);
+    } else {
+      parent.right = null;
+    }
+  }
   return root;
-}
+};
 
 /**
  * Your functions will be called as such:
