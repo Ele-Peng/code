@@ -20,11 +20,12 @@ var subarraySum = function(nums, k) {
         sum_i = sum_i + nums[i];
         if (preSum[`${sum_i - k}`] !== void 0) {
             ans += preSum[`${sum_i - k}`];
+            
         }
 
         preSum[`${sum_i}`] = (preSum[`${sum_i}`] || 0) + 1;
     }
-    
+
     return ans;
 };
 // @lc code=end
