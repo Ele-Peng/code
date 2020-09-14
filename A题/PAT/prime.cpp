@@ -9,6 +9,7 @@ int main() {
     cin >> num;
     int _num = num;
     int n = 0;
+    
     while(n > 0) {
         _num = n * 10 + _num;
         n = num % 10;
