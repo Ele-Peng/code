@@ -44,7 +44,7 @@ var trap = function(height) {
   let current = 0;
   while(current < height.length) {
     // 栈不为空 且 当前元素高度 要 大于 栈顶元素高度
-    while(stack.length && stack.length && height[current] > height[stack[stack.length - 1]]) {
+    while(stack.length && height[current] > height[stack[stack.length - 1]]) {
       let h = height[stack[stack.length - 1]];
       stack.pop();
       if (!stack.length) break;
