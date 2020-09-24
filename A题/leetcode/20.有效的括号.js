@@ -29,7 +29,7 @@ var isValid = function(s) {
       }
     }
   }
-  return !stack.length && true;
+  return !stack.length;
 };
 // @lc code=end
 
