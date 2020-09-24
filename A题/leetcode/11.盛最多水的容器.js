@@ -36,7 +36,7 @@
 // };
 
 
-// 第二遍
+// 第二遍 O(n)
 var maxArea = function(height) {
   let max = 0;
   for (let i = 0,j = height.length - 1; i !== j; ) {
