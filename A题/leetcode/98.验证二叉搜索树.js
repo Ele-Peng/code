@@ -18,6 +18,7 @@
  */
 var isValidBST = function(root) {
     return isValidBSTHelper(root, null, null);
+    
 };
 
 function isValidBSTHelper(root, min, max) {
