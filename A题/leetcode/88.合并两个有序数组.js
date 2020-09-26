@@ -12,14 +12,20 @@
  * @param {number} n
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
-
- 
+// 辅助栈
 var merge = function(nums1, m, nums2, n) {
-    let nums1Tail = m - 1;
-    let nums2Tail = n - 1;
-    let len = m + n - 1;
-    while (nums1Tail >= 0 && nums2Tail >= 0) {
-        nums1[len --] = nums1[nums1Tail] > nums2[nums2Tail] ? nums1[nums1Tail--] : nums2[nums2Tail--];
+    let stackHelper = [];
+    for (let i = 0, j = 0; i + j < m + n; ) {
+        if ((nums2[j] === void 0) || (i < m && nums1[i] <= nums2[j])) {
+            stackHelper.push(nums1[i]);
+            i ++;
+        } else {
+            stackHelper.push(nums2[j]);
+            j ++;
+        }
+    }
+    for (let i = 0; i < m + n; i ++) {
+        nums1[i] = stackHelper[i];
     }
 };
 // @lc code=end
