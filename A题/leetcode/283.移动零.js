@@ -28,16 +28,22 @@
 //   }
 //   return nums
 // };
-// 双指针
+
+
+
+
+
+
+// 双指针 第二遍
+// 比0大的，即不为0的放到左边，否则放到右边；
 var moveZeroes = function(nums) {
-  let swapNotZeroIndex = 0
-  for (let i = 0; i < nums.length; i += 1) {
+  let current = 0;
+  for (let i = 0; i < nums.length; i ++) {
     if (nums[i] !== 0) {
-      nums[swapNotZeroIndex] = nums[i]
-      if (i !== swapNotZeroIndex) {
-        nums[i] = 0
-      }
-      swapNotZeroIndex++
+      let temp = nums[i];
+      nums[i] = nums[current];
+      nums[current] = temp;
+      current ++;
     }
   }
   return nums
