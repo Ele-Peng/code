@@ -28,22 +28,29 @@
 
 // 单纯的字母
 // more earlier to break 
+// var isAnagram = function(s, t) {
+//   let sArr = s.split("")
+//   let tArr = t.split("")
+//   if (sArr.length !== tArr.length) return false;
+//   let map = {};
+//   for (let i = 0;i < sArr.length; i ++) {
+//     map[sArr[i]] ? map[sArr[i]] ++ : map[sArr[i]] = 1;
+//   }
+//   for (let i = 0;i < tArr.length; i ++) {
+//     if (map[tArr[i]]) {
+//       map[tArr[i]] --;
+//     } else {
+//       return false;
+//     }
+//   }
+//   return true;
+// };
+
+// sort 
 var isAnagram = function(s, t) {
-  let sArr = s.split("")
-  let tArr = t.split("")
-  if (sArr.length !== tArr.length) return false;
-  let map = {};
-  for (let i = 0;i < sArr.length; i ++) {
-    map[sArr[i]] ? map[sArr[i]] ++ : map[sArr[i]] = 1;
-  }
-  for (let i = 0;i < tArr.length; i ++) {
-    if (map[tArr[i]]) {
-      map[tArr[i]] --;
-    } else {
-      return false;
-    }
-  }
-  return true;
+  let sArr = s.split("").sort().join('');
+  let tArr = t.split("").sort().join('');
+  return sArr === tArr;
 };
 // @lc code=end
 
