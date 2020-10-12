@@ -17,16 +17,22 @@
  * @param {Node} root
  * @return {number[][]}
  */
+// 层序遍历递归
 var levelOrder = function(root) {
-  let res = [];
-  levelOrderHelper(root, res);
+  if (!root) return [];
+  const res = [];
+  levelOrderHelper([root], res, 0);
   return res;
 };
-var levelOrderHelper = function(root, arr) {
-  if (!root) return root;
-  for (let)
-  arr.push(root.val);
-  levelOrderHelper(root.children, arr);
+var levelOrderHelper = function(nodes, res, level) {
+  if (!nodes.length) return nodes;
+  if (!res[level]) res[level] = [];
+  const childNodes = [];
+  nodes.forEach(element => {
+    res[level].push(element.val);
+    childNodes.push(...element.children);
+  });
+  levelOrderHelper(childNodes, res, level += 1);
 }
 // @lc code=end
 
