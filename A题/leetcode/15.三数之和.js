@@ -44,31 +44,63 @@
 
 
 // 双指针 左右下标
+// var threeSum = function(nums) {
+//   let res = []
+//   nums.sort((a, b) => { return a - b })
+//   for (let target = 0;target < nums.length; target++) {
+//     // 因为已经排序好，所以后面不可能有三个数加和等于 00，直接返回结果
+//     if (nums[target] > 0) break;
+//     if (target > 0 && nums[target] === nums[target - 1]) {
+//       continue;
+//     };
+//     for (let i = target + 1, j = nums.length - 1; i < j; ) {
+//       if (nums[target] + nums[i] + nums[j] < 0) {
+//         i++
+//         while (i < j && nums[i] === nums[i - 1]) i++
+//       } else if (nums[target] + nums[i] + nums[j] > 0) {
+//         j--
+//         while (i < j && nums[j] === nums[j + 1]) j--
+//       } else if (nums[target] + nums[i] + nums[j] === 0) {
+//         res.push([nums[target], nums[i], nums[j]])
+//         i++
+//         j--
+//         while (i < j && nums[i] === nums[i - 1]) i++
+//         while (i < j && nums[j] === nums[j + 1]) j--
+//       }
+//     }
+//   }
+//   return res
+// };
+
+
+
 var threeSum = function(nums) {
-  let res = []
-  nums.sort((a, b) => { return a - b })
-  for (let target = 0;target < nums.length; target++) {
-    if (nums[target] > 0) break;
-    if (target > 0 && nums[target] === nums[target - 1]) {
-      continue;
-    };
-    for (let i = target + 1, j = nums.length - 1; i < j; ) {
-      if (nums[target] + nums[i] + nums[j] < 0) {
-        i++
-        while (i < j && nums[i] === nums[i - 1]) i++
-      } else if (nums[target] + nums[i] + nums[j] > 0) {
-        j--
-        while (i < j && nums[j] === nums[j + 1]) j--
+  if (!nums || nums.length < 3) return [];
+  let res = [];
+  nums.sort((a, b) => {return a - b;});
+  for (let target = 0; target < nums.length; target ++) {
+    // 因为已经排序好，所以后面不可能有三个数加和等于 0，直接返回结果
+    if (nums[target] > 0) return res;
+    // 重复target元素
+    if (target > 0 && nums[target] === nums[target - 1]) continue;
+    let i = target + 1, j = nums.length - 1;
+    while (i < j) {
+      if (nums[target] + nums[i] + nums[j] > 0) {
+        j --;
+        while (i < j && nums[j] === nums[j + 1]) j --;
+      } else if (nums[target] + nums[i] + nums[j] < 0) {
+        i ++;
+        while (i < j && nums[i] === nums[i - 1]) i ++;
       } else if (nums[target] + nums[i] + nums[j] === 0) {
-        res.push([nums[target], nums[i], nums[j]])
-        i++
-        j--
-        while (i < j && nums[i] === nums[i - 1]) i++
-        while (i < j && nums[j] === nums[j + 1]) j--
+        res.push([nums[target], nums[i], nums[j]]);
+        i ++;
+        j --;
+        while(i < j && nums[j] === nums[j + 1]) j --;
+        while (i < j && nums[i] === nums[i - 1]) i ++;
       }
     }
   }
-  return res
+  return res;
 };
 // @lc code=end
 

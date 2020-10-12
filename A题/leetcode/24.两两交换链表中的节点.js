@@ -16,12 +16,22 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
+// var swapPairs = function(head) {
+//     if (!head || head.next == null) return head;
+//     let res = head.next;
+//     head.next = swapPairs(res.next);
+//     res.next = head;
+//     return res;
+// };
+
+
+
 var swapPairs = function(head) {
-    if (!head || head.next == null) return head;
-    let res = head.next;
-    head.next = swapPairs(res.next);
-    res.next = head;
-    return res;
+  if (head == null || head.next == null) return head;
+  let res = head.next;
+  head.next = swapPairs(res.next);
+  res.next = head;
+  return res;
 };
 // @lc code=end
 
