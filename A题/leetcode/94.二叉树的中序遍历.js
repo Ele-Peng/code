@@ -17,17 +17,38 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
+// 递归
+// var inorderTraversal = function(root) {
+//     const res = [];
+//     inorderTraversalHelper(root, res);
+//     return res;
+// };
+
+// var inorderTraversalHelper = function(root, res) {
+//     if (!root) return root;
+//     inorderTraversalHelper(root.left, res);
+//     res.push(root.val);
+//     inorderTraversalHelper(root.right, res);
+// }
+
+
+// 迭代
+
 var inorderTraversal = function(root) {
-    const res = [];
-    inorderTraversalHelper(root, res);
+    if (!root) return [];
+    let res = [];
+    let stack = [];
+    while(root || stack.length) {
+        while(root) {
+            stack.push(root); // stack 后进先出
+            root = root.left;
+        }
+        root = stack.pop();
+        res.push(root.val);
+        root = root.right;
+    }
     return res;
 };
 
-var inorderTraversalHelper = function(root, res) {
-    if (!root) return root;
-    inorderTraversalHelper(root.left, res);
-    res.push(root.val);
-    inorderTraversalHelper(root.right, res);
-}
 // @lc code=end
 
