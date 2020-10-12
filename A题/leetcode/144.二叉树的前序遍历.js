@@ -17,17 +17,31 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
+// var preorderTraversal = function(root) {
+//     const res = [];
+//     preorderTraversalHelper(root, res);
+//     return res;
+// };
+
+// var preorderTraversalHelper = function(root, res) {
+//     if (!root) return root;
+//     res.push(root.val);
+//     preorderTraversalHelper(root.left, res);
+//     preorderTraversalHelper(root.right, res);
+// }
+
+// 迭代
 var preorderTraversal = function(root) {
-    const res = [];
-    preorderTraversalHelper(root, res);
+    if (!root) return [];
+    let res = [];
+    let queue = [root];
+    while(queue.length) {
+        let queueTop = queue.shift();
+        res.push(queueTop.val);
+        queueTop.right && queue.unshift(queueTop.right);
+        queueTop.left && queue.unshift(queueTop.left);
+    }
     return res;
 };
-
-var preorderTraversalHelper = function(root, res) {
-    if (!root) return root;
-    res.push(root.val);
-    preorderTraversalHelper(root.left, res);
-    preorderTraversalHelper(root.right, res);
-}
 // @lc code=end
 
