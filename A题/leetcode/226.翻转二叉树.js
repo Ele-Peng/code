@@ -16,11 +16,27 @@
  * @param {TreeNode} root
  * @return {TreeNode}
  */
+// var invertTree = function(root) {
+//   if (root == null) return null;
+//   let tempNode = root.left;
+//   root.left = root.right;
+//   root.right = tempNode;
+//   root.left = invertTree(root.left);
+//   root.right = invertTree(root.right);
+//   return root;
+// };
+
+
 var invertTree = function(root) {
-  if (root == null) return null;
-  let tempNode = root.left;
+  // recursion terminator
+  if (!root) return root;
+
+  // logic process
+  let temp = root.left;
   root.left = root.right;
-  root.right = tempNode;
+  root.right = temp;
+
+  // drill down
   root.left = invertTree(root.left);
   root.right = invertTree(root.right);
   return root;
