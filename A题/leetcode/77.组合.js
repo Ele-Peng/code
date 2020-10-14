@@ -21,7 +21,7 @@ var combineHelper = function(n, k, start, paths, path) {
     paths.push(path.slice()); // 备份一份
   }
   // logic process
-  for (let i = start; i <= n; i ++) {
+  for (let i = start; i <= n; i ++) { 
     path.push(i);
     // drill down
     combineHelper(n, k, i + 1, paths, path);
