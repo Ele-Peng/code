@@ -34,14 +34,31 @@
 
 // 迭代
 
+// var inorderTraversal = function(root) {
+//     if (!root) return [];
+//     let res = [];
+//     let stack = [];
+//     while(root || stack.length) {
+//         while(root) {
+//             stack.push(root); // stack 后进先出
+//             root = root.left;
+//         }
+//         root = stack.pop();
+//         res.push(root.val);
+//         root = root.right;
+//     }
+//     return res;
+// };
+
+
+// 迭代 - DFS
 var inorderTraversal = function(root) {
-    if (!root) return [];
     let res = [];
     let stack = [];
-    while(root || stack.length) {
+    while (root || stack.length) {
         while(root) {
-            stack.push(root); // stack 后进先出
-            root = root.left;
+            stack.push(root);
+            root = root.left; // 找到左子树最左的节点
         }
         root = stack.pop();
         res.push(root.val);
