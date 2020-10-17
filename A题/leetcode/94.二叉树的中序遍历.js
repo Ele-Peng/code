@@ -56,13 +56,14 @@ var inorderTraversal = function(root) {
     let res = [];
     let stack = [];
     while (root || stack.length) {
-        while(root) {
+        if (root) {
             stack.push(root);
-            root = root.left; // 找到左子树最左的节点
+            root = root.left;
+        } else {
+            let cur = stack.pop();
+            res.push(cur.val);
+            root = cur.right; // 没有右子树，便会将双亲节点pop出来
         }
-        root = stack.pop();
-        res.push(root.val);
-        root = root.right;
     }
     return res;
 };
