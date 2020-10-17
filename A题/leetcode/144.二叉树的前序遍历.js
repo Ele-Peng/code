@@ -31,15 +31,32 @@
 // }
 
 // 迭代
+// var preorderTraversal = function(root) {
+//     if (!root) return [];
+//     let res = [];
+//     let queue = [root];
+//     while(queue.length) {
+//         let queueTop = queue.shift();
+//         res.push(queueTop.val);
+//         queueTop.right && queue.unshift(queueTop.right);
+//         queueTop.left && queue.unshift(queueTop.left);
+//     }
+//     return res;
+// };
+
+// 迭代-DFS
 var preorderTraversal = function(root) {
-    if (!root) return [];
     let res = [];
-    let queue = [root];
-    while(queue.length) {
-        let queueTop = queue.shift();
-        res.push(queueTop.val);
-        queueTop.right && queue.unshift(queueTop.right);
-        queueTop.left && queue.unshift(queueTop.left);
+    let stack = [root];
+    while (stack.length) {
+        let cur = stack.pop();
+        res.push(cur.val);
+        if (cur.left) {
+            stack.push(cur.left);
+        }
+        if (cur.right) {
+            stack.push(cur.right);
+        }
     }
     return res;
 };
