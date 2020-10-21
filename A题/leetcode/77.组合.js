@@ -15,6 +15,14 @@ var combine = function(n, k) {
   combineHelper(n, k, 1, res, []);
   return res;
 };
+/**
+ * 
+ * @param {*} n 1 ... n 数组 1 ~ n
+ * @param {*} k 取 k 个数
+ * @param {*} start 从哪个开始取（不从数组下标0开始）
+ * @param {*} paths 结果集
+ * @param {*} path 单个结果
+ */
 var combineHelper = function(n, k, start, paths, path) {
   // recursion terminator
   if (path.length === k) {
@@ -22,10 +30,10 @@ var combineHelper = function(n, k, start, paths, path) {
   }
   // logic process
   for (let i = start; i <= n; i ++) { 
-    path.push(i);
+    path.push(i); // 选
     // drill down
     combineHelper(n, k, i + 1, paths, path);
-    path.pop();
+    path.pop(); // 不选
   }
 };
 // @lc code=end
