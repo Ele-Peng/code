@@ -21,7 +21,7 @@ var findContentChildren = function(g, s) {
             i ++;
             j ++;
         } else {
-            j ++;
+            j ++; // 当前饼干小了，找下一块大的饼干
         }
     }
     return res;
