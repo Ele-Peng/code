@@ -39,8 +39,10 @@ var merge = function(nums1, m, nums2, n) {
     for (let i = len - 1; i >= 0; i --) {
         if (nums1[count1] < nums2[count2]) {
             nums1[i] = nums2[count2];
+            count2 --;
         } else {
             nums1[i] = nums1[count1];
+            count1 --;
         }
     }
 };
