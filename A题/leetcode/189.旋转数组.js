@@ -44,8 +44,11 @@ var rotate = function(nums, k) {
   }
   let temp = 0;
   rotateHelper(0, n - 1);
+  console.log("nums1", nums);
   rotateHelper(0, k - 1);
+  console.log("nums2", nums);
   rotateHelper(k, n - 1);
+  console.log("nums3", nums);
   function rotateHelper(start, end) {
     while(start < end) {
       temp = nums[start];
