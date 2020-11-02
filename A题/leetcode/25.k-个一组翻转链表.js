@@ -43,21 +43,51 @@
 
 
 
+// var reverseKGroup = function(head, k) {
+//   if (head === null) return head;
+//   let a = head, b = head;
+//   for (let i = 0; i < k; i ++) {
+//     if (b == null) return head;
+//     b = b.next;
+//   }
+//   let tempList = reverseFromAtoB(a, b);
+//   a.next = reverseKGroup(b, k);
+//   return tempList;
+// }
+
+// function reverseFromAtoB(a, b) {
+//   let prev = null, cur = a, next = a;
+//   while (cur !== b) {
+//     next = cur.next;
+//     cur.next = prev;
+//     prev = cur;
+//     cur = next;
+//   }
+//   return prev;
+// }
+
+// 第三遍
+
+
 var reverseKGroup = function(head, k) {
-  if (head === null) return head;
+  // recursion terminator
+  if (!head) return head;
+
+  // current level logic
   let a = head, b = head;
-  for (let i = 0; i < k; i ++) {
-    if (b == null) return head;
+  for (let i = 0; i < k ; i ++) {
+    if (!b) return head;
     b = b.next;
   }
-  let tempList = reverseFromAtoB(a, b);
+  let newHead = reverseAtoB(a, b);
+  // drill down
   a.next = reverseKGroup(b, k);
-  return tempList;
+  return newHead;
 }
 
-function reverseFromAtoB(a, b) {
+var reverseAtoB = function(a, b) {
   let prev = null, cur = a, next = a;
-  while (cur !== b) {
+  while(cur !== b) {
     next = cur.next;
     cur.next = prev;
     prev = cur;
