@@ -27,18 +27,36 @@
 // };
 
 
+// var invertTree = function(root) {
+//   // recursion terminator
+//   if (!root) return root;
+
+//   // logic process
+//   let temp = root.left;
+//   root.left = root.right;
+//   root.right = temp;
+
+//   // drill down
+//   root.left = invertTree(root.left);
+//   root.right = invertTree(root.right);
+//   return root;
+// };
+
+
+// 第三遍
 var invertTree = function(root) {
   // recursion terminator
   if (!root) return root;
 
-  // logic process
+  // current level logic
+  // swap two node
   let temp = root.left;
   root.left = root.right;
   root.right = temp;
 
   // drill down
-  root.left = invertTree(root.left);
-  root.right = invertTree(root.right);
+  invertTree(root.left);
+  invertTree(root.right);
   return root;
 };
 // @lc code=end
