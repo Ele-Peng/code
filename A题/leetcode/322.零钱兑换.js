@@ -65,6 +65,7 @@ var coinChange = function(coins, amount) {
       dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
     }
   }
+  
   return dp[amount] === amount + 1 ? -1 : dp[amount];
 }
 // @lc code=end
