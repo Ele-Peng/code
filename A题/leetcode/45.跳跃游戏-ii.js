@@ -26,7 +26,7 @@
 //   return steps;
 // };
 
-
+// greedy
 var jump = function(nums) {
   let len = nums.length;
   let end = 0; // 跳跃的暂时终点
@@ -43,5 +43,28 @@ var jump = function(nums) {
 
   return jump;
 };
+
+// dp 会超时
+// var jump = function(nums) {
+//   let len = nums.length;
+//   let memo = (new Array(len)).fill(len);
+//   return dp(nums, 0, memo);
+// };
+
+// var dp = function(nums, p, memo) {
+//   let len = nums.length;
+//   // base case
+//   if (p >= len - 1) return 0;
+
+//   if (memo[p] !== len) return memo[p];
+
+//   let steps = nums[p];
+//   for (let i = 1; i <= steps; i ++) {
+//     let subProblem = dp(nums, p + i, memo);
+//     memo[p] = Math.min(memo[p], subProblem + 1);
+//   }
+
+//   return memo[p];
+// }
 // @lc code=end
 
