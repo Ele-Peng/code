@@ -10,6 +10,7 @@
  * @return {number}
  */
 var numDecodings = function(s) {
+  
   let len = s.length;
   if ((s.length && s[0] == 0) || (!s.length)) {
     return 0;
