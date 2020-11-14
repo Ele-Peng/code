@@ -9,7 +9,7 @@ class Promise {
         if (value && (typeof value === 'object' || typeof value === 'function')) {
             var then = value.then;
             if (typeof then === 'function') {
-                then.call(value, this._resolve.bind(this));
+                then.call(value, this._resolve.bind(this), this._reject.bind(this));
                 return ;
             }
         }
@@ -45,6 +45,16 @@ class Promise {
     catch(onError) {
         return this.then(null, onError);
     }
+    finally(onDone) {
+        if (typeof onDone !== 'function') {
+            return this.then();
+        }
+        let Promise = this.constructor;
+        return this.then(
+            value => Promise.resolve(onDone()).then(() => value),
+            reason => Promise.resolve(onDone()).then(() => { throw reason})
+        );
+    }
     _handle(callback) {
         if (this.state === "pending") {
             this.callbacks.push(callback);
@@ -56,6 +66,7 @@ class Promise {
             cb(this.value);
             return ;
         }
+        let ret;
         try {
             ret = cb(this.value);
             cb = this.state === 'fulfilled' ? callback.resolve : callback.reject;
