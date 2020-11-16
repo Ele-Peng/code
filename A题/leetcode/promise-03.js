@@ -30,6 +30,7 @@ class Promise {
      * then 方法传入的行参 onFulfilled 以及创建新 Promise 实例时传入的 resolve 放在一起
      * 被 push 到当前 Promise 的callbacks 队列中
      * 这是衔接当前 Promise 和 后邻 Promise的关键所在
+     * 
      * 根据规范， onFulfilled 是可以为空的，为空时不调用 onFulfilled
      * 
      */
