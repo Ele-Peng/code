@@ -4,6 +4,12 @@ function main() {
   return arr;
 }
 
+/**
+ * 选择排序
+ * 选择 [0, n] 中最大的 index 值，与最后一个 n - 1交换，保证从右至左由大到小排序
+ * @param {*} nums 
+ * @param {*} n 
+ */
 function selectionSort(nums, n) {
   while (n > 1) {
     let pos = findMaxIndex(nums, n);
