@@ -9,12 +9,10 @@ function mergeSort(nums, L, R) {
     let M = (L + R) >> 1;
     mergeSort(nums, L, M);
     mergeSort(nums, M + 1, R);
-    console.log(R);
     merge(nums, L, M + 1, R);
 }
 
 function merge(nums, L, M, R) {
-    console.log(L, M , R);
     const LEFT_SIZE = M - L;
     const RIGHT_SIZE = R - M + 1;
     let left = new Array(LEFT_SIZE);
