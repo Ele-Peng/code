@@ -17,7 +17,7 @@ function swap(nums, i, j) {
  * @param {*} i 对 i 做 heapify 操作
  */
 function heapify(nums, n, i) {
-  if (i >= n) return ;
+  if (i >= n) return ; // base case 防止数组越界
   let leftChild = 2 * i + 1;
   let rightChild = 2 * i + 2;
   let max = i;
