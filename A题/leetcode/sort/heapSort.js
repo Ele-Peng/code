@@ -17,7 +17,7 @@ function swap(nums, i, j) {
  * @param {*} i 对 i 做 heapify 操作
  */
 function heapify(nums, n, i) {
-  if (i >= n) return ; // base case 防止数组越界
+  if (i >= n) return ; // base case 递归出口
   let leftChild = 2 * i + 1;
   let rightChild = 2 * i + 2;
   let max = i;
@@ -56,8 +56,8 @@ function buildHeap(nums, n) {
 function heapSort(nums, n) {
   buildHeap(nums, n);
   for (let i = n - 1; i >= 0; i --) {
-    swap(nums, i, 0);
-    heapify(nums, i, 0);
+    swap(nums, i, 0); // 第0个 与 最后一个 调换位置， 第0个 默认为最大的
+    heapify(nums, i, 0); // 砍断 并重新 heapify
   }
 }
 
