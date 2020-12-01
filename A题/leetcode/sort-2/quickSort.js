@@ -1,5 +1,5 @@
 function quickSort(nums, start, end) {
-  if (start > end) return;
+  if (start > end) return ;
   let left = start;
   let right = end;
   let target = nums[start];
@@ -25,7 +25,7 @@ function swap(nums, i, j) {
 
 function main() {
   let arr = [2,4,7,8,6,5,1,9];
-  if (arr.length < 2)  return arr;
+  if (arr.length < 2) return arr;
   quickSort(arr, 0, arr.length - 1);
   return arr;
 }
