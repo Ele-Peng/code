@@ -13,26 +13,26 @@ function heapSort(nums, n) {
 }
 
 function buildHeap(nums, n) {
-  let lastIndex = (n - 1);
-  let lastParentIndex = (lastIndex - 1) >> 1;
+  let lastIndex = n - 1;
+  let lastParentIndex = (lastIndex - 1) >> 2;
   for (let i = lastParentIndex; i >= 0; i --) {
     heapify(nums, n, i);
   }
 }
 
-function heapify(nums, n, i) {
+function heap(nums, n, i) {
   if (i >= n) return ;
-  let leftChild = i * 2 + 1;
-  let rightChild = i * 2 + 2;
+  let leftChild = 2 * i + 1;
+  let rightChild = 2 * i + 2;
   let max = i;
-  if (leftChild < n && nums[max] < nums[leftChild]) {
+  if (leftChild < i && nums[max] < nums[leftChild]) {
     max = leftChild;
   }
-  if (rightChild < n && nums[max] < nums[rightChild]) {
+  if (rightChild < i && nums[max] < nums[rightChild]) {
     max = rightChild;
   }
   if (max !== i) {
-    swap(nums, max, i)
+    swap(nums, max, i);
     heapify(nums, n, max);
   }
 }
