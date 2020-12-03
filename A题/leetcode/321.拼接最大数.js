@@ -31,7 +31,7 @@ var merge = function(nums1, nums2) {
     if (p2 >= len2 || nums1[p1] > nums2[p2]) r.push(nums1[p1++]);
     else if (nums1[p1] === nums2[p2]) {
       let _p1 = p1, _p2 = p2;
-      while (_p1 < len1 && nums1[++_p1] === nums2[++p2]) {}
+      while (_p1 < len1 && nums1[++_p1] === nums2[++_p2]) {}
       r.push(_p2 >= len2 || nums1[_p1] > nums2[_p2] ? nums1[p1++] : nums2[p2++]);
     }
     else r.push(nums2[p2++]);
