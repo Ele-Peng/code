@@ -13,18 +13,18 @@ var lemonadeChange = function(bills) {
     let map = {
         five: 0,
         ten: 0
-    };
+    }
     for (let i = 0; i < bills.length; i ++) {
         if (bills[i] === 5) {
             map.five ++;
         } else if (bills[i] === 10) {
             if (!map.five) return false;
-            map.five --;
             map.ten ++;
+            map.five --;
         } else if (bills[i] === 20) {
             if (map.five > 0 && map.ten > 0) {
-                map.five --;
                 map.ten --;
+                map.five --;
             } else if (map.five >= 3) {
                 map.five -= 3;
             } else {
