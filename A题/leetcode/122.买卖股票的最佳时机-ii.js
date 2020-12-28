@@ -33,5 +33,38 @@
 // };
 
 
+
+// var maxProfit = function(prices) {
+//     let len = prices.length;
+//     let dp = new Array(len);
+//     for (let i = 0; i < len; i ++) {
+//         dp[i] = (new Array(2)).fill(0);
+//     }
+
+//     for (let i = 0; i < len; i ++) {
+//         if (i - 1 === -1) { // base case
+//             dp[i][0] = 0;
+//             dp[i][1] = -prices[i];
+//             continue;
+//         }
+//         dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+//         dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
+//     }
+
+//     return dp[len - 1][0];
+// };
+
+
+
+var maxProfit = function(prices) {
+    let len = prices.length;
+    let dp_i_0 = 0, dp_i_1 = -Infinity;
+    for (let i = 0; i < len; i ++) {
+        let temp = dp_i_0;
+        dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i]);
+        dp_i_1 = Math.max(dp_i_1, temp - prices[i]);
+    }
+    return dp_i_0;
+};
 // @lc code=end
 
