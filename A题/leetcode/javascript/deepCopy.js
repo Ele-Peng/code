@@ -41,6 +41,7 @@ const clone = parent => {
 
     return child;
   }
+  
   return _clone(parent);
 }
 
