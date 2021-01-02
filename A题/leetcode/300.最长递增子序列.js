@@ -11,6 +11,8 @@
  */
 var lengthOfLIS = function(nums) {
   // dp[i] 严格以 第 i 个数 为结尾的上升子序列的长度
+
+  // 优化点： 因为单调性，可以用 二分 优化
   let dp = (new Array(nums.length)).fill(1);
   for (let i = 0; i < nums.length; i ++) {
     for (let j = 0; j < i; j ++) {
