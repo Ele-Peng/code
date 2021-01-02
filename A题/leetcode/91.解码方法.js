@@ -11,7 +11,7 @@
  */
 var numDecodings = function(s) {
   let len = s.length;
-  if (!len || (s.length && s[0] === '0')) return 0;
+  if (!len || (s.length === 1 && s[0] === '0')) return 0;
   let dp = (new Array(len + 1)).fill(0);
   dp[0] = 1;
   dp[1] = 1;
