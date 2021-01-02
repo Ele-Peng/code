@@ -10,24 +10,19 @@
  * @return {number}
  */
 var numDecodings = function(s) {
-  
   let len = s.length;
-  if ((s.length && s[0] == 0) || (!s.length)) {
-    return 0;
-  }
-
+  if (!len || (s.length && s[0] === '0')) return 0;
   let dp = (new Array(len + 1)).fill(0);
   dp[0] = 1;
   dp[1] = 1;
   for (let i = 2; i <= len; i ++) {
-    if (s[i - 1] != 0) {
+    if (s[i - 1] != '0') {
       dp[i] += dp[i - 1];
     }
-    if (s[i - 2] == 1 || (s[i - 2] == 2 && s[i - 1] <= 6)) {
+    if (s[i - 2] === '1' || (s[i - 2] === '2' && s[i - 1] <= '6')) {
       dp[i] += dp[i - 2];
     }
   }
-
   return dp[len];
 };
 // @lc code=end
