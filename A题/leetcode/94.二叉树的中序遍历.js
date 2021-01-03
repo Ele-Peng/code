@@ -52,21 +52,35 @@
 
 
 // 迭代 - DFS
+// var inorderTraversal = function(root) {
+//     let res = [];
+//     let stack = [];
+//     while (root || stack.length) {
+//         if (root) {
+//             stack.push(root);
+//             root = root.left;
+//         } else {
+//             let cur = stack.pop();
+//             res.push(cur.val);
+//             root = cur.right; // 没有右子树，便会将双亲节点pop出来
+//         }
+//     }
+//     return res;
+// };
+
+
 var inorderTraversal = function(root) {
-    let res = [];
-    let stack = [];
-    while (root || stack.length) {
-        if (root) {
-            stack.push(root);
-            root = root.left;
-        } else {
-            let cur = stack.pop();
-            res.push(cur.val);
-            root = cur.right; // 没有右子树，便会将双亲节点pop出来
-        }
-    }
-    return res;
+  let res = [];
+  inorderTraversalHelper(root, res);
+  return res;
 };
+
+var inorderTraversalHelper = function (root, res) {
+  if (!root) return null;
+  inorderTraversalHelper(root.left, res);
+  res.push(root.val);
+  inorderTraversalHelper(root.right, res);
+}
 
 // @lc code=end
 
