@@ -69,17 +69,38 @@
 // };
 
 
-var inorderTraversal = function(root) {
-  let res = [];
-  inorderTraversalHelper(root, res);
-  return res;
-};
+// var inorderTraversal = function(root) {
+//   let res = [];
+//   inorderTraversalHelper(root, res);
+//   return res;
+// };
 
-var inorderTraversalHelper = function (root, res) {
-  if (!root) return null;
-  inorderTraversalHelper(root.left, res);
-  res.push(root.val);
-  inorderTraversalHelper(root.right, res);
+// var inorderTraversalHelper = function (root, res) {
+//   if (!root) return null;
+//   inorderTraversalHelper(root.left, res);
+//   res.push(root.val);
+//   inorderTraversalHelper(root.right, res);
+// }
+
+
+var inorderTraversal = function (root) {
+  if (!root) return [];
+
+  let res = [];
+  let stack = []
+
+  while (root || stack.length) {
+    if (root) {
+      stack.push(root);
+      root = root.left;
+    } else {
+      let cur = stack.pop();
+      res.push(cur.val);
+      root = cur.right;
+    }
+  }
+
+  return res;
 }
 
 // @lc code=end
