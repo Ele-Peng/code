@@ -30,20 +30,33 @@
 // }
 
 
+// var isValidBST = function(root) {
+//     return isValidBSTHelper(root, null, null)
+// };
+
+
+// var isValidBSTHelper = function(root, min, max) {
+//     // recursion terminator
+//     if (!root) return true;
+//     if (min !== null && root.val <= min.val) return false;
+//     if (max !== null && root.val >= max.val) return false;
+//     // logic 
+//     // drill down
+//     return isValidBSTHelper(root.left, min, root) &&
+//     isValidBSTHelper(root.right, root, max);
+// };
+
+
 var isValidBST = function(root) {
     return isValidBSTHelper(root, null, null)
 };
 
 
 var isValidBSTHelper = function(root, min, max) {
-    // recursion terminator
     if (!root) return true;
     if (min !== null && root.val <= min.val) return false;
     if (max !== null && root.val >= max.val) return false;
-    // logic 
-    // drill down
-    return isValidBSTHelper(root.left, min, root) &&
-    isValidBSTHelper(root.right, root, max);
+    return isValidBSTHelper(root.left, min, root) && isValidBSTHelper(root.right, root, max);
 };
 // @lc code=end
 
