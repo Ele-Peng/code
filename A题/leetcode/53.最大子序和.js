@@ -39,21 +39,51 @@
 // };
 
 // 前缀和 暴力
+// var maxSubArray = function(nums) {
+//   let prefix = [0];
+//   for (let i = 1; i <= nums.length; i ++) {
+//     prefix[i] = nums[i - 1] + prefix[i - 1];
+//   }
+//   let max = prefix[1];
+//   for (let i = 0; i <= nums.length - 1; i ++) {
+//     for (let j = i + 1; j <= nums.length; j ++) {
+//       let delta = prefix[j] - prefix[i];
+//       if (delta > max) {
+//         max = delta
+//       }
+//     }
+//   }
+//   return max;
+// };
+
+// 动态规划
+// var maxSubArray = function(nums) {
+//   let dp = new Array(nums.length);
+//   let len = nums.length;
+//   if (!len) return 0;
+//   dp[0] = nums[0];
+//   for (let i = 1; i < nums.length; i ++) {
+//     dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
+//   }
+//   let res = dp[0];
+//   for (let i = 0;i < nums.length; i ++) {
+//     res = Math.max(dp[i], res);
+//   }
+//   return res;
+// };
+
 var maxSubArray = function(nums) {
-  let prefix = [0];
-  for (let i = 1; i <= nums.length; i ++) {
-    prefix[i] = nums[i - 1] + prefix[i - 1];
+  let len = nums.length;
+  if (!len) return len;
+  let dp_default = nums[0];
+  let dp_res = nums[0];
+  let res = nums[0];
+  for (let i = 1; i < nums.length; i ++) {
+    dp_res = Math.max(nums[i] + dp_default, nums[i]);
+    dp_default = dp_res;
+    res = Math.max(res, dp_res);
   }
-  let max = prefix[1];
-  for (let i = 0; i <= nums.length - 1; i ++) {
-    for (let j = i + 1; j <= nums.length; j ++) {
-      let delta = prefix[j] - prefix[i];
-      if (delta > max) {
-        max = delta
-      }
-    }
-  }
-  return max;
+  return res;
 };
 // @lc code=end
 
