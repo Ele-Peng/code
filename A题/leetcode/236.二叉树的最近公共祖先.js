@@ -34,17 +34,27 @@
 
 
 
-var lowestCommonAncestor = function(root, p, q) {
-  // recursion terminator
+// var lowestCommonAncestor = function(root, p, q) {
+//   // recursion terminator
+//   if (!root) return root;
+//   if (root === p || root === q) return root;
+//   // drill down
+//   let left = lowestCommonAncestor(root.left, p, q);
+//   let right = lowestCommonAncestor(root.right, p, q);
+//   // logic process
+//   if (left && right) return root;
+//   if (!left && !right) return null;
+//   return !left ? right : left;
+// };
+
+var lowestCommonAncestor = function (root, p, q) {
   if (!root) return root;
-  if (root === p || root === q) return root;
-  // drill down
+  if (p === root || q === root) return root;
   let left = lowestCommonAncestor(root.left, p, q);
   let right = lowestCommonAncestor(root.right, p, q);
-  // logic process
   if (left && right) return root;
   if (!left && !right) return null;
-  return !left ? right : left;
-};
+  return left ? left : right;
+}
 // @lc code=end
 
