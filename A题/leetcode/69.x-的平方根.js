@@ -11,19 +11,12 @@
  */
 var mySqrt = function(x) {
   if (x < 2) return x;
-  let left = 1;
-  let right = x >>> 1;
-  while (left + 1 < right) {
-    let mid = (left + right) >>> 1;
-    if (mid * mid > x) {
-      right = mid;
-    } else if (mid * mid < x) {
-      left = mid;
-    } else {
-      return mid;
-    }
+  let left = 0, right = x, mid = 0, res = -1;
+  while (left <= right) {
+    mid = (left + right) >> 1;
+    mid * mid <= x ? (res = mid, left = mid + 1) : (right = mid - 1);
   }
-  return right * right > x ? left : right;
+  return res;
 };
 // @lc code=end
 
