@@ -14,7 +14,7 @@
 var topKFrequent = function(nums, k) {
   let map = {};
   for (let i = 0; i < nums.length; i ++) {
-      map[nums[i]] !== void 0 ? map[nums[i]]++ : map[nums[i]] = 1;
+    map[nums[i]] !== void 0 ? map[nums[i]]++ : map[nums[i]] = 1;
   }
   return topKSort(k, map);
 };
@@ -31,20 +31,20 @@ function quickSort(nums, start, end, k) {
   let right = end;
   let target = nums[(start + end) >> 1]; // 洗牌算法 随机化哨兵位置
   while (left <= right) {
-      while (cmp(target, nums[left])) {
-          left ++;
-      }
-      while (cmp(nums[right], target)) {
-          right --;
-      }
-      if (left <= right) {
-          swap(nums, left, right);
-          left ++;
-          right --;
-      }
+    while (cmp(target, nums[left])) {
+      left ++;
+    }
+    while (cmp(nums[right], target)) {
+      right --;
+    }
+    if (left <= right) {
+      swap(nums, left, right);
+      left ++;
+      right --;
+    }
   }
   if (right > start && nums.length - k <= right) quickSort(nums, start, right, k);
-  if (left < end && nums.length - k >= left)  quickSort(nums, left, end, k);
+  if (left < end && nums.length - k >= left) quickSort(nums, left, end, k);
 }
 
 function swap(nums, a, b) {

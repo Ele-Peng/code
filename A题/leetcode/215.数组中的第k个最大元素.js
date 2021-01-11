@@ -41,41 +41,41 @@ function swap(nums, i, j) {
   nums[j] = temp;
 }
 
-// 一个整数数组, 将这个数组划分为一些连续的子数组, 将各个子数组内部元素进行排序后，整个数组是有序的，问最多能切成多少个子数组.
-// test case: [1, 3, 2, 4, 5, 7, 6, 8]
-// greedy
-function frequentSequence(nums) {
-  let res = [];
-  if (!nums.length) return res;
-  let count = 1;
-  let max = nums[0];
-  res[0] = [nums[0]];
-  for (let i = 1; i < nums.length; i ++) {
-    if (nums[i] > max) {
-      res[count] = [nums[i]];
-      count ++;
-      max = nums[i];
-    } else {
-      res[count - 1].push(nums[i]);
-    }
-  }
-  return res;
-}
+// // 一个整数数组, 将这个数组划分为一些连续的子数组, 将各个子数组内部元素进行排序后，整个数组是有序的，问最多能切成多少个子数组.
+// // test case: [1, 3, 2, 4, 5, 7, 6, 8]
+// // greedy
+// function frequentSequence(nums) {
+//   let res = [];
+//   if (!nums.length) return res;
+//   let count = 1;
+//   let max = nums[0];
+//   res[0] = [nums[0]];
+//   for (let i = 1; i < nums.length; i ++) {
+//     if (nums[i] > max) {
+//       res[count] = [nums[i]];
+//       count ++;
+//       max = nums[i];
+//     } else {
+//       res[count - 1].push(nums[i]);
+//     }
+//   }
+//   return res;
+// }
 
-// dp
-function frequentSequence(nums) {
-  if (!nums.length) return [];
-  let dp = (new Array(nums.length)).fill(0);
-  dp[0] = 1;
-  for (let i = 1; i < nums.length; i ++) {
-    for (let j = i - 1; j >= 0; j --) {
-      let min = Math.min(...nums.slice(j, i));
-      if (nums[i] > min) {
-        dp[i] = Math.max(dp[i], dp[j] + 1);
-      }
-    }
-  }
-  return dp[nums.length - 1];
-}
+// // dp
+// function frequentSequence(nums) {
+//   if (!nums.length) return [];
+//   let dp = (new Array(nums.length)).fill(0);
+//   dp[0] = 1;
+//   for (let i = 1; i < nums.length; i ++) {
+//     for (let j = i - 1; j >= 0; j --) {
+//       let min = Math.min(...nums.slice(j, i));
+//       if (nums[i] > min) {
+//         dp[i] = Math.max(dp[i], dp[j] + 1);
+//       }
+//     }
+//   }
+//   return dp[nums.length - 1];
+// }
 // @lc code=end
 
