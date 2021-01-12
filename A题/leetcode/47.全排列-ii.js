@@ -48,5 +48,36 @@ var permuteUniqueHelper = function(nums, res, path, usedNum) {
     usedNum[nums[i]] ++; // 撤销使用记录 
   }
 };
+
+// 产生形式是 字符串数组
+// function allPossibilites(str) {
+//   let strArr = str.split("");
+//   let res = []; // 结果集
+//   let path = ""; // 每一次的结果
+//   let len = strArr.length;
+//   const used = (new Array(len)).fill(false);
+
+//   allPossibilitesHelper(strArr, res, path, len, used);
+//   return res;
+// }
+
+// function allPossibilitesHelper(strArr, res, path, len, used) {
+//   if (res.indexOf(path) !== -1) return ;
+//   // base case
+//   if (path.length === len) {
+//       return res.push(path.slice());
+//   }
+//   // logic 
+//   for (let i = 0; i < len; i ++) {
+//       if (!used[i]) {
+//           // 选了
+//           let tempPath = path + strArr[i];
+//           used[i] = true;
+//           allPossibilitesHelper(strArr, res, tempPath, len, used);
+//           used[i] = false;
+//       }
+//   }
+// }
+// allPossibilites("abbc");
 // @lc code=end
 
