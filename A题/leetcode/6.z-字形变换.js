@@ -18,6 +18,7 @@ var convert = function(s, numRows) {
         const x = i % n;
         rows[Math.min(x, n - x)] += s[i];
     }
+    
     return rows.join("");
 };
 // @lc code=end
