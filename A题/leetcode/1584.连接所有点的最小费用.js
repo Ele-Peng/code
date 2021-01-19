@@ -26,14 +26,14 @@ function UF(len, edges) {
     const edgesTemp = edges.sort((a, b) => {
         return a[2] - b[2];
     });
-    const father = (new Array(len)).map((item, index) => {
+    const father = (new Array(len)).fill(0).map((item, index) => {
         return index;
     });
     let res = 0;
     // get Father
     const getFather = (x) => {
         if (father[x] === x) return x;
-        return father[x] = getFather(fa[x]);
+        return father[x] = getFather(father[x]);
     }
     // 这里是点x点y，对应上面的points的索引
     for (const [x, y, val] of edgesTemp) {
