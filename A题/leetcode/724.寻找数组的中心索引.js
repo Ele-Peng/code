@@ -21,6 +21,7 @@ var pivotIndex = function(nums) {
             leftSum += nums[i];
         }
     }
+    
     return -1;
 };
 // @lc code=end
