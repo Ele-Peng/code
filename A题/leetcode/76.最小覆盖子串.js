@@ -11,8 +11,8 @@
  * @return {string}
  */
 var minWindow = function(s, t) {
-  let need = new Map;
-  let window = new Map;
+  let need = new Map; // 需要凑齐的字符数
+  let window = new Map; // 窗口中的字符数
   for (let i of t) {
     if (need.has(i)) need.set(i, need.get(i) + 1);
     else need.set(i, 1);
