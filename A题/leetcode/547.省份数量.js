@@ -16,20 +16,43 @@ var findCircleNum = function(isConnected) {
             if (isConnected[i][j]) unionFind.union(i, j);
         }
     }
-    return unionFind.father.filter((v, i) => v === i).length
+    return unionFind.count;
 };
 
 
 class UnionFind {
-    constructor(n) {
+    constructor (n) {
+        this.count = n; // 连通量个数
         this.father = (new Array(n)).fill(0).map((item, index) => {
             return index;
-        })
+        }); // 存储一棵树
+        this.size = (new Array(n)).fill(0).map((item, index) => {
+            return index;
+        }); // 树的重量
     }
 
     union (x, y) {
-        const rootX = this.find(x), rootY = this.find(y);
-        if (rootX !== rootY) this.father[rootX] = rootY;
+        let rootX = this.find(x);
+        let rootY = this.find(y);
+        if (rootX === rootY) {
+            return ;
+        }
+        // 小树接到大树下
+        if (this.size[rootX] > this.size[rootY]) {
+            this.father[rootX] = rootY;
+            this.size[rootX] += this.size[rootY];
+        } else {
+            this.father[rootY] = rootX;
+            this.size[rootY] += this.size[rootX];
+        }
+        this.count --;
+    }
+
+    // 判断两个是否联通
+    connected (x, y) {
+        let rootX = this.find(x);
+        let rootY = this.find(y);
+        return rootX === rootY;
     }
 
     find (x) {
