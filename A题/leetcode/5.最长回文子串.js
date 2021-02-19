@@ -10,6 +10,7 @@
  * @return {string}
  */
 var longestPalindrome = function(s) {
+  
   if (!s || s.length < 2) return s;
   let start = 0;
   let end = 0;
