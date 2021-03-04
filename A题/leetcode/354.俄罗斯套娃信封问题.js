@@ -43,6 +43,7 @@ var lengthOfLIS = function(nums) {
     }
 
     if (left === piles) piles ++;
+    
     top[left] = poker;
   }
   return piles;
