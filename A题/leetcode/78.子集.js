@@ -15,13 +15,24 @@ var subsets = function(nums) {
     return res;
 };
 
+// var subsetsHelper = function(start, path, res, nums) {
+//     res.push(path.slice());
+//     for (let i = start; i < nums.length; i ++) {
+//         path.push(nums[i]);
+//         subsetsHelper(i + 1, path, res, nums); // 需传入 i， 不是 start
+//         path.pop();
+//     }
+// };
+
 var subsetsHelper = function(start, path, res, nums) {
-    res.push(path.slice());
-    for (let i = start; i < nums.length; i ++) {
-        path.push(nums[i]);
-        subsetsHelper(i + 1, path, res, nums); // 需传入 i， 不是 start
-        path.pop();
+    if (start === nums.length) {
+        res.push(path.slice());
+        return ;
     }
+    path.push(nums[start]);
+    subsetsHelper(start + 1, path, res, nums);
+    path.pop();
+    subsetsHelper(start + 1, path, res, nums);
 };
 // @lc code=end
 
