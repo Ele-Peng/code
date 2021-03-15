@@ -125,6 +125,7 @@ var solveSudoku = function(board) {
     }
 
     fill(0, 0);
+    
     return board;
 }
 // @lc code=end
