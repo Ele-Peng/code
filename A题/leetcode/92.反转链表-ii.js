@@ -36,13 +36,32 @@
 //   head.next = p;
 //   return last;
 // }
+// var reverseBetween = function(head, m, n) {
+//   let tail = null;
+//   var reverseN = function(head, n) {
+//     // recursion terminator
+//     if (!head || !head.next) return head;
+//     // current level logic
+//     if (n === 1) { // n 小于 链表长度
+//       tail = head.next;
+//       return head;
+//     }
+//     let next = head.next;
+//     let reverseHead = reverseN(next, n - 1);
+//     next.next = head;
+//     head.next = tail;
+//     return reverseHead;
+//   }
+//   if (m === 1) return reverseN(head, n);
+//   head.next = reverseBetween(head.next, m - 1, n - 1);
+//   return head;
+// };
+
 var reverseBetween = function(head, m, n) {
   let tail = null;
-  var reverseN = function(head, n) {
-    // recursion terminator
+  var reverseN = (head, n) => {
     if (!head || !head.next) return head;
-    // current level logic
-    if (n === 1) { // n 小于 链表长度
+    if (n === 1) {
       tail = head.next;
       return head;
     }
@@ -55,6 +74,6 @@ var reverseBetween = function(head, m, n) {
   if (m === 1) return reverseN(head, n);
   head.next = reverseBetween(head.next, m - 1, n - 1);
   return head;
-};
+}
 // @lc code=end
 
