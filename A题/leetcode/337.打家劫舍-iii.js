@@ -16,20 +16,42 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var rob = function(root) {
+// var rob = function(root) {
+//   let memo = new Map;
+//   return robHelper(root, memo);
+// };
+// var robHelper = function(root, memo) {
+//   if (!root) return 0;
+//   if (memo.has(root)) return memo.get(root);
+//   let do_it = root.val + (
+//     !root.left ? 0 : robHelper(root.left.left, memo) + robHelper(root.left.right, memo)
+//   ) + (
+//     !root.right ? 0 : robHelper(root.right.left, memo) + robHelper(root.right.right, memo)
+//   )
+//   let not_do = robHelper(root.left, memo) + robHelper(root.right, memo);
+//   let res = Math.max(do_it, not_do);
+//   memo.set(root, res);
+//   return res;
+// }
+
+var rob = function (root) {
   let memo = new Map;
-  return robHelper(root, memo);
-};
-var robHelper = function(root, memo) {
+  return rootHelper(root, memo);
+}
+
+function rootHelper(root, memo) {
   if (!root) return 0;
   if (memo.has(root)) return memo.get(root);
   let do_it = root.val + (
-    !root.left ? 0 : robHelper(root.left.left, memo) + robHelper(root.left.right, memo)
+    !root.left ? 0 : rootHelper(root.left.left, memo) + rootHelper(root.left.right, memo)
   ) + (
-    !root.right ? 0 : robHelper(root.right.left, memo) + robHelper(root.right.right, memo)
-  )
-  let not_do = robHelper(root.left, memo) + robHelper(root.right, memo);
+    !root.right ? 0 : rootHelper(root.right.left, memo) + rootHelper(root.right.right, memo)
+  );
+
+  let not_do = rootHelper(root.left, memo) + rootHelper(root.right, memo);
+
   let res = Math.max(do_it, not_do);
+
   memo.set(root, res);
   return res;
 }
