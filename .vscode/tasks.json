@@ -1,25 +1,25 @@
 {
-  // See https://go.microsoft.com/fwlink/?LinkId=733558
-  // for the documentation about the tasks.json format
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "type": "shell",
-      "label": "C/C++: g++ build active file",
-      "command": "/usr/bin/g++",
-      "args": [
-        "-g",
-        "${workspaceFolder}/A题/Luogu/kmp.cpp",
-        "-o",
-        "${workspaceFolder}/A题/Luogu/luogu.o"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [
-        "$gcc"
-      ],
-      "group": "build"
-    }
-  ]
-}
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "type": "shell",
+        "label": "C/C++: g++ build active file",
+        "command": "/usr/bin/g++",
+        "args": [
+          "-g",
+          "${workspaceFolder}/OJ/Luogu/NOI213N+1.cpp",
+          "-o",
+          "${workspaceFolder}/OJ/Luogu/luogu.o"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "problemMatcher": [
+          "$gcc"
+        ],
+        "group": "build"
+      }
+    ]
+  }
