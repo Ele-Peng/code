@@ -11,7 +11,7 @@ int main() {
             cin >> arr[i][j];
             // 找出每行最大值
             if (j == 0) row_max[i] = arr[i][j];
-             else row_max[i] = row_max[i] < arr[i][j] ? arr[i][j] : row_max[i];
+            else row_max[i] = row_max[i] < arr[i][j] ? arr[i][j] : row_max[i];
         }
     }
     int col_min[5];

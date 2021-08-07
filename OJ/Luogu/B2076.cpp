@@ -1,6 +1,5 @@
-#include <iostream>
-#include <cmath>
-#include <algorithm>
+#include<bits/stdc++.h>
+
 using namespace std;
 
 int main() {
@@ -8,11 +7,10 @@ int main() {
     cin >> height;
     double sum = height;
     double debouce_height = height;
-    for (int i = 1; i <= 10; i ++) {
+    for (int i = 2; i <= 10; i ++) {
         debouce_height /= 2;
-        if (i == 10) cout << sum << endl;
         sum += debouce_height * 2;
-        if (i == 10) cout << debouce_height;
     }
+    cout << sum << endl << debouce_height / 2 << endl;
     return 0;
 }
