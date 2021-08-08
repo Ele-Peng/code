@@ -9,7 +9,7 @@
         "command": "/usr/bin/g++",
         "args": [
           "-g",
-          "${workspaceFolder}/OJ/Luogu/P5690.cpp",
+          "${workspaceFolder}/OJ/Luogu/Task1.cpp",
           "-o",
           "${workspaceFolder}/OJ/Luogu/luogu.o"
         ],
