@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+      "*.wpy": "vue",
+      "*.wxml": "html",
+      "*.cjson": "jsonc",
+      "*.wxss": "css",
+      "*.wxs": "javascript",
+      "iostream": "cpp",
+      "cstdio": "cpp",
+      "ostream": "cpp",
+      "bitset": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+  }
